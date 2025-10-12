@@ -281,7 +281,22 @@ class Heirattack(BaseAttack):
             self.inner_train(full_features, adj_norm, idx_train, idx_unlabeled, labels)
             embeddings = self.get_embeddings(full_features, adj_norm)
 
-            # GB Division (粒球划分) - 替代 KMeans
+            # === 全局属性增强 PageRank：找出重要节点 ===
+            # 计算全图的属性增强 PPR 分数
+            global_ppr_scores = self.compute_global_ppr(
+                fea=full_features,
+                adj=full_adj_cpu,
+                topk_ratio=0.10,  # 取前10%的重要节点
+                alpha=0.15,
+                N=30,
+                use_cos_sim=True,
+            )
+            # 全局重要节点索引（按 PPR 分数排序）
+            global_important_nodes = np.argsort(-global_ppr_scores)[
+                : int(0.10 * self.nnodes)
+            ]
+
+            # GB Division (粒球划分) - 使用重要节点引导
             pool = [range(self.nnodes)]
             childs = [[]]
             parents = [-1]
@@ -305,16 +320,24 @@ class Heirattack(BaseAttack):
                 # 使用粒球划分（基于嵌入空间的简化版本）
                 subgraph_list = list(subgraph)
 
-                # 使用与原 KMeans 相同的逻辑：基于嵌入向量直接聚类
-                targets = []
+                # 找出子图中的重要节点（与全局重要节点的交集）
+                subgraph_set = set(subgraph_list)
+                targets = [
+                    node for node in global_important_nodes if node in subgraph_set
+                ]
+
+                # 使用重要节点引导聚类
                 m = len(targets)
                 if m >= self.M:
+                    # 如果重要节点数量足够，先对它们聚类得到初始中心
                     cid = self.gb_cluster.fit_predict(embeddings[targets, :])
+                    # 然后用这些中心对整个子图进行分配
                     cid = self.gb_cluster.fit_predict(
                         embeddings[subgraph_list, :],
                         centroids=self.gb_cluster.centroids,
                     )
                 else:
+                    # 重要节点不足，直接对整个子图聚类
                     cid = self.gb_cluster.fit_predict(embeddings[subgraph_list, :])
 
                 for i in range(self.M):
@@ -595,6 +618,90 @@ class Heirattack(BaseAttack):
         idx = np.argpartition(s, -k)[-k:]
         topk_idx = idx[np.argsort(-s[idx])]
         return topk_idx, s
+
+    def compute_global_ppr(
+        self,
+        fea: torch.Tensor,
+        adj: sp.spmatrix,
+        topk_ratio: float = 0.10,
+        alpha: float = 0.15,
+        N: int = 30,
+        eps: float = 1e-12,
+        use_cos_sim: bool = True,
+        seed_strategy: str = "uniform",  # "uniform", "degree", "label"
+    ):
+        """
+        计算全局属性增强 PageRank，识别重要节点
+
+        参数:
+        - fea: [n, d] 节点特征
+        - adj: scipy.sparse (n, n) 邻接矩阵
+        - topk_ratio: 不使用（为兼容保留）
+        - alpha: 重启概率 (0.15 更全局，0.85 更局部)
+        - N: 迭代次数
+        - use_cos_sim: 是否使用特征相似度加权边
+        - seed_strategy: 初始分布策略
+            - "uniform": 均匀分布（无偏全局）
+            - "degree": 按度数加权（偏向枢纽）
+            - "label": 按标签节点加权（偏向已知重要节点）
+
+        返回:
+        - scores: np.ndarray[float], shape (n,) - 全局 PPR 重要性分数
+        """
+        n = adj.shape[0]
+        A = adj.tocsr().astype(np.float32)
+        A.setdiag(0)
+        A.eliminate_zeros()
+
+        # 构建属性增强的转移矩阵
+        if use_cos_sim:
+            fea_cpu = fea.detach().to("cpu").float()
+            X = F.normalize(fea_cpu, p=2, dim=1).numpy()
+            r, c = A.nonzero()
+            sim = (X[r] * X[c]).sum(axis=1)
+            sim = np.clip(sim, 0.0, 1.0)
+            W = sp.csr_matrix((sim, (r, c)), shape=(n, n), dtype=np.float32)
+        else:
+            W = A.copy()
+
+        # 处理孤立节点
+        d = np.asarray(W.sum(axis=1)).reshape(-1)
+        iso = d < eps
+        if iso.any():
+            W = W.tolil()
+            for u in np.where(iso)[0]:
+                W[u, u] = 1.0
+            W = W.tocsr()
+            d = np.asarray(W.sum(axis=1)).reshape(-1)
+
+        # 行归一化：转移矩阵
+        Dinv = sp.diags(1.0 / np.maximum(d, eps), format="csr")
+        P = Dinv @ W
+
+        # 初始分布 v（根据策略）
+        v = np.ones((n,), dtype=np.float32) / n  # 默认均匀
+
+        if seed_strategy == "degree":
+            # 按度数加权（度数高的节点初始概率大）
+            degrees = np.asarray(A.sum(axis=1)).reshape(-1)
+            if degrees.sum() > 0:
+                v = degrees / degrees.sum()
+        elif seed_strategy == "label":
+            # 如果有标签信息，可以从已知节点出发
+            # 这里暂时用均匀分布，您可以传入 idx_train 来定制
+            pass
+
+        # PageRank with restart
+        x = alpha * v.copy()
+        s = x.copy()
+        for _ in range(1, N):
+            x = (1.0 - alpha) * (P @ x) + alpha * v
+            s += x
+
+        # 归一化分数到 [0, 1]
+        s = s / (s.sum() + eps)
+
+        return s
 
     # === Heirattack 内：新增/替换 ===
 

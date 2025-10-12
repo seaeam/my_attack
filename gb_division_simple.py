@@ -12,7 +12,7 @@ def gb_division_on_embeddings(
     embeddings, target_clusters, mode="euclidean", max_iter=100, tol=1e-4
 ):
     """
-    直接在嵌入向量上进行粒球划分，类似 KMeans 但使用粒球的思想
+    直接在嵌入向量上进行粒球划分，使用粒球的思想
 
     参数:
         embeddings: np.ndarray, shape (n, d) - 节点嵌入向量
