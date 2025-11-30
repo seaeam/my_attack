@@ -492,8 +492,19 @@ class Heirattack(BaseAttack):
 
                     # 步骤4.5.9: 执行实际的扰动操作
 
-                    # 1) 刚刚选出的两个具体节点
-                    row_idx, col_idx = pool[targetI][0], pool[targetJ][0]
+                    # 1) 刚刚选出的两个具体节点（ball 内 MoE 精选，而非直接取第一个）
+                    row_idx, col_idx = self._select_nodes_in_balls(
+                        pool=pool,
+                        targetI=targetI,
+                        targetJ=targetJ,
+                        status=status,
+                        full_adj_cpu=full_adj_cpu,
+                        full_features=full_features,
+                        labels_st=labels_st,
+                        labels_oh_l=labels_oh_l,
+                        labels_oh_ul=labels_oh_ul,
+                        global_ppr_scores=global_ppr_scores,
+                    )
                     #    分别从两个 seed 出发调用 att_walk，得到各自 Top-k
                     #    设置 topk_ratio（如 0.05 表示前 5% 节点）
                     topk_nodes_1, scores_1 = self.ppr_topk_from_seed(
@@ -702,6 +713,177 @@ class Heirattack(BaseAttack):
         s = s / (s.sum() + eps)
 
         return s
+
+    # === Node-level MoE 选择（ball 内精细化落点） ===
+
+    def _normalize_score(self, mat: torch.Tensor) -> torch.Tensor:
+        """Min-max 归一化，避免不同专家量纲差太大。恒定/全零时返回零矩阵。"""
+        if mat.numel() == 0:
+            return mat
+        mmin = mat.min()
+        mmax = mat.max()
+        if (mmax - mmin).abs() < 1e-12:
+            return torch.zeros_like(mat)
+        return (mat - mmin) / (mmax - mmin)
+
+    def _compute_margin_scores(
+        self, logits: torch.Tensor, labels_st: torch.Tensor
+    ) -> torch.Tensor:
+        """
+        计算节点 margin 得分，返回正相关的易攻性分数：
+        margin_raw = z_y - max_{k!=y} z_k，score = relu(-margin_raw)
+        margin 小/为负 → score 大。
+        """
+        device = logits.device
+        n = logits.size(0)
+        y = labels_st.to(device).view(-1)
+        z_y = logits.gather(1, y.view(-1, 1)).squeeze(1)
+        logits_clone = logits.clone()
+        logits_clone[torch.arange(n, device=device), y] = -1e9
+        z_max, _ = logits_clone.max(dim=1)
+        margin_raw = z_y - z_max
+        return torch.relu(-margin_raw)
+
+    def _select_nodes_in_balls(
+        self,
+        *,
+        pool,
+        targetI: int,
+        targetJ: int,
+        status: str,
+        full_adj_cpu: sp.spmatrix,
+        full_features: torch.Tensor,
+        labels_st: torch.Tensor,
+        labels_oh_l: torch.Tensor,
+        labels_oh_ul: torch.Tensor,
+        global_ppr_scores: np.ndarray,
+    ):
+        """
+        在选定的两个 ball 内，用节点级 MoE（margin / 重要性 / 敏感度）选出 (row_idx, col_idx)。
+        - 信号：margin（脆弱度）、全局 PPR+度（重要性）、feature/struct grad norm（敏感度）
+        - 门控：用 ball 的标签熵 / 重要性均值 / 敏感度均值 softmax 得到权重
+        """
+        nodes_I = list(pool[targetI])
+        nodes_J = list(pool[targetJ])
+        if len(nodes_I) == 0 or len(nodes_J) == 0:
+            return pool[targetI][0], pool[targetJ][0]
+        if len(nodes_I) == 1 and len(nodes_J) == 1:
+            return nodes_I[0], nodes_J[0]
+
+        device = self.device
+
+        # 1) 取当前 full graph 的结构/特征梯度、logits
+        try:
+            adj_dense = torch.from_numpy(full_adj_cpu.toarray()).float().to(device)
+        except Exception:
+            return nodes_I[0], nodes_J[0]
+        self.cur_adj = adj_dense.clone()
+        self.cur_adj.requires_grad_(True)
+        adj_norm_dense = utils.normalize_adj_tensor(self.cur_adj, sparse=False)
+
+        adj_grad_full, feature_grad_full = self.get_meta_grad(
+            full_features, adj_norm_dense, labels_oh_l, labels_oh_ul
+        )
+        has_struct_grad = adj_grad_full is not None
+        has_feat_grad = feature_grad_full is not None
+        if has_struct_grad:
+            adj_grad_full = adj_grad_full.detach()
+        if has_feat_grad:
+            feature_grad_full = feature_grad_full.detach()
+        else:
+            feature_grad_full = torch.zeros_like(full_features)
+
+        logits_full = self._compute_logits(full_features, adj_norm_dense).detach()
+        margin_scores = self._compute_margin_scores(logits_full, labels_st)
+        ppr_scores = torch.tensor(
+            global_ppr_scores, device=device, dtype=torch.float32
+        )
+
+        # 节点度 / 敏感度
+        deg = torch.from_numpy(
+            np.asarray(full_adj_cpu.sum(axis=1)).reshape(-1)
+        ).float().to(device)
+        feat_sens = feature_grad_full.norm(p=2, dim=1)
+        if has_struct_grad:
+            struct_sens = adj_grad_full.abs().sum(dim=1)
+        else:
+            struct_sens = torch.zeros_like(feat_sens)
+
+        # 归一化后的节点信号
+        margin_n = self._normalize_score(margin_scores)
+        importance_n = 0.7 * self._normalize_score(ppr_scores) + 0.3 * self._normalize_score(deg)
+        sens_n = 0.5 * self._normalize_score(feat_sens) + 0.5 * self._normalize_score(struct_sens)
+
+        idx_I = torch.tensor(nodes_I, device=device, dtype=torch.long)
+        idx_J = torch.tensor(nodes_J, device=device, dtype=torch.long)
+
+        def _label_entropy(ball_nodes):
+            if len(ball_nodes) == 0:
+                return 0.0
+            labs = labels_st[ball_nodes].detach().cpu().numpy()
+            counts = np.bincount(labs, minlength=self.nclass).astype(np.float64)
+            total = counts.sum()
+            if total == 0:
+                return 0.0
+            p = counts / total
+            ent = -(p[p > 0] * np.log(p[p > 0])).sum()
+            return float(ent / (np.log(self.nclass) + 1e-12))
+
+        def _ball_weights(ball_nodes):
+            ent = _label_entropy(ball_nodes)
+            b = torch.tensor(ball_nodes, device=device, dtype=torch.long)
+            if b.numel() == 0:
+                return torch.tensor([1 / 3, 1 / 3, 1 / 3], device=device)
+            w_imp = importance_n[b].mean().item()
+            w_sens = sens_n[b].mean().item()
+            logits = torch.tensor([ent, w_imp, w_sens], device=device)
+            return torch.softmax(logits, dim=0)
+
+        w_I = _ball_weights(nodes_I)
+        w_J = _ball_weights(nodes_J)
+
+        node_score_I = (
+            w_I[0] * margin_n[idx_I] + w_I[1] * importance_n[idx_I] + w_I[2] * sens_n[idx_I]
+        )
+        node_score_J = (
+            w_J[0] * margin_n[idx_J] + w_J[1] * importance_n[idx_J] + w_J[2] * sens_n[idx_J]
+        )
+
+        # 选各自 Top-k 节点作为候选
+        kI = max(1, min(len(nodes_I), 8))
+        kJ = max(1, min(len(nodes_J), 8))
+        topI_idx = torch.topk(node_score_I, k=kI).indices
+        topJ_idx = torch.topk(node_score_J, k=kJ).indices
+
+        grad_scale = (
+            float(adj_grad_full.abs().mean().item()) + 1e-6 if has_struct_grad else 1.0
+        )
+        best_score = -1e12
+        best_pair = None
+        for i_rel in topI_idx:
+            i_node = int(idx_I[i_rel].item())
+            for j_rel in topJ_idx:
+                j_node = int(idx_J[j_rel].item())
+                if i_node == j_node:
+                    continue
+                exists = full_adj_cpu[i_node, j_node] != 0
+                if status == "add" and exists:
+                    continue
+                if status == "del" and not exists:
+                    continue
+                score = node_score_I[i_rel] + node_score_J[j_rel]
+                if has_struct_grad:
+                    g = adj_grad_full[i_node, j_node]
+                    g = g if status == "add" else -g
+                    g = torch.relu(g) / grad_scale
+                    score = score + 0.3 * g
+                if score > best_score:
+                    best_score = score
+                    best_pair = (i_node, j_node)
+
+        if best_pair is None:
+            return nodes_I[0], nodes_J[0]
+        return best_pair
 
     # === Heirattack 内：新增/替换 ===
 
