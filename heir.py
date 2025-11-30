@@ -795,14 +795,14 @@ class Heirattack(BaseAttack):
 
         logits_full = self._compute_logits(full_features, adj_norm_dense).detach()
         margin_scores = self._compute_margin_scores(logits_full, labels_st)
-        ppr_scores = torch.tensor(
-            global_ppr_scores, device=device, dtype=torch.float32
-        )
+        ppr_scores = torch.tensor(global_ppr_scores, device=device, dtype=torch.float32)
 
         # 节点度 / 敏感度
-        deg = torch.from_numpy(
-            np.asarray(full_adj_cpu.sum(axis=1)).reshape(-1)
-        ).float().to(device)
+        deg = (
+            torch.from_numpy(np.asarray(full_adj_cpu.sum(axis=1)).reshape(-1))
+            .float()
+            .to(device)
+        )
         feat_sens = feature_grad_full.norm(p=2, dim=1)
         if has_struct_grad:
             struct_sens = adj_grad_full.abs().sum(dim=1)
@@ -811,8 +811,12 @@ class Heirattack(BaseAttack):
 
         # 归一化后的节点信号
         margin_n = self._normalize_score(margin_scores)
-        importance_n = 0.7 * self._normalize_score(ppr_scores) + 0.3 * self._normalize_score(deg)
-        sens_n = 0.5 * self._normalize_score(feat_sens) + 0.5 * self._normalize_score(struct_sens)
+        importance_n = 0.7 * self._normalize_score(
+            ppr_scores
+        ) + 0.3 * self._normalize_score(deg)
+        sens_n = 0.5 * self._normalize_score(feat_sens) + 0.5 * self._normalize_score(
+            struct_sens
+        )
 
         idx_I = torch.tensor(nodes_I, device=device, dtype=torch.long)
         idx_J = torch.tensor(nodes_J, device=device, dtype=torch.long)
@@ -843,10 +847,14 @@ class Heirattack(BaseAttack):
         w_J = _ball_weights(nodes_J)
 
         node_score_I = (
-            w_I[0] * margin_n[idx_I] + w_I[1] * importance_n[idx_I] + w_I[2] * sens_n[idx_I]
+            w_I[0] * margin_n[idx_I]
+            + w_I[1] * importance_n[idx_I]
+            + w_I[2] * sens_n[idx_I]
         )
         node_score_J = (
-            w_J[0] * margin_n[idx_J] + w_J[1] * importance_n[idx_J] + w_J[2] * sens_n[idx_J]
+            w_J[0] * margin_n[idx_J]
+            + w_J[1] * importance_n[idx_J]
+            + w_J[2] * sens_n[idx_J]
         )
 
         # 选各自 Top-k 节点作为候选
