@@ -12,7 +12,6 @@ from heir import Heirattack
 from deeprobust.graph.global_attack import DICE, MetaApprox
 
 import math
-from fast_pytorch_kmeans import KMeans
 
 from split_test import (
     get_amazon_dataset,
@@ -55,6 +54,15 @@ parser.add_argument(
     default="Meta-Both",
     choices=["Meta-Both", "Meta-Self", "Meta-Train"],
     help="model variant",
+)
+parser.add_argument(
+    "--use_moe", action="store_true", default=True, help="Enable MoE enhancement"
+)
+parser.add_argument(
+    "--no_moe", action="store_true", default=False, help="Disable MoE enhancement"
+)
+parser.add_argument(
+    "--moe_weight", type=float, default=1, help="MoE gradient weight [0, 1]"
 )
 
 args = parser.parse_args()
@@ -234,6 +242,13 @@ model = Heirattack(
     args=args,
     features=features,
 )
+
+# 设置 MoE 参数
+model.use_moe_default = args.use_moe and not args.no_moe
+model.moe_grad_weight_default = args.moe_weight
+print(f"\n🤖 MoE Status: {'✅ ENABLED' if model.use_moe_default else '❌ DISABLED'}")
+if model.use_moe_default:
+    print(f"   MoE gradient weight: {model.moe_grad_weight_default:.2f}")
 #
 # model = MetaApprox(model=surrogate, nnodes=adj.shape[0], feature_shape=features.shape, attack_structure=True,
 #                    attack_features=False, device=device, lambda_=0.5)

@@ -1,3 +1,4 @@
+import copy
 import torch
 import numpy as np
 import torch.nn.functional as F
@@ -13,15 +14,25 @@ from deeprobust.graph.global_attack import DICE, MetaApprox
 import math
 from fast_pytorch_kmeans import KMeans
 
+from split_test import (
+    get_amazon_dataset,
+    get_coauthor_dataset,
+    get_deeproubust_dataset,
+    get_planetoid_dataset,
+)
+
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--no-cuda", action="store_true", default=False, help="Disables CUDA training."
 )
+parser.add_argument("--split_data", type=str, default="normal")
 parser.add_argument("--oracle", action="store_true", default=False)
 parser.add_argument("--seed", type=int, default=15, help="Random seed.")
 parser.add_argument(
     "--epochs", type=int, default=200, help="Number of epochs to train."
 )
+parser.add_argument("--ball_r", type=float, default=0.8)
+parser.add_argument("--noise", type=int, default=0)
 parser.add_argument("--step", type=int, default=1)
 parser.add_argument("--level", type=int, default=2)
 parser.add_argument("--miter", type=int, default=10)
@@ -42,7 +53,7 @@ parser.add_argument(
     "--model",
     type=str,
     default="Meta-Both",
-    choices=["Meta-Both", "Meta-Self" "Meta-Train"],
+    choices=["Meta-Both", "Meta-Self", "Meta-Train"],
     help="model variant",
 )
 
@@ -64,24 +75,41 @@ pyg_flag = False
 amazon = "Computers"
 # amazon = 'Photo'
 
+if args.dataset == "physics" or args.dataset == "cs":
+    gb_data = get_coauthor_dataset(args.dataset, split=args.split_data)
+elif args.dataset == "acm" or args.dataset == "cora_ml" or args.dataset == "polblogs":
+    gb_data = get_deeproubust_dataset(args.dataset, split=args.split_data)
+elif args.dataset == "computers" or args.dataset == "photo":
+    gb_data = get_amazon_dataset(args.dataset, split=args.split_data)
+else:
+    gb_data = get_planetoid_dataset(args.dataset, split=args.split_data)
+
+if hasattr(
+    gb_data, "adj"
+):  # get_deeproubust_dataset中的数据集需要额外添加x、y、edge_index
+    gb_data.x = torch.from_numpy(gb_data.features.toarray()).float()
+    gb_data.y = torch.from_numpy(gb_data.labels).long()
+    adj_coo = gb_data.adj.tocoo()
+    edge_index = torch.tensor([adj_coo.row, adj_coo.col], dtype=torch.long)
+    gb_data.edge_index = edge_index
 
 if "amazon" in args.dataset:
     from torch_geometric.datasets import Amazon
 
-    dataset = Amazon(root="../Data/pygdata/", name=amazon)
-    dataset = Amazon(root="../Data/", name="Photo")
+    dataset = Amazon(root="./Data/pygdata/", name=amazon)
+    dataset = Amazon(root="./Data/", name="Photo")
 
     pyg_flag = True
 elif "cs" in args.dataset:
     from torch_geometric.datasets import Coauthor
 
-    dataset = Coauthor(root="../Data/", name=args.dataset)
+    dataset = Coauthor(root="./Data/", name=args.dataset)
 
     pyg_flag = True
 elif "dblp" in args.dataset:
     from torch_geometric.datasets import DBLP, WikiCS
 
-    dataset = DBLP(root="../Data/")
+    dataset = DBLP(root="./Data/")
 
     pyg_flag = True
 elif "reddit" in args.dataset:
@@ -96,7 +124,7 @@ elif "ogbn" in args.dataset:
     dataset = PygNodePropPredDataset(name=args.dataset)
     pyg_flag = True
 else:
-    data = Dataset(root="../Data/", name=args.dataset, setting="nettack")
+    data = Dataset(root="./Data/", name=args.dataset, setting="nettack")
     adj, features, labels = data.adj, data.features, data.labels
     idx_train, idx_val, idx_test = data.idx_train, data.idx_val, data.idx_test
 
@@ -104,14 +132,14 @@ if pyg_flag:
     if args.dataset == "amazon":
         from deeprobust.graph.data import AmazonPyg
 
-        data = AmazonPyg("../Data/", name=amazon)
+        data = AmazonPyg("./Data/", name=amazon)
         from deeprobust.graph.data import Pyg2Dpr
 
         data = Pyg2Dpr(data)
     elif "cs" in args.dataset:
         from deeprobust.graph.data import CoauthorPyg
 
-        data = CoauthorPyg("../Data/", name=args.dataset)
+        data = CoauthorPyg("./Data/", name=args.dataset)
         from deeprobust.graph.data import Pyg2Dpr
 
         data = Pyg2Dpr(data)
@@ -195,13 +223,16 @@ model = Heirattack(
     nnodes=adj.shape[0],
     feature_shape=features.shape,
     attack_structure=True,
-    attack_features=False,
+    attack_features=True,
     device=device,
     lambda_=lambda_,
     train_iters=args.miter,
     levels=args.level,
+    gb_data=gb_data,
     use_oracle=args.oracle,
     lr=args.lr,
+    args=args,
+    features=features,
 )
 #
 # model = MetaApprox(model=surrogate, nnodes=adj.shape[0], feature_shape=features.shape, attack_structure=True,
@@ -212,10 +243,18 @@ model = Heirattack(
 model = model.to(device)
 
 
-def test(adj):
-    """test on GCN"""
+def test(adj, features, idx_eval, description="Test set"):
+    """Test GCN and ensure tensors are on CPU for deeprobust."""
+    import scipy.sparse as sp
 
-    # adj = normalize_adj_tensor(adj)
+    # 将 features 和 adj 转到 CPU
+    if torch.is_tensor(features) and features.is_cuda:
+        features = features.cpu()
+    if torch.is_tensor(adj) and adj.is_cuda:
+        adj = adj.cpu()
+    elif sp.issparse(adj):
+        adj = adj.tocoo()  # 保留 sparse 格式
+
     gcn = GCN(
         nfeat=features.shape[1],
         nhid=args.hidden,
@@ -226,18 +265,18 @@ def test(adj):
     gcn = gcn.to(device)
     gcn.fit(features, adj, labels, idx_train)
     output = gcn.output.cpu()
-    loss_test = F.nll_loss(output[idx_unlabeled], labels[idx_unlabeled])
-    acc_test = accuracy(output[idx_unlabeled], labels[idx_unlabeled])
+    loss_test = F.nll_loss(output[idx_eval], labels[idx_eval])
+    acc_test = accuracy(output[idx_eval], labels[idx_eval])
     print(
-        "Test set results:",
+        f"{description} results:",
         "loss= {:.4f}".format(loss_test.item()),
         "accuracy= {:.4f}".format(acc_test.item()),
     )
-
     return acc_test.item()
 
 
 def main():
+    # 执行多步攻击
     model.meta_attack_multi_step(
         features,
         org_adj,
@@ -248,17 +287,26 @@ def main():
         n_step=args.step,
         type=args.model,
     )
-    # model.attack(features, adj, labels, idx_train, idx_unlabeled, perturbations, ll_constraint=False)
-    # model.attack(org_adj, labels, perturbations)
-    print("=== testing GCN on original(clean) graph ===")
-    test(adj)
+
+    # 取攻击结果
     modified_adj = model.modified_adj
-    # modified_features = model.modified_features
-    test(modified_adj)
+    modified_features = model.modified_features
+
+    print("=== Clean graph ===")
+    test(adj, features, idx_unlabeled, description="Clean graph")
+
+    print("=== Edge-only attack ===")
+    test(modified_adj, features, idx_unlabeled, description="Edge-only attack")
+
+    print("=== Feature-only attack ===")
+    test(adj, modified_features, idx_unlabeled, description="Feature-only attack")
+
+    print("=== Combined attack (edge + feature) ===")
+    test(modified_adj, modified_features, idx_unlabeled, description="Combined attack")
 
     # # if you want to save the modified adj/features, uncomment the code below
-    # model.save_adj(root='./', name=f'mod_adj_polblogs_005_metatrain')
-    # model.save_features(root='./', name='mod_features')
+    # model.save_adj(root="./", name=f"mod_adj_polblogs_005_metatrain")
+    # model.save_features(root="./", name="mod_features")
 
 
 if __name__ == "__main__":
