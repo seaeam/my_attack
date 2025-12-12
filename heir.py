@@ -100,8 +100,12 @@ class Heirattack(BaseAttack):
         self.use_oracle = use_oracle
 
         # ========== MoE 组件初始化 ==========
-        self.num_experts = 3  # 三个专家
+        self.num_experts = 3  # 三个专家：簇内、度数、置信度
         self.moe_hidden_dim = 64
+        self.moe_top_k = 2  # 稀疏路由：只激活 top-2 专家
+        self.moe_load_balance_weight = 0.01  # 负载平衡损失权重
+        self.moe_update_freq = 5  # 每 5 次扰动更新一次 MoE
+        self._moe_update_counter = 0
         self._init_moe_components()
 
     def _initialize(self):
@@ -117,35 +121,76 @@ class Heirattack(BaseAttack):
                 v.data.fill_(0)
 
     def _init_moe_components(self):
-        """初始化 MoE（专家混合）组件"""
-        # 门控网络：输入节点特征 -> 专家权重
+        """初始化 MoE（专家混合）组件 - 强化版"""
+        # 门控网络：输入节点特征 -> 专家权重（不含 Softmax，由 _moe_forward 处理）
         self.gating_network = nn.Sequential(
             nn.Linear(self.nfeat, self.moe_hidden_dim),
             nn.ReLU(),
+            nn.Dropout(0.1),  # 防止过拟合
             nn.Linear(self.moe_hidden_dim, self.num_experts),
-            nn.Softmax(dim=-1),
         ).to(self.device)
 
-        # 专家网络：每个专家输出攻击策略参数
-        self.experts = nn.ModuleList(
-            [
-                nn.Sequential(
-                    nn.Linear(self.nfeat, self.moe_hidden_dim),
-                    nn.ReLU(),
-                    nn.Linear(self.moe_hidden_dim, self.moe_hidden_dim),
-                    nn.Tanh(),  # 输出归一化的策略向量
-                ).to(self.device)
-                for _ in range(self.num_experts)
-            ]
-        )
+        # 专家网络：差异化设计，每个专家有不同的结构
+        self.experts = nn.ModuleList()
 
-        # 专家特化方向（可学习的先验偏好）
-        # Expert 0: 簇内攻击（高内聚）
-        # Expert 1: 度数导向攻击（高度节点）
-        # Expert 2: 置信度导向攻击（低置信度优先）
-        self.expert_priors = nn.Parameter(
-            torch.randn(self.num_experts, self.moe_hidden_dim).to(self.device)
-        )
+        # Expert 0: 簇内攻击专家（深层网络，关注局部结构）
+        expert0 = nn.Sequential(
+            nn.Linear(self.nfeat, self.moe_hidden_dim),
+            nn.LayerNorm(self.moe_hidden_dim),
+            nn.ReLU(),
+            nn.Linear(self.moe_hidden_dim, self.moe_hidden_dim),
+            nn.LayerNorm(self.moe_hidden_dim),
+            nn.ReLU(),
+            nn.Linear(self.moe_hidden_dim, self.moe_hidden_dim),
+            nn.Tanh(),
+        ).to(self.device)
+        self.experts.append(expert0)
+
+        # Expert 1: 度数导向专家（宽层网络，关注全局影响）
+        expert1 = nn.Sequential(
+            nn.Linear(self.nfeat, self.moe_hidden_dim * 2),
+            nn.LayerNorm(self.moe_hidden_dim * 2),
+            nn.ReLU(),
+            nn.Linear(self.moe_hidden_dim * 2, self.moe_hidden_dim),
+            nn.Tanh(),
+        ).to(self.device)
+        self.experts.append(expert1)
+
+        # Expert 2: 置信度导向专家（残差结构，保留原始特征信息）
+        class ResidualExpert(nn.Module):
+            def __init__(self, input_dim, hidden_dim):
+                super().__init__()
+                self.fc1 = nn.Linear(input_dim, hidden_dim)
+                self.ln1 = nn.LayerNorm(hidden_dim)
+                self.fc2 = nn.Linear(hidden_dim, hidden_dim)
+                self.ln2 = nn.LayerNorm(hidden_dim)
+                self.shortcut = (
+                    nn.Linear(input_dim, hidden_dim)
+                    if input_dim != hidden_dim
+                    else nn.Identity()
+                )
+
+            def forward(self, x):
+                residual = self.shortcut(x)
+                out = F.relu(self.ln1(self.fc1(x)))
+                out = self.ln2(self.fc2(out))
+                return torch.tanh(out + residual)
+
+        expert2 = ResidualExpert(self.nfeat, self.moe_hidden_dim).to(self.device)
+        self.experts.append(expert2)
+
+        # 专家特化先验（初始化为不同方向，促进差异化）
+        # Expert 0: 簇内攻击 -> 负方向（破坏内聚）
+        # Expert 1: 度数导向 -> 正方向（放大影响）
+        # Expert 2: 置信度导向 -> 零中心（精准攻击）
+        expert_priors_init = torch.stack(
+            [
+                -torch.ones(self.moe_hidden_dim),  # Expert 0: 负方向
+                torch.ones(self.moe_hidden_dim),  # Expert 1: 正方向
+                torch.zeros(self.moe_hidden_dim),  # Expert 2: 零中心
+            ]
+        ).to(self.device)
+        self.expert_priors = nn.Parameter(expert_priors_init * 0.1)
 
         # 梯度投影器（预先创建，避免运行时重复初始化）
         self._moe_grad_projector = nn.Linear(self.moe_hidden_dim, self.nfeat).to(
@@ -154,14 +199,24 @@ class Heirattack(BaseAttack):
         nn.init.xavier_uniform_(self._moe_grad_projector.weight, gain=0.1)
         nn.init.zeros_(self._moe_grad_projector.bias)
 
-        # MoE 优化器（独立于主攻击流程）
-        self.moe_optimizer = optim.Adam(
+        # MoE 优化器（独立于主攻击流程，使用 AdamW 和学习率调度）
+        self.moe_optimizer = optim.AdamW(
             list(self.gating_network.parameters())
             + list(self.experts.parameters())
             + [self.expert_priors]
             + list(self._moe_grad_projector.parameters()),
             lr=0.001,
+            weight_decay=1e-4,  # 正则化
         )
+
+        # 学习率调度器（余弦退火）
+        self.moe_scheduler = optim.lr_scheduler.CosineAnnealingLR(
+            self.moe_optimizer, T_max=100, eta_min=1e-5
+        )
+
+        # 历史统计（用于负载平衡）
+        self.expert_usage_history = torch.zeros(self.num_experts).to(self.device)
+        self.moe_training_steps = 0
 
     def _compute_node_contexts(self, full_features, adj, U):
         """为节点计算上下文特征（用于门控网络）"""
@@ -202,13 +257,50 @@ class Heirattack(BaseAttack):
         context = 0.9 * X_u + 0.1 * extra_feat
         return context
 
-    def _moe_forward(self, node_contexts):
-        """MoE 前向传播：门控 + 专家混合"""
-        # 门控权重 [m, num_experts]
-        gate_weights = self.gating_network(node_contexts)
+    def _moe_forward(self, node_contexts, use_sparse=True):
+        """MoE 前向传播：稀疏 Top-k 门控 + 专家混合
+
+        Args:
+            node_contexts: [m, d] 节点上下文特征
+            use_sparse: 是否使用稀疏 Top-k 路由
+
+        Returns:
+            mixed_output: [m, hidden_dim] 混合专家输出
+            gate_weights: [m, num_experts] 门控权重（用于统计）
+            active_experts: [m, k] 激活的专家索引（稀疏模式）
+        """
+        # 门控 logits [m, num_experts]
+        gate_logits = self.gating_network(node_contexts)
+
+        if use_sparse and self.training:
+            # 稀疏 Top-k 路由（训练时）
+            # 计算 Top-k 门控权重
+            topk_gate_logits, topk_indices = torch.topk(
+                gate_logits, k=min(self.moe_top_k, self.num_experts), dim=1
+            )
+            # 对 Top-k 做 softmax
+            topk_gate_weights = F.softmax(topk_gate_logits, dim=1)  # [m, k]
+
+            # 构建稀疏门控权重矩阵
+            m = node_contexts.size(0)
+            gate_weights = torch.zeros_like(gate_logits)  # [m, num_experts]
+            gate_weights.scatter_(1, topk_indices, topk_gate_weights)
+
+            active_experts = topk_indices
+        else:
+            # 稠密路由（推理时或不使用稀疏）
+            gate_weights = F.softmax(gate_logits, dim=1)  # [m, num_experts]
+            active_experts = None
 
         # 每个专家的输出 [m, hidden_dim]
-        expert_outputs = [expert(node_contexts) for expert in self.experts]
+        expert_outputs = []
+        for i, expert in enumerate(self.experts):
+            # 添加专家先验偏好
+            expert_out = expert(node_contexts)  # [m, hidden_dim]
+            # 融合可学习的先验
+            expert_out = expert_out + 0.1 * self.expert_priors[i].unsqueeze(0)
+            expert_outputs.append(expert_out)
+
         expert_stack = torch.stack(
             expert_outputs, dim=1
         )  # [m, num_experts, hidden_dim]
@@ -216,72 +308,179 @@ class Heirattack(BaseAttack):
         # 加权混合 [m, hidden_dim]
         mixed_output = torch.sum(gate_weights.unsqueeze(2) * expert_stack, dim=1)
 
-        return mixed_output, gate_weights
+        return mixed_output, gate_weights, active_experts
 
-    def _moe_guided_gradient_weighting(self, grad, moe_output, node_contexts):
-        """用 MoE 输出调制梯度 - 改进版：结合专家语义"""
+    def _moe_guided_gradient_weighting(
+        self, grad, moe_output, node_contexts, gate_weights
+    ):
+        """用 MoE 输出调制梯度 - 强化版：多策略融合
+
+        结合专家语义和门控权重，实现更精细的梯度调制。
+        """
         # moe_output: [m, hidden_dim]
         # grad: [m, d]
+        # gate_weights: [m, num_experts]
 
         m, d = grad.shape
         hidden_dim = moe_output.size(1)
 
-        # 1. 创建稳定的梯度投影器（只初始化一次）
-        if not hasattr(self, "_moe_grad_projector"):
-            self._moe_grad_projector = nn.Linear(hidden_dim, d).to(self.device)
-            # 初始化为小权重，避免开始就过度调制
-            nn.init.xavier_uniform_(self._moe_grad_projector.weight, gain=0.1)
-
-        # 2. 基于 MoE 输出的调制因子
-        base_modulation = torch.tanh(
+        # 1. 基于 MoE 输出的方向性调制
+        direction_modulation = torch.tanh(
             self._moe_grad_projector(moe_output)
         )  # [m, d] 范围 [-1, 1]
 
-        # 3. 简单的梯度调制（小幅度）
-        weighted_grad = grad * (1.0 + 0.1 * base_modulation)  # 放大因子 [0.9, 1.1]
+        # 2. 基于门控权重的幅度调制（专家置信度）
+        # 计算门控熵：熵越低，专家选择越确定，调制越强
+        gate_entropy = -(gate_weights * torch.log(gate_weights + 1e-8)).sum(
+            dim=1
+        )  # [m]
+        max_entropy = np.log(self.num_experts)
+        confidence = 1.0 - (gate_entropy / max_entropy)  # [m] 范围 [0, 1]
+        magnitude_scale = 0.05 + 0.25 * confidence.unsqueeze(
+            1
+        )  # [m, 1] 范围 [0.05, 0.3]
+
+        # 3. 基于梯度方向一致性的自适应权重
+        # 计算 MoE 调制方向与原始梯度方向的一致性
+        grad_norm = F.normalize(grad, p=2, dim=1, eps=1e-8)
+        direction_norm = F.normalize(direction_modulation, p=2, dim=1, eps=1e-8)
+        alignment = (grad_norm * direction_norm).sum(
+            dim=1, keepdim=True
+        )  # [m, 1] 范围 [-1, 1]
+        # 一致性越高，调制越强
+        adaptive_weight = torch.sigmoid(2.0 * alignment)  # [m, 1] 范围 [0.12, 0.88]
+
+        # 4. 综合调制策略
+        # 方向调制 + 幅度调制 + 自适应权重
+        modulation = direction_modulation * magnitude_scale * adaptive_weight
+        weighted_grad = grad * (1.0 + modulation)  # 动态范围
+
+        # 5. 梯度归一化（保持稳定性）
+        grad_magnitude = grad.norm(p=2, dim=1, keepdim=True)
+        weighted_grad_magnitude = weighted_grad.norm(p=2, dim=1, keepdim=True)
+        # 保持原始梯度的相对幅度，只改变方向
+        weighted_grad = weighted_grad * (
+            grad_magnitude / (weighted_grad_magnitude + 1e-8)
+        )
 
         return weighted_grad
 
-    def _update_moe(self, node_contexts, attack_success):
-        """根据攻击效果更新 MoE（强化学习风格）"""
-        # attack_success: [m] 布尔张量，表示每个节点攻击是否成功
+    def _update_moe(self, node_contexts, attack_success, gate_weights_history):
+        """根据攻击效果更新 MoE（强化学习 + 负载平衡）
 
-        # 确保 node_contexts 需要梯度（重新前向传播）
-        if not node_contexts.requires_grad:
-            node_contexts = node_contexts.detach().requires_grad_(True)
+        Args:
+            node_contexts: [m, d] 节点上下文
+            attack_success: [m] 布尔张量，攻击成功标记
+            gate_weights_history: [m, num_experts] 本轮门控权重
 
+        Returns:
+            dict: 包含各项损失的字典
+        """
         # 设置为训练模式
         self.gating_network.train()
         for expert in self.experts:
             expert.train()
 
-        _, gate_weights = self._moe_forward(node_contexts)
+        # 重新前向传播（需要梯度）
+        node_contexts_grad = node_contexts.detach().requires_grad_(True)
+        _, gate_weights, active_experts = self._moe_forward(
+            node_contexts_grad, use_sparse=True
+        )
 
-        # 奖励：成功攻击的节点给予正奖励
-        rewards = attack_success.float().detach() * 2.0 - 1.0  # [-1, 1]
+        # === 1. 策略梯度损失（REINFORCE）===
+        # 奖励设计：成功 +1，失败 -0.5（鼓励尝试）
+        rewards = torch.where(
+            attack_success,
+            torch.ones_like(attack_success, dtype=torch.float32),
+            torch.full_like(attack_success, -0.5, dtype=torch.float32),
+        )
+        rewards = rewards.detach()
 
-        # 策略梯度损失（REINFORCE 风格）
-        # 鼓励成功节点的专家选择模式
+        # 基线减法（减少方差）
+        baseline = rewards.mean()
+        advantages = rewards - baseline
+
+        # 策略梯度
         log_probs = torch.log(gate_weights + 1e-8)  # [m, num_experts]
-        policy_loss = -(log_probs * rewards.unsqueeze(1)).mean()
+        policy_loss = -(log_probs * advantages.unsqueeze(1)).mean()
 
-        # 熵正则化（鼓励探索）
+        # === 2. 负载平衡损失 ===
+        # 计算当前批次的专家使用率
+        batch_expert_usage = gate_weights.mean(dim=0)  # [num_experts]
+
+        # 更新历史统计（指数移动平均）
+        self.expert_usage_history = (
+            0.9 * self.expert_usage_history + 0.1 * batch_expert_usage.detach()
+        )
+
+        # 负载平衡损失：鼓励均匀使用
+        uniform_target = 1.0 / self.num_experts
+        load_balance_loss = F.mse_loss(
+            self.expert_usage_history,
+            torch.full_like(self.expert_usage_history, uniform_target),
+        )
+
+        # === 3. 专家差异化损失 ===
+        # 鼓励不同专家输出不同的策略
+        expert_outputs = [expert(node_contexts_grad) for expert in self.experts]
+        expert_stack = torch.stack(
+            expert_outputs, dim=0
+        )  # [num_experts, m, hidden_dim]
+
+        # 计算专家输出的余弦相似度矩阵
+        expert_mean = expert_stack.mean(dim=1)  # [num_experts, hidden_dim]
+        expert_norm = F.normalize(expert_mean, p=2, dim=1)
+        similarity_matrix = expert_norm @ expert_norm.T  # [num_experts, num_experts]
+
+        # 除对角线外，相似度应该尽量小
+        mask = 1.0 - torch.eye(self.num_experts).to(self.device)
+        diversity_loss = (similarity_matrix * mask).abs().mean()
+
+        # === 4. 熵正则化（鼓励探索）===
         entropy = -(gate_weights * torch.log(gate_weights + 1e-8)).sum(dim=1).mean()
-        entropy_coef = 0.01
 
-        total_loss = policy_loss - entropy_coef * entropy
+        # === 5. 专家先验正则化 ===
+        # 防止先验向量过大
+        prior_reg = (self.expert_priors**2).mean()
 
-        # 更新
+        # === 综合损失 ===
+        total_loss = (
+            policy_loss
+            + self.moe_load_balance_weight * load_balance_loss
+            + 0.1 * diversity_loss
+            - 0.01 * entropy  # 熵奖励
+            + 0.001 * prior_reg
+        )
+
+        # 梯度裁剪（防止梯度爆炸）
         self.moe_optimizer.zero_grad()
         total_loss.backward()
+        torch.nn.utils.clip_grad_norm_(
+            list(self.gating_network.parameters())
+            + list(self.experts.parameters())
+            + [self.expert_priors],
+            max_norm=1.0,
+        )
         self.moe_optimizer.step()
+
+        # 学习率调度
+        self.moe_scheduler.step()
+        self.moe_training_steps += 1
 
         # 恢复评估模式
         self.gating_network.eval()
         for expert in self.experts:
             expert.eval()
 
-        return total_loss.item()
+        return {
+            "total_loss": total_loss.item(),
+            "policy_loss": policy_loss.item(),
+            "load_balance_loss": load_balance_loss.item(),
+            "diversity_loss": diversity_loss.item(),
+            "entropy": entropy.item(),
+            "success_rate": attack_success.float().mean().item(),
+            "expert_usage": self.expert_usage_history.cpu().numpy(),
+        }
 
     # 为未标记节点生成伪标签，用于自训练
     def self_training_label(self, labels, idx_train):
@@ -1030,6 +1229,7 @@ class Heirattack(BaseAttack):
         node_contexts = None
         moe_output = None
         gate_weights = None
+        active_experts = None
         if use_moe:
             # 需要 scipy.sparse 的 adj 用于度数计算
             # 假设可从 self.full_adj 或调用处获取
@@ -1058,7 +1258,14 @@ class Heirattack(BaseAttack):
 
             if use_moe:
                 node_contexts = self._compute_node_contexts(full_features, adj_scipy, U)
-                moe_output, gate_weights = self._moe_forward(node_contexts)
+                # 评估模式：使用稀疏路由
+                self.gating_network.eval()
+                for expert in self.experts:
+                    expert.eval()
+                with torch.no_grad():
+                    moe_output, gate_weights, active_experts = self._moe_forward(
+                        node_contexts, use_sparse=True
+                    )
 
         # 自动判定特征类型
         if feature_type == "auto":
@@ -1134,7 +1341,7 @@ class Heirattack(BaseAttack):
                 # ========== MoE 梯度调制 ==========
                 if use_moe and moe_output is not None:
                     g_moe = self._moe_guided_gradient_weighting(
-                        g, moe_output, node_contexts
+                        g, moe_output, node_contexts, gate_weights
                     )
                     g = (1.0 - moe_grad_weight) * g + moe_grad_weight * g_moe
 
@@ -1182,17 +1389,29 @@ class Heirattack(BaseAttack):
                 X.requires_grad_(True)
 
             # ========== MoE 强化学习更新（连续特征）==========
-            # 注意：在线更新暂时禁用以避免梯度计算问题
-            # MoE 的梯度调制功能仍然有效（这是主要价值）
-            # 可以通过离线批量训练来更新 MoE 参数
-            # if use_moe and node_contexts is not None:
-            #     with torch.no_grad():
-            #         logits_init = self._compute_logits(full_features, adj_norm)
-            #         logits_final = self._compute_logits(X, adj_norm)
-            #         pred_init = logits_init.argmax(dim=1)[U_t]
-            #         pred_final = logits_final.argmax(dim=1)[U_t]
-            #         attack_success = (pred_init != pred_final)
-            #         self._update_moe(node_contexts, attack_success)
+            # 启用 MoE 在线更新（改进版，梯度安全）
+            if use_moe and node_contexts is not None:
+                # 计算攻击成功率
+                with torch.no_grad():
+                    # 原始预测
+                    logits_init = self._compute_logits(full_features, adj_norm)
+                    pred_init = logits_init.argmax(dim=1)[U_t]
+
+                    # 攻击后预测
+                    logits_final = self._compute_logits(X, adj_norm)
+                    pred_final = logits_final.argmax(dim=1)[U_t]
+
+                    # 成功 = 预测改变
+                    attack_success = pred_init != pred_final
+
+                # 定期更新 MoE（避免频繁更新导致不稳定）
+                self._moe_update_counter += 1
+                if self._moe_update_counter % self.moe_update_freq == 0:
+                    update_stats = self._update_moe(
+                        node_contexts, attack_success, gate_weights
+                    )
+                    # 可选：打印更新统计（调试用）
+                    # print(f"MoE Update: {update_stats}")
 
             return X
 
@@ -1231,7 +1450,7 @@ class Heirattack(BaseAttack):
             # ========== MoE 梯度调制（二值特征）==========
             if use_moe and moe_output is not None:
                 grad_moe = self._moe_guided_gradient_weighting(
-                    grad, moe_output, node_contexts
+                    grad, moe_output, node_contexts, gate_weights
                 )
                 grad = (1.0 - moe_grad_weight) * grad + moe_grad_weight * grad_moe
 
@@ -1329,6 +1548,28 @@ class Heirattack(BaseAttack):
             # 回写
             X = X.detach()
             X[U_t] = XU_new
+
+            # ========== MoE 强化学习更新（二值特征）==========
+            if use_moe and node_contexts is not None:
+                # 计算攻击成功率（类似连续特征）
+                with torch.no_grad():
+                    X_orig = full_features.clone()
+                    X_orig[U_t] = XU  # 原始特征
+
+                    logits_init = self._compute_logits(X_orig, adj_norm)
+                    pred_init = logits_init.argmax(dim=1)[U_t]
+
+                    logits_final = self._compute_logits(X, adj_norm)
+                    pred_final = logits_final.argmax(dim=1)[U_t]
+
+                    attack_success = pred_init != pred_final
+
+                # 定期更新
+                self._moe_update_counter += 1
+                if self._moe_update_counter % self.moe_update_freq == 0:
+                    update_stats = self._update_moe(
+                        node_contexts, attack_success, gate_weights
+                    )
 
             return X
 
