@@ -57,6 +57,45 @@ parser.add_argument(
     help="model variant",
 )
 
+# 文本攻击参数
+parser.add_argument(
+    "--use_text_attack",
+    action="store_true",
+    default=False,
+    help="Enable text generation attack for node features",
+)
+parser.add_argument(
+    "--llm_type",
+    type=str,
+    default="gpt",
+    choices=["gpt", "deepseek", "llama"],
+    help="LLM type: gpt (OpenAI), deepseek (DeepSeek), or llama (local)",
+)
+parser.add_argument(
+    "--openai_api_key",
+    type=str,
+    default=None,
+    help="API key (required if using GPT or DeepSeek)",
+)
+parser.add_argument(
+    "--api_base_url",
+    type=str,
+    default=None,
+    help="API base URL (for DeepSeek or custom endpoints, e.g., https://api.deepseek.com)",
+)
+parser.add_argument(
+    "--llama_model_path",
+    type=str,
+    default=None,
+    help="Llama model path (required if using local Llama)",
+)
+parser.add_argument(
+    "--text_attack_nodes",
+    type=int,
+    default=None,
+    help="Number of nodes to attack with text generation (default: all perturbed nodes). Use smaller value for faster testing.",
+)
+
 args = parser.parse_args()
 
 device = torch.device(
@@ -218,12 +257,33 @@ print(
 
 lambda_ = 1
 
+# 如果启用文本攻击，打印配置信息
+if args.use_text_attack:
+    print("\n" + "=" * 60)
+    print("📝 Text Attack Enabled")
+    print("=" * 60)
+    print(f"  LLM Type: {args.llm_type}")
+    if args.llm_type == "gpt":
+        if args.openai_api_key:
+            print(f"  OpenAI API Key: {'*' * 20}...")
+        else:
+            print("  ⚠️  Warning: OpenAI API key not provided")
+    elif args.llm_type == "llama":
+        if args.llama_model_path:
+            print(f"  Llama Model Path: {args.llama_model_path}")
+        else:
+            print("  ⚠️  Warning: Llama model path not provided")
+    print("  Attack Target: Node Features (via text generation)")
+    print("=" * 60 + "\n")
+else:
+    print("\n💡 Text attack disabled. Use --use_text_attack to enable.\n")
+
 model = Heirattack(
     model=surrogate,
     nnodes=adj.shape[0],
     feature_shape=features.shape,
     attack_structure=True,
-    attack_features=True,
+    attack_features=True,  # 启用特征攻击（如果use_text_attack=True则用文本生成）
     device=device,
     lambda_=lambda_,
     train_iters=args.miter,
@@ -231,7 +291,7 @@ model = Heirattack(
     gb_data=gb_data,
     use_oracle=args.oracle,
     lr=args.lr,
-    args=args,
+    args=args,  # 传递args以支持文本攻击
     features=features,
 )
 #
@@ -277,6 +337,14 @@ def test(adj, features, idx_eval, description="Test set"):
 
 def main():
     # 执行多步攻击
+    print("\n🚀 Starting Heir Attack...")
+    print(f"  Perturbation budget: {perturbations} edges")
+    print(f"  Perturbation rate: {args.ptb_rate * 100}%")
+    print(f"  Attack mode: {args.model}")
+    if args.use_text_attack:
+        print(f"  Text attack: Enabled (LLM: {args.llm_type})")
+    print()
+
     model.meta_attack_multi_step(
         features,
         org_adj,
@@ -292,17 +360,43 @@ def main():
     modified_adj = model.modified_adj
     modified_features = model.modified_features
 
+    print("\n" + "=" * 60)
+    print("📊 Evaluation Results")
+    print("=" * 60 + "\n")
+
     print("=== Clean graph ===")
-    test(adj, features, idx_unlabeled, description="Clean graph")
+    acc_clean = test(adj, features, idx_unlabeled, description="Clean graph")
 
-    print("=== Edge-only attack ===")
-    test(modified_adj, features, idx_unlabeled, description="Edge-only attack")
+    print("\n=== Edge-only attack ===")
+    acc_edge = test(
+        modified_adj, features, idx_unlabeled, description="Edge-only attack"
+    )
 
-    print("=== Feature-only attack ===")
-    test(adj, modified_features, idx_unlabeled, description="Feature-only attack")
+    print("\n=== Feature-only attack ===")
+    acc_feature = test(
+        adj, modified_features, idx_unlabeled, description="Feature-only attack"
+    )
 
-    print("=== Combined attack (edge + feature) ===")
-    test(modified_adj, modified_features, idx_unlabeled, description="Combined attack")
+    print("\n=== Combined attack (edge + feature) ===")
+    acc_combined = test(
+        modified_adj, modified_features, idx_unlabeled, description="Combined attack"
+    )
+
+    # 输出攻击效果总结
+    print("\n" + "=" * 60)
+    print("📈 Attack Performance Summary")
+    print("=" * 60)
+    print(f"  Clean accuracy:         {acc_clean:.4f}")
+    print(
+        f"  Edge attack accuracy:   {acc_edge:.4f} (drop: {acc_clean - acc_edge:.4f})"
+    )
+    print(
+        f"  Feature attack accuracy: {acc_feature:.4f} (drop: {acc_clean - acc_feature:.4f})"
+    )
+    print(
+        f"  Combined accuracy:      {acc_combined:.4f} (drop: {acc_clean - acc_combined:.4f})"
+    )
+    print("=" * 60 + "\n")
 
     # # if you want to save the modified adj/features, uncomment the code below
     # model.save_adj(root="./", name=f"mod_adj_polblogs_005_metatrain")

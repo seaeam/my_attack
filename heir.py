@@ -12,6 +12,15 @@ from gb_division import gb_division
 from deeprobust.graph.global_attack import BaseAttack
 from gb_division_simple import GBCluster
 
+# 文本攻击生成器导入
+try:
+    from text_attack_generator import TextAttackGenerator
+
+    TEXT_ATTACK_AVAILABLE = True
+except ImportError:
+    TEXT_ATTACK_AVAILABLE = False
+    print("Warning: TextAttackGenerator not available. Text attack will be disabled.")
+
 
 class Heirattack(BaseAttack):
     def __init__(
@@ -107,6 +116,27 @@ class Heirattack(BaseAttack):
         self.moe_update_freq = 5  # 每 5 次扰动更新一次 MoE
         self._moe_update_counter = 0
         self._init_moe_components()
+
+        # ========== 文本攻击生成器初始化 ==========
+        self.use_text_attack = getattr(args, "use_text_attack", False)
+        if self.use_text_attack and TEXT_ATTACK_AVAILABLE:
+            self.text_generator = TextAttackGenerator(
+                dataset_name=getattr(args, "dataset", "cora"),
+                llm_type=getattr(args, "llm_type", "gpt"),
+                api_key=getattr(args, "openai_api_key", None),
+                model_path=getattr(args, "llama_model_path", None),
+                base_url=getattr(args, "api_base_url", None),
+                device=self.device,
+            )
+            print(
+                f"✅ Text attack generator initialized with LLM: {getattr(args, 'llm_type', 'gpt')}"
+            )
+        else:
+            self.text_generator = None
+            if self.use_text_attack:
+                print(
+                    "⚠️ Text attack requested but not available. Falling back to gradient-based attack."
+                )
 
     def _initialize(self):
         for w, v in zip(self.weights, self.w_velocities):
@@ -599,6 +629,122 @@ class Heirattack(BaseAttack):
 
         return adj_grad, feature_grad
 
+    def attack_features_with_text(
+        self, target_nodes, full_features, labels_st, budget_per_node=20
+    ):
+        """
+        使用文本生成方法攻击节点特征
+
+        Args:
+            target_nodes: 要攻击的节点索引列表
+            full_features: 当前完整特征矩阵 [nnodes, nfeat]
+            labels_st: 自训练标签
+            budget_per_node: 每个节点的修改预算（词数）
+
+        Returns:
+            modified_features: 修改后的特征矩阵
+        """
+        if not self.use_text_attack or self.text_generator is None:
+            print("⚠️ Text attack not available, skipping feature attack")
+            return full_features
+
+        print(
+            f"🔥 Attacking {len(target_nodes)} nodes with text generation (budget={budget_per_node})"
+        )
+        print(
+            f"⏱️  Estimated time: {len(target_nodes) * 2}~{len(target_nodes) * 5} seconds"
+        )
+
+        modified_features = full_features.clone()
+        success_count = 0
+        fail_count = 0
+
+        import time
+
+        start_time = time.time()
+
+        # 批量生成对抗性文本
+        for idx, node_id in enumerate(target_nodes):
+            # 获取目标标签（翻转预测）
+            pred_label = labels_st[node_id].item()
+            target_label = (pred_label + 1) % self.nclass  # 简单翻转到下一个类别
+
+            # 获取当前节点的特征向量
+            current_bow = full_features[node_id].detach().cpu()
+
+            # 转换为numpy
+            if current_bow.is_sparse:
+                current_bow = current_bow.to_dense().numpy()
+            else:
+                current_bow = current_bow.numpy()
+
+            # 从BoW向量提取used_words和not_used_words（防止词表维度不匹配导致越界）
+            try:
+                vocab = self.text_generator.vocab
+                vocab_size = len(vocab)
+                idx_used = np.where(current_bow > 0)[0]
+                idx_not = np.where(current_bow == 0)[0]
+                # 只保留在词表范围内的索引
+                idx_used = idx_used[idx_used < vocab_size]
+                idx_not = idx_not[idx_not < vocab_size]
+                used_words = [vocab[i] for i in idx_used]
+                not_used_words = [vocab[i] for i in idx_not]
+
+                # 限制词数（避免过长的列表）
+                if len(used_words) > budget_per_node:
+                    used_words = used_words[:budget_per_node]
+                if len(not_used_words) > 100:  # 限制禁用词数量
+                    not_used_words = not_used_words[:100]
+
+                # 生成对抗性文本
+                text = self.text_generator.generate_adversarial_text(
+                    used_words=used_words, not_used_words=not_used_words, verbose=False
+                )
+
+                # 将文本转回BoW向量
+                new_bow = self.text_generator.vectorizer.transform([text]).toarray()[0]
+                # 与当前特征维度对齐（若词表维度与特征维度不一致则做安全对齐）
+                feat_dim = modified_features.shape[1]
+                if new_bow.shape[0] != feat_dim:
+                    aligned = np.zeros(feat_dim, dtype=np.float32)
+                    copy_len = min(new_bow.shape[0], feat_dim)
+                    aligned[:copy_len] = new_bow[:copy_len]
+                    new_bow = aligned
+
+                # 更新特征
+                modified_features[node_id] = (
+                    torch.from_numpy(new_bow).float().to(self.device)
+                )
+
+                success_count += 1
+
+                # 更频繁的进度显示，包含速度信息
+                if (idx + 1) % 5 == 0 or (idx + 1) == len(target_nodes):
+                    elapsed = time.time() - start_time
+                    speed = elapsed / (idx + 1)
+                    remaining = speed * (len(target_nodes) - idx - 1)
+                    print(
+                        f"  ✓ [{idx + 1}/{len(target_nodes)}] Success: {success_count}, Failed: {fail_count} | "
+                        f"Speed: {speed:.1f}s/node | ETA: {remaining:.0f}s"
+                    )
+
+            except Exception as e:
+                fail_count += 1
+                if fail_count <= 3:  # 只显示前3个错误
+                    print(f"  ✗ Failed to attack node {node_id}: {str(e)}")
+                elif fail_count == 4:
+                    print(
+                        f"  ✗ More errors occurred, suppressing further error messages..."
+                    )
+                continue
+
+        total_time = time.time() - start_time
+        print(
+            f"\n✅ Text attack completed: {success_count} successful, {fail_count} failed in {total_time:.1f}s"
+        )
+
+        return modified_features
+
     # 层次化图对抗攻击的多步元攻击主函数
     # 实现基于粗化图的多步元攻击，通过递归聚类和梯度指导来选择最优扰动
     def meta_attack_multi_step(
@@ -927,6 +1073,34 @@ class Heirattack(BaseAttack):
         if self.attack_structure:
             self.modified_adj = full_adj_cpu
         if self.attack_features:
+            # 如果启用了文本攻击，使用文本生成方法攻击特征
+            if self.use_text_attack and self.text_generator is not None:
+                # 使用全局重要节点作为攻击目标
+                n_feature_attacks = min(n_perturbations, len(global_important_nodes))
+
+                # 如果用户指定了text_attack_nodes参数，限制攻击节点数量
+                if (
+                    hasattr(self, "args")
+                    and hasattr(self.args, "text_attack_nodes")
+                    and self.args.text_attack_nodes is not None
+                ):
+                    n_feature_attacks = min(
+                        n_feature_attacks, self.args.text_attack_nodes
+                    )
+                    print(
+                        f"ℹ️  Limited text attack to {n_feature_attacks} nodes (--text_attack_nodes)"
+                    )
+
+                target_nodes_for_text = global_important_nodes[:n_feature_attacks]
+
+                # 使用文本生成攻击这些节点的特征
+                full_features = self.attack_features_with_text(
+                    target_nodes=target_nodes_for_text,
+                    full_features=full_features,
+                    labels_st=labels_st,
+                    budget_per_node=20,  # 每个节点修改20个词
+                )
+
             self.modified_features = full_features.detach()
 
     def ppr_topk_from_seed(
