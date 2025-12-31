@@ -40,27 +40,23 @@ class TextAttackGenerator:
         self,
         dataset_name: str,
         bow_cache_dir: str = "./bow_cache",
-        llm_type: str = "gpt",  # "gpt", "deepseek", "llama", "llama_topic", "llama_mask"
-        model_path: str = None,
         api_key: str = None,
+        base_url: str = None,
         device: str = "cuda",
         max_tokens: int = 300,
         num_retries: int = 3,
-        base_url: str = None,  # API base URL (用于DeepSeek等兼容OpenAI的API)
     ):
         """
         Args:
             dataset_name: 数据集名称（cora, citeseer, pubmed等）
             bow_cache_dir: BoW词表缓存目录
-            llm_type: LLM类型
-            model_path: Llama模型路径（如果使用Llama）
-            api_key: OpenAI API密钥（如果使用GPT）
+            api_key: OpenAI兼容API密钥
+            base_url: API基础URL（如 https://api.openai.com/v1）
             device: 设备
             max_tokens: 最大生成token数
             num_retries: 生成失败时重试次数
         """
         self.dataset_name = dataset_name
-        self.llm_type = llm_type
         self.device = device
         self.max_tokens = max_tokens
         self.num_retries = num_retries
@@ -81,27 +77,12 @@ class TextAttackGenerator:
         # 加载数据集类别信息
         self.category_names = self._load_category_names()
 
-        # 初始化LLM
-        if "llama" in llm_type.lower():
-            if model_path is None:
-                raise ValueError("model_path must be provided for Llama models")
-            self._init_llama(model_path)
-        elif "gpt" in llm_type.lower() or "deepseek" in llm_type.lower():
-            if api_key is None:
-                raise ValueError(f"api_key must be provided for {llm_type} models")
-            self.api_key = api_key
-            # DeepSeek使用兼容OpenAI的API，但需要指定base_url
-            if "deepseek" in llm_type.lower():
-                if base_url is None:
-                    base_url = "https://api.deepseek.com"  # DeepSeek默认endpoint
-                self.client = OpenAI(api_key=api_key, base_url=base_url)
-                self.model_name = "deepseek-chat"  # DeepSeek默认模型
-                print(f"Using DeepSeek API with base_url: {base_url}")
-            else:
-                self.client = OpenAI(api_key=api_key)
-                self.model_name = "gpt-3.5-turbo"  # GPT默认模型
-        else:
-            raise ValueError(f"Unsupported llm_type: {llm_type}")
+        # 初始化GPT客户端
+        if api_key is None:
+            raise ValueError("api_key must be provided")
+
+        self.client = OpenAI(api_key=api_key, base_url=base_url)
+        self.model_name = "gpt-3.5-turbo"
 
     def _init_llama(self, model_path: str):
         """初始化Llama模型"""
@@ -247,10 +228,10 @@ class TextAttackGenerator:
         return must_use_words, must_not_use_words
 
     def build_prompt(
-        self, used_words: List[str], include_topic: bool = True
+        self, used_words: List[str], include_topic: bool = False
     ) -> List[Dict[str, str]]:
         """构建LLM提示"""
-        if include_topic and "topic" in self.llm_type.lower():
+        if include_topic:
             user_content = (
                 f"There are {len(self.category_names)} types of paper, which are "
                 + ", ".join(self.category_names)
@@ -283,69 +264,14 @@ class TextAttackGenerator:
         ]
         return messages
 
-    def generate_text_gpt(self, messages: List[Dict[str, str]]) -> str:
-        """使用GPT/DeepSeek生成文本"""
+    def generate_text(self, messages: List[Dict[str, str]]) -> str:
+        """使用GPT生成文本"""
         response = self.client.chat.completions.create(
-            model=getattr(self, "model_name", "gpt-3.5-turbo-1106"),
+            model=self.model_name,
             messages=messages,
             max_tokens=self.max_tokens,
         )
         return response.choices[0].message.content
-
-    def generate_text_llama(
-        self,
-        messages: List[Dict[str, str]],
-        not_used_words: List[str],
-        use_mask: bool = True,
-    ) -> str:
-        """使用Llama生成文本（支持token屏蔽）"""
-        # 构建禁用token列表
-        if use_mask and "mask" in self.llm_type.lower():
-            # 扩展禁用词（包括大写形式）
-            Cap = [word.capitalize() for word in not_used_words]
-            not_used_words_ext = not_used_words + Cap
-
-            # 编码为token ID
-            not_used_tokens = [
-                self.tokenizer.encode(word, add_special_tokens=False)[0]
-                for word in not_used_words_ext
-                if len(self.tokenizer.encode(word, add_special_tokens=False)) > 0
-            ]
-            the_not_used_tokens = [
-                self.tokenizer.encode(f"the {word}", add_special_tokens=False)[-1]
-                for word in not_used_words_ext
-                if len(self.tokenizer.encode(f"the {word}", add_special_tokens=False))
-                > 0
-            ]
-            not_used_tokens.extend(the_not_used_tokens)
-
-            custom_processor = RestrictProcessor(self.tokenizer, not_used_tokens)
-        else:
-            # 不使用屏蔽
-            custom_processor = RestrictProcessor(self.tokenizer, [])
-
-        logits_processor = LogitsProcessorList([custom_processor])
-
-        # 编码输入
-        input_ids = self.tokenizer.apply_chat_template(
-            messages, add_generation_prompt=True, return_tensors="pt"
-        ).to(self.model.device)
-
-        # 生成
-        outputs = self.model.generate(
-            input_ids,
-            max_new_tokens=self.max_tokens,
-            eos_token_id=self.terminators,
-            pad_token_id=self.tokenizer.pad_token_id,
-            do_sample=True,
-            temperature=0.6,
-            top_p=0.9,
-            logits_processor=logits_processor,
-        )
-
-        response = outputs[0][input_ids.shape[-1] :]
-        text = self.tokenizer.decode(response, skip_special_tokens=True)
-        return text
 
     def calculate_usage_rates(
         self, text: str, should_use_words: List[str], should_not_use_words: List[str]
@@ -401,7 +327,7 @@ class TextAttackGenerator:
 
         Args:
             used_words: 必须使用的词列表
-            not_used_words: 禁止使用的词列表
+            not_used_words: 禁止使用的词列表（当前实现中不强制，仅作为参考）
             verbose: 是否打印详细信息
 
         Returns:
@@ -410,10 +336,7 @@ class TextAttackGenerator:
         messages = self.build_prompt(used_words)
 
         # 第一轮生成
-        if "llama" in self.llm_type.lower():
-            response = self.generate_text_llama(messages, not_used_words)
-        else:
-            response = self.generate_text_gpt(messages)
+        response = self.generate_text(messages)
 
         use_rate, not_use_rate, missing_words = self.calculate_usage_rates(
             response, used_words, not_used_words
@@ -443,10 +366,7 @@ class TextAttackGenerator:
             messages.append({"role": "user", "content": feedback})
 
             # 重新生成
-            if "llama" in self.llm_type.lower():
-                response = self.generate_text_llama(messages, not_used_words)
-            else:
-                response = self.generate_text_gpt(messages)
+            response = self.generate_text(messages)
 
             use_rate, not_use_rate, missing_words = self.calculate_usage_rates(
                 response, used_words, not_used_words

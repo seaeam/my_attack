@@ -12,7 +12,6 @@ from heir import Heirattack
 from deeprobust.graph.global_attack import DICE, MetaApprox
 
 import math
-from fast_pytorch_kmeans import KMeans
 
 from split_test import (
     get_amazon_dataset,
