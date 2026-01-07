@@ -122,6 +122,7 @@ class Heirattack(BaseAttack):
         if self.use_text_attack and TEXT_ATTACK_AVAILABLE:
             self.text_generator = TextAttackGenerator(
                 dataset_name=getattr(args, "dataset", "cora"),
+                feature_dim=self.nfeat,  # 使用数据集的实际特征维度
                 llm_type=getattr(args, "llm_type", "gpt"),
                 api_key=getattr(args, "openai_api_key", None),
                 model_path=getattr(args, "llama_model_path", None),
@@ -129,7 +130,7 @@ class Heirattack(BaseAttack):
                 device=self.device,
             )
             print(
-                f"✅ Text attack generator initialized with LLM: {getattr(args, 'llm_type', 'gpt')}"
+                f"✅ Text attack generator initialized with LLM: {getattr(args, 'llm_type', 'gpt')}, Feature dimension: {self.nfeat}"
             )
         else:
             self.text_generator = None
@@ -678,15 +679,17 @@ class Heirattack(BaseAttack):
             else:
                 current_bow = current_bow.numpy()
 
-            # 从BoW向量提取used_words和not_used_words（防止词表维度不匹配导致越界）
+            # 从BoW向量提取used_words和not_used_words
             try:
                 vocab = self.text_generator.vocab
-                vocab_size = len(vocab)
-                idx_used = np.where(current_bow > 0)[0]
-                idx_not = np.where(current_bow == 0)[0]
-                # 只保留在词表范围内的索引
-                idx_used = idx_used[idx_used < vocab_size]
-                idx_not = idx_not[idx_not < vocab_size]
+                vocab_size = self.text_generator.vocab_size
+
+                # 只使用词表范围内的维度来提取词
+                valid_dim = min(len(current_bow), vocab_size)
+                current_bow_valid = current_bow[:valid_dim]
+
+                idx_used = np.where(current_bow_valid > 0)[0]
+                idx_not = np.where(current_bow_valid == 0)[0]
                 used_words = [vocab[i] for i in idx_used]
                 not_used_words = [vocab[i] for i in idx_not]
 
@@ -703,8 +706,9 @@ class Heirattack(BaseAttack):
 
                 # 将文本转回BoW向量
                 new_bow = self.text_generator.vectorizer.transform([text]).toarray()[0]
-                # 与当前特征维度对齐（若词表维度与特征维度不一致则做安全对齐）
-                feat_dim = modified_features.shape[1]
+
+                # 对齐到数据集的特征维度
+                feat_dim = self.text_generator.feature_dim
                 if new_bow.shape[0] != feat_dim:
                     aligned = np.zeros(feat_dim, dtype=np.float32)
                     copy_len = min(new_bow.shape[0], feat_dim)

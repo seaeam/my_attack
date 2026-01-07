@@ -39,6 +39,7 @@ class TextAttackGenerator:
     def __init__(
         self,
         dataset_name: str,
+        feature_dim: int = None,  # 数据集特征维度
         bow_cache_dir: str = "./bow_cache",
         llm_type: str = "gpt",  # "gpt", "deepseek", "llama", "llama_topic", "llama_mask"
         model_path: str = None,
@@ -51,6 +52,7 @@ class TextAttackGenerator:
         """
         Args:
             dataset_name: 数据集名称（cora, citeseer, pubmed等）
+            feature_dim: 数据集的实际特征维度（如果为None，则使用词表大小）
             bow_cache_dir: BoW词表缓存目录
             llm_type: LLM类型
             model_path: Llama模型路径（如果使用Llama）
@@ -64,6 +66,7 @@ class TextAttackGenerator:
         self.device = device
         self.max_tokens = max_tokens
         self.num_retries = num_retries
+        self.feature_dim = feature_dim  # 保存特征维度
 
         # 加载BoW词表
         vectorizer_path = os.path.join(bow_cache_dir, f"{dataset_name}.pkl")
@@ -71,7 +74,25 @@ class TextAttackGenerator:
             with open(vectorizer_path, "rb") as f:
                 self.vectorizer = pickle.load(f)
             self.vocab = self.vectorizer.get_feature_names_out()
-            print(f"Loaded BoW vocabulary: {len(self.vocab)} words")
+            self.vocab_size = len(self.vocab)
+
+            # 如果没有指定特征维度，使用词表大小
+            if self.feature_dim is None:
+                self.feature_dim = self.vocab_size
+                print(
+                    f"Loaded BoW vocabulary: {self.vocab_size} words (using as feature dimension)"
+                )
+            else:
+                print(
+                    f"Loaded BoW vocabulary: {self.vocab_size} words, target feature dimension: {self.feature_dim}"
+                )
+                if self.vocab_size != self.feature_dim:
+                    print(
+                        f"⚠️  Warning: Vocabulary size ({self.vocab_size}) != Feature dimension ({self.feature_dim})"
+                    )
+                    print(
+                        f"   Generated features will be automatically aligned to dimension {self.feature_dim}"
+                    )
         else:
             raise FileNotFoundError(
                 f"BoW vocabulary not found at {vectorizer_path}. "
@@ -90,15 +111,13 @@ class TextAttackGenerator:
             if api_key is None:
                 raise ValueError(f"api_key must be provided for {llm_type} models")
             self.api_key = api_key
+            self.base_url = base_url
             # DeepSeek使用兼容OpenAI的API，但需要指定base_url
             if "deepseek" in llm_type.lower():
-                if base_url is None:
-                    base_url = "https://api.deepseek.com"  # DeepSeek默认endpoint
                 self.client = OpenAI(api_key=api_key, base_url=base_url)
                 self.model_name = "deepseek-chat"  # DeepSeek默认模型
-                print(f"Using DeepSeek API with base_url: {base_url}")
             else:
-                self.client = OpenAI(api_key=api_key)
+                self.client = OpenAI(api_key=api_key, base_url=base_url)
                 self.model_name = "gpt-3.5-turbo"  # GPT默认模型
         else:
             raise ValueError(f"Unsupported llm_type: {llm_type}")
@@ -154,7 +173,7 @@ class TextAttackGenerator:
         从BoW向量中提取必须使用和禁止使用的词
 
         Args:
-            bow_vector: [vocab_size] BoW向量（0/1或连续值）
+            bow_vector: [feature_dim] BoW向量（0/1或连续值）
 
         Returns:
             used_words: 必须使用的词列表（bow_vector > threshold）
@@ -163,27 +182,31 @@ class TextAttackGenerator:
         if isinstance(bow_vector, torch.Tensor):
             bow_vector = bow_vector.detach().cpu().numpy()
 
+        # 只使用词表范围内的维度
+        valid_dim = min(len(bow_vector), self.vocab_size)
+        bow_vector = bow_vector[:valid_dim]
+
         # 判断是否为二值向量
         is_binary = np.all((bow_vector == 0) | (bow_vector == 1))
 
         if is_binary:
             used_words = [
-                self.vocab[i] for i in range(len(self.vocab)) if bow_vector[i] == 1
+                self.vocab[i] for i in range(len(bow_vector)) if bow_vector[i] == 1
             ]
             not_used_words = [
-                self.vocab[i] for i in range(len(self.vocab)) if bow_vector[i] == 0
+                self.vocab[i] for i in range(len(bow_vector)) if bow_vector[i] == 0
             ]
         else:
             # 连续值：使用阈值
             threshold = 0.1
             used_words = [
                 self.vocab[i]
-                for i in range(len(self.vocab))
+                for i in range(len(bow_vector))
                 if bow_vector[i] > threshold
             ]
             not_used_words = [
                 self.vocab[i]
-                for i in range(len(self.vocab))
+                for i in range(len(bow_vector))
                 if bow_vector[i] <= threshold
             ]
 
@@ -200,8 +223,8 @@ class TextAttackGenerator:
         从梯度中提取关键词（heir attack特定方法）
 
         Args:
-            original_bow: [vocab_size] 原始BoW向量
-            gradient: [vocab_size] 梯度向量
+            original_bow: [feature_dim] 原始BoW向量
+            gradient: [feature_dim] 梯度向量
             top_k: 选择top-k个词
             use_gradient_for_selection: 是否使用梯度来选择词（True=基于梯度，False=基于原始值）
 
@@ -213,6 +236,11 @@ class TextAttackGenerator:
             original_bow = original_bow.detach().cpu().numpy()
         if isinstance(gradient, torch.Tensor):
             gradient = gradient.detach().cpu().numpy()
+
+        # 只使用词表范围内的维度
+        valid_dim = min(len(original_bow), self.vocab_size)
+        original_bow = original_bow[:valid_dim]
+        gradient = gradient[:valid_dim]
 
         if use_gradient_for_selection:
             # 基于梯度选择：
