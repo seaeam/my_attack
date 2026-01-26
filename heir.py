@@ -111,13 +111,46 @@ class Heirattack(BaseAttack):
         # ========== 文本攻击生成器初始化 ==========
         self.use_text_attack = getattr(args, "use_text_attack", False)
         if self.use_text_attack and TEXT_ATTACK_AVAILABLE:
-            self.text_generator = TextAttackGenerator(
-                dataset_name=getattr(args, "dataset", "cora"),
-                api_key=getattr(args, "openai_api_key", None),
-                base_url=getattr(args, "api_base_url", None),
-                device=self.device,
-            )
-            print(f"✅ Text attack generator initialized with GPT API")
+            llm_type = getattr(args, "llm_type", "gpt")
+
+            # 根据LLM类型设置参数
+            if llm_type == "llama":
+                model_path = getattr(args, "llama_model_path", None)
+                if model_path is None:
+                    raise ValueError(
+                        "llama_model_path is required when using llm_type=llama"
+                    )
+
+                self.text_generator = TextAttackGenerator(
+                    dataset_name=getattr(args, "dataset", "cora"),
+                    llm_type="llama",
+                    model_path=model_path,
+                    device=self.device,
+                    feature_dim=self.nfeat,
+                )
+                print(
+                    f"✅ Text attack generator initialized with local Llama model: {model_path}"
+                )
+            else:
+                # GPT or other API-based models
+                api_key = getattr(args, "openai_api_key", None)
+                if api_key is None:
+                    raise ValueError(
+                        f"openai_api_key is required when using llm_type={llm_type}"
+                    )
+
+                self.text_generator = TextAttackGenerator(
+                    dataset_name=getattr(args, "dataset", "cora"),
+                    api_key=api_key,
+                    base_url=getattr(args, "api_base_url", None),
+                    device=self.device,
+                    llm_type=llm_type,
+                    feature_dim=self.nfeat,
+                    num_retries=getattr(args, "text_retries", 1),  # 默认只重试1次
+                )
+                print(
+                    f"✅ Text attack generator initialized with {llm_type.upper()} API"
+                )
         else:
             self.text_generator = None
             if self.use_text_attack:
@@ -312,23 +345,26 @@ class Heirattack(BaseAttack):
             print("⚠️ Text attack not available, skipping feature attack")
             return full_features
 
-        print(
-            f"🔥 Attacking {len(target_nodes)} nodes with text generation (budget={budget_per_node})"
-        )
-        print(
-            f"⏱️  Estimated time: {len(target_nodes) * 2}~{len(target_nodes) * 5} seconds"
-        )
-
         modified_features = full_features.clone()
         success_count = 0
         fail_count = 0
 
         import time
+        from tqdm import tqdm
 
         start_time = time.time()
 
+        # 使用tqdm进度条
+        pbar = tqdm(
+            target_nodes,
+            desc=f"🔥 LLM Text Attack",
+            unit="node",
+            ncols=100,
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]",
+        )
+
         # 批量生成对抗性文本
-        for idx, node_id in enumerate(target_nodes):
+        for node_id in pbar:
             # 获取目标标签（翻转预测）
             pred_label = labels_st[node_id].item()
             target_label = (pred_label + 1) % self.nclass  # 简单翻转到下一个类别
@@ -381,30 +417,22 @@ class Heirattack(BaseAttack):
                 )
 
                 success_count += 1
-
-                # 更频繁的进度显示，包含速度信息
-                if (idx + 1) % 5 == 0 or (idx + 1) == len(target_nodes):
-                    elapsed = time.time() - start_time
-                    speed = elapsed / (idx + 1)
-                    remaining = speed * (len(target_nodes) - idx - 1)
-                    print(
-                        f"  ✓ [{idx + 1}/{len(target_nodes)}] Success: {success_count}, Failed: {fail_count} | "
-                        f"Speed: {speed:.1f}s/node | ETA: {remaining:.0f}s"
-                    )
+                # 更新进度条显示
+                pbar.set_postfix({"✓": success_count, "✗": fail_count})
 
             except Exception as e:
                 fail_count += 1
+                pbar.set_postfix({"✓": success_count, "✗": fail_count})
                 if fail_count <= 3:  # 只显示前3个错误
-                    print(f"  ✗ Failed to attack node {node_id}: {str(e)}")
-                elif fail_count == 4:
-                    print(
-                        f"  ✗ More errors occurred, suppressing further error messages..."
-                    )
+                    tqdm.write(f"  ✗ Node {node_id} failed: {str(e)}")
                 continue
+
+        pbar.close()
 
         total_time = time.time() - start_time
         print(
-            f"\n✅ Text attack completed: {success_count} successful, {fail_count} failed in {total_time:.1f}s"
+            f"✅ Attack completed: {success_count} successful, {fail_count} failed in {total_time:.1f}s "
+            f"({total_time/len(target_nodes):.1f}s/node)"
         )
 
         return modified_features
@@ -700,42 +728,37 @@ class Heirattack(BaseAttack):
                     # ===== 文本攻击：针对 PPR Top-k 并集 U 执行对抗性文本生成 =====
                     U = np.unique(np.concatenate([topk_nodes_1, topk_nodes_2]))
 
-                    # 使用文本生成方法攻击 PPR 邻居节点
+                    # 使用文本生成方法攻击 PPR 邻居节点 - 只攻击未攻击过的节点
                     if self.use_text_attack and self.text_generator is not None:
-                        # 限制每次循环攻击的节点数（避免耗时过长）
-                        max_nodes_per_step = min(
-                            len(U), n_step * 3
-                        )  # 每步最多攻击 3*n_step 个节点
+                        # 过滤掉已攻击过的节点
+                        if not hasattr(self, "_attacked_nodes"):
+                            self._attacked_nodes = set()
 
-                        # 如果用户指定了每步文本攻击节点数
-                        if (
-                            hasattr(self.args, "text_attack_nodes_per_step")
-                            and self.args.text_attack_nodes_per_step is not None
-                        ):
-                            max_nodes_per_step = min(
-                                max_nodes_per_step, self.args.text_attack_nodes_per_step
+                        new_nodes = np.array(
+                            [n for n in U if n not in self._attacked_nodes]
+                        )
+
+                        if len(new_nodes) > 0:
+                            print(
+                                f"\n🎯 [Step {tot_perturbs}/{n_perturbations}] "
+                                f"Text attack: {len(new_nodes)} new nodes (skipped {len(U)-len(new_nodes)} already attacked)"
                             )
 
-                        # 根据PPR分数选择最重要的节点
-                        combined_scores = np.zeros(self.nnodes)
-                        combined_scores[topk_nodes_1] += scores_1[topk_nodes_1]
-                        combined_scores[topk_nodes_2] += scores_2[topk_nodes_2]
-                        U_scores = combined_scores[U]
-                        target_indices = np.argsort(-U_scores)[:max_nodes_per_step]
-                        target_nodes_U = U[target_indices]
+                            # 执行文本攻击 - 只攻击新节点
+                            full_features = self.attack_features_with_text(
+                                target_nodes=new_nodes,
+                                full_features=full_features,
+                                labels_st=labels_st,
+                                budget_per_node=15,
+                            )
 
-                        print(
-                            f"\n🎯 [Step {tot_perturbs}/{n_perturbations}] "
-                            f"Text attack on {len(target_nodes_U)} nodes from PPR union (|U|={len(U)})"
-                        )
-
-                        # 执行文本攻击
-                        full_features = self.attack_features_with_text(
-                            target_nodes=target_nodes_U,
-                            full_features=full_features,
-                            labels_st=labels_st,
-                            budget_per_node=15,  # 每节点修改15个词
-                        )
+                            # 记录已攻击的节点
+                            self._attacked_nodes.update(new_nodes.tolist())
+                        else:
+                            print(
+                                f"\n⏭️ [Step {tot_perturbs}/{n_perturbations}] "
+                                f"All {len(U)} nodes already attacked, skipping"
+                            )
                     else:
                         print(
                             f"⚠️ [Step {tot_perturbs}/{n_perturbations}] "

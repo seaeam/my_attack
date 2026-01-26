@@ -43,8 +43,11 @@ class TextAttackGenerator:
         api_key: str = None,
         base_url: str = None,
         device: str = "cuda",
-        max_tokens: int = 300,
-        num_retries: int = 3,
+        max_tokens: int = 50,
+        num_retries: int = 0,
+        llm_type: str = "gpt",
+        model_path: str = None,
+        feature_dim: int = None,
     ):
         """
         Args:
@@ -55,11 +58,16 @@ class TextAttackGenerator:
             device: 设备
             max_tokens: 最大生成token数
             num_retries: 生成失败时重试次数
+            llm_type: LLM类型（"gpt" 或 "llama"）
+            model_path: 本地模型路径（llm_type="llama"时需要）
+            feature_dim: 数据集特征维度（用于对齐BoW向量）
         """
         self.dataset_name = dataset_name
         self.device = device
         self.max_tokens = max_tokens
         self.num_retries = num_retries
+        self.llm_type = llm_type.lower()
+        self.feature_dim = feature_dim
 
         # 加载BoW词表
         vectorizer_path = os.path.join(bow_cache_dir, f"{dataset_name}.pkl")
@@ -74,22 +82,51 @@ class TextAttackGenerator:
                 f"Please run data preprocessing first."
             )
 
+        # 记录词表大小
+        self.vocab_size = len(self.vocab)
+        print(f"Vocab size: {self.vocab_size}, Feature dim: {self.feature_dim}")
+
         # 加载数据集类别信息
         self.category_names = self._load_category_names()
 
-        # 初始化GPT客户端
-        if api_key is None:
-            raise ValueError("api_key must be provided")
+        # 初始化LLM
+        if self.llm_type == "gpt":
+            if api_key is None:
+                raise ValueError("api_key must be provided for GPT")
+            self.client = OpenAI(api_key=api_key, base_url=base_url)
 
-        self.client = OpenAI(api_key=api_key, base_url=base_url)
-        self.model_name = "gpt-3.5-turbo"
+            # 检测是否为Ollama（通过base_url判断）
+            if base_url and "localhost:11434" in base_url:
+                # Ollama模式：从环境变量或参数获取模型名
+                self.model_name = os.environ.get(
+                    "OLLAMA_MODEL", "Eomer/gpt-3.5-turbo:latest"
+                )
+                print(f"🦙 Detected Ollama - using model: {self.model_name}")
+            else:
+                # 标准GPT
+                self.model_name = "gpt-3.5-turbo"
+
+            self.model = None
+            self.tokenizer = None
+            print(f"Initialized GPT client with model: {self.model_name}")
+        elif self.llm_type == "llama":
+            if model_path is None:
+                raise ValueError("model_path must be provided for Llama")
+            self._init_llama(model_path)
+            self.client = None
+            print(f"Initialized Llama model from: {model_path}")
+        else:
+            raise ValueError(f"Unsupported llm_type: {llm_type}. Use 'gpt' or 'llama'")
 
     def _init_llama(self, model_path: str):
         """初始化Llama模型"""
         print(f"Loading Llama model from {model_path}...")
         self.tokenizer = AutoTokenizer.from_pretrained(model_path)
         self.model = AutoModelForCausalLM.from_pretrained(
-            model_path, torch_dtype=torch.bfloat16, device_map="auto"
+            model_path,
+            torch_dtype=torch.bfloat16,
+            device_map="auto",
+            # attn_implementation="flash_attention_2"  # 如果需要更快的推理
         )
         self.tokenizer.pad_token_id = self.tokenizer.eos_token_id
         self.tokenizer.pad_token = self.tokenizer.eos_token
@@ -98,6 +135,7 @@ class TextAttackGenerator:
             self.tokenizer.eos_token_id,
             self.tokenizer.convert_tokens_to_ids("<|eot_id|>"),
         ]
+        self.model.eval()  # 设置为评估模式
         print("Llama model loaded successfully")
 
     def _load_category_names(self) -> List[str]:
@@ -246,13 +284,9 @@ class TextAttackGenerator:
             )
         else:
             user_content = (
-                "Generate a title and an abstract for an academic article.\n"
-                + "Ensure the generated content explicitly contains the following words: "
-                + ", ".join(f"'{word}'" for word in used_words)
-                + ".\n"
-                + "These words should appear as specified, without using synonyms, plural forms, or other variants.\n"
-                + f"Length limit: {self.max_tokens} words."
-                + "\nOutput the TITLE and ABSTRACT without explanation.\nTITLE:...\nABSTRACT:..."
+                "Write a short academic text using these words: "
+                + ", ".join(used_words[:15])  # 最多15个词
+                + ".\nOutput text only, no explanation."
             )
 
         messages = [
@@ -265,13 +299,37 @@ class TextAttackGenerator:
         return messages
 
     def generate_text(self, messages: List[Dict[str, str]]) -> str:
-        """使用GPT生成文本"""
-        response = self.client.chat.completions.create(
-            model=self.model_name,
-            messages=messages,
-            max_tokens=self.max_tokens,
-        )
-        return response.choices[0].message.content
+        """调用LLM生成文本"""
+        if self.llm_type == "gpt":
+            # 使用GPT API
+            response = self.client.chat.completions.create(
+                model=self.model_name,
+                messages=messages,
+                max_tokens=self.max_tokens,
+            )
+            return response.choices[0].message.content
+        elif self.llm_type == "llama":
+            # 使用本地Llama模型
+            input_ids = self.tokenizer.apply_chat_template(
+                messages, add_generation_prompt=True, return_tensors="pt"
+            ).to(self.model.device)
+
+            with torch.no_grad():
+                outputs = self.model.generate(
+                    input_ids,
+                    max_new_tokens=self.max_tokens,
+                    eos_token_id=self.terminators,
+                    pad_token_id=self.tokenizer.pad_token_id,
+                    do_sample=True,
+                    temperature=0.6,
+                    top_p=0.9,
+                )
+
+            response = outputs[0][input_ids.shape[-1] :]
+            text = self.tokenizer.decode(response, skip_special_tokens=True)
+            return text
+        else:
+            raise ValueError(f"Unsupported llm_type: {self.llm_type}")
 
     def calculate_usage_rates(
         self, text: str, should_use_words: List[str], should_not_use_words: List[str]
@@ -351,9 +409,9 @@ class TextAttackGenerator:
         best_response = response
         best_use_rate = use_rate
 
-        # 迭代修正（最多3轮）
+        # 迭代修正（仅在效果很差时重试）
         for retry in range(self.num_retries):
-            if len(missing_words) == 0 or use_rate >= 95.0:
+            if len(missing_words) == 0 or use_rate >= 80.0:
                 break
 
             # 构建反馈

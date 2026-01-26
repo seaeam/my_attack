@@ -94,6 +94,12 @@ parser.add_argument(
     default=None,
     help="Number of nodes to attack with text generation (default: all perturbed nodes). Use smaller value for faster testing.",
 )
+parser.add_argument(
+    "--text_retries",
+    type=int,
+    default=0,
+    help="Number of retries for text generation if quality is low (0=no retry, faster but lower quality)",
+)
 
 args = parser.parse_args()
 
