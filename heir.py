@@ -108,6 +108,10 @@ class Heirattack(BaseAttack):
         self.gb_cluster = GBCluster(n_clusters=self.M, mode="euclidean", verbose=0)
         self.use_oracle = use_oracle
 
+        # 缓存
+        self.template_cache = {}  # 簇模板缓存
+        self.node2cluster = {}  # 节点到簇ID的映射
+
         # ========== 文本攻击生成器初始化 ==========
         self.use_text_attack = getattr(args, "use_text_attack", False)
         if self.use_text_attack and TEXT_ATTACK_AVAILABLE:
@@ -330,111 +334,145 @@ class Heirattack(BaseAttack):
         self, target_nodes, full_features, labels_st, budget_per_node=20
     ):
         """
-        使用文本生成方法攻击节点特征
-
-        Args:
-            target_nodes: 要攻击的节点索引列表
-            full_features: 当前完整特征矩阵 [nnodes, nfeat]
-            labels_st: 自训练标签
-            budget_per_node: 每个节点的修改预算（词数）
-
-        Returns:
-            modified_features: 修改后的特征矩阵
+        Cluster-based Text Attack Generation
         """
         if not self.use_text_attack or self.text_generator is None:
             print("⚠️ Text attack not available, skipping feature attack")
             return full_features
 
         modified_features = full_features.clone()
-        success_count = 0
-        fail_count = 0
 
-        import time
-        from tqdm import tqdm
+        # 1. Group nodes by cluster
+        clusters = {}
+        for node in target_nodes:
+            cid = self.node2cluster.get(node, -1)
+            if cid not in clusters:
+                clusters[cid] = []
+            clusters[cid].append(node)
 
-        start_time = time.time()
-
-        # 使用tqdm进度条
-        pbar = tqdm(
-            target_nodes,
-            desc=f"🔥 LLM Text Attack",
-            unit="node",
-            ncols=100,
-            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]",
+        print(
+            f"🔥 Text Attack: {len(target_nodes)} nodes grouped into {len(clusters)} clusters."
         )
 
-        # 批量生成对抗性文本
-        for node_id in pbar:
-            # 获取目标标签（翻转预测）
-            pred_label = labels_st[node_id].item()
-            target_label = (pred_label + 1) % self.nclass  # 简单翻转到下一个类别
+        # Stats
+        total_llm_calls = 0
+        cache_hits = 0
+        success_count = 0
 
-            # 获取当前节点的特征向量
-            current_bow = full_features[node_id].detach().cpu()
-
-            # 转换为numpy
-            if current_bow.is_sparse:
-                current_bow = current_bow.to_dense().numpy()
-            else:
-                current_bow = current_bow.numpy()
-
-            # 从BoW向量提取used_words和not_used_words（防止词表维度不匹配导致越界）
+        # 2. Process each cluster
+        for cid, nodes in tqdm(clusters.items(), desc="Cluster Attack"):
             try:
-                vocab = self.text_generator.vocab
-                vocab_size = len(vocab)
-                idx_used = np.where(current_bow > 0)[0]
-                idx_not = np.where(current_bow == 0)[0]
-                # 只保留在词表范围内的索引
-                idx_used = idx_used[idx_used < vocab_size]
-                idx_not = idx_not[idx_not < vocab_size]
-                used_words = [vocab[i] for i in idx_used]
-                not_used_words = [vocab[i] for i in idx_not]
+                # Prepare cluster signature
+                # Get cluster center feature
+                nodes_tensor = torch.tensor(nodes).long().to(self.device)
+                cluster_feat = full_features[nodes_tensor]
+                if cluster_feat.is_sparse:
+                    cluster_feat = cluster_feat.to_dense()
 
-                # 限制词数（避免过长的列表）
-                if len(used_words) > budget_per_node:
-                    used_words = used_words[:budget_per_node]
-                if len(not_used_words) > 100:  # 限制禁用词数量
-                    not_used_words = not_used_words[:100]
+                cluster_center = cluster_feat.mean(dim=0).cpu().numpy()
 
-                # 生成对抗性文本
-                text = self.text_generator.generate_adversarial_text(
-                    used_words=used_words, not_used_words=not_used_words, verbose=False
-                )
+                # Extract cluster attributes (top words)
+                (
+                    cluster_attrs,
+                    _,
+                ) = self.text_generator.extract_words_from_bow_vector(cluster_center)
+                cluster_attrs = cluster_attrs[:10]  # Top 10
 
-                # 将文本转回BoW向量
-                new_bow = self.text_generator.vectorizer.transform([text]).toarray()[0]
-                # 与当前特征维度对齐（若词表维度与特征维度不一致则做安全对齐）
-                feat_dim = modified_features.shape[1]
-                if new_bow.shape[0] != feat_dim:
-                    aligned = np.zeros(feat_dim, dtype=np.float32)
-                    copy_len = min(new_bow.shape[0], feat_dim)
-                    aligned[:copy_len] = new_bow[:copy_len]
-                    new_bow = aligned
+                # Discriminative words (for now reuse attributes or simple selection)
+                discriminative_words = cluster_attrs
 
-                # 更新特征
-                modified_features[node_id] = (
-                    torch.from_numpy(new_bow).float().to(self.device)
-                )
+                # Cache Key: Cluster ID + Attributes hash
+                signature = f"{cid}_{hash(tuple(sorted(cluster_attrs)))}"
 
-                success_count += 1
-                # 更新进度条显示
-                pbar.set_postfix({"✓": success_count, "✗": fail_count})
+                # Check Cache
+                if signature in self.template_cache:
+                    templates = self.template_cache[signature]
+                    cache_hits += 1
+                else:
+                    # Select Representative Node (Highest PPR score)
+                    if hasattr(self, "global_ppr_scores"):
+                        rep_node = max(nodes, key=lambda x: self.global_ppr_scores[x])
+                    else:
+                        rep_node = nodes[0]  # Fallback
+
+                    # Generate Templates
+                    templates = self.text_generator.generate_cluster_template(
+                        cluster_attributes=cluster_attrs,
+                        discriminative_words=discriminative_words,
+                        num_candidates=3,
+                    )
+                    total_llm_calls += 1
+
+                    # Cache
+                    if templates:
+                        self.template_cache[signature] = templates
+
+                if not templates:
+                    continue
+
+                # 3. Adapt for each node
+                for node in nodes:
+                    try:
+                        # Pick a template
+                        template = np.random.choice(templates)
+
+                        # Node specific requirements
+                        current_bow = full_features[node].detach().cpu()
+                        if current_bow.is_sparse:
+                            current_bow = current_bow.to_dense().numpy()
+                        else:
+                            current_bow = current_bow.numpy()
+
+                        used_words, _ = (
+                            self.text_generator.extract_words_from_bow_vector(
+                                current_bow
+                            )
+                        )
+                        used_words = used_words[:budget_per_node]
+
+                        # Lightweight Adaptation: Fill missing words
+                        # Check which used_words are missing in template
+                        missing = [
+                            w for w in used_words if w.lower() not in template.lower()
+                        ]
+
+                        adapted_text = template
+                        if missing:
+                            # Append simple phrase to fill missing words
+                            adapted_text += (
+                                f" Key aspects include: {', '.join(missing)}."
+                            )
+
+                        # Vectorize and Write back
+                        new_bow = self.text_generator.vectorizer.transform(
+                            [adapted_text]
+                        ).toarray()[0]
+
+                        # Align dimensions
+                        feat_dim = modified_features.shape[1]
+                        if new_bow.shape[0] != feat_dim:
+                            aligned = np.zeros(feat_dim, dtype=np.float32)
+                            copy_len = min(new_bow.shape[0], feat_dim)
+                            aligned[:copy_len] = new_bow[:copy_len]
+                            new_bow = aligned
+
+                        modified_features[node] = (
+                            torch.from_numpy(new_bow).float().to(self.device)
+                        )
+                        success_count += 1
+
+                    except Exception as e:
+                        # Fallback or skip
+                        pass
 
             except Exception as e:
-                fail_count += 1
-                pbar.set_postfix({"✓": success_count, "✗": fail_count})
-                if fail_count <= 3:  # 只显示前3个错误
-                    tqdm.write(f"  ✗ Node {node_id} failed: {str(e)}")
+                print(f"Error processing cluster {cid}: {e}")
                 continue
 
-        pbar.close()
-
-        total_time = time.time() - start_time
         print(
-            f"✅ Attack completed: {success_count} successful, {fail_count} failed in {total_time:.1f}s "
-            f"({total_time/len(target_nodes):.1f}s/node)"
+            f"✅ Cluster Attack Done. Success: {success_count}/{len(target_nodes)}, "
+            f"LLM Calls: {total_llm_calls}, Cache Hits: {cache_hits}"
         )
-
         return modified_features
 
     # 层次化图对抗攻击的多步元攻击主函数
@@ -493,7 +531,7 @@ class Heirattack(BaseAttack):
 
             # === 全局属性增强 PageRank：找出重要节点 ===
             # 计算全图的属性增强 PPR 分数
-            global_ppr_scores = self.compute_global_ppr(
+            self.global_ppr_scores = self.compute_global_ppr(
                 fea=full_features,
                 adj=full_adj_cpu,
                 topk_ratio=0.10,  # 取前10%的重要节点
@@ -502,7 +540,7 @@ class Heirattack(BaseAttack):
                 use_cos_sim=True,
             )
             # 全局重要节点索引（按 PPR 分数排序）
-            global_important_nodes = np.argsort(-global_ppr_scores)[
+            global_important_nodes = np.argsort(-self.global_ppr_scores)[
                 : int(0.10 * self.nnodes)
             ]
 
@@ -562,6 +600,14 @@ class Heirattack(BaseAttack):
                     pool[-id - 1].append(subgraph[i])
 
                 cur += 1
+
+            # 构建 node2cluster 映射 (使用叶子节点作为簇)
+            self.node2cluster = {}
+            for i in range(len(pool)):
+                # 如果是叶子节点（没有孩子）且包含节点
+                if len(childs[i]) == 0 and len(pool[i]) > 0:
+                    for node_idx in pool[i]:
+                        self.node2cluster[node_idx] = i
 
             for step in range(n_step):
                 tot_perturbs += 1

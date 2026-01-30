@@ -298,6 +298,58 @@ class TextAttackGenerator:
         ]
         return messages
 
+    def generate_cluster_template(
+        self,
+        cluster_attributes: List[str],
+        discriminative_words: List[str],
+        style_constraints: str = "Keep it concise, academic, and natural.",
+        num_candidates: int = 3,
+    ) -> List[str]:
+        """
+        Generate cluster-level templates.
+
+        Args:
+            cluster_attributes: List of important attributes for the cluster
+            discriminative_words: List of discriminative words for the cluster
+            style_constraints: Style constraints string
+            num_candidates: Number of templates to generate
+
+        Returns:
+            List of generated templates
+        """
+        prompt = (
+            f"Task: Generate {num_candidates} distinct text templates for a cluster of academic papers.\n"
+            f"Cluster Keywords: {', '.join(cluster_attributes[:10])}\n"
+            f"Discriminative Words (Must Include): {', '.join(discriminative_words[:10])}\n"
+            f"Style: {style_constraints}\n\n"
+            f"Requirements:\n"
+            f"1. Write {num_candidates} different templates. Each template should be a coherent paragraph (Abstract-like).\n"
+            f"2. Integrate the 'Discriminative Words' naturally.\n"
+            f"3. You can use placeholders like [DETAILS] for specific node information, but the text should be mostly complete.\n"
+            f"4. Output ONLY the templates, separated by '|||'. Do not add numbering or labels like 'Template 1'.\n"
+            f"5. Do not include explanations."
+        )
+
+        messages = [
+            {
+                "role": "system",
+                "content": "You are a helpful AI assistant for text generation.",
+            },
+            {"role": "user", "content": prompt},
+        ]
+
+        try:
+            response_text = self.generate_text(messages)
+            # Parse response
+            templates = [t.strip() for t in response_text.split("|||") if t.strip()]
+            # Fallback if separator not found but text exists
+            if not templates and response_text:
+                templates = [response_text.strip()]
+            return templates
+        except Exception as e:
+            print(f"Error generating cluster templates: {e}")
+            return []
+
     def generate_text(self, messages: List[Dict[str, str]]) -> str:
         """调用LLM生成文本"""
         if self.llm_type == "gpt":
