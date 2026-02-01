@@ -11,6 +11,9 @@ from deeprobust.graph import utils
 from gb_division import gb_division
 from deeprobust.graph.global_attack import BaseAttack
 from gb_division_simple import GBCluster
+import hashlib
+import pickle
+import os
 
 # 文本攻击生成器导入
 try:
@@ -110,7 +113,37 @@ class Heirattack(BaseAttack):
 
         # 缓存
         self.template_cache = {}  # 簇模板缓存
-        self.node2cluster = {}  # 节点到簇ID的映射
+        self.node2cluster = {}  # 节点到簇ID的映射（稳定映射，整个攻击过程中复用）
+        self.stable_gb_pool = None  # 稳定的粒球划分结果
+        self.cluster_level_map = {}  # 簇级别映射（用于选择合适层级）
+
+        # 统计信息
+        self.attack_stats = {
+            "total_nodes_attacked": 0,
+            "total_clusters": 0,
+            "llm_calls": 0,
+            "cache_hits": 0,
+            "adaptation_failures": 0,
+            "similarity_failures": 0,
+            "rounds": 0,
+            "cluster_size_distribution": [],
+        }
+
+        # 缓存持久化路径
+        dataset_name = getattr(args, "dataset", "unknown")
+        self.cache_file = f"template_cache_{dataset_name}.pkl"
+
+        # 尝试加载缓存
+        if os.path.exists(self.cache_file):
+            try:
+                with open(self.cache_file, "rb") as f:
+                    self.template_cache = pickle.load(f)
+                print(
+                    f"✅ Loaded {len(self.template_cache)} cached templates from {self.cache_file}"
+                )
+            except Exception as e:
+                print(f"⚠️ Failed to load cache: {e}")
+                self.template_cache = {}
 
         # ========== 文本攻击生成器初始化 ==========
         self.use_text_attack = getattr(args, "use_text_attack", False)
@@ -371,29 +404,53 @@ class Heirattack(BaseAttack):
 
                 cluster_center = cluster_feat.mean(dim=0).cpu().numpy()
 
-                # Extract cluster attributes (top words)
-                (
-                    cluster_attrs,
-                    _,
-                ) = self.text_generator.extract_words_from_bow_vector(cluster_center)
-                cluster_attrs = cluster_attrs[:10]  # Top 10
+                # Extract cluster attributes (top words) - 增加高频词统计
+                cluster_attrs_list = []
+                for node in nodes:
+                    node_bow = full_features[node].detach().cpu()
+                    if node_bow.is_sparse:
+                        node_bow = node_bow.to_dense().numpy()
+                    else:
+                        node_bow = node_bow.numpy()
+                    node_words, _ = self.text_generator.extract_words_from_bow_vector(
+                        node_bow
+                    )
+                    cluster_attrs_list.extend(node_words[:5])
 
-                # Discriminative words (for now reuse attributes or simple selection)
-                discriminative_words = cluster_attrs
+                # 统计高频词
+                from collections import Counter
 
-                # Cache Key: Cluster ID + Attributes hash
-                signature = f"{cid}_{hash(tuple(sorted(cluster_attrs)))}"
+                word_freq = Counter(cluster_attrs_list)
+                cluster_attrs = [w for w, _ in word_freq.most_common(10)]
+
+                # Discriminative words - 从簇标签分布推断
+                discriminative_words = cluster_attrs  # 简化版，可进一步优化
+                if hasattr(self, "node2cluster") and len(nodes) > 0:
+                    # 统计簇内标签分布
+                    cluster_labels = labels_st[nodes_tensor].cpu().numpy()
+                    label_counts = Counter(cluster_labels)
+                    majority_label = label_counts.most_common(1)[0][0]
+                    # TODO: 可以根据 majority_label 加载该类别的判别词表
+
+                # Cache Key: 使用稳定的 MD5 哈希（不含 cid）
+                attrs_str = ",".join(sorted(cluster_attrs))
+                signature = hashlib.md5(attrs_str.encode()).hexdigest()
 
                 # Check Cache
                 if signature in self.template_cache:
                     templates = self.template_cache[signature]
                     cache_hits += 1
                 else:
-                    # Select Representative Node (Highest PPR score)
-                    if hasattr(self, "global_ppr_scores"):
+                    # Select Representative Node (Highest PPR score or cluster center)
+                    if (
+                        hasattr(self, "global_ppr_scores")
+                        and self.global_ppr_scores is not None
+                    ):
                         rep_node = max(nodes, key=lambda x: self.global_ppr_scores[x])
                     else:
-                        rep_node = nodes[0]  # Fallback
+                        # Fallback: 选择距离簇中心最近的节点
+                        distances = torch.norm(cluster_feat - cluster_center, dim=1)
+                        rep_node = nodes[torch.argmin(distances).item()]
 
                     # Generate Templates
                     templates = self.text_generator.generate_cluster_template(
@@ -412,67 +469,134 @@ class Heirattack(BaseAttack):
 
                 # 3. Adapt for each node
                 for node in nodes:
-                    try:
-                        # Pick a template
-                        template = np.random.choice(templates)
+                    adaptation_success = False
+                    template_attempts = 0
+                    max_template_attempts = min(3, len(templates))
 
-                        # Node specific requirements
-                        current_bow = full_features[node].detach().cpu()
-                        if current_bow.is_sparse:
-                            current_bow = current_bow.to_dense().numpy()
-                        else:
-                            current_bow = current_bow.numpy()
+                    # 尝试多个模板（模板重试机制）
+                    for template_idx in range(max_template_attempts):
+                        try:
+                            # Pick a template (依次尝试不同模板)
+                            if template_attempts == 0:
+                                template = templates[0]  # 先用第一个
+                            elif len(templates) > 1:
+                                template = templates[template_idx % len(templates)]
+                            else:
+                                template = templates[0]
 
-                        used_words, _ = (
-                            self.text_generator.extract_words_from_bow_vector(
-                                current_bow
+                            template_attempts += 1
+
+                            # Node specific requirements
+                            current_bow = full_features[node].detach().cpu()
+                            if current_bow.is_sparse:
+                                current_bow = current_bow.to_dense().numpy()
+                            else:
+                                current_bow = current_bow.numpy()
+
+                            used_words, _ = (
+                                self.text_generator.extract_words_from_bow_vector(
+                                    current_bow
+                                )
                             )
-                        )
-                        used_words = used_words[:budget_per_node]
+                            used_words = used_words[:budget_per_node]
 
-                        # Lightweight Adaptation: Fill missing words
-                        # Check which used_words are missing in template
-                        missing = [
-                            w for w in used_words if w.lower() not in template.lower()
-                        ]
+                            # Lightweight Adaptation: Fill missing words (增加补齐数量以增强攻击)
+                            missing = [
+                                w
+                                for w in used_words[:20]
+                                if w.lower() not in template.lower()
+                            ][
+                                :15
+                            ]  # 最多补15个词（增强攻击强度）
 
-                        adapted_text = template
-                        if missing:
-                            # Append simple phrase to fill missing words
-                            adapted_text += (
-                                f" Key aspects include: {', '.join(missing)}."
+                            adapted_text = template
+                            if missing:
+                                # 使用紧凑的补齐方式以增强攻击效果
+                                if len(missing) <= 3:
+                                    adapted_text += (
+                                        f" Additionally, {' '.join(missing)}."
+                                    )
+                                else:
+                                    # 对更多词直接拼接（更激进的攻击）
+                                    adapted_text += f" Key terms: {' '.join(missing)}."
+
+                            # Vectorize
+                            new_bow = self.text_generator.vectorizer.transform(
+                                [adapted_text]
+                            ).toarray()[0]
+
+                            # Align dimensions
+                            feat_dim = modified_features.shape[1]
+                            if new_bow.shape[0] != feat_dim:
+                                aligned = np.zeros(feat_dim, dtype=np.float32)
+                                copy_len = min(new_bow.shape[0], feat_dim)
+                                aligned[:copy_len] = new_bow[:copy_len]
+                                new_bow = aligned
+
+                            # 相似性验证
+                            new_bow_tensor = (
+                                torch.from_numpy(new_bow).float().to(self.device)
                             )
+                            old_bow_tensor = full_features[node].detach()
+                            if old_bow_tensor.is_sparse:
+                                old_bow_tensor = old_bow_tensor.to_dense()
 
-                        # Vectorize and Write back
-                        new_bow = self.text_generator.vectorizer.transform(
-                            [adapted_text]
-                        ).toarray()[0]
+                            # 计算余弦相似度
+                            similarity = F.cosine_similarity(
+                                new_bow_tensor.unsqueeze(0), old_bow_tensor.unsqueeze(0)
+                            ).item()
 
-                        # Align dimensions
-                        feat_dim = modified_features.shape[1]
-                        if new_bow.shape[0] != feat_dim:
-                            aligned = np.zeros(feat_dim, dtype=np.float32)
-                            copy_len = min(new_bow.shape[0], feat_dim)
-                            aligned[:copy_len] = new_bow[:copy_len]
-                            new_bow = aligned
+                            # 相似性阈值检查（降低阈值以增强攻击效果）
+                            if similarity < 0.2:  # 降低阈值允许更激进的攻击
+                                # 相似度太低，尝试下一个模板
+                                if template_idx < max_template_attempts - 1:
+                                    continue
+                                else:
+                                    # 所有模板都失败，但仍然写入以保证攻击强度（宽松策略）
+                                    self.attack_stats["similarity_failures"] += 1
+                                    # 继续执行写入，不break
 
-                        modified_features[node] = (
-                            torch.from_numpy(new_bow).float().to(self.device)
-                        )
-                        success_count += 1
+                            # 写回特征
+                            modified_features[node] = new_bow_tensor
+                            success_count += 1
+                            adaptation_success = True
+                            break  # 成功，退出模板重试循环
 
-                    except Exception as e:
-                        # Fallback or skip
-                        pass
+                        except Exception as e:
+                            # 当前模板失败，尝试下一个
+                            if template_idx >= max_template_attempts - 1:
+                                self.attack_stats["adaptation_failures"] += 1
+                            continue
+
+                    # 如果所有模板都失败，保持原特征（或标记为需要单点生成）
+                    if not adaptation_success:
+                        pass  # 保持原特征
 
             except Exception as e:
                 print(f"Error processing cluster {cid}: {e}")
                 continue
 
-        print(
-            f"✅ Cluster Attack Done. Success: {success_count}/{len(target_nodes)}, "
-            f"LLM Calls: {total_llm_calls}, Cache Hits: {cache_hits}"
+        # 更新统计信息
+        self.attack_stats["total_nodes_attacked"] += len(target_nodes)
+        self.attack_stats["total_clusters"] += len(clusters)
+        self.attack_stats["llm_calls"] += total_llm_calls
+        self.attack_stats["cache_hits"] += cache_hits
+        self.attack_stats["rounds"] += 1
+        self.attack_stats["cluster_size_distribution"].append(
+            [len(nodes) for nodes in clusters.values()]
         )
+
+        # 计算缓存命中率
+        cache_hit_rate = cache_hits / max(1, total_llm_calls + cache_hits)
+
+        print(
+            f"✅ Cluster Attack Done. Success: {success_count}/{len(target_nodes)} ({100*success_count/max(1,len(target_nodes)):.1f}%), "
+            f"LLM Calls: {total_llm_calls}, Cache Hits: {cache_hits} ({100*cache_hit_rate:.1f}%), "
+            f"Clusters: {len(clusters)}, Avg Size: {np.mean([len(n) for n in clusters.values()]):.1f}, "
+            f"Similarity Failures: {self.attack_stats['similarity_failures']}, "
+            f"Adaptation Failures: {self.attack_stats['adaptation_failures']}"
+        )
+
         return modified_features
 
     # 层次化图对抗攻击的多步元攻击主函数
@@ -601,13 +725,59 @@ class Heirattack(BaseAttack):
 
                 cur += 1
 
-            # 构建 node2cluster 映射 (使用叶子节点作为簇)
+            # 构建 node2cluster 映射（选择合适层级，不用叶子节点）
+            # 选择倒数第2层作为簇，确保每个簇有足够节点可复用
             self.node2cluster = {}
+            self.cluster_level_map = {}
+
+            # 统计每层的节点数分布
+            level_clusters = {}
             for i in range(len(pool)):
-                # 如果是叶子节点（没有孩子）且包含节点
-                if len(childs[i]) == 0 and len(pool[i]) > 0:
+                level = levels[i]
+                if level not in level_clusters:
+                    level_clusters[level] = []
+                if len(pool[i]) > 0:
+                    level_clusters[level].append((i, len(pool[i])))
+
+            # 选择合适层级：优先使用倒数第3层（更细的簇，攻击更有针对性）
+            max_level = max(level_clusters.keys()) if level_clusters else 1
+            # 优先用倒数第3层，簇太少才用倒数第2层
+            if max_level >= 3:
+                target_level = max(1, max_level - 2)  # 倒数第3层
+                # 如果倒数第3层簇太少（<3），退化到倒数第2层
+                if (
+                    target_level in level_clusters
+                    and len(level_clusters[target_level]) < 3
+                ):
+                    target_level = max(1, max_level - 1)
+            else:
+                target_level = max(1, max_level - 1)  # 倒数第2层
+
+            # 构建映射：将节点映射到目标层级的簇
+            for i in range(len(pool)):
+                if levels[i] == target_level and len(pool[i]) > 0:
                     for node_idx in pool[i]:
                         self.node2cluster[node_idx] = i
+                    self.cluster_level_map[i] = len(pool[i])
+
+            # 如果目标层级没有覆盖所有节点（有些在更深层），回溯找父簇
+            for node_idx in range(self.nnodes):
+                if node_idx not in self.node2cluster:
+                    # 找到包含该节点的最接近目标层级的簇
+                    for i in range(len(pool)):
+                        if node_idx in pool[i] and levels[i] <= target_level:
+                            self.node2cluster[node_idx] = i
+                            break
+
+            # 保存稳定的粒球划分（首次）
+            if self.stable_gb_pool is None:
+                self.stable_gb_pool = {"pool": pool, "childs": childs, "levels": levels}
+
+            print(
+                f"📊 GB Division: Selected level {target_level}/{max_level}, "
+                f"{len(set(self.node2cluster.values()))} clusters, "
+                f"avg size: {np.mean(list(self.cluster_level_map.values())):.1f}"
+            )
 
             for step in range(n_step):
                 tot_perturbs += 1
@@ -832,9 +1002,45 @@ class Heirattack(BaseAttack):
         if self.attack_features:
             # 文本攻击已在循环中完成，直接保存最终特征
             self.modified_features = full_features.detach()
+
+            # 保存缓存到文件
+            try:
+                with open(self.cache_file, "wb") as f:
+                    pickle.dump(self.template_cache, f)
+                print(
+                    f"💾 Saved {len(self.template_cache)} templates to {self.cache_file}"
+                )
+            except Exception as e:
+                print(f"⚠️ Failed to save cache: {e}")
+
+            # 输出完整统计报告
+            print("\n" + "=" * 60)
+            print("📊 Attack Statistics Summary")
+            print("=" * 60)
             print(
-                f"\n✅ Attack completed: Structure perturbations={num_add+num_del}, Text attacks executed in-loop"
+                f"Structure Perturbations: {num_add} adds + {num_del} dels = {num_add+num_del} total"
             )
+            print(f"Total Nodes Attacked: {self.attack_stats['total_nodes_attacked']}")
+            print(f"Total Clusters Formed: {self.attack_stats['total_clusters']}")
+            print(
+                f"Average Cluster Size: {self.attack_stats['total_nodes_attacked']/max(1, self.attack_stats['total_clusters']):.2f}"
+            )
+            print(f"LLM Calls: {self.attack_stats['llm_calls']}")
+            print(f"Cache Hits: {self.attack_stats['cache_hits']}")
+            total_queries = (
+                self.attack_stats["llm_calls"] + self.attack_stats["cache_hits"]
+            )
+            if total_queries > 0:
+                print(
+                    f"Cache Hit Rate: {100*self.attack_stats['cache_hits']/total_queries:.1f}%"
+                )
+                print(
+                    f"LLM Call Reduction: {100*(1-self.attack_stats['llm_calls']/max(1,self.attack_stats['total_nodes_attacked'])):.1f}%"
+                )
+            print(f"Adaptation Failures: {self.attack_stats['adaptation_failures']}")
+            print(f"Similarity Failures: {self.attack_stats['similarity_failures']}")
+            print(f"Attack Rounds: {self.attack_stats['rounds']}")
+            print("=" * 60 + "\n")
 
     def ppr_topk_from_seed(
         self,
