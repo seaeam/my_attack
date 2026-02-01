@@ -11,7 +11,7 @@
 #     --api_base_url  https://yibuapi.com/v1 \
 
 
-export OLLAMA_MODEL="llama3.2:3b-instruct-fp16"
+export OLLAMA_MODEL="llama3.2:1b-instruct-fp16"
 
 python meta.py \
     --dataset citeseer \

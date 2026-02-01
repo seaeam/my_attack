@@ -12,6 +12,25 @@ from heir import Heirattack
 from deeprobust.graph.global_attack import DICE, MetaApprox
 
 import math
+import sys
+import os
+import datetime
+
+
+class Logger(object):
+    def __init__(self, filename="default.log", stream=sys.stdout):
+        self.terminal = stream
+        self.log = open(filename, "a")
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+        self.log.flush()
+
+    def flush(self):
+        self.terminal.flush()
+        self.log.flush()
+
 
 from split_test import (
     get_amazon_dataset,
@@ -102,6 +121,13 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
+
+# Setup logger
+if not os.path.exists("logs"):
+    os.makedirs("logs")
+timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+log_filename = f"logs/result_{args.dataset}_{args.model}_{timestamp}.txt"
+sys.stdout = Logger(log_filename)
 
 device = torch.device(
     "cuda:0" if torch.cuda.is_available() and not args.no_cuda else "cpu"
