@@ -41,32 +41,35 @@ class TextAttackGenerator:
         dataset_name: str,
         feature_dim: int = None,  # 数据集特征维度
         bow_cache_dir: str = "./bow_cache",
-        llm_type: str = "gpt",  # "gpt", "deepseek", "llama", "llama_topic", "llama_mask"
-        model_path: str = None,
         api_key: str = None,
+        base_url: str = None,
         device: str = "cuda",
-        max_tokens: int = 300,
-        num_retries: int = 3,
-        base_url: str = None,  # API base URL (用于DeepSeek等兼容OpenAI的API)
+        max_tokens: int = 50,
+        num_retries: int = 0,
+        llm_type: str = "gpt",
+        model_path: str = None,
+        feature_dim: int = None,
     ):
         """
         Args:
             dataset_name: 数据集名称（cora, citeseer, pubmed等）
             feature_dim: 数据集的实际特征维度（如果为None，则使用词表大小）
             bow_cache_dir: BoW词表缓存目录
-            llm_type: LLM类型
-            model_path: Llama模型路径（如果使用Llama）
-            api_key: OpenAI API密钥（如果使用GPT）
+            api_key: OpenAI兼容API密钥
+            base_url: API基础URL（如 https://api.openai.com/v1）
             device: 设备
             max_tokens: 最大生成token数
             num_retries: 生成失败时重试次数
+            llm_type: LLM类型（"gpt" 或 "llama"）
+            model_path: 本地模型路径（llm_type="llama"时需要）
+            feature_dim: 数据集特征维度（用于对齐BoW向量）
         """
         self.dataset_name = dataset_name
-        self.llm_type = llm_type
         self.device = device
         self.max_tokens = max_tokens
         self.num_retries = num_retries
-        self.feature_dim = feature_dim  # 保存特征维度
+        self.llm_type = llm_type.lower()
+        self.feature_dim = feature_dim
 
         # 加载BoW词表
         vectorizer_path = os.path.join(bow_cache_dir, f"{dataset_name}.pkl")
@@ -99,35 +102,51 @@ class TextAttackGenerator:
                 f"Please run data preprocessing first."
             )
 
+        # 记录词表大小
+        self.vocab_size = len(self.vocab)
+        print(f"Vocab size: {self.vocab_size}, Feature dim: {self.feature_dim}")
+
         # 加载数据集类别信息
         self.category_names = self._load_category_names()
 
         # 初始化LLM
-        if "llama" in llm_type.lower():
-            if model_path is None:
-                raise ValueError("model_path must be provided for Llama models")
-            self._init_llama(model_path)
-        elif "gpt" in llm_type.lower() or "deepseek" in llm_type.lower():
+        if self.llm_type == "gpt":
             if api_key is None:
-                raise ValueError(f"api_key must be provided for {llm_type} models")
-            self.api_key = api_key
-            self.base_url = base_url
-            # DeepSeek使用兼容OpenAI的API，但需要指定base_url
-            if "deepseek" in llm_type.lower():
-                self.client = OpenAI(api_key=api_key, base_url=base_url)
-                self.model_name = "deepseek-chat"  # DeepSeek默认模型
+                raise ValueError("api_key must be provided for GPT")
+            self.client = OpenAI(api_key=api_key, base_url=base_url)
+
+            # 检测是否为Ollama（通过base_url判断）
+            if base_url and "localhost:11434" in base_url:
+                # Ollama模式：从环境变量或参数获取模型名
+                self.model_name = os.environ.get(
+                    "OLLAMA_MODEL", "Eomer/gpt-3.5-turbo:latest"
+                )
+                print(f"🦙 Detected Ollama - using model: {self.model_name}")
             else:
-                self.client = OpenAI(api_key=api_key, base_url=base_url)
-                self.model_name = "gpt-3.5-turbo"  # GPT默认模型
+                # 标准GPT
+                self.model_name = "gpt-3.5-turbo"
+
+            self.model = None
+            self.tokenizer = None
+            print(f"Initialized GPT client with model: {self.model_name}")
+        elif self.llm_type == "llama":
+            if model_path is None:
+                raise ValueError("model_path must be provided for Llama")
+            self._init_llama(model_path)
+            self.client = None
+            print(f"Initialized Llama model from: {model_path}")
         else:
-            raise ValueError(f"Unsupported llm_type: {llm_type}")
+            raise ValueError(f"Unsupported llm_type: {llm_type}. Use 'gpt' or 'llama'")
 
     def _init_llama(self, model_path: str):
         """初始化Llama模型"""
         print(f"Loading Llama model from {model_path}...")
         self.tokenizer = AutoTokenizer.from_pretrained(model_path)
         self.model = AutoModelForCausalLM.from_pretrained(
-            model_path, torch_dtype=torch.bfloat16, device_map="auto"
+            model_path,
+            torch_dtype=torch.bfloat16,
+            device_map="auto",
+            # attn_implementation="flash_attention_2"  # 如果需要更快的推理
         )
         self.tokenizer.pad_token_id = self.tokenizer.eos_token_id
         self.tokenizer.pad_token = self.tokenizer.eos_token
@@ -136,6 +155,7 @@ class TextAttackGenerator:
             self.tokenizer.eos_token_id,
             self.tokenizer.convert_tokens_to_ids("<|eot_id|>"),
         ]
+        self.model.eval()  # 设置为评估模式
         print("Llama model loaded successfully")
 
     def _load_category_names(self) -> List[str]:
@@ -275,10 +295,10 @@ class TextAttackGenerator:
         return must_use_words, must_not_use_words
 
     def build_prompt(
-        self, used_words: List[str], include_topic: bool = True
+        self, used_words: List[str], include_topic: bool = False
     ) -> List[Dict[str, str]]:
         """构建LLM提示"""
-        if include_topic and "topic" in self.llm_type.lower():
+        if include_topic:
             user_content = (
                 f"There are {len(self.category_names)} types of paper, which are "
                 + ", ".join(self.category_names)
@@ -293,13 +313,9 @@ class TextAttackGenerator:
             )
         else:
             user_content = (
-                "Generate a title and an abstract for an academic article.\n"
-                + "Ensure the generated content explicitly contains the following words: "
-                + ", ".join(f"'{word}'" for word in used_words)
-                + ".\n"
-                + "These words should appear as specified, without using synonyms, plural forms, or other variants.\n"
-                + f"Length limit: {self.max_tokens} words."
-                + "\nOutput the TITLE and ABSTRACT without explanation.\nTITLE:...\nABSTRACT:..."
+                "Write a short academic text using these words: "
+                + ", ".join(used_words[:15])  # 最多15个词
+                + ".\nOutput text only, no explanation."
             )
 
         messages = [
@@ -311,69 +327,90 @@ class TextAttackGenerator:
         ]
         return messages
 
-    def generate_text_gpt(self, messages: List[Dict[str, str]]) -> str:
-        """使用GPT/DeepSeek生成文本"""
-        response = self.client.chat.completions.create(
-            model=getattr(self, "model_name", "gpt-3.5-turbo-1106"),
-            messages=messages,
-            max_tokens=self.max_tokens,
-        )
-        return response.choices[0].message.content
-
-    def generate_text_llama(
+    def generate_cluster_template(
         self,
-        messages: List[Dict[str, str]],
-        not_used_words: List[str],
-        use_mask: bool = True,
-    ) -> str:
-        """使用Llama生成文本（支持token屏蔽）"""
-        # 构建禁用token列表
-        if use_mask and "mask" in self.llm_type.lower():
-            # 扩展禁用词（包括大写形式）
-            Cap = [word.capitalize() for word in not_used_words]
-            not_used_words_ext = not_used_words + Cap
+        cluster_attributes: List[str],
+        discriminative_words: List[str],
+        style_constraints: str = "Keep it concise, academic, and natural.",
+        num_candidates: int = 3,
+    ) -> List[str]:
+        """
+        Generate cluster-level templates.
 
-            # 编码为token ID
-            not_used_tokens = [
-                self.tokenizer.encode(word, add_special_tokens=False)[0]
-                for word in not_used_words_ext
-                if len(self.tokenizer.encode(word, add_special_tokens=False)) > 0
-            ]
-            the_not_used_tokens = [
-                self.tokenizer.encode(f"the {word}", add_special_tokens=False)[-1]
-                for word in not_used_words_ext
-                if len(self.tokenizer.encode(f"the {word}", add_special_tokens=False))
-                > 0
-            ]
-            not_used_tokens.extend(the_not_used_tokens)
+        Args:
+            cluster_attributes: List of important attributes for the cluster
+            discriminative_words: List of discriminative words for the cluster
+            style_constraints: Style constraints string
+            num_candidates: Number of templates to generate
 
-            custom_processor = RestrictProcessor(self.tokenizer, not_used_tokens)
-        else:
-            # 不使用屏蔽
-            custom_processor = RestrictProcessor(self.tokenizer, [])
-
-        logits_processor = LogitsProcessorList([custom_processor])
-
-        # 编码输入
-        input_ids = self.tokenizer.apply_chat_template(
-            messages, add_generation_prompt=True, return_tensors="pt"
-        ).to(self.model.device)
-
-        # 生成
-        outputs = self.model.generate(
-            input_ids,
-            max_new_tokens=self.max_tokens,
-            eos_token_id=self.terminators,
-            pad_token_id=self.tokenizer.pad_token_id,
-            do_sample=True,
-            temperature=0.6,
-            top_p=0.9,
-            logits_processor=logits_processor,
+        Returns:
+            List of generated templates
+        """
+        prompt = (
+            f"Task: Generate {num_candidates} distinct text templates for a cluster of academic papers.\n"
+            f"Cluster Keywords: {', '.join(cluster_attributes[:10])}\n"
+            f"Discriminative Words (Must Include): {', '.join(discriminative_words[:10])}\n"
+            f"Style: {style_constraints}\n\n"
+            f"Requirements:\n"
+            f"1. Write {num_candidates} different templates. Each template should be a coherent paragraph (Abstract-like).\n"
+            f"2. Integrate the 'Discriminative Words' naturally.\n"
+            f"3. You can use placeholders like [DETAILS] for specific node information, but the text should be mostly complete.\n"
+            f"4. Output ONLY the templates, separated by '|||'. Do not add numbering or labels like 'Template 1'.\n"
+            f"5. Do not include explanations."
         )
 
-        response = outputs[0][input_ids.shape[-1] :]
-        text = self.tokenizer.decode(response, skip_special_tokens=True)
-        return text
+        messages = [
+            {
+                "role": "system",
+                "content": "You are a helpful AI assistant for text generation.",
+            },
+            {"role": "user", "content": prompt},
+        ]
+
+        try:
+            response_text = self.generate_text(messages)
+            # Parse response
+            templates = [t.strip() for t in response_text.split("|||") if t.strip()]
+            # Fallback if separator not found but text exists
+            if not templates and response_text:
+                templates = [response_text.strip()]
+            return templates
+        except Exception as e:
+            print(f"Error generating cluster templates: {e}")
+            return []
+
+    def generate_text(self, messages: List[Dict[str, str]]) -> str:
+        """调用LLM生成文本"""
+        if self.llm_type == "gpt":
+            # 使用GPT API
+            response = self.client.chat.completions.create(
+                model=self.model_name,
+                messages=messages,
+                max_tokens=self.max_tokens,
+            )
+            return response.choices[0].message.content
+        elif self.llm_type == "llama":
+            # 使用本地Llama模型
+            input_ids = self.tokenizer.apply_chat_template(
+                messages, add_generation_prompt=True, return_tensors="pt"
+            ).to(self.model.device)
+
+            with torch.no_grad():
+                outputs = self.model.generate(
+                    input_ids,
+                    max_new_tokens=self.max_tokens,
+                    eos_token_id=self.terminators,
+                    pad_token_id=self.tokenizer.pad_token_id,
+                    do_sample=True,
+                    temperature=0.6,
+                    top_p=0.9,
+                )
+
+            response = outputs[0][input_ids.shape[-1] :]
+            text = self.tokenizer.decode(response, skip_special_tokens=True)
+            return text
+        else:
+            raise ValueError(f"Unsupported llm_type: {self.llm_type}")
 
     def calculate_usage_rates(
         self, text: str, should_use_words: List[str], should_not_use_words: List[str]
@@ -429,7 +466,7 @@ class TextAttackGenerator:
 
         Args:
             used_words: 必须使用的词列表
-            not_used_words: 禁止使用的词列表
+            not_used_words: 禁止使用的词列表（当前实现中不强制，仅作为参考）
             verbose: 是否打印详细信息
 
         Returns:
@@ -438,10 +475,7 @@ class TextAttackGenerator:
         messages = self.build_prompt(used_words)
 
         # 第一轮生成
-        if "llama" in self.llm_type.lower():
-            response = self.generate_text_llama(messages, not_used_words)
-        else:
-            response = self.generate_text_gpt(messages)
+        response = self.generate_text(messages)
 
         use_rate, not_use_rate, missing_words = self.calculate_usage_rates(
             response, used_words, not_used_words
@@ -456,9 +490,9 @@ class TextAttackGenerator:
         best_response = response
         best_use_rate = use_rate
 
-        # 迭代修正（最多3轮）
+        # 迭代修正（仅在效果很差时重试）
         for retry in range(self.num_retries):
-            if len(missing_words) == 0 or use_rate >= 95.0:
+            if len(missing_words) == 0 or use_rate >= 80.0:
                 break
 
             # 构建反馈
@@ -471,10 +505,7 @@ class TextAttackGenerator:
             messages.append({"role": "user", "content": feedback})
 
             # 重新生成
-            if "llama" in self.llm_type.lower():
-                response = self.generate_text_llama(messages, not_used_words)
-            else:
-                response = self.generate_text_gpt(messages)
+            response = self.generate_text(messages)
 
             use_rate, not_use_rate, missing_words = self.calculate_usage_rates(
                 response, used_words, not_used_words
