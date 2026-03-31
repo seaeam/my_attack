@@ -107,6 +107,21 @@ class Heirattack(BaseAttack):
         self.M = int(self.nnodes ** (1.0 / self.levels))  # int(math.sqrt(N))
         self.gb_cluster = GBCluster(n_clusters=self.M, mode="euclidean", verbose=0)
         self.use_oracle = use_oracle
+        self.global_important_ratio = float(
+            getattr(args, "global_important_ratio", 0.10)
+        )
+        self.global_ppr_alpha = float(getattr(args, "global_ppr_alpha", 0.15))
+        self.global_ppr_iters = int(getattr(args, "global_ppr_iters", 30))
+        self.global_seed_strategy = getattr(args, "global_seed_strategy", "uniform")
+        self.freeze_structure_features = bool(
+            getattr(args, "freeze_structure_features", False)
+        )
+        self.text_budget_per_node = int(getattr(args, "text_budget_per_node", 15))
+        self.text_topk_ratio = float(getattr(args, "text_topk_ratio", 0.05))
+        self.text_ppr_alpha = float(getattr(args, "text_ppr_alpha", 0.20))
+        self.text_ppr_iters = int(getattr(args, "text_ppr_iters", 25))
+        self.text_min_cluster_size = int(getattr(args, "text_min_cluster_size", 2))
+        self.text_max_cluster_size = int(getattr(args, "text_max_cluster_size", 8))
 
         # 缓存
         self.template_cache = {}  # 簇模板缓存
@@ -330,8 +345,259 @@ class Heirattack(BaseAttack):
 
         return adj_grad, feature_grad
 
+    def _merge_small_text_clusters(
+        self, target_nodes, cluster_ids, target_embeddings, min_cluster_size=2
+    ):
+        target_nodes = np.asarray(target_nodes, dtype=np.int64)
+        cluster_ids = np.asarray(cluster_ids, dtype=np.int64)
+        target_embeddings = np.asarray(target_embeddings, dtype=np.float32)
+
+        if target_nodes.size == 0:
+            return {}
+
+        raw_clusters = {}
+        for pos, cid in enumerate(cluster_ids.tolist()):
+            raw_clusters.setdefault(int(cid), []).append(pos)
+
+        if len(raw_clusters) <= 1:
+            return {0: target_nodes.tolist()}
+
+        large_clusters = {
+            cid: positions
+            for cid, positions in raw_clusters.items()
+            if len(positions) >= min_cluster_size
+        }
+        small_clusters = {
+            cid: positions
+            for cid, positions in raw_clusters.items()
+            if len(positions) < min_cluster_size
+        }
+
+        if not large_clusters:
+            return {0: target_nodes.tolist()}
+
+        center_ids = sorted(large_clusters.keys())
+        centers = np.stack(
+            [target_embeddings[large_clusters[cid]].mean(axis=0) for cid in center_ids],
+            axis=0,
+        )
+
+        for positions in small_clusters.values():
+            points = target_embeddings[positions]
+            if self.gb_cluster.mode == "cosine":
+                points_norm = points / (
+                    np.linalg.norm(points, axis=1, keepdims=True) + 1e-12
+                )
+                centers_norm = centers / (
+                    np.linalg.norm(centers, axis=1, keepdims=True) + 1e-12
+                )
+                dists = 1.0 - (points_norm @ centers_norm.T)
+            else:
+                dists = np.linalg.norm(
+                    points[:, None, :] - centers[None, :, :], axis=2
+                )
+
+            nearest_center = dists.argmin(axis=1)
+            for pos, center_idx in zip(positions, nearest_center.tolist()):
+                large_clusters[center_ids[center_idx]].append(pos)
+
+        merged_clusters = {}
+        for new_cid, cid in enumerate(sorted(large_clusters.keys())):
+            positions = sorted(large_clusters[cid])
+            merged_clusters[new_cid] = target_nodes[positions].tolist()
+
+        return merged_clusters
+
+    def _fallback_partition_text_cluster(
+        self, target_nodes, target_embeddings, min_cluster_size=2, max_cluster_size=8
+    ):
+        target_nodes = np.asarray(target_nodes, dtype=np.int64)
+        target_embeddings = np.asarray(target_embeddings, dtype=np.float32)
+        n = target_nodes.size
+
+        if n <= 1 or n <= max_cluster_size:
+            return [target_nodes.tolist()]
+
+        max_parts = max(1, n // max(1, min_cluster_size))
+        num_parts = max(2, int(math.ceil(n / float(max_cluster_size))))
+        num_parts = min(num_parts, max_parts)
+        if num_parts <= 1:
+            return [target_nodes.tolist()]
+
+        centered = target_embeddings - target_embeddings.mean(axis=0, keepdims=True)
+        try:
+            if np.linalg.norm(centered) > 1e-8:
+                _, _, vh = np.linalg.svd(centered, full_matrices=False)
+                scores = centered @ vh[0]
+            else:
+                scores = np.arange(n, dtype=np.float32)
+        except np.linalg.LinAlgError:
+            scores = np.arange(n, dtype=np.float32)
+
+        order = np.argsort(scores)
+
+        while num_parts > 1:
+            base = n // num_parts
+            remainder = n % num_parts
+            part_sizes = [
+                base + (1 if part_idx < remainder else 0)
+                for part_idx in range(num_parts)
+            ]
+            if min(part_sizes) >= min_cluster_size:
+                break
+            num_parts -= 1
+
+        if num_parts <= 1:
+            return [target_nodes.tolist()]
+
+        base = n // num_parts
+        remainder = n % num_parts
+        part_sizes = [
+            base + (1 if part_idx < remainder else 0) for part_idx in range(num_parts)
+        ]
+
+        partitions = []
+        start = 0
+        for size in part_sizes:
+            idx = order[start : start + size]
+            partitions.append(target_nodes[idx].tolist())
+            start += size
+
+        return [part for part in partitions if part]
+
+    def _split_text_cluster_once(
+        self, target_nodes, target_embeddings, min_cluster_size=2, max_cluster_size=8
+    ):
+        target_nodes = np.asarray(target_nodes, dtype=np.int64)
+        target_embeddings = np.asarray(target_embeddings, dtype=np.float32)
+        n = target_nodes.size
+
+        if n <= 1 or n <= max_cluster_size:
+            return [target_nodes.tolist()]
+
+        max_clusters = max(1, n // max(1, min_cluster_size))
+        target_k = max(2, int(math.ceil(n / float(max_cluster_size))))
+        target_k = min(target_k, max_clusters)
+
+        if target_k <= 1:
+            return [target_nodes.tolist()]
+
+        local_clusterer = GBCluster(
+            n_clusters=target_k, mode=self.gb_cluster.mode, verbose=0
+        )
+        cluster_ids = local_clusterer.fit_predict(target_embeddings)
+        if isinstance(cluster_ids, torch.Tensor):
+            cluster_ids = cluster_ids.detach().cpu().numpy()
+
+        merged_clusters = self._merge_small_text_clusters(
+            target_nodes,
+            cluster_ids,
+            target_embeddings,
+            min_cluster_size=min_cluster_size,
+        )
+        cluster_list = [nodes for nodes in merged_clusters.values() if nodes]
+
+        if len(cluster_list) <= 1:
+            return self._fallback_partition_text_cluster(
+                target_nodes,
+                target_embeddings,
+                min_cluster_size=min_cluster_size,
+                max_cluster_size=max_cluster_size,
+            )
+
+        largest_child = max(len(nodes) for nodes in cluster_list)
+        if largest_child >= n:
+            return self._fallback_partition_text_cluster(
+                target_nodes,
+                target_embeddings,
+                min_cluster_size=min_cluster_size,
+                max_cluster_size=max_cluster_size,
+            )
+
+        return cluster_list
+
+    def _build_round_text_clusters(
+        self, target_nodes, target_embeddings, min_cluster_size=2, max_cluster_size=8
+    ):
+        target_nodes = np.asarray(target_nodes, dtype=np.int64)
+        if target_nodes.size == 0:
+            return {}
+
+        if isinstance(target_embeddings, torch.Tensor):
+            embeddings_np = target_embeddings.detach().cpu().float().numpy()
+        else:
+            embeddings_np = np.asarray(target_embeddings, dtype=np.float32)
+
+        if embeddings_np.ndim != 2 or embeddings_np.shape[0] != target_nodes.size:
+            raise ValueError("target_embeddings must align with target_nodes")
+
+        n = target_nodes.size
+        if n <= 1:
+            return {0: target_nodes.tolist()}
+        if n <= max_cluster_size:
+            return {0: target_nodes.tolist()}
+        final_clusters = {}
+        next_cid = 0
+        pending = [(target_nodes, embeddings_np)]
+
+        while pending:
+            cur_nodes, cur_embeddings = pending.pop(0)
+            cur_nodes = np.asarray(cur_nodes, dtype=np.int64)
+            cur_embeddings = np.asarray(cur_embeddings, dtype=np.float32)
+            cur_size = cur_nodes.size
+
+            if cur_size <= 1 or cur_size <= max_cluster_size:
+                final_clusters[next_cid] = cur_nodes.tolist()
+                next_cid += 1
+                continue
+
+            if cur_size < 2 * min_cluster_size:
+                final_clusters[next_cid] = cur_nodes.tolist()
+                next_cid += 1
+                continue
+
+            child_clusters = self._split_text_cluster_once(
+                cur_nodes,
+                cur_embeddings,
+                min_cluster_size=min_cluster_size,
+                max_cluster_size=max_cluster_size,
+            )
+
+            if len(child_clusters) <= 1 and len(child_clusters[0]) == cur_size:
+                final_clusters[next_cid] = cur_nodes.tolist()
+                next_cid += 1
+                continue
+
+            node_to_pos = {int(node): pos for pos, node in enumerate(cur_nodes.tolist())}
+            for child_nodes in child_clusters:
+                child_nodes = np.asarray(child_nodes, dtype=np.int64)
+                if child_nodes.size == 0:
+                    continue
+
+                child_positions = np.asarray(
+                    [node_to_pos[int(node)] for node in child_nodes], dtype=np.int64
+                )
+                child_embeddings = cur_embeddings[child_positions]
+
+                if (
+                    child_nodes.size > max_cluster_size
+                    and child_nodes.size >= 2 * min_cluster_size
+                ):
+                    pending.append((child_nodes, child_embeddings))
+                else:
+                    final_clusters[next_cid] = child_nodes.tolist()
+                    next_cid += 1
+
+        return final_clusters
+
     def attack_features_with_text(
-        self, target_nodes, full_features, labels_st, budget_per_node=20
+        self,
+        target_nodes,
+        full_features,
+        labels_st,
+        budget_per_node=20,
+        target_embeddings=None,
+        text_clusters=None,
     ):
         """
         Cluster-based Text Attack Generation
@@ -342,17 +608,33 @@ class Heirattack(BaseAttack):
 
         modified_features = full_features.clone()
 
-        # 1. Group nodes by cluster
-        clusters = {}
-        for node in target_nodes:
-            cid = self.node2cluster.get(node, -1)
-            if cid not in clusters:
-                clusters[cid] = []
-            clusters[cid].append(node)
+        if text_clusters is not None:
+            clusters = text_clusters
+        elif target_embeddings is not None:
+            clusters = self._build_round_text_clusters(
+                target_nodes,
+                target_embeddings,
+                min_cluster_size=self.text_min_cluster_size,
+                max_cluster_size=self.text_max_cluster_size,
+            )
+        else:
+            clusters = {}
+            for node in target_nodes:
+                cid = self.node2cluster.get(node, -1)
+                if cid not in clusters:
+                    clusters[cid] = []
+                clusters[cid].append(node)
 
-        print(
-            f"🔥 Text Attack: {len(target_nodes)} nodes grouped into {len(clusters)} clusters."
-        )
+        cluster_sizes = [len(nodes) for nodes in clusters.values()]
+        if cluster_sizes:
+            avg_size = sum(cluster_sizes) / float(len(cluster_sizes))
+            print(
+                "🔥 Text Attack: "
+                f"{len(target_nodes)} nodes grouped into {len(clusters)} clusters "
+                f"(min/avg/max = {min(cluster_sizes)}/{avg_size:.1f}/{max(cluster_sizes)})."
+            )
+        else:
+            print(f"🔥 Text Attack: {len(target_nodes)} nodes grouped into 0 clusters.")
 
         # Stats
         total_llm_calls = 0
@@ -496,6 +778,7 @@ class Heirattack(BaseAttack):
         full_adj, full_features, labels = utils.to_tensor(
             ori_adj, ori_features, labels, device=self.device
         )
+        base_structure_features = full_features.detach().clone()
 
         labels_st = self.self_training_label(labels, idx_train)
         labels_oh_l = torch.zeros(self.nnodes, self.nclass).to(self.device)
@@ -522,26 +805,38 @@ class Heirattack(BaseAttack):
         num_add, num_del, depth = 0, 0, 0
 
         for i in tqdm(range(n_turns), desc="Perturbing graph"):
+            search_features = (
+                base_structure_features
+                if self.freeze_structure_features
+                else full_features
+            )
             self.full_adj = utils.sparse_mx_to_torch_sparse_tensor(full_adj_cpu).to(
                 self.device
             )
             adj_norm = utils.normalize_adj_tensor(self.full_adj, sparse=True)
-            self.inner_train(full_features, adj_norm, idx_train, idx_unlabeled, labels)
-            embeddings = self.get_embeddings(full_features, adj_norm)
+            self.inner_train(
+                search_features, adj_norm, idx_train, idx_unlabeled, labels
+            )
+            embeddings = self.get_embeddings(search_features, adj_norm)
 
             # === 全局属性增强 PageRank：找出重要节点 ===
             # 计算全图的属性增强 PPR 分数
             self.global_ppr_scores = self.compute_global_ppr(
-                fea=full_features,
+                fea=search_features,
                 adj=full_adj_cpu,
-                topk_ratio=0.10,  # 取前10%的重要节点
-                alpha=0.15,
-                N=30,
+                topk_ratio=self.global_important_ratio,
+                alpha=self.global_ppr_alpha,
+                N=self.global_ppr_iters,
                 use_cos_sim=True,
+                seed_strategy=self.global_seed_strategy,
             )
             # 全局重要节点索引（按 PPR 分数排序）
+            global_k = min(
+                self.nnodes,
+                max(self.M, int(round(self.global_important_ratio * self.nnodes))),
+            )
             global_important_nodes = np.argsort(-self.global_ppr_scores)[
-                : int(0.10 * self.nnodes)
+                :global_k
             ]
 
             # GB Division (粒球划分) - 使用重要节点引导
@@ -643,7 +938,7 @@ class Heirattack(BaseAttack):
                             sizes[i] = len(nodes)
                             # adj_inpool[i][i] = sizes[i] - 1
                             feature_inpool[i] = torch.mean(
-                                full_features[nodes, :], dim=0
+                                search_features[nodes, :], dim=0
                             )
                             # labels_inpool[i] = torch.sum(labels_onehot[nodes, :], dim=0)
                             if "Both" in type or "Train" in type:
@@ -756,9 +1051,9 @@ class Heirattack(BaseAttack):
                         fea=full_features,
                         adj=full_adj_cpu,  # scipy.sparse csr_matrix
                         seed_u=row_idx,
-                        topk_ratio=0.05,
-                        alpha=0.2,
-                        N=25,
+                        topk_ratio=self.text_topk_ratio,
+                        alpha=self.text_ppr_alpha,
+                        N=self.text_ppr_iters,
                         use_cos_sim=True,
                     )
 
@@ -766,9 +1061,9 @@ class Heirattack(BaseAttack):
                         fea=full_features,
                         adj=full_adj_cpu,
                         seed_u=col_idx,
-                        topk_ratio=0.05,
-                        alpha=0.2,
-                        N=25,
+                        topk_ratio=self.text_topk_ratio,
+                        alpha=self.text_ppr_alpha,
+                        N=self.text_ppr_iters,
                         use_cos_sim=True,
                     )
                     # ===== 文本攻击：针对 PPR Top-k 并集 U 执行对抗性文本生成 =====
@@ -790,12 +1085,30 @@ class Heirattack(BaseAttack):
                                 f"Text attack: {len(new_nodes)} new nodes (skipped {len(U)-len(new_nodes)} already attacked)"
                             )
 
+                            text_embeddings = self.get_embeddings(
+                                full_features, adj_norm
+                            )
+                            new_nodes_tensor = (
+                                torch.from_numpy(new_nodes)
+                                .long()
+                                .to(text_embeddings.device)
+                            )
+                            round_text_embeddings = text_embeddings[new_nodes_tensor]
+                            text_clusters = self._build_round_text_clusters(
+                                new_nodes,
+                                round_text_embeddings,
+                                min_cluster_size=self.text_min_cluster_size,
+                                max_cluster_size=self.text_max_cluster_size,
+                            )
+
                             # 执行文本攻击 - 只攻击新节点
                             full_features = self.attack_features_with_text(
                                 target_nodes=new_nodes,
                                 full_features=full_features,
                                 labels_st=labels_st,
-                                budget_per_node=15,
+                                budget_per_node=self.text_budget_per_node,
+                                target_embeddings=round_text_embeddings,
+                                text_clusters=text_clusters,
                             )
 
                             # 记录已攻击的节点

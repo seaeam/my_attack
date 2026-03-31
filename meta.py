@@ -56,6 +56,37 @@ parser.add_argument("--level", type=int, default=2)
 parser.add_argument("--miter", type=int, default=10)
 parser.add_argument("--lr", type=float, default=0.01, help="Initial learning rate.")
 parser.add_argument(
+    "--global_important_ratio",
+    type=float,
+    default=0.10,
+    help="Fraction of nodes kept as globally important seeds for structure attack.",
+)
+parser.add_argument(
+    "--global_ppr_alpha",
+    type=float,
+    default=0.15,
+    help="Restart probability for global PPR used by structure attack.",
+)
+parser.add_argument(
+    "--global_ppr_iters",
+    type=int,
+    default=30,
+    help="Number of power-iteration steps for global PPR.",
+)
+parser.add_argument(
+    "--global_seed_strategy",
+    type=str,
+    default="uniform",
+    choices=["uniform", "degree", "label"],
+    help="Seed distribution used by global PPR for structure attack.",
+)
+parser.add_argument(
+    "--freeze_structure_features",
+    action="store_true",
+    default=False,
+    help="Keep structure-search features fixed to the original graph even after text attacks update node features.",
+)
+parser.add_argument(
     "--weight_decay",
     type=float,
     default=5e-4,
@@ -118,6 +149,42 @@ parser.add_argument(
     type=int,
     default=0,
     help="Number of retries for text generation if quality is low (0=no retry, faster but lower quality)",
+)
+parser.add_argument(
+    "--text_budget_per_node",
+    type=int,
+    default=15,
+    help="Maximum number of node-specific words preserved during text attack.",
+)
+parser.add_argument(
+    "--text_topk_ratio",
+    type=float,
+    default=0.05,
+    help="Per-seed local PPR top-k ratio used to collect text-attack candidates.",
+)
+parser.add_argument(
+    "--text_ppr_alpha",
+    type=float,
+    default=0.20,
+    help="Restart probability for local PPR used by text attack.",
+)
+parser.add_argument(
+    "--text_ppr_iters",
+    type=int,
+    default=25,
+    help="Number of local PPR iterations for text attack.",
+)
+parser.add_argument(
+    "--text_min_cluster_size",
+    type=int,
+    default=2,
+    help="Minimum cluster size for local text clustering.",
+)
+parser.add_argument(
+    "--text_max_cluster_size",
+    type=int,
+    default=8,
+    help="Maximum target cluster size for local text clustering.",
 )
 
 args = parser.parse_args()
@@ -372,8 +439,25 @@ def main():
     print(f"  Perturbation budget: {perturbations} edges")
     print(f"  Perturbation rate: {args.ptb_rate * 100}%")
     print(f"  Attack mode: {args.model}")
+    print(
+        "  Structure search: "
+        f"level={args.level}, step={args.step}, miter={args.miter}, lr={args.lr}"
+    )
+    print(
+        "  Global PPR: "
+        f"ratio={args.global_important_ratio:.2f}, alpha={args.global_ppr_alpha}, "
+        f"iters={args.global_ppr_iters}, seed={args.global_seed_strategy}"
+    )
+    if args.freeze_structure_features:
+        print("  Structure features: frozen to original features")
     if args.use_text_attack:
         print(f"  Text attack: Enabled (LLM: {args.llm_type})")
+        print(
+            "  Text config: "
+            f"topk_ratio={args.text_topk_ratio}, alpha={args.text_ppr_alpha}, "
+            f"iters={args.text_ppr_iters}, budget={args.text_budget_per_node}, "
+            f"cluster={args.text_min_cluster_size}-{args.text_max_cluster_size}"
+        )
     print()
 
     model.meta_attack_multi_step(

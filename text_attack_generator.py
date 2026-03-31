@@ -99,7 +99,7 @@ class TextAttackGenerator:
             if base_url and "localhost:11434" in base_url:
                 # Ollama模式：从环境变量或参数获取模型名
                 self.model_name = os.environ.get(
-                    "OLLAMA_MODEL", "Eomer/gpt-3.5-turbo:latest"
+                    "OLLAMA_MODEL", "llama3.2:1b-instruct-fp16"
                 )
                 print(f"🦙 Detected Ollama - using model: {self.model_name}")
             else:

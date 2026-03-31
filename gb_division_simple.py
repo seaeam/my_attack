@@ -1,187 +1,77 @@
-"""
-简化的粒球划分：直接在嵌入空间上进行粒球划分，类似 KMeans 的效果
-用于替代 KMeans 进行层次化图攻击中的节点聚类
-"""
-
 import numpy as np
+import scipy.sparse as sp
 import torch
 from scipy.spatial.distance import cdist
 
+from tools import del_outlier, get_dataset
+from tools.add_id import add_id
+from tools.add_purity import add_purity
+from tools.corse_split import initial_splite
+from tools.purification import purification
+from tools.split_ball_purity import split_ball_further, split_ball_purity
 
-def gb_division_on_embeddings(
-    embeddings, target_clusters, mode="euclidean", max_iter=100, tol=1e-4
-):
-    """
-    直接在嵌入向量上进行粒球划分，使用粒球的思想
 
-    参数:
-        embeddings: np.ndarray, shape (n, d) - 节点嵌入向量
-        target_clusters: int - 目标粒球/簇数量
-        mode: str - 距离度量方式 ('euclidean' 或 'cosine')
-        max_iter: int - 最大迭代次数
-        tol: float - 收敛阈值
+def _compute_distances(points, centers, mode="euclidean"):
+    if len(points) == 0 or len(centers) == 0:
+        return np.zeros((len(points), len(centers)), dtype=np.float32)
 
-    返回:
-        cluster_ids: np.ndarray, shape (n,) - 每个点的簇ID
-        centers: np.ndarray, shape (K, d) - 粒球中心
-        radii: np.ndarray, shape (K,) - 粒球半径
-    """
-    n, d = embeddings.shape
-
-    # 检查输入数据是否有效
-    if n == 0 or d == 0:
-        return np.zeros(0, dtype=np.int64), np.zeros((0, d)), np.zeros(0)
-
-    # 检查是否有 NaN 或 Inf
-    if np.any(np.isnan(embeddings)) or np.any(np.isinf(embeddings)):
-        # 替换 NaN 和 Inf 为 0
-        embeddings = np.nan_to_num(embeddings, nan=0.0, posinf=0.0, neginf=0.0)
-
-    K = min(target_clusters, n)  # 实际簇数不超过点数
-
-    if K <= 0:
-        return (
-            np.zeros(n, dtype=np.int64),
-            embeddings.mean(axis=0, keepdims=True),
-            np.array([1.0]),
+    if mode == "cosine":
+        points_norm = points / (np.linalg.norm(points, axis=1, keepdims=True) + 1e-12)
+        centers_norm = centers / (
+            np.linalg.norm(centers, axis=1, keepdims=True) + 1e-12
         )
+        return 1.0 - (points_norm @ centers_norm.T)
 
-    if K == 1:
-        center = embeddings.mean(axis=0, keepdims=True)
-        if mode == "cosine":
-            # 余弦距离
-            center_norm = center / (np.linalg.norm(center) + 1e-12)
-            emb_norm = embeddings / (
-                np.linalg.norm(embeddings, axis=1, keepdims=True) + 1e-12
-            )
-            dists = 1.0 - (emb_norm @ center_norm.T).squeeze()
-        else:
-            dists = np.linalg.norm(embeddings - center, axis=1)
-        radius = dists.max()
-        return np.zeros(n, dtype=np.int64), center, np.array([radius])
+    return cdist(points, centers, metric="euclidean")
 
-    # 初始化：K-means++ 风格
-    centers = _kmeans_plusplus_init(embeddings, K, mode)
 
-    cluster_ids = np.zeros(n, dtype=np.int64)
+def _compute_radius(points, center, mode="euclidean"):
+    if len(points) == 0:
+        return 0.0
 
-    for iteration in range(max_iter):
-        old_centers = centers.copy()
+    dists = _compute_distances(points, center[None, :], mode=mode).reshape(-1)
+    return float(dists.max()) if dists.size > 0 else 0.0
 
-        # E-step: 分配点到最近的中心
-        if mode == "cosine":
-            # 余弦相似度
-            centers_norm = centers / (
-                np.linalg.norm(centers, axis=1, keepdims=True) + 1e-12
-            )
-            emb_norm = embeddings / (
-                np.linalg.norm(embeddings, axis=1, keepdims=True) + 1e-12
-            )
-            similarities = emb_norm @ centers_norm.T
-            cluster_ids = similarities.argmax(axis=1)
-        else:
-            # 欧氏距离
-            dists = cdist(embeddings, centers, metric="euclidean")
-            cluster_ids = dists.argmin(axis=1)
 
-        # M-step: 更新中心（加权平均，考虑密度）
-        empty_clusters = []
-        for k in range(K):
-            mask = cluster_ids == k
-            if mask.sum() > 0:
-                # 粒球中心：该簇所有点的均值
-                centers[k] = embeddings[mask].mean(axis=0)
-            else:
-                empty_clusters.append(k)
+def _build_knn_adjacency(embeddings, mode="euclidean", num_neighbors=None):
+    n = embeddings.shape[0]
+    if n <= 1:
+        return sp.coo_matrix((n, n), dtype=np.float32)
 
-        # 如果有空簇，重新初始化（选择距离现有中心最远的点）
-        if empty_clusters:
-            for k in empty_clusters:
-                if mode == "cosine":
-                    centers_norm = centers / (
-                        np.linalg.norm(centers, axis=1, keepdims=True) + 1e-12
-                    )
-                    emb_norm = embeddings / (
-                        np.linalg.norm(embeddings, axis=1, keepdims=True) + 1e-12
-                    )
-                    sims = emb_norm @ centers_norm.T
-                    max_sims = sims.max(axis=1)
-                    # 避免选择已经很近的点
-                    if max_sims.min() < 0.99:  # 不是所有点都已经很接近
-                        farthest = max_sims.argmin()
-                    else:
-                        farthest = np.random.randint(n)
-                else:
-                    dists_to_centers = cdist(embeddings, centers, metric="euclidean")
-                    min_dists = dists_to_centers.min(axis=1)
-                    # 避免数值问题
-                    if min_dists.max() > 1e-6:
-                        farthest = min_dists.argmax()
-                    else:
-                        farthest = np.random.randint(n)
-                centers[k] = embeddings[farthest]
+    if num_neighbors is None:
+        num_neighbors = max(1, min(n - 1, int(np.sqrt(n))))
 
-        # 检查收敛
-        center_shift = np.linalg.norm(centers - old_centers)
-        if center_shift < tol:
-            break
+    dists = _compute_distances(embeddings, embeddings, mode=mode)
+    np.fill_diagonal(dists, np.inf)
 
-    # 计算每个粒球的半径（到中心的最大距离）
-    radii = np.zeros(K)
-    for k in range(K):
-        mask = cluster_ids == k
-        if mask.sum() > 0:
-            if mode == "cosine":
-                center_norm = centers[k : k + 1] / (
-                    np.linalg.norm(centers[k : k + 1]) + 1e-12
-                )
-                emb_norm = embeddings[mask] / (
-                    np.linalg.norm(embeddings[mask], axis=1, keepdims=True) + 1e-12
-                )
-                dists = 1.0 - (emb_norm @ center_norm.T).squeeze()
-            else:
-                dists = np.linalg.norm(embeddings[mask] - centers[k], axis=1)
-            radii[k] = dists.max() if dists.size > 0 else 0.0
-        else:
-            radii[k] = 0.0
+    rows, cols = [], []
+    for node in range(n):
+        neighbors = np.argsort(dists[node])[:num_neighbors]
+        rows.extend([node] * len(neighbors))
+        cols.extend(neighbors.tolist())
 
-    return cluster_ids, centers, radii
+    data = np.ones(len(rows), dtype=np.float32)
+    adjacency = sp.coo_matrix((data, (rows, cols)), shape=(n, n), dtype=np.float32)
+    adjacency = adjacency.maximum(adjacency.T).tocoo()
+    adjacency.setdiag(0)
+    adjacency.eliminate_zeros()
+    return adjacency
 
 
 def _kmeans_plusplus_init(embeddings, K, mode="euclidean"):
-    """K-means++ 初始化策略"""
     n, d = embeddings.shape
-    centers = np.zeros((K, d))
-
-    # 随机选择第一个中心
+    centers = np.zeros((K, d), dtype=np.float32)
     centers[0] = embeddings[np.random.randint(n)]
 
     for k in range(1, K):
-        # 计算每个点到已有中心的最小距离
-        if mode == "cosine":
-            centers_norm = centers[:k] / (
-                np.linalg.norm(centers[:k], axis=1, keepdims=True) + 1e-12
-            )
-            emb_norm = embeddings / (
-                np.linalg.norm(embeddings, axis=1, keepdims=True) + 1e-12
-            )
-            sims = emb_norm @ centers_norm.T
-            min_dists = 1.0 - sims.max(axis=1)
-        else:
-            dists = cdist(embeddings, centers[:k], metric="euclidean")
-            min_dists = dists.min(axis=1)
-
-        # 以距离平方作为概率选择下一个中心
-        probs = min_dists**2
-        probs = np.maximum(probs, 1e-12)  # 避免全零
+        min_dists = _compute_distances(embeddings, centers[:k], mode=mode).min(axis=1)
+        probs = np.maximum(min_dists**2, 1e-12)
         prob_sum = probs.sum()
 
-        # 如果所有概率都是0或NaN，使用均匀分布
         if prob_sum <= 1e-12 or np.isnan(prob_sum) or np.isinf(prob_sum):
             next_center_idx = np.random.randint(n)
         else:
-            probs /= prob_sum
-            # 再次检查是否有 NaN
+            probs = probs / prob_sum
             if np.any(np.isnan(probs)) or np.any(np.isinf(probs)):
                 next_center_idx = np.random.randint(n)
             else:
@@ -190,6 +80,205 @@ def _kmeans_plusplus_init(embeddings, K, mode="euclidean"):
         centers[k] = embeddings[next_center_idx]
 
     return centers
+
+
+def _bootstrap_pseudo_labels(
+    embeddings, target_clusters, mode="euclidean", centroids=None
+):
+    n = embeddings.shape[0]
+    K = min(max(int(target_clusters), 0), n)
+
+    if n == 0 or K <= 1:
+        return np.zeros(n, dtype=np.int64)
+
+    if centroids is not None:
+        centers = np.asarray(centroids, dtype=np.float32)
+        if centers.ndim == 1:
+            centers = centers.reshape(1, -1)
+        if centers.shape[1] != embeddings.shape[1] or centers.shape[0] == 0:
+            centers = None
+    else:
+        centers = None
+
+    if centers is None:
+        centers = _kmeans_plusplus_init(embeddings, K, mode=mode)
+
+    dists = _compute_distances(embeddings, centers, mode=mode)
+    return dists.argmin(axis=1).astype(np.int64)
+
+
+def _cluster_stats_from_assignments(embeddings, cluster_ids, mode="euclidean"):
+    cluster_ids = np.asarray(cluster_ids, dtype=np.int64)
+    valid_ids = sorted(int(cid) for cid in np.unique(cluster_ids) if cid >= 0)
+
+    if not valid_ids:
+        cluster_ids = np.zeros(len(embeddings), dtype=np.int64)
+        valid_ids = [0]
+
+    remapped = cluster_ids.copy()
+    centers = np.zeros((len(valid_ids), embeddings.shape[1]), dtype=np.float32)
+    radii = np.zeros(len(valid_ids), dtype=np.float32)
+
+    for new_id, old_id in enumerate(valid_ids):
+        nodes = np.where(cluster_ids == old_id)[0]
+        remapped[nodes] = new_id
+        points = embeddings[nodes]
+        centers[new_id] = points.mean(axis=0)
+        radii[new_id] = _compute_radius(points, centers[new_id], mode=mode)
+
+    return remapped, centers, radii
+
+
+def gb_division_on_embeddings(
+    embeddings,
+    target_clusters,
+    mode="euclidean",
+    max_iter=100,
+    tol=1e-4,
+    centroids=None,
+):
+    """
+    在嵌入向量上运行 `gb_division.py` 的粒球拆分流程。
+
+    由于这里没有原始图和真实标签，内部会：
+    1. 从 embedding 构造一个对称 kNN 图；
+    2. 用 warm-start 中心或 k-means++ 初始化生成伪标签；
+    3. 复用原版的初分、纯度细分、进一步细分和净化流程；
+    4. 再整理回簇 ID、中心点和半径。
+    """
+    del max_iter, tol
+
+    embeddings = np.asarray(embeddings, dtype=np.float32)
+    if embeddings.ndim != 2:
+        raise ValueError("embeddings must be a 2D array")
+
+    n, d = embeddings.shape
+    if n == 0 or d == 0:
+        return (
+            np.zeros(0, dtype=np.int64),
+            np.zeros((0, d), dtype=np.float32),
+            np.zeros(0, dtype=np.float32),
+        )
+
+    if np.any(np.isnan(embeddings)) or np.any(np.isinf(embeddings)):
+        embeddings = np.nan_to_num(embeddings, nan=0.0, posinf=0.0, neginf=0.0)
+
+    K = min(max(int(target_clusters), 0), n)
+    if K <= 0:
+        return (
+            np.zeros(n, dtype=np.int64),
+            embeddings.mean(axis=0, keepdims=True),
+            np.array([1.0], dtype=np.float32),
+        )
+
+    if K == 1:
+        center = embeddings.mean(axis=0, keepdims=True)
+        radius = _compute_radius(embeddings, center[0], mode=mode)
+        return np.zeros(n, dtype=np.int64), center, np.array([radius], dtype=np.float32)
+
+    adjacency = _build_knn_adjacency(embeddings, mode=mode)
+    pseudo_labels = _bootstrap_pseudo_labels(
+        embeddings, K, mode=mode, centroids=centroids
+    )
+
+    graph = get_dataset.get_dataset(embeddings, adjacency, pseudo_labels, seed=0)
+    graph = del_outlier.del_outlier(graph)
+
+    if graph.number_of_nodes() == 0:
+        center = embeddings.mean(axis=0, keepdims=True)
+        radius = _compute_radius(embeddings, center[0], mode=mode)
+        return np.zeros(n, dtype=np.int64), center, np.array([radius], dtype=np.float32)
+
+    total_degree_dict_old = dict(graph.degree())
+    old_node_ids = list(total_degree_dict_old.keys())
+    total_degree_dict = {
+        new_id: deg for new_id, (_, deg) in enumerate(total_degree_dict_old.items())
+    }
+    id_dict = {new_id: old_id for new_id, old_id in enumerate(total_degree_dict_old)}
+    id_dict_oldtonew = {
+        old_id: new_id for new_id, old_id in enumerate(total_degree_dict_old)
+    }
+
+    attributes = np.asarray(
+        [graph.nodes[old_id]["attributes"] for old_id in old_node_ids], dtype=np.float32
+    )
+    labels = np.asarray(
+        [graph.nodes[old_id]["label"] for old_id in old_node_ids], dtype=np.float32
+    ).reshape(-1, 1)
+    indices = np.asarray(old_node_ids, dtype=np.int64).reshape(-1, 1)
+    data_mat = np.concatenate((indices, attributes, labels), axis=1)
+    data_mat = add_id(data_mat)
+
+    clusters = [[data_mat, total_degree_dict]]
+    granular_balls = initial_splite(
+        clusters, graph, id_dict, id_dict_oldtonew, labels, total_degree_dict
+    )
+
+    if not granular_balls:
+        return _cluster_stats_from_assignments(embeddings, pseudo_labels, mode=mode)
+
+    dropped_nodes = []
+    while len(granular_balls) > K:
+        granular_balls.sort(key=lambda x: len(x[0]))
+        cut_pos = len(granular_balls) - K
+
+        for dropped_ball in granular_balls[:cut_pos]:
+            rows = np.asarray(dropped_ball[0])
+            if rows.size != 0:
+                dropped_nodes.extend(rows[:, 0].astype(int).tolist())
+
+        granular_balls = granular_balls[cut_pos:]
+
+    granular_balls = add_purity(granular_balls)
+    granular_balls = split_ball_purity(
+        graph, id_dict, granular_balls, total_degree_dict, K
+    )
+    if len(granular_balls) < K:
+        granular_balls = split_ball_further(
+            graph, id_dict, granular_balls, total_degree_dict, K
+        )
+    granular_balls = purification(granular_balls)
+
+    if not granular_balls:
+        return _cluster_stats_from_assignments(embeddings, pseudo_labels, mode=mode)
+
+    cluster_ids = np.full(n, -1, dtype=np.int64)
+    provisional_centers = []
+    for gb_idx, gb in enumerate(granular_balls):
+        rows = np.asarray(gb[0])
+        if rows.size == 0:
+            continue
+        nodes = rows[:, 0].astype(int)
+        cluster_ids[nodes] = gb_idx
+        provisional_centers.append(embeddings[nodes].mean(axis=0))
+
+    if provisional_centers:
+        provisional_centers = np.asarray(provisional_centers, dtype=np.float32)
+    else:
+        provisional_centers = np.zeros((0, d), dtype=np.float32)
+
+    unassigned = np.where(cluster_ids < 0)[0]
+    if unassigned.size > 0:
+        if provisional_centers.shape[0] > 0:
+            nearest = _compute_distances(
+                embeddings[unassigned], provisional_centers, mode=mode
+            ).argmin(axis=1)
+            cluster_ids[unassigned] = nearest.astype(np.int64)
+        else:
+            cluster_ids[unassigned] = pseudo_labels[unassigned]
+
+    if dropped_nodes:
+        dropped_nodes = np.asarray(sorted(set(dropped_nodes)), dtype=np.int64)
+        dropped_nodes = dropped_nodes[(dropped_nodes >= 0) & (dropped_nodes < n)]
+        if dropped_nodes.size > 0 and provisional_centers.shape[0] > 0:
+            nearest = _compute_distances(
+                embeddings[dropped_nodes], provisional_centers, mode=mode
+            ).argmin(axis=1)
+            cluster_ids[dropped_nodes] = nearest.astype(np.int64)
+        elif dropped_nodes.size > 0:
+            cluster_ids[dropped_nodes] = pseudo_labels[dropped_nodes]
+
+    return _cluster_stats_from_assignments(embeddings, cluster_ids, mode=mode)
 
 
 def gb_division_simple(embeddings, target_clusters, mode="euclidean"):
@@ -204,22 +293,17 @@ def gb_division_simple(embeddings, target_clusters, mode="euclidean"):
     返回:
         cluster_ids: torch.Tensor, shape (n,) - 每个点的簇ID
     """
-    # 转换为 numpy
     if isinstance(embeddings, torch.Tensor):
         embeddings_np = embeddings.detach().cpu().numpy()
     else:
         embeddings_np = embeddings
 
-    # 调用粒球划分
-    cluster_ids, centers, radii = gb_division_on_embeddings(
+    cluster_ids, _, _ = gb_division_on_embeddings(
         embeddings_np, target_clusters, mode=mode
     )
-
-    # 转换回 torch
     return torch.from_numpy(cluster_ids).long()
 
 
-# 兼容接口：模拟 KMeans 的 fit_predict 方法
 class GBCluster:
     """粒球聚类器，提供类似 KMeans 的接口"""
 
@@ -236,7 +320,7 @@ class GBCluster:
 
         参数:
             embeddings: torch.Tensor, shape (n, d)
-            centroids: torch.Tensor, optional - 预先计算的中心（用于warm-start）
+            centroids: torch.Tensor, optional - 预先计算的中心（用于 warm-start）
 
         返回:
             cluster_ids: torch.Tensor, shape (n,) - 簇ID
@@ -246,36 +330,18 @@ class GBCluster:
         else:
             embeddings_np = embeddings
 
-        # 如果提供了中心点，使用它们进行分配
-        if centroids is not None:
-            if isinstance(centroids, torch.Tensor):
-                centers_np = centroids.detach().cpu().numpy()
-            else:
-                centers_np = centroids
+        if centroids is not None and isinstance(centroids, torch.Tensor):
+            centroids_np = centroids.detach().cpu().numpy()
+        else:
+            centroids_np = centroids
 
-            # 直接分配到最近的中心
-            if self.mode == "cosine":
-                centers_norm = centers_np / (
-                    np.linalg.norm(centers_np, axis=1, keepdims=True) + 1e-12
-                )
-                emb_norm = embeddings_np / (
-                    np.linalg.norm(embeddings_np, axis=1, keepdims=True) + 1e-12
-                )
-                similarities = emb_norm @ centers_norm.T
-                cluster_ids = similarities.argmax(axis=1)
-            else:
-                dists = cdist(embeddings_np, centers_np, metric="euclidean")
-                cluster_ids = dists.argmin(axis=1)
-
-            self.centroids = torch.from_numpy(centers_np).float()
-            return torch.from_numpy(cluster_ids).long()
-
-        # 否则重新聚类
         cluster_ids, centers, radii = gb_division_on_embeddings(
-            embeddings_np, self.n_clusters, mode=self.mode
+            embeddings_np,
+            self.n_clusters,
+            mode=self.mode,
+            centroids=centroids_np,
         )
 
         self.centroids = torch.from_numpy(centers).float()
         self.radii = torch.from_numpy(radii).float()
-
         return torch.from_numpy(cluster_ids).long()
