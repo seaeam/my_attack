@@ -122,6 +122,11 @@ class Heirattack(BaseAttack):
         self.text_ppr_iters = int(getattr(args, "text_ppr_iters", 25))
         self.text_min_cluster_size = int(getattr(args, "text_min_cluster_size", 2))
         self.text_max_cluster_size = int(getattr(args, "text_max_cluster_size", 8))
+        self.text_attack_max_visits = int(getattr(args, "text_attack_max_visits", 1))
+        self.text_similarity_min = float(getattr(args, "text_similarity_min", 0.85))
+        self.text_cdl_topk = int(getattr(args, "text_cdl_topk", 10))
+        self.text_cluster_attr_topk = int(getattr(args, "text_cluster_attr_topk", 10))
+        self.text_max_added_words = int(getattr(args, "text_max_added_words", 20))
 
         # 缓存
         self.template_cache = {}  # 簇模板缓存
@@ -393,9 +398,7 @@ class Heirattack(BaseAttack):
                 )
                 dists = 1.0 - (points_norm @ centers_norm.T)
             else:
-                dists = np.linalg.norm(
-                    points[:, None, :] - centers[None, :, :], axis=2
-                )
+                dists = np.linalg.norm(points[:, None, :] - centers[None, :, :], axis=2)
 
             nearest_center = dists.argmin(axis=1)
             for pos, center_idx in zip(positions, nearest_center.tolist()):
@@ -568,7 +571,9 @@ class Heirattack(BaseAttack):
                 next_cid += 1
                 continue
 
-            node_to_pos = {int(node): pos for pos, node in enumerate(cur_nodes.tolist())}
+            node_to_pos = {
+                int(node): pos for pos, node in enumerate(cur_nodes.tolist())
+            }
             for child_nodes in child_clusters:
                 child_nodes = np.asarray(child_nodes, dtype=np.int64)
                 if child_nodes.size == 0:
@@ -589,6 +594,38 @@ class Heirattack(BaseAttack):
                     next_cid += 1
 
         return final_clusters
+
+    def _select_discriminative_words(
+        self, cluster_center, full_features, cluster_nodes, topk=10
+    ):
+        """
+        选取跨类混淆词：与簇中心差异最大方向上的词汇。
+        从全图特征均值和簇中心的差异中选取 top-k 个维度对应词汇。
+        """
+        if self.text_generator is None:
+            return []
+
+        # 全图特征均值
+        if torch.is_tensor(full_features):
+            feat_np = full_features.detach().cpu()
+            if feat_np.is_sparse:
+                feat_np = feat_np.to_dense()
+            feat_np = feat_np.numpy()
+        else:
+            feat_np = np.asarray(full_features)
+
+        global_mean = feat_np.mean(axis=0)
+        diff = cluster_center - global_mean  # 正=簇高于全局, 负=簇低于全局
+
+        # 跨类混淆词：选取簇中心远低于全局均值的维度（即该簇缺少的词）
+        # 以及簇中心远高于全局均值的维度（即该簇特有的词）
+        # 取绝对差异最大的 topk 个维度
+        vocab = self.text_generator.vocab
+        n_vocab = min(len(vocab), len(diff))
+        abs_diff = np.abs(diff[:n_vocab])
+        top_indices = np.argsort(-abs_diff)[:topk]
+        discriminative_words = [vocab[i] for i in top_indices if i < len(vocab)]
+        return discriminative_words
 
     def attack_features_with_text(
         self,
@@ -658,10 +695,12 @@ class Heirattack(BaseAttack):
                     cluster_attrs,
                     _,
                 ) = self.text_generator.extract_words_from_bow_vector(cluster_center)
-                cluster_attrs = cluster_attrs[:10]  # Top 10
+                cluster_attrs = cluster_attrs[: self.text_cluster_attr_topk]
 
-                # Discriminative words (for now reuse attributes or simple selection)
-                discriminative_words = cluster_attrs
+                # Discriminative words: 跨类混淆词（从非簇中心方向选取）
+                discriminative_words = self._select_discriminative_words(
+                    cluster_center, full_features, nodes, topk=self.text_cdl_topk
+                )
 
                 # Cache Key: Cluster ID + Attributes hash
                 signature = f"{cid}_{hash(tuple(sorted(cluster_attrs)))}"
@@ -737,6 +776,48 @@ class Heirattack(BaseAttack):
                             copy_len = min(new_bow.shape[0], feat_dim)
                             aligned[:copy_len] = new_bow[:copy_len]
                             new_bow = aligned
+
+                        # --- text_max_added_words: 限制新增词条数 ---
+                        orig_nonzero = set(np.where(current_bow > 0)[0])
+                        new_nonzero = np.where(new_bow > 0)[0]
+                        added_indices = [
+                            idx for idx in new_nonzero if idx not in orig_nonzero
+                        ]
+                        if len(added_indices) > self.text_max_added_words:
+                            # 保留 new_bow 值最大的 text_max_added_words 个新增词
+                            added_vals = new_bow[added_indices]
+                            keep_idx = np.argsort(-added_vals)[
+                                : self.text_max_added_words
+                            ]
+                            keep_set = set(np.array(added_indices)[keep_idx])
+                            for idx in added_indices:
+                                if idx not in keep_set:
+                                    new_bow[idx] = 0.0
+
+                        # --- text_similarity_min: 相似度约束投影 ---
+                        orig_vec = current_bow.astype(np.float32)
+                        new_vec = new_bow.astype(np.float32)
+                        orig_norm = np.linalg.norm(orig_vec)
+                        new_norm = np.linalg.norm(new_vec)
+                        if orig_norm > 1e-12 and new_norm > 1e-12:
+                            cos_sim = np.dot(orig_vec, new_vec) / (orig_norm * new_norm)
+                            if cos_sim < self.text_similarity_min:
+                                # 线性插值回原始向量直到满足相似度下限
+                                lo, hi = 0.0, 1.0
+                                for _ in range(20):  # 二分查找
+                                    mid = (lo + hi) / 2.0
+                                    blended = mid * new_vec + (1.0 - mid) * orig_vec
+                                    b_norm = np.linalg.norm(blended)
+                                    if b_norm < 1e-12:
+                                        break
+                                    sim_b = np.dot(orig_vec, blended) / (
+                                        orig_norm * b_norm
+                                    )
+                                    if sim_b >= self.text_similarity_min:
+                                        lo = mid
+                                    else:
+                                        hi = mid
+                                new_bow = lo * new_vec + (1.0 - lo) * orig_vec
 
                         modified_features[node] = (
                             torch.from_numpy(new_bow).float().to(self.device)
@@ -835,9 +916,7 @@ class Heirattack(BaseAttack):
                 self.nnodes,
                 max(self.M, int(round(self.global_important_ratio * self.nnodes))),
             )
-            global_important_nodes = np.argsort(-self.global_ppr_scores)[
-                :global_k
-            ]
+            global_important_nodes = np.argsort(-self.global_ppr_scores)[:global_k]
 
             # GB Division (粒球划分) - 使用重要节点引导
             pool = [range(self.nnodes)]
@@ -1045,84 +1124,91 @@ class Heirattack(BaseAttack):
 
                     # 1) 刚刚选出的两个具体节点
                     row_idx, col_idx = pool[targetI][0], pool[targetJ][0]
-                    #    分别从两个 seed 出发调用 att_walk，得到各自 Top-k
-                    #    设置 topk_ratio（如 0.05 表示前 5% 节点）
-                    topk_nodes_1, scores_1 = self.ppr_topk_from_seed(
-                        fea=full_features,
-                        adj=full_adj_cpu,  # scipy.sparse csr_matrix
-                        seed_u=row_idx,
-                        topk_ratio=self.text_topk_ratio,
-                        alpha=self.text_ppr_alpha,
-                        N=self.text_ppr_iters,
-                        use_cos_sim=True,
-                    )
 
-                    topk_nodes_2, scores_2 = self.ppr_topk_from_seed(
-                        fea=full_features,
-                        adj=full_adj_cpu,
-                        seed_u=col_idx,
-                        topk_ratio=self.text_topk_ratio,
-                        alpha=self.text_ppr_alpha,
-                        N=self.text_ppr_iters,
-                        use_cos_sim=True,
-                    )
-                    # ===== 文本攻击：针对 PPR Top-k 并集 U 执行对抗性文本生成 =====
-                    U = np.unique(np.concatenate([topk_nodes_1, topk_nodes_2]))
-
-                    # 使用文本生成方法攻击 PPR 邻居节点 - 只攻击未攻击过的节点
-                    if self.use_text_attack and self.text_generator is not None:
-                        # 过滤掉已攻击过的节点
-                        if not hasattr(self, "_attacked_nodes"):
-                            self._attacked_nodes = set()
-
-                        new_nodes = np.array(
-                            [n for n in U if n not in self._attacked_nodes]
+                    # ===== 文本/特征攻击（仅在 attack_features 开启时执行）=====
+                    if self.attack_features:
+                        #    分别从两个 seed 出发调用 att_walk，得到各自 Top-k
+                        topk_nodes_1, scores_1 = self.ppr_topk_from_seed(
+                            fea=full_features,
+                            adj=full_adj_cpu,
+                            seed_u=row_idx,
+                            topk_ratio=self.text_topk_ratio,
+                            alpha=self.text_ppr_alpha,
+                            N=self.text_ppr_iters,
+                            use_cos_sim=True,
                         )
 
-                        if len(new_nodes) > 0:
-                            print(
-                                f"\n🎯 [Step {tot_perturbs}/{n_perturbations}] "
-                                f"Text attack: {len(new_nodes)} new nodes (skipped {len(U)-len(new_nodes)} already attacked)"
-                            )
-
-                            text_embeddings = self.get_embeddings(
-                                full_features, adj_norm
-                            )
-                            new_nodes_tensor = (
-                                torch.from_numpy(new_nodes)
-                                .long()
-                                .to(text_embeddings.device)
-                            )
-                            round_text_embeddings = text_embeddings[new_nodes_tensor]
-                            text_clusters = self._build_round_text_clusters(
-                                new_nodes,
-                                round_text_embeddings,
-                                min_cluster_size=self.text_min_cluster_size,
-                                max_cluster_size=self.text_max_cluster_size,
-                            )
-
-                            # 执行文本攻击 - 只攻击新节点
-                            full_features = self.attack_features_with_text(
-                                target_nodes=new_nodes,
-                                full_features=full_features,
-                                labels_st=labels_st,
-                                budget_per_node=self.text_budget_per_node,
-                                target_embeddings=round_text_embeddings,
-                                text_clusters=text_clusters,
-                            )
-
-                            # 记录已攻击的节点
-                            self._attacked_nodes.update(new_nodes.tolist())
-                        else:
-                            print(
-                                f"\n⏭️ [Step {tot_perturbs}/{n_perturbations}] "
-                                f"All {len(U)} nodes already attacked, skipping"
-                            )
-                    else:
-                        print(
-                            f"⚠️ [Step {tot_perturbs}/{n_perturbations}] "
-                            f"Text attack disabled, skipping {len(U)} nodes"
+                        topk_nodes_2, scores_2 = self.ppr_topk_from_seed(
+                            fea=full_features,
+                            adj=full_adj_cpu,
+                            seed_u=col_idx,
+                            topk_ratio=self.text_topk_ratio,
+                            alpha=self.text_ppr_alpha,
+                            N=self.text_ppr_iters,
+                            use_cos_sim=True,
                         )
+                        # ===== 文本攻击：针对 PPR Top-k 并集 U 执行对抗性文本生成 =====
+                        U = np.unique(np.concatenate([topk_nodes_1, topk_nodes_2]))
+
+                        # 使用文本生成方法攻击 PPR 邻居节点 - 只攻击未攻击过的节点
+                        if self.use_text_attack and self.text_generator is not None:
+                            # 过滤掉已达到最大访问次数的节点
+                            if not hasattr(self, "_attacked_nodes"):
+                                self._attacked_nodes = {}  # node -> visit_count
+
+                            new_nodes = np.array(
+                                [
+                                    n
+                                    for n in U
+                                    if self._attacked_nodes.get(n, 0)
+                                    < self.text_attack_max_visits
+                                ]
+                            )
+
+                            if len(new_nodes) > 0:
+                                print(
+                                    f"\n🎯 [Step {tot_perturbs}/{n_perturbations}] "
+                                    f"Text attack: {len(new_nodes)} new nodes (skipped {len(U)-len(new_nodes)} already attacked)"
+                                )
+
+                                text_embeddings = self.get_embeddings(
+                                    full_features, adj_norm
+                                )
+                                new_nodes_tensor = (
+                                    torch.from_numpy(new_nodes)
+                                    .long()
+                                    .to(text_embeddings.device)
+                                )
+                                round_text_embeddings = text_embeddings[
+                                    new_nodes_tensor
+                                ]
+                                text_clusters = self._build_round_text_clusters(
+                                    new_nodes,
+                                    round_text_embeddings,
+                                    min_cluster_size=self.text_min_cluster_size,
+                                    max_cluster_size=self.text_max_cluster_size,
+                                )
+
+                                # 执行文本攻击 - 只攻击新节点
+                                full_features = self.attack_features_with_text(
+                                    target_nodes=new_nodes,
+                                    full_features=full_features,
+                                    labels_st=labels_st,
+                                    budget_per_node=self.text_budget_per_node,
+                                    target_embeddings=round_text_embeddings,
+                                    text_clusters=text_clusters,
+                                )
+
+                                # 记录已攻击的节点（增加计数）
+                                for nd in new_nodes.tolist():
+                                    self._attacked_nodes[nd] = (
+                                        self._attacked_nodes.get(nd, 0) + 1
+                                    )
+                            else:
+                                print(
+                                    f"\n⏭️ [Step {tot_perturbs}/{n_perturbations}] "
+                                    f"All {len(U)} nodes already attacked, skipping"
+                                )
 
                     # 2) 执行扰动
                     full_adj_cpu[row_idx, col_idx] = 1 - full_adj_cpu[row_idx, col_idx]
@@ -1139,7 +1225,6 @@ class Heirattack(BaseAttack):
                         deled[col_idx, row_idx] = 1
 
         # 步骤5: 输出攻击结果和统计信息
-        # print(num_del, num_add, full_adj_cpu.sum(), 1.0 * depth / n_perturbations)
         if self.attack_structure:
             self.modified_adj = full_adj_cpu
         if self.attack_features:
@@ -1147,6 +1232,11 @@ class Heirattack(BaseAttack):
             self.modified_features = full_features.detach()
             print(
                 f"\n✅ Attack completed: Structure perturbations={num_add+num_del}, Text attacks executed in-loop"
+            )
+        else:
+            self.modified_features = full_features.detach()
+            print(
+                f"\n✅ Attack completed: Structure perturbations={num_add+num_del} (edge-only, feature attack disabled)"
             )
 
     def ppr_topk_from_seed(

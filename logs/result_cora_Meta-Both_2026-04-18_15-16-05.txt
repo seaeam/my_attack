@@ -1,0 +1,1405 @@
+Loading cora dataset...
+Selecting 1 largest connected components
+(2485, 1433) (1,) (2485, 2485) 247 249 1988
+Test set results: loss= 0.8632 accuracy= 0.8194
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+Loaded BoW vocabulary: 500 words
+Vocab size: 500, Feature dim: 1433
+🦙 Detected Ollama - using model: llama3.2:1b-instruct-fp16
+Initialized GPT client with model: llama3.2:1b-instruct-fp16
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 506 edges
+  Perturbation rate: 10.0%
+  Attack mode: Meta-Both
+  Structure search: level=2, step=1, miter=150, lr=0.01
+  Global PPR: ratio=0.15, alpha=0.15, iters=150, seed=label, label_w=0.5
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.12, alpha=0.26, iters=30, budget=50, per_step=None, max_visits=3, cluster=2-5, sim>=0.45, cdl_topk=18, cluster_attr_topk=18, max_added=60
+
+
+🎯 [Step 1/506] Text attack: 390 selected nodes (eligible 390, exhausted 0)
+🔥 Text Attack: 390 nodes grouped into 112 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 390/390, LLM Calls: 112, Cache Hits: 0
+
+🎯 [Step 2/506] Text attack: 298 selected nodes (eligible 298, exhausted 0)
+🔥 Text Attack: 298 nodes grouped into 86 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 298/298, LLM Calls: 86, Cache Hits: 0
+
+🎯 [Step 3/506] Text attack: 298 selected nodes (eligible 298, exhausted 0)
+🔥 Text Attack: 298 nodes grouped into 86 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 298/298, LLM Calls: 86, Cache Hits: 0
+
+🎯 [Step 4/506] Text attack: 348 selected nodes (eligible 348, exhausted 0)
+🔥 Text Attack: 348 nodes grouped into 97 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 348/348, LLM Calls: 97, Cache Hits: 0
+
+🎯 [Step 5/506] Text attack: 308 selected nodes (eligible 308, exhausted 0)
+🔥 Text Attack: 308 nodes grouped into 89 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 308/308, LLM Calls: 89, Cache Hits: 0
+
+🎯 [Step 6/506] Text attack: 318 selected nodes (eligible 318, exhausted 5)
+🔥 Text Attack: 318 nodes grouped into 83 clusters (min/avg/max = 2/3.8/5).
+✅ Cluster Attack Done. Success: 318/318, LLM Calls: 83, Cache Hits: 0
+
+🎯 [Step 7/506] Text attack: 431 selected nodes (eligible 431, exhausted 8)
+🔥 Text Attack: 431 nodes grouped into 119 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 431/431, LLM Calls: 119, Cache Hits: 0
+
+🎯 [Step 8/506] Text attack: 288 selected nodes (eligible 288, exhausted 12)
+🔥 Text Attack: 288 nodes grouped into 82 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 288/288, LLM Calls: 82, Cache Hits: 0
+
+🎯 [Step 9/506] Text attack: 285 selected nodes (eligible 285, exhausted 20)
+🔥 Text Attack: 285 nodes grouped into 79 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 285/285, LLM Calls: 79, Cache Hits: 0
+
+🎯 [Step 10/506] Text attack: 261 selected nodes (eligible 261, exhausted 45)
+🔥 Text Attack: 261 nodes grouped into 74 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 261/261, LLM Calls: 74, Cache Hits: 0
+
+🎯 [Step 11/506] Text attack: 365 selected nodes (eligible 365, exhausted 202)
+🔥 Text Attack: 365 nodes grouped into 104 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 365/365, LLM Calls: 104, Cache Hits: 0
+
+🎯 [Step 12/506] Text attack: 273 selected nodes (eligible 273, exhausted 85)
+🔥 Text Attack: 273 nodes grouped into 76 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 273/273, LLM Calls: 76, Cache Hits: 0
+
+🎯 [Step 13/506] Text attack: 75 selected nodes (eligible 75, exhausted 223)
+🔥 Text Attack: 75 nodes grouped into 21 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 75/75, LLM Calls: 21, Cache Hits: 0
+
+🎯 [Step 14/506] Text attack: 151 selected nodes (eligible 151, exhausted 147)
+🔥 Text Attack: 151 nodes grouped into 43 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 151/151, LLM Calls: 43, Cache Hits: 0
+
+🎯 [Step 15/506] Text attack: 132 selected nodes (eligible 132, exhausted 170)
+🔥 Text Attack: 132 nodes grouped into 41 clusters (min/avg/max = 2/3.2/5).
+✅ Cluster Attack Done. Success: 132/132, LLM Calls: 41, Cache Hits: 0
+
+🎯 [Step 16/506] Text attack: 24 selected nodes (eligible 24, exhausted 274)
+🔥 Text Attack: 24 nodes grouped into 6 clusters (min/avg/max = 3/4.0/5).
+✅ Cluster Attack Done. Success: 24/24, LLM Calls: 6, Cache Hits: 0
+
+🎯 [Step 17/506] Text attack: 119 selected nodes (eligible 119, exhausted 179)
+🔥 Text Attack: 119 nodes grouped into 32 clusters (min/avg/max = 2/3.7/5).
+✅ Cluster Attack Done. Success: 119/119, LLM Calls: 32, Cache Hits: 0
+
+🎯 [Step 18/506] Text attack: 102 selected nodes (eligible 102, exhausted 210)
+🔥 Text Attack: 102 nodes grouped into 29 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 102/102, LLM Calls: 29, Cache Hits: 0
+
+🎯 [Step 19/506] Text attack: 217 selected nodes (eligible 217, exhausted 81)
+🔥 Text Attack: 217 nodes grouped into 63 clusters (min/avg/max = 2/3.4/5).
+✅ Cluster Attack Done. Success: 217/217, LLM Calls: 63, Cache Hits: 0
+
+🎯 [Step 20/506] Text attack: 131 selected nodes (eligible 131, exhausted 167)
+🔥 Text Attack: 131 nodes grouped into 34 clusters (min/avg/max = 2/3.9/5).
+✅ Cluster Attack Done. Success: 131/131, LLM Calls: 34, Cache Hits: 0
+
+🎯 [Step 21/506] Text attack: 166 selected nodes (eligible 166, exhausted 428)
+🔥 Text Attack: 166 nodes grouped into 46 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 166/166, LLM Calls: 46, Cache Hits: 0
+
+🎯 [Step 22/506] Text attack: 79 selected nodes (eligible 79, exhausted 219)
+🔥 Text Attack: 79 nodes grouped into 21 clusters (min/avg/max = 2/3.8/5).
+✅ Cluster Attack Done. Success: 79/79, LLM Calls: 21, Cache Hits: 0
+
+🎯 [Step 23/506] Text attack: 84 selected nodes (eligible 84, exhausted 240)
+🔥 Text Attack: 84 nodes grouped into 27 clusters (min/avg/max = 2/3.1/5).
+✅ Cluster Attack Done. Success: 84/84, LLM Calls: 27, Cache Hits: 0
+
+🎯 [Step 24/506] Text attack: 42 selected nodes (eligible 42, exhausted 291)
+🔥 Text Attack: 42 nodes grouped into 11 clusters (min/avg/max = 2/3.8/5).
+✅ Cluster Attack Done. Success: 42/42, LLM Calls: 11, Cache Hits: 0
+
+🎯 [Step 25/506] Text attack: 113 selected nodes (eligible 113, exhausted 190)
+🔥 Text Attack: 113 nodes grouped into 33 clusters (min/avg/max = 2/3.4/5).
+✅ Cluster Attack Done. Success: 113/113, LLM Calls: 33, Cache Hits: 0
+
+🎯 [Step 26/506] Text attack: 13 selected nodes (eligible 13, exhausted 313)
+🔥 Text Attack: 13 nodes grouped into 4 clusters (min/avg/max = 3/3.2/4).
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 4, Cache Hits: 0
+
+🎯 [Step 27/506] Text attack: 79 selected nodes (eligible 79, exhausted 240)
+🔥 Text Attack: 79 nodes grouped into 26 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 79/79, LLM Calls: 26, Cache Hits: 0
+
+🎯 [Step 28/506] Text attack: 115 selected nodes (eligible 115, exhausted 211)
+🔥 Text Attack: 115 nodes grouped into 33 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 115/115, LLM Calls: 33, Cache Hits: 0
+
+🎯 [Step 29/506] Text attack: 48 selected nodes (eligible 48, exhausted 250)
+🔥 Text Attack: 48 nodes grouped into 13 clusters (min/avg/max = 2/3.7/5).
+✅ Cluster Attack Done. Success: 48/48, LLM Calls: 13, Cache Hits: 0
+
+🎯 [Step 30/506] Text attack: 68 selected nodes (eligible 68, exhausted 230)
+🔥 Text Attack: 68 nodes grouped into 19 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 68/68, LLM Calls: 19, Cache Hits: 0
+
+🎯 [Step 31/506] Text attack: 28 selected nodes (eligible 28, exhausted 296)
+🔥 Text Attack: 28 nodes grouped into 8 clusters (min/avg/max = 3/3.5/5).
+✅ Cluster Attack Done. Success: 28/28, LLM Calls: 8, Cache Hits: 0
+
+🎯 [Step 32/506] Text attack: 25 selected nodes (eligible 25, exhausted 308)
+🔥 Text Attack: 25 nodes grouped into 6 clusters (min/avg/max = 2/4.2/5).
+✅ Cluster Attack Done. Success: 25/25, LLM Calls: 6, Cache Hits: 0
+
+🎯 [Step 33/506] Text attack: 38 selected nodes (eligible 38, exhausted 462)
+🔥 Text Attack: 38 nodes grouped into 12 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 38/38, LLM Calls: 12, Cache Hits: 0
+
+🎯 [Step 34/506] Text attack: 25 selected nodes (eligible 25, exhausted 329)
+🔥 Text Attack: 25 nodes grouped into 8 clusters (min/avg/max = 2/3.1/5).
+✅ Cluster Attack Done. Success: 25/25, LLM Calls: 8, Cache Hits: 0
+
+🎯 [Step 35/506] Text attack: 21 selected nodes (eligible 21, exhausted 333)
+🔥 Text Attack: 21 nodes grouped into 5 clusters (min/avg/max = 3/4.2/5).
+✅ Cluster Attack Done. Success: 21/21, LLM Calls: 5, Cache Hits: 0
+
+🎯 [Step 36/506] Text attack: 92 selected nodes (eligible 92, exhausted 226)
+🔥 Text Attack: 92 nodes grouped into 24 clusters (min/avg/max = 2/3.8/5).
+✅ Cluster Attack Done. Success: 92/92, LLM Calls: 24, Cache Hits: 0
+
+🎯 [Step 37/506] Text attack: 58 selected nodes (eligible 58, exhausted 240)
+🔥 Text Attack: 58 nodes grouped into 16 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 58/58, LLM Calls: 16, Cache Hits: 0
+
+🎯 [Step 38/506] Text attack: 6 selected nodes (eligible 6, exhausted 292)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 39/506] Text attack: 7 selected nodes (eligible 7, exhausted 291)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 40/506] Text attack: 16 selected nodes (eligible 16, exhausted 301)
+🔥 Text Attack: 16 nodes grouped into 4 clusters (min/avg/max = 3/4.0/5).
+✅ Cluster Attack Done. Success: 16/16, LLM Calls: 4, Cache Hits: 0
+
+🎯 [Step 41/506] Text attack: 4 selected nodes (eligible 4, exhausted 302)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 42/506] Text attack: 1 selected nodes (eligible 1, exhausted 302)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 43/506] Text attack: 104 selected nodes (eligible 104, exhausted 454)
+🔥 Text Attack: 104 nodes grouped into 29 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 104/104, LLM Calls: 29, Cache Hits: 0
+
+🎯 [Step 44/506] Text attack: 15 selected nodes (eligible 15, exhausted 354)
+🔥 Text Attack: 15 nodes grouped into 5 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 15/15, LLM Calls: 5, Cache Hits: 0
+
+🎯 [Step 45/506] Text attack: 3 selected nodes (eligible 3, exhausted 295)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 46/506] Text attack: 4 selected nodes (eligible 4, exhausted 294)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 47/506] Text attack: 52 selected nodes (eligible 52, exhausted 246)
+🔥 Text Attack: 52 nodes grouped into 16 clusters (min/avg/max = 2/3.2/5).
+✅ Cluster Attack Done. Success: 52/52, LLM Calls: 16, Cache Hits: 0
+
+🎯 [Step 48/506] Text attack: 17 selected nodes (eligible 17, exhausted 283)
+🔥 Text Attack: 17 nodes grouped into 5 clusters (min/avg/max = 3/3.4/4).
+✅ Cluster Attack Done. Success: 17/17, LLM Calls: 5, Cache Hits: 0
+
+🎯 [Step 49/506] Text attack: 6 selected nodes (eligible 6, exhausted 337)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 50/506] Text attack: 12 selected nodes (eligible 12, exhausted 396)
+🔥 Text Attack: 12 nodes grouped into 4 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 4, Cache Hits: 0
+
+🎯 [Step 51/506] Text attack: 18 selected nodes (eligible 18, exhausted 280)
+🔥 Text Attack: 18 nodes grouped into 6 clusters (min/avg/max = 2/3.0/5).
+✅ Cluster Attack Done. Success: 18/18, LLM Calls: 6, Cache Hits: 0
+
+🎯 [Step 52/506] Text attack: 23 selected nodes (eligible 23, exhausted 276)
+🔥 Text Attack: 23 nodes grouped into 6 clusters (min/avg/max = 3/3.8/5).
+✅ Cluster Attack Done. Success: 23/23, LLM Calls: 6, Cache Hits: 0
+
+🎯 [Step 53/506] Text attack: 8 selected nodes (eligible 8, exhausted 314)
+🔥 Text Attack: 8 nodes grouped into 2 clusters (min/avg/max = 3/4.0/5).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 54/506] Text attack: 5 selected nodes (eligible 5, exhausted 407)
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 55/506] Text attack: 2 selected nodes (eligible 2, exhausted 312)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 56/506] Text attack: 2 selected nodes (eligible 2, exhausted 296)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 57/506] Text attack: 47 selected nodes (eligible 47, exhausted 542)
+🔥 Text Attack: 47 nodes grouped into 13 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 47/47, LLM Calls: 13, Cache Hits: 0
+
+🎯 [Step 58/506] Text attack: 8 selected nodes (eligible 8, exhausted 290)
+🔥 Text Attack: 8 nodes grouped into 2 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 59/506] Text attack: 26 selected nodes (eligible 26, exhausted 523)
+🔥 Text Attack: 26 nodes grouped into 7 clusters (min/avg/max = 2/3.7/5).
+✅ Cluster Attack Done. Success: 26/26, LLM Calls: 7, Cache Hits: 0
+
+🎯 [Step 60/506] Text attack: 9 selected nodes (eligible 9, exhausted 311)
+🔥 Text Attack: 9 nodes grouped into 2 clusters (min/avg/max = 4/4.5/5).
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 2, Cache Hits: 0
+
+⏭️ [Step 61/506] All 313 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 62/506] Text attack: 2 selected nodes (eligible 2, exhausted 296)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 63/506] Text attack: 15 selected nodes (eligible 15, exhausted 283)
+🔥 Text Attack: 15 nodes grouped into 4 clusters (min/avg/max = 3/3.8/4).
+✅ Cluster Attack Done. Success: 15/15, LLM Calls: 4, Cache Hits: 0
+
+⏭️ [Step 64/506] All 299 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 65/506] Text attack: 2 selected nodes (eligible 2, exhausted 296)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 66/506] Text attack: 19 selected nodes (eligible 19, exhausted 279)
+🔥 Text Attack: 19 nodes grouped into 5 clusters (min/avg/max = 2/3.8/5).
+✅ Cluster Attack Done. Success: 19/19, LLM Calls: 5, Cache Hits: 0
+
+🎯 [Step 67/506] Text attack: 6 selected nodes (eligible 6, exhausted 305)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 68/506] Text attack: 5 selected nodes (eligible 5, exhausted 297)
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 69/506] Text attack: 12 selected nodes (eligible 12, exhausted 287)
+🔥 Text Attack: 12 nodes grouped into 3 clusters (min/avg/max = 3/4.0/5).
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 3, Cache Hits: 0
+
+⏭️ [Step 70/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 71/506] Text attack: 23 selected nodes (eligible 23, exhausted 552)
+🔥 Text Attack: 23 nodes grouped into 6 clusters (min/avg/max = 3/3.8/5).
+✅ Cluster Attack Done. Success: 23/23, LLM Calls: 6, Cache Hits: 0
+
+🎯 [Step 72/506] Text attack: 2 selected nodes (eligible 2, exhausted 310)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 73/506] All 302 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 74/506] Text attack: 2 selected nodes (eligible 2, exhausted 296)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 75/506] Text attack: 54 selected nodes (eligible 54, exhausted 514)
+🔥 Text Attack: 54 nodes grouped into 16 clusters (min/avg/max = 2/3.4/4).
+✅ Cluster Attack Done. Success: 54/54, LLM Calls: 16, Cache Hits: 0
+
+🎯 [Step 76/506] Text attack: 9 selected nodes (eligible 9, exhausted 573)
+🔥 Text Attack: 9 nodes grouped into 3 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 3, Cache Hits: 0
+
+🎯 [Step 77/506] Text attack: 2 selected nodes (eligible 2, exhausted 296)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 78/506] Text attack: 35 selected nodes (eligible 35, exhausted 287)
+🔥 Text Attack: 35 nodes grouped into 9 clusters (min/avg/max = 2/3.9/5).
+✅ Cluster Attack Done. Success: 35/35, LLM Calls: 9, Cache Hits: 0
+
+🎯 [Step 79/506] Text attack: 4 selected nodes (eligible 4, exhausted 294)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 80/506] Text attack: 28 selected nodes (eligible 28, exhausted 487)
+🔥 Text Attack: 28 nodes grouped into 8 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 28/28, LLM Calls: 8, Cache Hits: 0
+
+⏭️ [Step 81/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 82/506] Text attack: 12 selected nodes (eligible 12, exhausted 286)
+🔥 Text Attack: 12 nodes grouped into 4 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 4, Cache Hits: 0
+
+🎯 [Step 83/506] Text attack: 2 selected nodes (eligible 2, exhausted 380)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 84/506] Text attack: 3 selected nodes (eligible 3, exhausted 346)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 85/506] Text attack: 16 selected nodes (eligible 16, exhausted 567)
+🔥 Text Attack: 16 nodes grouped into 4 clusters (min/avg/max = 3/4.0/5).
+✅ Cluster Attack Done. Success: 16/16, LLM Calls: 4, Cache Hits: 0
+
+🎯 [Step 86/506] Text attack: 11 selected nodes (eligible 11, exhausted 426)
+🔥 Text Attack: 11 nodes grouped into 3 clusters (min/avg/max = 3/3.7/5).
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 3, Cache Hits: 0
+
+🎯 [Step 87/506] Text attack: 6 selected nodes (eligible 6, exhausted 314)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 88/506] Text attack: 2 selected nodes (eligible 2, exhausted 334)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 89/506] Text attack: 34 selected nodes (eligible 34, exhausted 275)
+🔥 Text Attack: 34 nodes grouped into 9 clusters (min/avg/max = 2/3.8/5).
+✅ Cluster Attack Done. Success: 34/34, LLM Calls: 9, Cache Hits: 0
+
+🎯 [Step 90/506] Text attack: 1 selected nodes (eligible 1, exhausted 325)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 91/506] Text attack: 5 selected nodes (eligible 5, exhausted 372)
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 92/506] All 327 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 93/506] Text attack: 1 selected nodes (eligible 1, exhausted 401)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 94/506] Text attack: 3 selected nodes (eligible 3, exhausted 382)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 95/506] Text attack: 1 selected nodes (eligible 1, exhausted 297)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 96/506] Text attack: 17 selected nodes (eligible 17, exhausted 281)
+🔥 Text Attack: 17 nodes grouped into 4 clusters (min/avg/max = 3/4.2/5).
+✅ Cluster Attack Done. Success: 17/17, LLM Calls: 4, Cache Hits: 0
+
+🎯 [Step 97/506] Text attack: 14 selected nodes (eligible 14, exhausted 284)
+🔥 Text Attack: 14 nodes grouped into 4 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 14/14, LLM Calls: 4, Cache Hits: 0
+
+🎯 [Step 98/506] Text attack: 16 selected nodes (eligible 16, exhausted 323)
+🔥 Text Attack: 16 nodes grouped into 5 clusters (min/avg/max = 2/3.2/5).
+✅ Cluster Attack Done. Success: 16/16, LLM Calls: 5, Cache Hits: 0
+
+⏭️ [Step 99/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 100/506] Text attack: 6 selected nodes (eligible 6, exhausted 355)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 2, Cache Hits: 0
+
+⏭️ [Step 101/506] All 388 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 102/506] Text attack: 5 selected nodes (eligible 5, exhausted 321)
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 103/506] Text attack: 2 selected nodes (eligible 2, exhausted 512)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 104/506] Text attack: 2 selected nodes (eligible 2, exhausted 323)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 105/506] Text attack: 2 selected nodes (eligible 2, exhausted 298)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 106/506] All 359 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 107/506] All 568 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 108/506] All 325 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 109/506] All 326 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 110/506] Text attack: 1 selected nodes (eligible 1, exhausted 358)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 111/506] Text attack: 2 selected nodes (eligible 2, exhausted 330)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 112/506] All 337 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 113/506] All 324 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 114/506] Text attack: 1 selected nodes (eligible 1, exhausted 345)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 115/506] Text attack: 4 selected nodes (eligible 4, exhausted 580)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 116/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 117/506] Text attack: 2 selected nodes (eligible 2, exhausted 326)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 118/506] Text attack: 4 selected nodes (eligible 4, exhausted 368)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 119/506] Text attack: 4 selected nodes (eligible 4, exhausted 516)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 120/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 121/506] Text attack: 4 selected nodes (eligible 4, exhausted 550)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 122/506] Text attack: 5 selected nodes (eligible 5, exhausted 293)
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 123/506] Text attack: 7 selected nodes (eligible 7, exhausted 548)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 3/3.5/4).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 2, Cache Hits: 0
+
+⏭️ [Step 124/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 125/506] Text attack: 1 selected nodes (eligible 1, exhausted 335)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 126/506] All 401 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 127/506] All 342 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 128/506] All 327 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 129/506] Text attack: 3 selected nodes (eligible 3, exhausted 370)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 130/506] Text attack: 11 selected nodes (eligible 11, exhausted 342)
+🔥 Text Attack: 11 nodes grouped into 4 clusters (min/avg/max = 2/2.8/3).
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 4, Cache Hits: 0
+
+⏭️ [Step 131/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 132/506] Text attack: 52 selected nodes (eligible 52, exhausted 246)
+🔥 Text Attack: 52 nodes grouped into 15 clusters (min/avg/max = 2/3.5/5).
+✅ Cluster Attack Done. Success: 52/52, LLM Calls: 15, Cache Hits: 0
+
+🎯 [Step 133/506] Text attack: 2 selected nodes (eligible 2, exhausted 296)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 134/506] All 377 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 135/506] All 337 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 136/506] All 315 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 137/506] All 327 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 138/506] All 315 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 139/506] Text attack: 1 selected nodes (eligible 1, exhausted 297)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 140/506] Text attack: 1 selected nodes (eligible 1, exhausted 297)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 141/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 142/506] Text attack: 33 selected nodes (eligible 33, exhausted 265)
+🔥 Text Attack: 33 nodes grouped into 10 clusters (min/avg/max = 2/3.3/5).
+✅ Cluster Attack Done. Success: 33/33, LLM Calls: 10, Cache Hits: 0
+
+🎯 [Step 143/506] Text attack: 1 selected nodes (eligible 1, exhausted 297)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 144/506] Text attack: 1 selected nodes (eligible 1, exhausted 354)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 145/506] Text attack: 2 selected nodes (eligible 2, exhausted 364)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 146/506] Text attack: 15 selected nodes (eligible 15, exhausted 283)
+🔥 Text Attack: 15 nodes grouped into 4 clusters (min/avg/max = 2/3.8/5).
+✅ Cluster Attack Done. Success: 15/15, LLM Calls: 4, Cache Hits: 0
+
+⏭️ [Step 147/506] All 316 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 148/506] Text attack: 2 selected nodes (eligible 2, exhausted 378)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 149/506] Text attack: 12 selected nodes (eligible 12, exhausted 314)
+🔥 Text Attack: 12 nodes grouped into 4 clusters (min/avg/max = 2/3.0/5).
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 4, Cache Hits: 0
+
+🎯 [Step 150/506] Text attack: 1 selected nodes (eligible 1, exhausted 314)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 151/506] Text attack: 14 selected nodes (eligible 14, exhausted 284)
+🔥 Text Attack: 14 nodes grouped into 5 clusters (min/avg/max = 2/2.8/3).
+✅ Cluster Attack Done. Success: 14/14, LLM Calls: 5, Cache Hits: 0
+
+🎯 [Step 152/506] Text attack: 1 selected nodes (eligible 1, exhausted 374)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 153/506] Text attack: 12 selected nodes (eligible 12, exhausted 288)
+🔥 Text Attack: 12 nodes grouped into 3 clusters (min/avg/max = 3/4.0/5).
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 3, Cache Hits: 0
+
+⏭️ [Step 154/506] All 324 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 155/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 156/506] All 335 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 157/506] Text attack: 2 selected nodes (eligible 2, exhausted 296)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 158/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 159/506] Text attack: 16 selected nodes (eligible 16, exhausted 282)
+🔥 Text Attack: 16 nodes grouped into 4 clusters (min/avg/max = 3/4.0/5).
+✅ Cluster Attack Done. Success: 16/16, LLM Calls: 4, Cache Hits: 0
+
+⏭️ [Step 160/506] All 336 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 161/506] Text attack: 4 selected nodes (eligible 4, exhausted 363)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 162/506] All 312 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 163/506] Text attack: 16 selected nodes (eligible 16, exhausted 338)
+🔥 Text Attack: 16 nodes grouped into 4 clusters (min/avg/max = 3/4.0/5).
+✅ Cluster Attack Done. Success: 16/16, LLM Calls: 4, Cache Hits: 0
+
+⏭️ [Step 164/506] All 307 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 165/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 166/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 167/506] Text attack: 1 selected nodes (eligible 1, exhausted 439)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 168/506] Text attack: 2 selected nodes (eligible 2, exhausted 296)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 169/506] All 380 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 170/506] All 313 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 171/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 172/506] Text attack: 4 selected nodes (eligible 4, exhausted 294)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 173/506] Text attack: 3 selected nodes (eligible 3, exhausted 295)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 174/506] Text attack: 4 selected nodes (eligible 4, exhausted 338)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 175/506] Text attack: 1 selected nodes (eligible 1, exhausted 297)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 176/506] All 391 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 177/506] Text attack: 2 selected nodes (eligible 2, exhausted 358)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 178/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 179/506] Text attack: 6 selected nodes (eligible 6, exhausted 292)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 2, Cache Hits: 0
+
+⏭️ [Step 180/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 181/506] All 313 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 182/506] All 452 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 183/506] Text attack: 2 selected nodes (eligible 2, exhausted 414)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 184/506] All 329 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 185/506] Text attack: 8 selected nodes (eligible 8, exhausted 324)
+🔥 Text Attack: 8 nodes grouped into 3 clusters (min/avg/max = 2/2.7/3).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 3, Cache Hits: 0
+
+🎯 [Step 186/506] Text attack: 1 selected nodes (eligible 1, exhausted 298)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 187/506] All 377 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 188/506] Text attack: 2 selected nodes (eligible 2, exhausted 390)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 189/506] All 512 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 190/506] Text attack: 3 selected nodes (eligible 3, exhausted 330)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 191/506] Text attack: 3 selected nodes (eligible 3, exhausted 332)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 192/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 193/506] All 359 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 194/506] Text attack: 3 selected nodes (eligible 3, exhausted 354)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 195/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 196/506] Text attack: 14 selected nodes (eligible 14, exhausted 439)
+🔥 Text Attack: 14 nodes grouped into 4 clusters (min/avg/max = 3/3.5/5).
+✅ Cluster Attack Done. Success: 14/14, LLM Calls: 4, Cache Hits: 0
+
+⏭️ [Step 197/506] All 300 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 198/506] All 299 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 199/506] All 324 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 200/506] All 337 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 201/506] All 306 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 202/506] Text attack: 16 selected nodes (eligible 16, exhausted 283)
+🔥 Text Attack: 16 nodes grouped into 4 clusters (min/avg/max = 2/4.0/5).
+✅ Cluster Attack Done. Success: 16/16, LLM Calls: 4, Cache Hits: 0
+
+⏭️ [Step 203/506] All 328 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 204/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 205/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 206/506] All 318 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 207/506] Text attack: 1 selected nodes (eligible 1, exhausted 554)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 208/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 209/506] All 320 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 210/506] All 347 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 211/506] All 314 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 212/506] All 354 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 213/506] All 364 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 214/506] Text attack: 2 selected nodes (eligible 2, exhausted 356)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 215/506] Text attack: 1 selected nodes (eligible 1, exhausted 359)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 216/506] Text attack: 4 selected nodes (eligible 4, exhausted 295)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 217/506] All 312 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 218/506] All 326 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 219/506] All 299 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 220/506] All 352 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 221/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 222/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 223/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 224/506] All 350 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 225/506] Text attack: 3 selected nodes (eligible 3, exhausted 295)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 226/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 227/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 228/506] All 313 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 229/506] All 321 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 230/506] All 334 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 231/506] All 371 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 232/506] All 541 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 233/506] All 357 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 234/506] All 325 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 235/506] All 299 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 236/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 237/506] All 313 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 238/506] All 321 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 239/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 240/506] Text attack: 13 selected nodes (eligible 13, exhausted 285)
+🔥 Text Attack: 13 nodes grouped into 4 clusters (min/avg/max = 2/3.2/5).
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 4, Cache Hits: 0
+
+⏭️ [Step 241/506] All 346 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 242/506] All 353 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 243/506] All 303 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 244/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 245/506] All 303 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 246/506] All 356 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 247/506] Text attack: 3 selected nodes (eligible 3, exhausted 295)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 248/506] Text attack: 2 selected nodes (eligible 2, exhausted 342)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 249/506] All 303 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 250/506] All 304 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 251/506] All 399 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 252/506] All 324 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 253/506] All 369 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 254/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 255/506] All 300 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 256/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 257/506] All 310 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 258/506] All 335 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 259/506] All 348 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 260/506] All 352 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 261/506] All 460 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 262/506] All 311 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 263/506] All 553 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 264/506] Text attack: 3 selected nodes (eligible 3, exhausted 335)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 265/506] All 312 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 266/506] All 316 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 267/506] All 315 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 268/506] All 361 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 269/506] All 310 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 270/506] All 310 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 271/506] Text attack: 3 selected nodes (eligible 3, exhausted 390)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 272/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 273/506] All 370 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 274/506] Text attack: 2 selected nodes (eligible 2, exhausted 303)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 275/506] All 368 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 276/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 277/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 278/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 279/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 280/506] All 584 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 281/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 282/506] All 568 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 283/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 284/506] Text attack: 1 selected nodes (eligible 1, exhausted 324)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 285/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 286/506] All 319 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 287/506] Text attack: 2 selected nodes (eligible 2, exhausted 296)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 288/506] All 301 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 289/506] All 382 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 290/506] All 377 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 291/506] All 322 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 292/506] All 316 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 293/506] All 316 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 294/506] All 366 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 295/506] All 591 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 296/506] Text attack: 3 selected nodes (eligible 3, exhausted 295)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 297/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 298/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 299/506] All 590 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 300/506] All 339 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 301/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 302/506] All 308 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 303/506] All 327 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 304/506] All 334 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 305/506] All 318 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 306/506] Text attack: 1 selected nodes (eligible 1, exhausted 581)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 307/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 308/506] All 351 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 309/506] All 307 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 310/506] All 337 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 311/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 312/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 313/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 314/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 315/506] All 319 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 316/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 317/506] All 305 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 318/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 319/506] All 341 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 320/506] All 327 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 321/506] All 304 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 322/506] All 351 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 323/506] All 386 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 324/506] All 299 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 325/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 326/506] All 347 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 327/506] All 327 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 328/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 329/506] All 325 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 330/506] All 566 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 331/506] All 344 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 332/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 333/506] All 318 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 334/506] All 308 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 335/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 336/506] All 324 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 337/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 338/506] All 317 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 339/506] Text attack: 1 selected nodes (eligible 1, exhausted 559)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 340/506] All 372 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 341/506] All 441 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 342/506] All 335 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 343/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 344/506] All 386 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 345/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 346/506] All 564 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 347/506] All 299 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 348/506] All 387 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 349/506] Text attack: 1 selected nodes (eligible 1, exhausted 553)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 350/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 351/506] All 348 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 352/506] All 354 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 353/506] All 328 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 354/506] All 341 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 355/506] All 510 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 356/506] All 566 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 357/506] All 301 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 358/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 359/506] All 305 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 360/506] All 336 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 361/506] All 315 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 362/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 363/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 364/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 365/506] All 322 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 366/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 367/506] All 329 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 368/506] All 566 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 369/506] All 397 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 370/506] All 326 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 371/506] All 311 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 372/506] All 343 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 373/506] All 400 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 374/506] All 327 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 375/506] All 306 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 376/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 377/506] All 360 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 378/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 379/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 380/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 381/506] All 320 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 382/506] All 344 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 383/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 384/506] All 303 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 385/506] All 429 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 386/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 387/506] All 302 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 388/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 389/506] All 351 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 390/506] All 379 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 391/506] All 346 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 392/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 393/506] All 355 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 394/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 395/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 396/506] All 335 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 397/506] All 316 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 398/506] All 440 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 399/506] All 323 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 400/506] All 311 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 401/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 402/506] All 317 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 403/506] All 364 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 404/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 405/506] All 345 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 406/506] Text attack: 5 selected nodes (eligible 5, exhausted 293)
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 407/506] All 321 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 408/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 409/506] All 303 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 410/506] All 383 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 411/506] All 393 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 412/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 413/506] All 416 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 414/506] All 318 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 415/506] All 353 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 416/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 417/506] All 366 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 418/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 419/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 420/506] All 307 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 421/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 422/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 423/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 424/506] All 586 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 425/506] All 331 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 426/506] All 343 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 427/506] All 320 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 428/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 429/506] All 300 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 430/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 431/506] All 319 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 432/506] All 310 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 433/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 434/506] All 565 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 435/506] All 304 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 436/506] All 353 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 437/506] All 405 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 438/506] All 301 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 439/506] All 328 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 440/506] All 317 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 441/506] All 336 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 442/506] All 313 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 443/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 444/506] All 339 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 445/506] All 362 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 446/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 447/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 448/506] All 305 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 449/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 450/506] All 302 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 451/506] All 554 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 452/506] Text attack: 2 selected nodes (eligible 2, exhausted 296)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 453/506] All 403 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 454/506] All 317 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 455/506] All 553 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 456/506] All 374 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 457/506] All 399 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 458/506] All 344 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 459/506] All 329 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 460/506] All 301 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 461/506] All 370 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 462/506] Text attack: 4 selected nodes (eligible 4, exhausted 294)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 463/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 464/506] All 373 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 465/506] All 325 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 466/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 467/506] All 372 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 468/506] All 323 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 469/506] All 364 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 470/506] All 391 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 471/506] All 368 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 472/506] All 324 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 473/506] All 319 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 474/506] All 310 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 475/506] All 319 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 476/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 477/506] All 316 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 478/506] All 380 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 479/506] All 323 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 480/506] All 363 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 481/506] All 317 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 482/506] All 305 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 483/506] Text attack: 1 selected nodes (eligible 1, exhausted 330)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 484/506] All 307 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 485/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 486/506] All 412 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 487/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 488/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 489/506] All 379 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 490/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 491/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 492/506] All 342 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 493/506] All 336 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 494/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 495/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 496/506] All 302 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 497/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+🎯 [Step 498/506] Text attack: 3 selected nodes (eligible 3, exhausted 295)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 499/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 500/506] All 318 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 501/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 502/506] All 329 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 503/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 504/506] All 340 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 505/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+⏭️ [Step 506/506] All 298 candidate nodes exhausted (max visits=3), skipping
+
+✅ Attack completed: Structure perturbations=506, Text attacks executed in-loop
+
+============================================================
+📊 Evaluation Results
+============================================================
+
+=== Clean graph ===
+Clean graph results: loss= 0.6233 accuracy= 0.8239
+
+=== Edge-only attack ===
+Edge-only attack results: loss= 0.6810 accuracy= 0.8154
+
+=== Feature-only attack ===
+Feature-only attack results: loss= 1.0105 accuracy= 0.7537
+
+=== Combined attack (edge + feature) ===
+Combined attack results: loss= 1.0440 accuracy= 0.7430
+
+============================================================
+📈 Attack Performance Summary
+============================================================
+  Clean accuracy:         0.8239
+  Edge attack accuracy:   0.8154 (drop: 0.0085)
+  Feature attack accuracy: 0.7537 (drop: 0.0702)
+  Combined accuracy:      0.7430 (drop: 0.0809)
+  Misclassification:      0.2570
+============================================================
+

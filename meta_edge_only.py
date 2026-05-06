@@ -1,3 +1,8 @@
+"""
+消融实验：仅边攻击（Structure-only attack）
+不启用任何特征/文本攻击，attack_features=False
+"""
+
 import copy
 import torch
 import numpy as np
@@ -59,178 +64,69 @@ parser.add_argument(
     "--global_important_ratio",
     type=float,
     default=0.10,
-    help="Fraction of nodes kept as globally important seeds for structure attack.",
 )
 parser.add_argument(
     "--global_ppr_alpha",
     type=float,
     default=0.15,
-    help="Restart probability for global PPR used by structure attack.",
 )
 parser.add_argument(
     "--global_ppr_iters",
     type=int,
     default=30,
-    help="Number of power-iteration steps for global PPR.",
 )
 parser.add_argument(
     "--global_seed_strategy",
     type=str,
     default="uniform",
     choices=["uniform", "degree", "label"],
-    help="Seed distribution used by global PPR for structure attack.",
 )
-parser.add_argument(
-    "--global_label_weight",
-    type=float,
-    default=0.0,
-    help="Mixing weight for label-aware PPR seeds (0=pure uniform, 1=pure training-set seeds). Only used when --global_seed_strategy=label.",
-)
-parser.add_argument(
-    "--freeze_structure_features",
-    action="store_true",
-    default=False,
-    help="Keep structure-search features fixed to the original graph even after text attacks update node features.",
-)
+parser.add_argument("--global_label_weight", type=float, default=0.0)
 parser.add_argument(
     "--weight_decay",
     type=float,
     default=5e-4,
-    help="Weight decay (L2 loss on parameters).",
 )
-parser.add_argument("--hidden", type=int, default=16, help="Number of hidden units.")
-parser.add_argument(
-    "--dropout", type=float, default=0.5, help="Dropout rate (1 - keep probability)."
-)
-parser.add_argument("--dataset", type=str, default="citeseer", help="dataset")
-parser.add_argument("--ptb_rate", type=float, default=0.05, help="pertubation rate")
+parser.add_argument("--hidden", type=int, default=16)
+parser.add_argument("--dropout", type=float, default=0.5)
+parser.add_argument("--dataset", type=str, default="citeseer")
+parser.add_argument("--ptb_rate", type=float, default=0.05)
 parser.add_argument(
     "--model",
     type=str,
     default="Meta-Both",
     choices=["Meta-Both", "Meta-Self", "Meta-Train"],
-    help="model variant",
-)
-
-# 文本攻击参数
-parser.add_argument(
-    "--use_text_attack",
-    action="store_true",
-    default=False,
-    help="Enable text generation attack for node features",
-)
-parser.add_argument(
-    "--llm_type",
-    type=str,
-    default="gpt",
-    choices=["gpt", "deepseek", "llama"],
-    help="LLM type: gpt (OpenAI), deepseek (DeepSeek), or llama (local)",
-)
-parser.add_argument(
-    "--openai_api_key",
-    type=str,
-    default=None,
-    help="API key (required if using GPT or DeepSeek)",
-)
-parser.add_argument(
-    "--api_base_url",
-    type=str,
-    default=None,
-    help="API base URL (for DeepSeek or custom endpoints, e.g., https://api.deepseek.com)",
-)
-parser.add_argument(
-    "--llama_model_path",
-    type=str,
-    default=None,
-    help="Llama model path (required if using local Llama)",
-)
-parser.add_argument(
-    "--text_attack_nodes",
-    type=int,
-    default=None,
-    help="Maximum number of nodes to attack with text generation per perturbation step (default: use all eligible nodes).",
-)
-parser.add_argument(
-    "--text_attack_max_visits",
-    type=int,
-    default=1,
-    help="Maximum number of times a node can be revisited by text attack across all perturbation steps.",
-)
-parser.add_argument(
-    "--text_retries",
-    type=int,
-    default=0,
-    help="Number of retries for text generation if quality is low (0=no retry, faster but lower quality)",
-)
-parser.add_argument(
-    "--text_budget_per_node",
-    type=int,
-    default=15,
-    help="Maximum number of node-specific words preserved during text attack.",
-)
-parser.add_argument(
-    "--text_topk_ratio",
-    type=float,
-    default=0.05,
-    help="Per-seed local PPR top-k ratio used to collect text-attack candidates.",
-)
-parser.add_argument(
-    "--text_ppr_alpha",
-    type=float,
-    default=0.20,
-    help="Restart probability for local PPR used by text attack.",
-)
-parser.add_argument(
-    "--text_ppr_iters",
-    type=int,
-    default=25,
-    help="Number of local PPR iterations for text attack.",
-)
-parser.add_argument(
-    "--text_min_cluster_size",
-    type=int,
-    default=2,
-    help="Minimum cluster size for local text clustering.",
-)
-parser.add_argument(
-    "--text_max_cluster_size",
-    type=int,
-    default=8,
-    help="Maximum target cluster size for local text clustering.",
-)
-parser.add_argument(
-    "--text_similarity_min",
-    type=float,
-    default=0.85,
-    help="Minimum cosine similarity preserved between original and attacked BoW features.",
-)
-parser.add_argument(
-    "--text_cdl_topk",
-    type=int,
-    default=10,
-    help="Top-k class-discriminative lexicon words used in text prompts.",
-)
-parser.add_argument(
-    "--text_cluster_attr_topk",
-    type=int,
-    default=10,
-    help="Top-k cluster attribute words exposed to the LLM prompt.",
-)
-parser.add_argument(
-    "--text_max_added_words",
-    type=int,
-    default=20,
-    help="Maximum number of new vocabulary entries injected per node after similarity projection.",
 )
 
 args = parser.parse_args()
+
+# 消融实验强制关闭文本攻击相关参数
+args.use_text_attack = False
+args.freeze_structure_features = False
+args.text_attack_nodes = None
+args.text_attack_max_visits = 1
+args.text_retries = 0
+args.text_budget_per_node = 15
+args.text_topk_ratio = 0.05
+args.text_ppr_alpha = 0.20
+args.text_ppr_iters = 25
+args.text_min_cluster_size = 2
+args.text_max_cluster_size = 8
+args.text_similarity_min = 0.85
+args.text_cdl_topk = 10
+args.text_cluster_attr_topk = 10
+args.text_max_added_words = 20
 
 # Setup logger
 if not os.path.exists("logs"):
     os.makedirs("logs")
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-log_filename = f"logs/result_{args.dataset}_{args.model}_{timestamp}.txt"
+log_filename = f"logs/ablation_edge_{args.dataset}_{args.model}_{timestamp}.txt"
 sys.stdout = Logger(log_filename)
+
+print("=" * 60)
+print("  Ablation: Edge-Only Attack (no feature/text attack)")
+print("=" * 60)
 
 device = torch.device(
     "cuda:0" if torch.cuda.is_available() and not args.no_cuda else "cpu"
@@ -241,12 +137,8 @@ torch.manual_seed(args.seed)
 if device != "cpu":
     torch.cuda.manual_seed(args.seed)
 
-
 pyg_flag = False
-
-
 amazon = "Computers"
-# amazon = 'Photo'
 
 if args.dataset == "physics" or args.dataset == "cs":
     gb_data = get_coauthor_dataset(args.dataset, split=args.split_data)
@@ -257,9 +149,7 @@ elif args.dataset == "computers" or args.dataset == "photo":
 else:
     gb_data = get_planetoid_dataset(args.dataset, split=args.split_data)
 
-if hasattr(
-    gb_data, "adj"
-):  # get_deeproubust_dataset中的数据集需要额外添加x、y、edge_index
+if hasattr(gb_data, "adj"):
     gb_data.x = torch.from_numpy(gb_data.features.toarray()).float()
     gb_data.y = torch.from_numpy(gb_data.labels).long()
     adj_coo = gb_data.adj.tocoo()
@@ -271,19 +161,16 @@ if "amazon" in args.dataset:
 
     dataset = Amazon(root="./Data/pygdata/", name=amazon)
     dataset = Amazon(root="./Data/", name="Photo")
-
     pyg_flag = True
 elif "cs" in args.dataset:
     from torch_geometric.datasets import Coauthor
 
     dataset = Coauthor(root="./Data/", name=args.dataset)
-
     pyg_flag = True
 elif "dblp" in args.dataset:
     from torch_geometric.datasets import DBLP, WikiCS
 
     dataset = DBLP(root="./Data/")
-
     pyg_flag = True
 elif "reddit" in args.dataset:
     from torch_geometric.datasets import Reddit
@@ -322,14 +209,12 @@ if pyg_flag:
         data = Pyg2Dpr(dataset)
 
     adj, features, labels = data.adj, data.features, data.labels
-
     print(adj.sum(), labels.min(), labels.max())
     adj = adj + adj.T
     adj = adj.tolil()
     adj[adj > 1] = 1
     lcc = data.largest_connected_components(adj)
     print(len(lcc))
-    # assert adj.sum(0).A1.min() > 0, "Graph contains singleton nodes"
     data.setting, data.seed = "nettack", args.seed
     idx_train, idx_val, idx_test = data.get_train_val_test()
 
@@ -351,7 +236,6 @@ if "Train" in args.model:
 if "Both" in args.model:
     idx_attack = np.union1d(idx_train, idx_unlabeled)
 lambda_ = 1
-
 
 perturbations = int(args.ptb_rate * (adj.sum() // 2))
 if pyg_flag:
@@ -376,7 +260,6 @@ surrogate = GCN(
     weight_decay=5e-4,
     device=device,
 )
-
 surrogate = surrogate.to(device)
 surrogate.fit(features, adj, labels, idx_train)
 
@@ -389,35 +272,13 @@ print(
     "accuracy= {:.4f}".format(acc_test.item()),
 )
 
-lambda_ = 1
-
-# 如果启用文本攻击，打印配置信息
-if args.use_text_attack:
-    print("\n" + "=" * 60)
-    print("📝 Text Attack Enabled")
-    print("=" * 60)
-    print(f"  LLM Type: {args.llm_type}")
-    if args.llm_type == "gpt":
-        if args.openai_api_key:
-            print(f"  OpenAI API Key: {'*' * 20}...")
-        else:
-            print("  ⚠️  Warning: OpenAI API key not provided")
-    elif args.llm_type == "llama":
-        if args.llama_model_path:
-            print(f"  Llama Model Path: {args.llama_model_path}")
-        else:
-            print("  ⚠️  Warning: Llama model path not provided")
-    print("  Attack Target: Node Features (via text generation)")
-    print("=" * 60 + "\n")
-else:
-    print("\n💡 Text attack disabled. Use --use_text_attack to enable.\n")
-
+# ★ 关键：attack_features=False，纯结构攻击
 model = Heirattack(
     model=surrogate,
     nnodes=adj.shape[0],
     feature_shape=features.shape,
     attack_structure=True,
-    attack_features=True,  # 启用特征攻击（如果use_text_attack=True则用文本生成）
+    attack_features=False,
     device=device,
     lambda_=lambda_,
     train_iters=args.miter,
@@ -425,29 +286,21 @@ model = Heirattack(
     gb_data=gb_data,
     use_oracle=args.oracle,
     lr=args.lr,
-    args=args,  # 传递args以支持文本攻击
+    args=args,
     features=features,
 )
-#
-# model = MetaApprox(model=surrogate, nnodes=adj.shape[0], feature_shape=features.shape, attack_structure=True,
-#                    attack_features=False, device=device, lambda_=0.5)
-
-# model = DICE()
-
 model = model.to(device)
 
 
 def test(adj, features, idx_eval, description="Test set"):
-    """Test GCN and ensure tensors are on CPU for deeprobust."""
     import scipy.sparse as sp
 
-    # 将 features 和 adj 转到 CPU
     if torch.is_tensor(features) and features.is_cuda:
         features = features.cpu()
     if torch.is_tensor(adj) and adj.is_cuda:
         adj = adj.cpu()
     elif sp.issparse(adj):
-        adj = adj.tocoo()  # 保留 sparse 格式
+        adj = adj.tocoo()
 
     gcn = GCN(
         nfeat=features.shape[1],
@@ -470,35 +323,17 @@ def test(adj, features, idx_eval, description="Test set"):
 
 
 def main():
-    # 执行多步攻击
-    print("\n🚀 Starting Heir Attack...")
-    print(f"  Perturbation budget: {perturbations} edges")
-    print(f"  Perturbation rate: {args.ptb_rate * 100}%")
+    print(f"\n  Dataset: {args.dataset}")
+    print(f"  Perturbation budget: {perturbations} edges ({args.ptb_rate*100}%)")
     print(f"  Attack mode: {args.model}")
     print(
-        "  Structure search: "
-        f"level={args.level}, step={args.step}, miter={args.miter}, lr={args.lr}"
+        f"  Structure search: level={args.level}, step={args.step}, miter={args.miter}, lr={args.lr}"
     )
     print(
-        "  Global PPR: "
-        f"ratio={args.global_important_ratio:.2f}, alpha={args.global_ppr_alpha}, "
-        f"iters={args.global_ppr_iters}, seed={args.global_seed_strategy}, "
-        f"label_w={args.global_label_weight}"
+        f"  Global PPR: ratio={args.global_important_ratio}, alpha={args.global_ppr_alpha}, "
+        f"iters={args.global_ppr_iters}, seed={args.global_seed_strategy}"
     )
-    if args.freeze_structure_features:
-        print("  Structure features: frozen to original features")
-    if args.use_text_attack:
-        print(f"  Text attack: Enabled (LLM: {args.llm_type})")
-        print(
-            "  Text config: "
-            f"topk_ratio={args.text_topk_ratio}, alpha={args.text_ppr_alpha}, "
-            f"iters={args.text_ppr_iters}, budget={args.text_budget_per_node}, "
-            f"per_step={args.text_attack_nodes}, max_visits={args.text_attack_max_visits}, "
-            f"cluster={args.text_min_cluster_size}-{args.text_max_cluster_size}, "
-            f"sim>={args.text_similarity_min}, cdl_topk={args.text_cdl_topk}, "
-            f"cluster_attr_topk={args.text_cluster_attr_topk}, "
-            f"max_added={args.text_max_added_words}"
-        )
+    print(f"  Feature attack: DISABLED (edge-only ablation)")
     print()
 
     model.meta_attack_multi_step(
@@ -512,52 +347,21 @@ def main():
         type=args.model,
     )
 
-    # 取攻击结果
     modified_adj = model.modified_adj
-    modified_features = model.modified_features
 
     print("\n" + "=" * 60)
-    print("📊 Evaluation Results")
+    print("  Ablation Results: Edge-Only Attack")
     print("=" * 60 + "\n")
 
-    print("=== Clean graph ===")
     acc_clean = test(adj, features, idx_unlabeled, description="Clean graph")
-
-    print("\n=== Edge-only attack ===")
     acc_edge = test(
         modified_adj, features, idx_unlabeled, description="Edge-only attack"
     )
 
-    print("\n=== Feature-only attack ===")
-    acc_feature = test(
-        adj, modified_features, idx_unlabeled, description="Feature-only attack"
-    )
-
-    print("\n=== Combined attack (edge + feature) ===")
-    acc_combined = test(
-        modified_adj, modified_features, idx_unlabeled, description="Combined attack"
-    )
-
-    # 输出攻击效果总结
     print("\n" + "=" * 60)
-    print("📈 Attack Performance Summary")
-    print("=" * 60)
-    print(f"  Clean accuracy:         {acc_clean:.4f}")
-    print(
-        f"  Edge attack accuracy:   {acc_edge:.4f} (drop: {acc_clean - acc_edge:.4f})"
-    )
-    print(
-        f"  Feature attack accuracy: {acc_feature:.4f} (drop: {acc_clean - acc_feature:.4f})"
-    )
-    print(
-        f"  Combined accuracy:      {acc_combined:.4f} (drop: {acc_clean - acc_combined:.4f})"
-    )
-    print(f"  Misclassification:      {1-acc_combined:.4f}")
+    print(f"  Clean accuracy:       {acc_clean:.4f}")
+    print(f"  Edge attack accuracy: {acc_edge:.4f} (drop: {acc_clean - acc_edge:.4f})")
     print("=" * 60 + "\n")
-
-    # # if you want to save the modified adj/features, uncomment the code below
-    # model.save_adj(root="./", name=f"mod_adj_polblogs_005_metatrain")
-    # model.save_features(root="./", name="mod_features")
 
 
 if __name__ == "__main__":

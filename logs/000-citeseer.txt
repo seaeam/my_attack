@@ -1,0 +1,53 @@
+Loading citeseer dataset...
+Selecting 1 largest connected components
+(2110, 3703) (1,) (2110, 2110) 210 211 1688
+Test set results: loss= 2.0000 accuracy= 0.7014
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+Loaded BoW vocabulary: 500 words
+Vocab size: 500, Feature dim: 3703
+🦙 Detected Ollama - using model: llama3.2:1b-instruct-fp16
+Initialized GPT client with model: llama3.2:1b-instruct-fp16
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 366 edges
+  Perturbation rate: 10.0%
+  Attack mode: Meta-Both
+  Structure search: level=2, step=1, miter=150, lr=0.01
+  Global PPR: ratio=0.15, alpha=0.15, iters=150, seed=uniform
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.12, alpha=0.26, iters=30, budget=50, per_step=None, max_visits=3, cluster=2-5, sim>=0.45, cdl_topk=18, cluster_attr_topk=18, max_added=60
+
+============================================================
+📊 Evaluation Results
+============================================================
+
+=== Clean graph ===
+Clean graph results: loss= 1.2627 accuracy= 0.7156
+
+=== Edge-only attack ===
+Edge-only attack results: loss= 1.4907 accuracy= 0.6140
+
+=== Feature-only attack ===
+Feature-only attack results: loss= 1.7273 accuracy= 0.6103
+
+=== Combined attack (edge + feature) ===
+Combined attack results: loss= 1.8834 accuracy= 0.5492
+
+============================================================
+📈 Attack Performance Summary
+============================================================
+  Clean accuracy:         0.7156
+  Edge attack accuracy:   0.6140 (drop: 0.1016)
+  Feature attack accuracy: 0.6103 (drop: 0.1053)
+  Combined accuracy:      0.5422 (drop: 0.1664)
+============================================================
+

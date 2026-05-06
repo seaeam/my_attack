@@ -1,0 +1,31 @@
+Loading citeseer dataset...
+Selecting 1 largest connected components
+(2110, 3703) (1,) (2110, 2110) 210 211 1688
+Test set results: loss= 2.0000 accuracy= 0.7014
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+Loaded BoW vocabulary: 500 words
+Vocab size: 500, Feature dim: 3703
+Initialized GPT client with model: llama3.2:3b-instruct-fp16
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 733 edges
+  Perturbation rate: 20.0%
+  Attack mode: Meta-Both
+  Structure search: level=4, step=1, miter=60, lr=0.05
+  Global PPR: ratio=0.45, alpha=0.08, iters=120, seed=degree
+  Structure features: frozen to original features
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.12, alpha=0.2, iters=40, budget=35, cluster=2-5, sim>=0.72, cdl_topk=12, cluster_attr_topk=12, max_added=32
+
+
+🎯 [Step 1/733] Text attack: 506 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 506 nodes grouped into 147 clusters (min/avg/max = 2/3.4/5).
