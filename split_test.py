@@ -193,21 +193,30 @@ def get_deeproubust_dataset(
     # 顺序划分
     if split == "complete":
         dataset = Dataset(root="./Data/", name=name)
-        dataset[0].train_mask.fill_(False)
-        dataset[0].train_mask[: dataset[0].num_nodes - 1000] = 1
-        dataset[0].val_mask.fill_(False)
-        dataset[0].val_mask[
-            dataset[0].num_nodes - 1000 : dataset[0].num_nodes - 500
-        ] = 1
-        dataset[0].test_mask.fill_(False)
-        dataset[0].test_mask[dataset[0].num_nodes - 500 :] = 1
+        dataset.num_nodes = dataset.adj.shape[0]
+        num_nodes = dataset.num_nodes
+
+        idx_train = torch.arange(0, max(num_nodes - 1000, 0))
+        idx_val = torch.arange(max(num_nodes - 1000, 0), max(num_nodes - 500, 0))
+        idx_test = torch.arange(max(num_nodes - 500, 0), num_nodes)
+
+        dataset.idx_train = idx_train
+        dataset.idx_val = idx_val
+        dataset.idx_test = idx_test
+
+        dataset.train_mask = torch.zeros(num_nodes, dtype=torch.bool)
+        dataset.val_mask = torch.zeros(num_nodes, dtype=torch.bool)
+        dataset.test_mask = torch.zeros(num_nodes, dtype=torch.bool)
+
+        dataset.train_mask[idx_train] = True
+        dataset.val_mask[idx_val] = True
+        dataset.test_mask[idx_test] = True
     # 按比例划分
     elif split == "normal":
-        data = Dataset(root="./Data/", name=name)
-        if require_lcc:  # 是否获取最大连通分支
-            dataset = get_largest_connected_component(data)
-        else:
-            dataset = data
+        dataset = Dataset(root="./Data/", name=name)
+        # DeepRobust's default Dataset(setting="nettack") already keeps the largest
+        # connected component in this code path.
+        # Do not pass it to the PyG-only LCC helper.
         dataset.num_nodes = dataset.adj.shape[0]
         num_nodes = dataset.num_nodes
 
@@ -223,6 +232,10 @@ def get_deeproubust_dataset(
         idx_val = idx_rand[num_train : num_train + num_val]  # 中间20%验证集
         idx_test = idx_rand[num_train + num_val :]  # 剩余20%测试集
 
+        dataset.idx_train = idx_train
+        dataset.idx_val = idx_val
+        dataset.idx_test = idx_test
+
         # 初始化全False的掩码
         dataset.train_mask = torch.zeros(num_nodes, dtype=torch.bool)
         dataset.val_mask = torch.zeros(num_nodes, dtype=torch.bool)
@@ -233,14 +246,14 @@ def get_deeproubust_dataset(
         dataset.val_mask[idx_val] = True
         dataset.test_mask[idx_test] = True
 
-        # 如果需要进行特征归一化，并且有额外的数据转换操作
-        if transform is not None and normalize_features:
-            dataset.transform = T.Compose([T.NormalizeFeatures(), transform])
-        elif normalize_features:
-            dataset.transform = T.NormalizeFeatures()
-        elif transform is not None:
-            dataset.transform = transform
-        return dataset
+    # 如果需要进行特征归一化，并且有额外的数据转换操作
+    if transform is not None and normalize_features:
+        dataset.transform = T.Compose([T.NormalizeFeatures(), transform])
+    elif normalize_features:
+        dataset.transform = T.NormalizeFeatures()
+    elif transform is not None:
+        dataset.transform = transform
+    return dataset
 
 
 def get_largest_connected_component(dataset):

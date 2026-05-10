@@ -71,15 +71,34 @@ class TextAttackGenerator:
 
         # 加载BoW词表
         vectorizer_path = os.path.join(bow_cache_dir, f"{dataset_name}.pkl")
+        self.uses_fallback_vocabulary = False
         if os.path.exists(vectorizer_path):
             with open(vectorizer_path, "rb") as f:
                 self.vectorizer = pickle.load(f)
             self.vocab = self.vectorizer.get_feature_names_out()
             print(f"Loaded BoW vocabulary: {len(self.vocab)} words")
+        elif feature_dim is not None:
+            feature_dim = int(feature_dim)
+            if feature_dim <= 0:
+                raise ValueError(
+                    "feature_dim must be positive when BoW cache is missing"
+                )
+
+            fallback_vocabulary = [f"feature_{i}" for i in range(feature_dim)]
+            self.vectorizer = CountVectorizer(
+                vocabulary=fallback_vocabulary,
+                token_pattern=r"(?u)\b\w+\b",
+            )
+            self.vocab = self.vectorizer.get_feature_names_out()
+            self.uses_fallback_vocabulary = True
+            print(
+                f"⚠️ BoW vocabulary not found at {vectorizer_path}; "
+                f"using fallback feature vocabulary with {len(self.vocab)} tokens."
+            )
         else:
             raise FileNotFoundError(
                 f"BoW vocabulary not found at {vectorizer_path}. "
-                f"Please run data preprocessing first."
+                f"Please run data preprocessing first or pass feature_dim."
             )
 
         # 记录词表大小

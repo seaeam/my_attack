@@ -5,7 +5,7 @@ set -euo pipefail
 export OLLAMA_MODEL="llama3.2:1b-instruct-fp16"
 
 ARGS=(
-  --dataset cora                 
+  --dataset polblogs                 
   --model Meta-Both                  # 伪标签覆盖所有unlabeled节点，梯度信号更丰富
   --ptb_rate 0.10                    # 扰动预算
 

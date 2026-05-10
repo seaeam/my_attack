@@ -53,6 +53,13 @@ parser.add_argument("--ball_r", type=float, default=0.8)
 parser.add_argument("--noise", type=int, default=0)
 parser.add_argument("--step", type=int, default=1)
 parser.add_argument("--level", type=int, default=2)
+parser.add_argument(
+    "--coarsen_method",
+    type=str,
+    default="gb",
+    choices=["gb", "kmeans"],
+    help="Hierarchical coarsening cluster method: granular ball (gb) or kmeans.",
+)
 parser.add_argument("--miter", type=int, default=10)
 parser.add_argument("--lr", type=float, default=0.01, help="Initial learning rate.")
 parser.add_argument(
@@ -263,7 +270,9 @@ if hasattr(
     gb_data.x = torch.from_numpy(gb_data.features.toarray()).float()
     gb_data.y = torch.from_numpy(gb_data.labels).long()
     adj_coo = gb_data.adj.tocoo()
-    edge_index = torch.tensor([adj_coo.row, adj_coo.col], dtype=torch.long)
+    edge_index = torch.from_numpy(
+        np.vstack((adj_coo.row, adj_coo.col)).astype(np.int64)
+    )
     gb_data.edge_index = edge_index
 
 if "amazon" in args.dataset:
@@ -477,7 +486,8 @@ def main():
     print(f"  Attack mode: {args.model}")
     print(
         "  Structure search: "
-        f"level={args.level}, step={args.step}, miter={args.miter}, lr={args.lr}"
+        f"method={args.coarsen_method}, level={args.level}, step={args.step}, "
+        f"miter={args.miter}, lr={args.lr}"
     )
     print(
         "  Global PPR: "

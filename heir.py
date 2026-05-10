@@ -10,7 +10,7 @@ from tqdm import tqdm
 from deeprobust.graph import utils
 from gb_division import gb_division
 from deeprobust.graph.global_attack import BaseAttack
-from gb_division_simple import GBCluster
+from gb_division_simple import GBCluster, KMeansCluster
 
 # 文本攻击生成器导入
 try:
@@ -105,7 +105,8 @@ class Heirattack(BaseAttack):
 
         self.levels = levels
         self.M = int(self.nnodes ** (1.0 / self.levels))  # int(math.sqrt(N))
-        self.gb_cluster = GBCluster(n_clusters=self.M, mode="euclidean", verbose=0)
+        self.coarsen_method = getattr(args, "coarsen_method", "gb").lower()
+        self.gb_cluster = self._make_clusterer(self.M)
         self.use_oracle = use_oracle
         self.global_important_ratio = float(
             getattr(args, "global_important_ratio", 0.10)
@@ -181,6 +182,23 @@ class Heirattack(BaseAttack):
                 print(
                     "⚠️ Text attack requested but not available. Falling back to gradient-based attack."
                 )
+
+    def _make_clusterer(self, n_clusters, args=None):
+        args = self.args if args is None else args
+        method = getattr(args, "coarsen_method", "gb").lower()
+        seed = getattr(args, "seed", None)
+
+        if method == "gb":
+            return GBCluster(n_clusters=n_clusters, mode="euclidean", verbose=0)
+        if method == "kmeans":
+            return KMeansCluster(
+                n_clusters=n_clusters,
+                mode="euclidean",
+                verbose=0,
+                random_state=seed,
+            )
+
+        raise ValueError(f"Unsupported coarsen_method: {method}")
 
     def _initialize(self):
         for w, v in zip(self.weights, self.w_velocities):
@@ -485,9 +503,7 @@ class Heirattack(BaseAttack):
         if target_k <= 1:
             return [target_nodes.tolist()]
 
-        local_clusterer = GBCluster(
-            n_clusters=target_k, mode=self.gb_cluster.mode, verbose=0
-        )
+        local_clusterer = self._make_clusterer(n_clusters=target_k)
         cluster_ids = local_clusterer.fit_predict(target_embeddings)
         if isinstance(cluster_ids, torch.Tensor):
             cluster_ids = cluster_ids.detach().cpu().numpy()

@@ -1,0 +1,45 @@
+#!/bin/bash
+
+set -euo pipefail
+
+export OLLAMA_MODEL="llama3.2:1b-instruct-fp16"
+
+ARGS=(
+  --dataset citeseer
+  --model Meta-Both
+  --coarsen_method kmeans
+  --ptb_rate 0.20
+
+  --level 4
+  --step 1
+  --miter 60
+  --lr 0.05
+
+  --global_important_ratio 0.45
+  --global_ppr_alpha 0.08
+  --global_ppr_iters 120
+  --global_seed_strategy degree
+
+  --freeze_structure_features
+
+  --use_text_attack
+  --llm_type gpt
+  --openai_api_key ollama
+  --api_base_url http://localhost:11434/v1
+
+  --text_attack_max_visits 4
+  --text_retries 3
+  --text_budget_per_node 35
+  --text_topk_ratio 0.08
+  --text_ppr_alpha 0.26
+  --text_ppr_iters 30
+  --text_min_cluster_size 2
+  --text_max_cluster_size 5
+
+  --text_similarity_min 0.65
+  --text_cdl_topk 14
+  --text_cluster_attr_topk 14
+  --text_max_added_words 40
+)
+
+python meta.py "${ARGS[@]}"

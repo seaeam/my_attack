@@ -345,3 +345,141 @@ class GBCluster:
         self.centroids = torch.from_numpy(centers).float()
         self.radii = torch.from_numpy(radii).float()
         return torch.from_numpy(cluster_ids).long()
+
+
+class KMeansCluster:
+    """KMeans 聚类器，提供与 GBCluster 一致的接口"""
+
+    def __init__(
+        self,
+        n_clusters,
+        mode="euclidean",
+        verbose=0,
+        max_iter=100,
+        tol=1e-4,
+        random_state=None,
+    ):
+        self.n_clusters = n_clusters
+        self.mode = mode
+        self.verbose = verbose
+        self.max_iter = max_iter
+        self.tol = tol
+        self.random_state = random_state
+        self.centroids = None
+        self.radii = None
+
+    def _rng(self):
+        if self.random_state is None:
+            return np.random
+        return np.random.RandomState(self.random_state)
+
+    def _init_centers(self, embeddings, k, initial_centers=None):
+        n, d = embeddings.shape
+        centers = np.zeros((k, d), dtype=np.float32)
+        start = 0
+
+        if initial_centers is not None and len(initial_centers) > 0:
+            initial_centers = np.asarray(initial_centers, dtype=np.float32)
+            copy_len = min(k, initial_centers.shape[0])
+            centers[:copy_len] = initial_centers[:copy_len]
+            start = copy_len
+
+        if start >= k:
+            return centers
+
+        rng = self._rng()
+        if start == 0:
+            centers[0] = embeddings[rng.randint(n)]
+            start = 1
+
+        for center_idx in range(start, k):
+            min_dists = _compute_distances(
+                embeddings, centers[:center_idx], mode=self.mode
+            ).min(axis=1)
+            probs = np.maximum(min_dists**2, 1e-12)
+            prob_sum = probs.sum()
+
+            if prob_sum <= 1e-12 or np.isnan(prob_sum) or np.isinf(prob_sum):
+                next_center_idx = rng.randint(n)
+            else:
+                probs = probs / prob_sum
+                if np.any(np.isnan(probs)) or np.any(np.isinf(probs)):
+                    next_center_idx = rng.randint(n)
+                else:
+                    next_center_idx = rng.choice(n, p=probs)
+
+            centers[center_idx] = embeddings[next_center_idx]
+
+        return centers
+
+    def fit_predict(self, embeddings, centroids=None):
+        """
+        对嵌入向量进行 KMeans 聚类。
+
+        参数:
+            embeddings: torch.Tensor or np.ndarray, shape (n, d)
+            centroids: torch.Tensor or np.ndarray, optional - warm-start 中心
+
+        返回:
+            cluster_ids: torch.Tensor, shape (n,) - 簇ID
+        """
+        if isinstance(embeddings, torch.Tensor):
+            embeddings_np = embeddings.detach().cpu().numpy()
+        else:
+            embeddings_np = np.asarray(embeddings)
+
+        embeddings_np = np.asarray(embeddings_np, dtype=np.float32)
+        if embeddings_np.ndim != 2:
+            raise ValueError("embeddings must be a 2D array")
+        if np.any(np.isnan(embeddings_np)) or np.any(np.isinf(embeddings_np)):
+            embeddings_np = np.nan_to_num(
+                embeddings_np, nan=0.0, posinf=0.0, neginf=0.0
+            )
+
+        n, d = embeddings_np.shape
+        k = min(max(int(self.n_clusters), 0), n)
+        if n == 0 or k <= 0:
+            self.centroids = torch.zeros((0, d), dtype=torch.float32)
+            self.radii = torch.zeros(0, dtype=torch.float32)
+            return torch.zeros(n, dtype=torch.long)
+
+        if centroids is not None and isinstance(centroids, torch.Tensor):
+            centroids_np = centroids.detach().cpu().numpy()
+        elif centroids is not None:
+            centroids_np = np.asarray(centroids)
+        else:
+            centroids_np = None
+
+        if (
+            centroids_np is not None
+            and centroids_np.ndim == 2
+            and centroids_np.shape[1] == d
+        ):
+            centers = self._init_centers(embeddings_np, k, initial_centers=centroids_np)
+        else:
+            centers = self._init_centers(embeddings_np, k)
+
+        cluster_ids = np.zeros(n, dtype=np.int64)
+        for _ in range(self.max_iter):
+            dists = _compute_distances(embeddings_np, centers, mode=self.mode)
+            cluster_ids = dists.argmin(axis=1).astype(np.int64)
+
+            new_centers = centers.copy()
+            for cid in range(k):
+                points = embeddings_np[cluster_ids == cid]
+                if points.size > 0:
+                    new_centers[cid] = points.mean(axis=0)
+
+            shift = float(np.linalg.norm(new_centers - centers))
+            centers = new_centers
+            if shift <= self.tol:
+                break
+
+        radii = np.zeros(k, dtype=np.float32)
+        for cid in range(k):
+            points = embeddings_np[cluster_ids == cid]
+            radii[cid] = _compute_radius(points, centers[cid], mode=self.mode)
+
+        self.centroids = torch.from_numpy(centers).float()
+        self.radii = torch.from_numpy(radii).float()
+        return torch.from_numpy(cluster_ids).long()
