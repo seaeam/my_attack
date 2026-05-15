@@ -1,0 +1,1907 @@
+Loading cora dataset...
+Selecting 1 largest connected components
+(2485, 1433) (1,) (2485, 2485) 247 249 1988
+Test set results: loss= 0.8632 accuracy= 0.8194
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+Loaded BoW vocabulary: 500 words
+Vocab size: 500, Feature dim: 1433
+🦙 Detected Ollama - using model: llama3.2:1b-instruct-fp16
+Initialized GPT client with model: llama3.2:1b-instruct-fp16
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 506 edges
+  Perturbation rate: 10.0%
+  Attack mode: Meta-Both
+  Structure search: method=gb, level=2, step=1, miter=600, lr=0.012
+  Global PPR: ratio=0.30, alpha=0.06, iters=240, seed=uniform, label_w=0.0
+  Attack scoring: train_w=0.6, unlabeled_w=1.8, edge_label_bias=0.8, edge_size_norm=0.5
+  Structure features: frozen to original features
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.12, alpha=0.28, iters=60, budget=80, per_step=None, max_visits=16, cluster=2-4, sim>=0.35, cdl_topk=36, cluster_attr_topk=36, max_added=70
+
+
+🎯 [Step 1/506] Text attack: 305 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 305 nodes grouped into 100 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 305/305, LLM Calls: 100, Cache Hits: 0
+
+🎯 [Step 2/506] Text attack: 565 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 565 nodes grouped into 186 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 565/565, LLM Calls: 186, Cache Hits: 0
+
+🎯 [Step 3/506] Text attack: 499 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 499 nodes grouped into 168 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 499/499, LLM Calls: 168, Cache Hits: 0
+
+🎯 [Step 4/506] Text attack: 572 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 572 nodes grouped into 187 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 572/572, LLM Calls: 187, Cache Hits: 0
+
+🎯 [Step 5/506] Text attack: 328 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 328 nodes grouped into 108 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 328/328, LLM Calls: 108, Cache Hits: 0
+
+🎯 [Step 6/506] Text attack: 569 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 569 nodes grouped into 192 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 569/569, LLM Calls: 192, Cache Hits: 0
+
+🎯 [Step 7/506] Text attack: 312 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 312 nodes grouped into 101 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 312/312, LLM Calls: 101, Cache Hits: 0
+
+🎯 [Step 8/506] Text attack: 347 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 347 nodes grouped into 117 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 347/347, LLM Calls: 117, Cache Hits: 0
+
+🎯 [Step 9/506] Text attack: 411 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 411 nodes grouped into 134 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 411/411, LLM Calls: 134, Cache Hits: 0
+
+🎯 [Step 10/506] Text attack: 577 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 577 nodes grouped into 196 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 577/577, LLM Calls: 196, Cache Hits: 0
+
+🎯 [Step 11/506] Text attack: 373 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 373 nodes grouped into 124 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 373/373, LLM Calls: 124, Cache Hits: 0
+
+🎯 [Step 12/506] Text attack: 362 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 362 nodes grouped into 117 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 362/362, LLM Calls: 117, Cache Hits: 0
+
+🎯 [Step 13/506] Text attack: 571 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 571 nodes grouped into 187 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 571/571, LLM Calls: 187, Cache Hits: 0
+
+🎯 [Step 14/506] Text attack: 359 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 359 nodes grouped into 122 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 359/359, LLM Calls: 122, Cache Hits: 0
+
+🎯 [Step 15/506] Text attack: 310 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 310 nodes grouped into 103 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 310/310, LLM Calls: 103, Cache Hits: 0
+
+🎯 [Step 16/506] Text attack: 470 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 470 nodes grouped into 152 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 470/470, LLM Calls: 152, Cache Hits: 0
+
+🎯 [Step 17/506] Text attack: 592 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 592 nodes grouped into 197 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 592/592, LLM Calls: 197, Cache Hits: 0
+
+🎯 [Step 18/506] Text attack: 319 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 319 nodes grouped into 100 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 319/319, LLM Calls: 100, Cache Hits: 0
+
+🎯 [Step 19/506] Text attack: 360 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 360 nodes grouped into 116 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 360/360, LLM Calls: 116, Cache Hits: 0
+
+🎯 [Step 20/506] Text attack: 443 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 443 nodes grouped into 146 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 443/443, LLM Calls: 146, Cache Hits: 0
+
+🎯 [Step 21/506] Text attack: 341 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 341 nodes grouped into 111 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 341/341, LLM Calls: 111, Cache Hits: 0
+
+🎯 [Step 22/506] Text attack: 306 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 306 nodes grouped into 102 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 306/306, LLM Calls: 102, Cache Hits: 0
+
+🎯 [Step 23/506] Text attack: 298 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 298 nodes grouped into 99 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 298/298, LLM Calls: 98, Cache Hits: 1
+
+🎯 [Step 24/506] Text attack: 333 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 333 nodes grouped into 112 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 333/333, LLM Calls: 111, Cache Hits: 1
+
+🎯 [Step 25/506] Text attack: 588 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 588 nodes grouped into 197 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 588/588, LLM Calls: 196, Cache Hits: 1
+
+🎯 [Step 26/506] Text attack: 298 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 298 nodes grouped into 94 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 298/298, LLM Calls: 89, Cache Hits: 5
+
+🎯 [Step 27/506] Text attack: 593 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 593 nodes grouped into 204 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 593/593, LLM Calls: 200, Cache Hits: 4
+
+🎯 [Step 28/506] Text attack: 298 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 298 nodes grouped into 95 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 298/298, LLM Calls: 93, Cache Hits: 2
+
+🎯 [Step 29/506] Text attack: 435 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 435 nodes grouped into 140 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 435/435, LLM Calls: 134, Cache Hits: 6
+
+🎯 [Step 30/506] Text attack: 533 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 533 nodes grouped into 178 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 533/533, LLM Calls: 172, Cache Hits: 6
+
+🎯 [Step 31/506] Text attack: 372 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 372 nodes grouped into 120 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 372/372, LLM Calls: 113, Cache Hits: 7
+
+🎯 [Step 32/506] Text attack: 387 new nodes (skipped 2 already attacked)
+🔥 Text Attack: 387 nodes grouped into 126 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 387/387, LLM Calls: 118, Cache Hits: 8
+
+🎯 [Step 33/506] Text attack: 366 new nodes (skipped 5 already attacked)
+🔥 Text Attack: 366 nodes grouped into 121 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 366/366, LLM Calls: 111, Cache Hits: 10
+
+🎯 [Step 34/506] Text attack: 554 new nodes (skipped 3 already attacked)
+🔥 Text Attack: 554 nodes grouped into 176 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 554/554, LLM Calls: 166, Cache Hits: 10
+
+🎯 [Step 35/506] Text attack: 511 new nodes (skipped 8 already attacked)
+🔥 Text Attack: 511 nodes grouped into 161 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 511/511, LLM Calls: 150, Cache Hits: 11
+
+🎯 [Step 36/506] Text attack: 336 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 336 nodes grouped into 107 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 336/336, LLM Calls: 95, Cache Hits: 12
+
+🎯 [Step 37/506] Text attack: 297 new nodes (skipped 3 already attacked)
+🔥 Text Attack: 297 nodes grouped into 98 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 297/297, LLM Calls: 87, Cache Hits: 11
+
+🎯 [Step 38/506] Text attack: 572 new nodes (skipped 11 already attacked)
+🔥 Text Attack: 572 nodes grouped into 191 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 572/572, LLM Calls: 173, Cache Hits: 18
+
+🎯 [Step 39/506] Text attack: 290 new nodes (skipped 8 already attacked)
+🔥 Text Attack: 290 nodes grouped into 94 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 290/290, LLM Calls: 87, Cache Hits: 7
+
+🎯 [Step 40/506] Text attack: 524 new nodes (skipped 13 already attacked)
+🔥 Text Attack: 524 nodes grouped into 168 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 524/524, LLM Calls: 159, Cache Hits: 9
+
+🎯 [Step 41/506] Text attack: 326 new nodes (skipped 4 already attacked)
+🔥 Text Attack: 326 nodes grouped into 111 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 326/326, LLM Calls: 96, Cache Hits: 15
+
+🎯 [Step 42/506] Text attack: 573 new nodes (skipped 19 already attacked)
+🔥 Text Attack: 573 nodes grouped into 180 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 573/573, LLM Calls: 159, Cache Hits: 21
+
+🎯 [Step 43/506] Text attack: 375 new nodes (skipped 39 already attacked)
+🔥 Text Attack: 375 nodes grouped into 131 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 375/375, LLM Calls: 115, Cache Hits: 16
+
+🎯 [Step 44/506] Text attack: 525 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 525 nodes grouped into 178 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 525/525, LLM Calls: 162, Cache Hits: 16
+
+🎯 [Step 45/506] Text attack: 405 new nodes (skipped 41 already attacked)
+🔥 Text Attack: 405 nodes grouped into 131 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 405/405, LLM Calls: 116, Cache Hits: 15
+
+🎯 [Step 46/506] Text attack: 525 new nodes (skipped 62 already attacked)
+🔥 Text Attack: 525 nodes grouped into 169 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 525/525, LLM Calls: 148, Cache Hits: 21
+
+🎯 [Step 47/506] Text attack: 294 new nodes (skipped 37 already attacked)
+🔥 Text Attack: 294 nodes grouped into 97 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 294/294, LLM Calls: 86, Cache Hits: 11
+
+🎯 [Step 48/506] Text attack: 345 new nodes (skipped 66 already attacked)
+🔥 Text Attack: 345 nodes grouped into 112 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 345/345, LLM Calls: 97, Cache Hits: 15
+
+🎯 [Step 49/506] Text attack: 333 new nodes (skipped 16 already attacked)
+🔥 Text Attack: 333 nodes grouped into 107 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 333/333, LLM Calls: 93, Cache Hits: 14
+
+🎯 [Step 50/506] Text attack: 276 new nodes (skipped 22 already attacked)
+🔥 Text Attack: 276 nodes grouped into 93 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 276/276, LLM Calls: 83, Cache Hits: 10
+
+🎯 [Step 51/506] Text attack: 307 new nodes (skipped 49 already attacked)
+🔥 Text Attack: 307 nodes grouped into 106 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 307/307, LLM Calls: 88, Cache Hits: 18
+
+🎯 [Step 52/506] Text attack: 452 new nodes (skipped 140 already attacked)
+🔥 Text Attack: 452 nodes grouped into 148 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 452/452, LLM Calls: 130, Cache Hits: 18
+
+🎯 [Step 53/506] Text attack: 452 new nodes (skipped 117 already attacked)
+🔥 Text Attack: 452 nodes grouped into 150 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 452/452, LLM Calls: 131, Cache Hits: 19
+
+🎯 [Step 54/506] Text attack: 337 new nodes (skipped 55 already attacked)
+🔥 Text Attack: 337 nodes grouped into 110 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 337/337, LLM Calls: 91, Cache Hits: 19
+
+🎯 [Step 55/506] Text attack: 492 new nodes (skipped 85 already attacked)
+🔥 Text Attack: 492 nodes grouped into 158 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 492/492, LLM Calls: 138, Cache Hits: 20
+
+🎯 [Step 56/506] Text attack: 234 new nodes (skipped 64 already attacked)
+🔥 Text Attack: 234 nodes grouped into 77 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 234/234, LLM Calls: 63, Cache Hits: 14
+
+🎯 [Step 57/506] Text attack: 193 new nodes (skipped 164 already attacked)
+🔥 Text Attack: 193 nodes grouped into 62 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 193/193, LLM Calls: 51, Cache Hits: 11
+
+🎯 [Step 58/506] Text attack: 257 new nodes (skipped 181 already attacked)
+🔥 Text Attack: 257 nodes grouped into 85 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 257/257, LLM Calls: 71, Cache Hits: 14
+
+🎯 [Step 59/506] Text attack: 327 new nodes (skipped 264 already attacked)
+🔥 Text Attack: 327 nodes grouped into 110 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 327/327, LLM Calls: 83, Cache Hits: 27
+
+🎯 [Step 60/506] Text attack: 451 new nodes (skipped 96 already attacked)
+🔥 Text Attack: 451 nodes grouped into 147 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 451/451, LLM Calls: 129, Cache Hits: 18
+
+🎯 [Step 61/506] Text attack: 244 new nodes (skipped 248 already attacked)
+🔥 Text Attack: 244 nodes grouped into 77 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 244/244, LLM Calls: 60, Cache Hits: 17
+
+🎯 [Step 62/506] Text attack: 144 new nodes (skipped 204 already attacked)
+🔥 Text Attack: 144 nodes grouped into 49 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 144/144, LLM Calls: 38, Cache Hits: 11
+
+🎯 [Step 63/506] Text attack: 307 new nodes (skipped 85 already attacked)
+🔥 Text Attack: 307 nodes grouped into 99 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 307/307, LLM Calls: 74, Cache Hits: 25
+
+🎯 [Step 64/506] Text attack: 264 new nodes (skipped 326 already attacked)
+🔥 Text Attack: 264 nodes grouped into 89 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 264/264, LLM Calls: 62, Cache Hits: 27
+
+🎯 [Step 65/506] Text attack: 367 new nodes (skipped 201 already attacked)
+🔥 Text Attack: 367 nodes grouped into 121 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 367/367, LLM Calls: 92, Cache Hits: 29
+
+🎯 [Step 66/506] Text attack: 385 new nodes (skipped 187 already attacked)
+🔥 Text Attack: 385 nodes grouped into 125 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 385/385, LLM Calls: 97, Cache Hits: 28
+
+🎯 [Step 67/506] Text attack: 406 new nodes (skipped 156 already attacked)
+🔥 Text Attack: 406 nodes grouped into 138 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 406/406, LLM Calls: 95, Cache Hits: 43
+
+🎯 [Step 68/506] Text attack: 231 new nodes (skipped 114 already attacked)
+🔥 Text Attack: 231 nodes grouped into 78 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 231/231, LLM Calls: 53, Cache Hits: 25
+
+🎯 [Step 69/506] Text attack: 251 new nodes (skipped 154 already attacked)
+🔥 Text Attack: 251 nodes grouped into 81 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 251/251, LLM Calls: 57, Cache Hits: 24
+
+🎯 [Step 70/506] Text attack: 331 new nodes (skipped 241 already attacked)
+🔥 Text Attack: 331 nodes grouped into 111 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 331/331, LLM Calls: 75, Cache Hits: 36
+
+🎯 [Step 71/506] Text attack: 115 new nodes (skipped 228 already attacked)
+🔥 Text Attack: 115 nodes grouped into 39 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 115/115, LLM Calls: 26, Cache Hits: 13
+
+🎯 [Step 72/506] Text attack: 237 new nodes (skipped 187 already attacked)
+🔥 Text Attack: 237 nodes grouped into 79 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 237/237, LLM Calls: 49, Cache Hits: 30
+
+🎯 [Step 73/506] Text attack: 356 new nodes (skipped 195 already attacked)
+🔥 Text Attack: 356 nodes grouped into 118 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 356/356, LLM Calls: 73, Cache Hits: 45
+
+🎯 [Step 74/506] Text attack: 335 new nodes (skipped 252 already attacked)
+🔥 Text Attack: 335 nodes grouped into 111 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 335/335, LLM Calls: 62, Cache Hits: 49
+
+🎯 [Step 75/506] Text attack: 206 new nodes (skipped 381 already attacked)
+🔥 Text Attack: 206 nodes grouped into 68 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 206/206, LLM Calls: 39, Cache Hits: 29
+
+🎯 [Step 76/506] Text attack: 166 new nodes (skipped 170 already attacked)
+🔥 Text Attack: 166 nodes grouped into 58 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 166/166, LLM Calls: 28, Cache Hits: 30
+
+🎯 [Step 77/506] Text attack: 220 new nodes (skipped 166 already attacked)
+🔥 Text Attack: 220 nodes grouped into 72 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 220/220, LLM Calls: 43, Cache Hits: 29
+
+🎯 [Step 78/506] Text attack: 169 new nodes (skipped 204 already attacked)
+🔥 Text Attack: 169 nodes grouped into 56 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 169/169, LLM Calls: 34, Cache Hits: 22
+
+🎯 [Step 79/506] Text attack: 266 new nodes (skipped 301 already attacked)
+🔥 Text Attack: 266 nodes grouped into 89 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 266/266, LLM Calls: 55, Cache Hits: 34
+
+🎯 [Step 80/506] Text attack: 175 new nodes (skipped 184 already attacked)
+🔥 Text Attack: 175 nodes grouped into 56 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 175/175, LLM Calls: 31, Cache Hits: 25
+
+🎯 [Step 81/506] Text attack: 259 new nodes (skipped 250 already attacked)
+🔥 Text Attack: 259 nodes grouped into 84 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 259/259, LLM Calls: 45, Cache Hits: 39
+
+🎯 [Step 82/506] Text attack: 80 new nodes (skipped 253 already attacked)
+🔥 Text Attack: 80 nodes grouped into 26 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 80/80, LLM Calls: 14, Cache Hits: 12
+
+🎯 [Step 83/506] Text attack: 154 new nodes (skipped 218 already attacked)
+🔥 Text Attack: 154 nodes grouped into 49 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 154/154, LLM Calls: 27, Cache Hits: 22
+
+🎯 [Step 84/506] Text attack: 53 new nodes (skipped 245 already attacked)
+🔥 Text Attack: 53 nodes grouped into 18 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 53/53, LLM Calls: 9, Cache Hits: 9
+
+🎯 [Step 85/506] Text attack: 175 new nodes (skipped 123 already attacked)
+🔥 Text Attack: 175 nodes grouped into 58 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 175/175, LLM Calls: 36, Cache Hits: 22
+
+🎯 [Step 86/506] Text attack: 256 new nodes (skipped 336 already attacked)
+🔥 Text Attack: 256 nodes grouped into 85 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 256/256, LLM Calls: 52, Cache Hits: 33
+
+🎯 [Step 87/506] Text attack: 101 new nodes (skipped 254 already attacked)
+🔥 Text Attack: 101 nodes grouped into 36 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 101/101, LLM Calls: 12, Cache Hits: 24
+
+🎯 [Step 88/506] Text attack: 153 new nodes (skipped 230 already attacked)
+🔥 Text Attack: 153 nodes grouped into 52 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 153/153, LLM Calls: 21, Cache Hits: 31
+
+🎯 [Step 89/506] Text attack: 191 new nodes (skipped 385 already attacked)
+🔥 Text Attack: 191 nodes grouped into 66 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 191/191, LLM Calls: 30, Cache Hits: 36
+
+🎯 [Step 90/506] Text attack: 81 new nodes (skipped 250 already attacked)
+🔥 Text Attack: 81 nodes grouped into 25 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 81/81, LLM Calls: 11, Cache Hits: 14
+
+🎯 [Step 91/506] Text attack: 187 new nodes (skipped 372 already attacked)
+🔥 Text Attack: 187 nodes grouped into 62 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 187/187, LLM Calls: 23, Cache Hits: 39
+
+🎯 [Step 92/506] Text attack: 75 new nodes (skipped 383 already attacked)
+🔥 Text Attack: 75 nodes grouped into 26 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 75/75, LLM Calls: 8, Cache Hits: 18
+
+🎯 [Step 93/506] Text attack: 128 new nodes (skipped 329 already attacked)
+🔥 Text Attack: 128 nodes grouped into 43 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 128/128, LLM Calls: 19, Cache Hits: 24
+
+🎯 [Step 94/506] Text attack: 116 new nodes (skipped 220 already attacked)
+🔥 Text Attack: 116 nodes grouped into 38 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 116/116, LLM Calls: 23, Cache Hits: 15
+
+🎯 [Step 95/506] Text attack: 124 new nodes (skipped 419 already attacked)
+🔥 Text Attack: 124 nodes grouped into 41 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 124/124, LLM Calls: 21, Cache Hits: 20
+
+🎯 [Step 96/506] Text attack: 48 new nodes (skipped 337 already attacked)
+🔥 Text Attack: 48 nodes grouped into 16 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 48/48, LLM Calls: 7, Cache Hits: 9
+
+🎯 [Step 97/506] Text attack: 99 new nodes (skipped 199 already attacked)
+🔥 Text Attack: 99 nodes grouped into 33 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 99/99, LLM Calls: 18, Cache Hits: 15
+
+🎯 [Step 98/506] Text attack: 92 new nodes (skipped 498 already attacked)
+🔥 Text Attack: 92 nodes grouped into 29 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 92/92, LLM Calls: 11, Cache Hits: 18
+
+🎯 [Step 99/506] Text attack: 91 new nodes (skipped 210 already attacked)
+🔥 Text Attack: 91 nodes grouped into 28 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 91/91, LLM Calls: 9, Cache Hits: 19
+
+🎯 [Step 100/506] Text attack: 38 new nodes (skipped 302 already attacked)
+🔥 Text Attack: 38 nodes grouped into 14 clusters (min/avg/max = 2/2.7/4).
+✅ Cluster Attack Done. Success: 38/38, LLM Calls: 5, Cache Hits: 9
+
+🎯 [Step 101/506] Text attack: 133 new nodes (skipped 201 already attacked)
+🔥 Text Attack: 133 nodes grouped into 42 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 133/133, LLM Calls: 16, Cache Hits: 26
+
+🎯 [Step 102/506] Text attack: 84 new nodes (skipped 396 already attacked)
+🔥 Text Attack: 84 nodes grouped into 27 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 84/84, LLM Calls: 7, Cache Hits: 20
+
+🎯 [Step 103/506] Text attack: 70 new nodes (skipped 306 already attacked)
+🔥 Text Attack: 70 nodes grouped into 25 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 70/70, LLM Calls: 12, Cache Hits: 13
+
+🎯 [Step 104/506] Text attack: 53 new nodes (skipped 320 already attacked)
+🔥 Text Attack: 53 nodes grouped into 20 clusters (min/avg/max = 2/2.6/4).
+✅ Cluster Attack Done. Success: 53/53, LLM Calls: 4, Cache Hits: 16
+
+🎯 [Step 105/506] Text attack: 50 new nodes (skipped 277 already attacked)
+🔥 Text Attack: 50 nodes grouped into 17 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 50/50, LLM Calls: 6, Cache Hits: 11
+
+🎯 [Step 106/506] Text attack: 148 new nodes (skipped 265 already attacked)
+🔥 Text Attack: 148 nodes grouped into 48 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 148/148, LLM Calls: 17, Cache Hits: 31
+
+🎯 [Step 107/506] Text attack: 32 new nodes (skipped 437 already attacked)
+🔥 Text Attack: 32 nodes grouped into 12 clusters (min/avg/max = 2/2.7/4).
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 6, Cache Hits: 6
+
+🎯 [Step 108/506] Text attack: 20 new nodes (skipped 354 already attacked)
+🔥 Text Attack: 20 nodes grouped into 6 clusters (min/avg/max = 2/3.3/4).
+✅ Cluster Attack Done. Success: 20/20, LLM Calls: 3, Cache Hits: 3
+
+🎯 [Step 109/506] Text attack: 158 new nodes (skipped 427 already attacked)
+🔥 Text Attack: 158 nodes grouped into 49 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 158/158, LLM Calls: 26, Cache Hits: 23
+
+🎯 [Step 110/506] Text attack: 117 new nodes (skipped 312 already attacked)
+🔥 Text Attack: 117 nodes grouped into 40 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 117/117, LLM Calls: 10, Cache Hits: 30
+
+🎯 [Step 111/506] Text attack: 30 new nodes (skipped 268 already attacked)
+🔥 Text Attack: 30 nodes grouped into 11 clusters (min/avg/max = 2/2.7/4).
+✅ Cluster Attack Done. Success: 30/30, LLM Calls: 3, Cache Hits: 8
+
+🎯 [Step 112/506] Text attack: 67 new nodes (skipped 306 already attacked)
+🔥 Text Attack: 67 nodes grouped into 23 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 67/67, LLM Calls: 12, Cache Hits: 11
+
+🎯 [Step 113/506] Text attack: 116 new nodes (skipped 386 already attacked)
+🔥 Text Attack: 116 nodes grouped into 37 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 116/116, LLM Calls: 12, Cache Hits: 25
+
+🎯 [Step 114/506] Text attack: 168 new nodes (skipped 389 already attacked)
+🔥 Text Attack: 168 nodes grouped into 54 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 168/168, LLM Calls: 23, Cache Hits: 31
+
+🎯 [Step 115/506] Text attack: 136 new nodes (skipped 235 already attacked)
+🔥 Text Attack: 136 nodes grouped into 46 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 136/136, LLM Calls: 24, Cache Hits: 22
+
+🎯 [Step 116/506] Text attack: 33 new nodes (skipped 317 already attacked)
+🔥 Text Attack: 33 nodes grouped into 12 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 33/33, LLM Calls: 2, Cache Hits: 10
+
+🎯 [Step 117/506] Text attack: 77 new nodes (skipped 470 already attacked)
+🔥 Text Attack: 77 nodes grouped into 24 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 77/77, LLM Calls: 7, Cache Hits: 17
+
+🎯 [Step 118/506] Text attack: 145 new nodes (skipped 385 already attacked)
+🔥 Text Attack: 145 nodes grouped into 48 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 145/145, LLM Calls: 11, Cache Hits: 37
+
+🎯 [Step 119/506] Text attack: 75 new nodes (skipped 420 already attacked)
+🔥 Text Attack: 75 nodes grouped into 25 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 75/75, LLM Calls: 7, Cache Hits: 18
+
+🎯 [Step 120/506] Text attack: 56 new nodes (skipped 275 already attacked)
+🔥 Text Attack: 56 nodes grouped into 19 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 56/56, LLM Calls: 3, Cache Hits: 16
+
+🎯 [Step 121/506] Text attack: 34 new nodes (skipped 422 already attacked)
+🔥 Text Attack: 34 nodes grouped into 12 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 34/34, LLM Calls: 1, Cache Hits: 11
+
+🎯 [Step 122/506] Text attack: 14 new nodes (skipped 387 already attacked)
+🔥 Text Attack: 14 nodes grouped into 5 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 14/14, LLM Calls: 3, Cache Hits: 2
+
+🎯 [Step 123/506] Text attack: 37 new nodes (skipped 261 already attacked)
+🔥 Text Attack: 37 nodes grouped into 12 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 37/37, LLM Calls: 6, Cache Hits: 6
+
+🎯 [Step 124/506] Text attack: 57 new nodes (skipped 487 already attacked)
+🔥 Text Attack: 57 nodes grouped into 19 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 57/57, LLM Calls: 4, Cache Hits: 15
+
+🎯 [Step 125/506] Text attack: 81 new nodes (skipped 489 already attacked)
+🔥 Text Attack: 81 nodes grouped into 26 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 81/81, LLM Calls: 7, Cache Hits: 19
+
+🎯 [Step 126/506] Text attack: 41 new nodes (skipped 263 already attacked)
+🔥 Text Attack: 41 nodes grouped into 15 clusters (min/avg/max = 2/2.7/4).
+✅ Cluster Attack Done. Success: 41/41, LLM Calls: 5, Cache Hits: 10
+
+🎯 [Step 127/506] Text attack: 100 new nodes (skipped 421 already attacked)
+🔥 Text Attack: 100 nodes grouped into 36 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 100/100, LLM Calls: 9, Cache Hits: 27
+
+🎯 [Step 128/506] Text attack: 144 new nodes (skipped 440 already attacked)
+🔥 Text Attack: 144 nodes grouped into 48 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 144/144, LLM Calls: 19, Cache Hits: 29
+
+🎯 [Step 129/506] Text attack: 22 new nodes (skipped 321 already attacked)
+🔥 Text Attack: 22 nodes grouped into 8 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 22/22, LLM Calls: 4, Cache Hits: 4
+
+🎯 [Step 130/506] Text attack: 51 new nodes (skipped 283 already attacked)
+🔥 Text Attack: 51 nodes grouped into 17 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 51/51, LLM Calls: 4, Cache Hits: 13
+
+🎯 [Step 131/506] Text attack: 38 new nodes (skipped 308 already attacked)
+🔥 Text Attack: 38 nodes grouped into 13 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 38/38, LLM Calls: 3, Cache Hits: 10
+
+🎯 [Step 132/506] Text attack: 98 new nodes (skipped 496 already attacked)
+🔥 Text Attack: 98 nodes grouped into 33 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 98/98, LLM Calls: 5, Cache Hits: 28
+
+🎯 [Step 133/506] Text attack: 31 new nodes (skipped 337 already attacked)
+🔥 Text Attack: 31 nodes grouped into 9 clusters (min/avg/max = 3/3.4/4).
+✅ Cluster Attack Done. Success: 31/31, LLM Calls: 0, Cache Hits: 9
+
+🎯 [Step 134/506] Text attack: 31 new nodes (skipped 392 already attacked)
+🔥 Text Attack: 31 nodes grouped into 11 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 31/31, LLM Calls: 2, Cache Hits: 9
+
+🎯 [Step 135/506] Text attack: 102 new nodes (skipped 465 already attacked)
+🔥 Text Attack: 102 nodes grouped into 33 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 102/102, LLM Calls: 12, Cache Hits: 21
+
+🎯 [Step 136/506] Text attack: 89 new nodes (skipped 214 already attacked)
+🔥 Text Attack: 89 nodes grouped into 32 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 89/89, LLM Calls: 14, Cache Hits: 18
+
+🎯 [Step 137/506] Text attack: 85 new nodes (skipped 493 already attacked)
+🔥 Text Attack: 85 nodes grouped into 27 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 85/85, LLM Calls: 8, Cache Hits: 19
+
+🎯 [Step 138/506] Text attack: 30 new nodes (skipped 350 already attacked)
+🔥 Text Attack: 30 nodes grouped into 11 clusters (min/avg/max = 2/2.7/4).
+✅ Cluster Attack Done. Success: 30/30, LLM Calls: 2, Cache Hits: 9
+
+🎯 [Step 139/506] Text attack: 24 new nodes (skipped 484 already attacked)
+🔥 Text Attack: 24 nodes grouped into 9 clusters (min/avg/max = 2/2.7/3).
+✅ Cluster Attack Done. Success: 24/24, LLM Calls: 2, Cache Hits: 7
+
+🎯 [Step 140/506] Text attack: 95 new nodes (skipped 491 already attacked)
+🔥 Text Attack: 95 nodes grouped into 31 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 95/95, LLM Calls: 8, Cache Hits: 23
+
+🎯 [Step 141/506] Text attack: 76 new nodes (skipped 496 already attacked)
+🔥 Text Attack: 76 nodes grouped into 24 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 76/76, LLM Calls: 8, Cache Hits: 16
+
+🎯 [Step 142/506] Text attack: 54 new nodes (skipped 533 already attacked)
+🔥 Text Attack: 54 nodes grouped into 18 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 54/54, LLM Calls: 5, Cache Hits: 13
+
+🎯 [Step 143/506] Text attack: 14 new nodes (skipped 284 already attacked)
+🔥 Text Attack: 14 nodes grouped into 5 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 14/14, LLM Calls: 3, Cache Hits: 2
+
+🎯 [Step 144/506] Text attack: 65 new nodes (skipped 506 already attacked)
+🔥 Text Attack: 65 nodes grouped into 21 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 65/65, LLM Calls: 5, Cache Hits: 16
+
+🎯 [Step 145/506] Text attack: 32 new nodes (skipped 399 already attacked)
+🔥 Text Attack: 32 nodes grouped into 12 clusters (min/avg/max = 2/2.7/4).
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 2, Cache Hits: 10
+
+🎯 [Step 146/506] Text attack: 68 new nodes (skipped 468 already attacked)
+🔥 Text Attack: 68 nodes grouped into 22 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 68/68, LLM Calls: 9, Cache Hits: 13
+
+🎯 [Step 147/506] Text attack: 31 new nodes (skipped 410 already attacked)
+🔥 Text Attack: 31 nodes grouped into 10 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 31/31, LLM Calls: 2, Cache Hits: 8
+
+🎯 [Step 148/506] Text attack: 57 new nodes (skipped 510 already attacked)
+🔥 Text Attack: 57 nodes grouped into 20 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 57/57, LLM Calls: 4, Cache Hits: 16
+
+🎯 [Step 149/506] Text attack: 46 new nodes (skipped 531 already attacked)
+🔥 Text Attack: 46 nodes grouped into 17 clusters (min/avg/max = 2/2.7/4).
+✅ Cluster Attack Done. Success: 46/46, LLM Calls: 1, Cache Hits: 16
+
+🎯 [Step 150/506] Text attack: 35 new nodes (skipped 362 already attacked)
+🔥 Text Attack: 35 nodes grouped into 12 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 35/35, LLM Calls: 2, Cache Hits: 10
+
+🎯 [Step 151/506] Text attack: 50 new nodes (skipped 248 already attacked)
+🔥 Text Attack: 50 nodes grouped into 16 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 50/50, LLM Calls: 7, Cache Hits: 9
+
+🎯 [Step 152/506] Text attack: 43 new nodes (skipped 523 already attacked)
+🔥 Text Attack: 43 nodes grouped into 15 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 43/43, LLM Calls: 4, Cache Hits: 11
+
+🎯 [Step 153/506] Text attack: 40 new nodes (skipped 442 already attacked)
+🔥 Text Attack: 40 nodes grouped into 14 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 40/40, LLM Calls: 3, Cache Hits: 11
+
+🎯 [Step 154/506] Text attack: 6 new nodes (skipped 379 already attacked)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 155/506] Text attack: 63 new nodes (skipped 256 already attacked)
+🔥 Text Attack: 63 nodes grouped into 19 clusters (min/avg/max = 2/3.3/4).
+✅ Cluster Attack Done. Success: 63/63, LLM Calls: 10, Cache Hits: 9
+
+🎯 [Step 156/506] Text attack: 44 new nodes (skipped 521 already attacked)
+🔥 Text Attack: 44 nodes grouped into 15 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 44/44, LLM Calls: 5, Cache Hits: 10
+
+🎯 [Step 157/506] Text attack: 26 new nodes (skipped 478 already attacked)
+🔥 Text Attack: 26 nodes grouped into 8 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 26/26, LLM Calls: 0, Cache Hits: 8
+
+🎯 [Step 158/506] Text attack: 48 new nodes (skipped 379 already attacked)
+🔥 Text Attack: 48 nodes grouped into 15 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 48/48, LLM Calls: 8, Cache Hits: 7
+
+🎯 [Step 159/506] Text attack: 14 new nodes (skipped 284 already attacked)
+🔥 Text Attack: 14 nodes grouped into 5 clusters (min/avg/max = 2/2.8/3).
+✅ Cluster Attack Done. Success: 14/14, LLM Calls: 2, Cache Hits: 3
+
+🎯 [Step 160/506] Text attack: 19 new nodes (skipped 290 already attacked)
+🔥 Text Attack: 19 nodes grouped into 5 clusters (min/avg/max = 3/3.8/4).
+✅ Cluster Attack Done. Success: 19/19, LLM Calls: 1, Cache Hits: 4
+
+🎯 [Step 161/506] Text attack: 67 new nodes (skipped 263 already attacked)
+🔥 Text Attack: 67 nodes grouped into 22 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 67/67, LLM Calls: 7, Cache Hits: 15
+
+🎯 [Step 162/506] Text attack: 23 new nodes (skipped 341 already attacked)
+🔥 Text Attack: 23 nodes grouped into 6 clusters (min/avg/max = 3/3.8/4).
+✅ Cluster Attack Done. Success: 23/23, LLM Calls: 0, Cache Hits: 6
+
+🎯 [Step 163/506] Text attack: 58 new nodes (skipped 240 already attacked)
+🔥 Text Attack: 58 nodes grouped into 19 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 58/58, LLM Calls: 5, Cache Hits: 14
+
+🎯 [Step 164/506] Text attack: 51 new nodes (skipped 288 already attacked)
+🔥 Text Attack: 51 nodes grouped into 18 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 51/51, LLM Calls: 4, Cache Hits: 14
+
+🎯 [Step 165/506] Text attack: 47 new nodes (skipped 308 already attacked)
+🔥 Text Attack: 47 nodes grouped into 15 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 47/47, LLM Calls: 6, Cache Hits: 9
+
+🎯 [Step 166/506] Text attack: 31 new nodes (skipped 380 already attacked)
+🔥 Text Attack: 31 nodes grouped into 12 clusters (min/avg/max = 2/2.6/4).
+✅ Cluster Attack Done. Success: 31/31, LLM Calls: 3, Cache Hits: 9
+
+🎯 [Step 167/506] Text attack: 13 new nodes (skipped 355 already attacked)
+🔥 Text Attack: 13 nodes grouped into 4 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 0, Cache Hits: 4
+
+🎯 [Step 168/506] Text attack: 17 new nodes (skipped 492 already attacked)
+🔥 Text Attack: 17 nodes grouped into 6 clusters (min/avg/max = 2/2.8/3).
+✅ Cluster Attack Done. Success: 17/17, LLM Calls: 1, Cache Hits: 5
+
+🎯 [Step 169/506] Text attack: 60 new nodes (skipped 238 already attacked)
+🔥 Text Attack: 60 nodes grouped into 20 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 60/60, LLM Calls: 3, Cache Hits: 17
+
+🎯 [Step 170/506] Text attack: 33 new nodes (skipped 342 already attacked)
+🔥 Text Attack: 33 nodes grouped into 12 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 33/33, LLM Calls: 5, Cache Hits: 7
+
+🎯 [Step 171/506] Text attack: 62 new nodes (skipped 416 already attacked)
+🔥 Text Attack: 62 nodes grouped into 20 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 62/62, LLM Calls: 5, Cache Hits: 15
+
+🎯 [Step 172/506] Text attack: 13 new nodes (skipped 533 already attacked)
+🔥 Text Attack: 13 nodes grouped into 5 clusters (min/avg/max = 2/2.6/3).
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 3, Cache Hits: 2
+
+🎯 [Step 173/506] Text attack: 2 new nodes (skipped 296 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 174/506] Text attack: 10 new nodes (skipped 335 already attacked)
+🔥 Text Attack: 10 nodes grouped into 3 clusters (min/avg/max = 3/3.3/4).
+✅ Cluster Attack Done. Success: 10/10, LLM Calls: 1, Cache Hits: 2
+
+🎯 [Step 175/506] Text attack: 22 new nodes (skipped 283 already attacked)
+🔥 Text Attack: 22 nodes grouped into 7 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 22/22, LLM Calls: 0, Cache Hits: 7
+
+🎯 [Step 176/506] Text attack: 64 new nodes (skipped 510 already attacked)
+🔥 Text Attack: 64 nodes grouped into 21 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 64/64, LLM Calls: 9, Cache Hits: 12
+
+🎯 [Step 177/506] Text attack: 30 new nodes (skipped 268 already attacked)
+🔥 Text Attack: 30 nodes grouped into 9 clusters (min/avg/max = 3/3.3/4).
+✅ Cluster Attack Done. Success: 30/30, LLM Calls: 2, Cache Hits: 7
+
+🎯 [Step 178/506] Text attack: 33 new nodes (skipped 265 already attacked)
+🔥 Text Attack: 33 nodes grouped into 12 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 33/33, LLM Calls: 4, Cache Hits: 8
+
+🎯 [Step 179/506] Text attack: 30 new nodes (skipped 268 already attacked)
+🔥 Text Attack: 30 nodes grouped into 10 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 30/30, LLM Calls: 3, Cache Hits: 7
+
+🎯 [Step 180/506] Text attack: 7 new nodes (skipped 291 already attacked)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 3/3.5/4).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 181/506] Text attack: 10 new nodes (skipped 288 already attacked)
+🔥 Text Attack: 10 nodes grouped into 3 clusters (min/avg/max = 3/3.3/4).
+✅ Cluster Attack Done. Success: 10/10, LLM Calls: 1, Cache Hits: 2
+
+🎯 [Step 182/506] Text attack: 4 new nodes (skipped 294 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 183/506] Text attack: 19 new nodes (skipped 538 already attacked)
+🔥 Text Attack: 19 nodes grouped into 7 clusters (min/avg/max = 2/2.7/4).
+✅ Cluster Attack Done. Success: 19/19, LLM Calls: 4, Cache Hits: 3
+
+🎯 [Step 184/506] Text attack: 8 new nodes (skipped 290 already attacked)
+🔥 Text Attack: 8 nodes grouped into 3 clusters (min/avg/max = 2/2.7/3).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 1, Cache Hits: 2
+
+🎯 [Step 185/506] Text attack: 37 new nodes (skipped 517 already attacked)
+🔥 Text Attack: 37 nodes grouped into 13 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 37/37, LLM Calls: 1, Cache Hits: 12
+
+🎯 [Step 186/506] Text attack: 32 new nodes (skipped 548 already attacked)
+🔥 Text Attack: 32 nodes grouped into 10 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 1, Cache Hits: 9
+
+🎯 [Step 187/506] Text attack: 1 new nodes (skipped 323 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 188/506] Text attack: 3 new nodes (skipped 359 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 189/506] Text attack: 9 new nodes (skipped 446 already attacked)
+🔥 Text Attack: 9 nodes grouped into 3 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 190/506] Text attack: 53 new nodes (skipped 528 already attacked)
+🔥 Text Attack: 53 nodes grouped into 18 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 53/53, LLM Calls: 6, Cache Hits: 12
+
+🎯 [Step 191/506] Text attack: 8 new nodes (skipped 346 already attacked)
+🔥 Text Attack: 8 nodes grouped into 2 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 192/506] Text attack: 12 new nodes (skipped 516 already attacked)
+🔥 Text Attack: 12 nodes grouped into 4 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 1, Cache Hits: 3
+
+🎯 [Step 193/506] Text attack: 26 new nodes (skipped 308 already attacked)
+🔥 Text Attack: 26 nodes grouped into 9 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 26/26, LLM Calls: 2, Cache Hits: 7
+
+🎯 [Step 194/506] Text attack: 55 new nodes (skipped 499 already attacked)
+🔥 Text Attack: 55 nodes grouped into 17 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 55/55, LLM Calls: 6, Cache Hits: 11
+
+🎯 [Step 195/506] Text attack: 20 new nodes (skipped 530 already attacked)
+🔥 Text Attack: 20 nodes grouped into 8 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 20/20, LLM Calls: 1, Cache Hits: 7
+
+🎯 [Step 196/506] Text attack: 15 new nodes (skipped 283 already attacked)
+🔥 Text Attack: 15 nodes grouped into 6 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 15/15, LLM Calls: 0, Cache Hits: 6
+
+🎯 [Step 197/506] Text attack: 72 new nodes (skipped 505 already attacked)
+🔥 Text Attack: 72 nodes grouped into 23 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 72/72, LLM Calls: 8, Cache Hits: 15
+
+🎯 [Step 198/506] Text attack: 5 new nodes (skipped 426 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 199/506] Text attack: 5 new nodes (skipped 293 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 200/506] Text attack: 28 new nodes (skipped 358 already attacked)
+🔥 Text Attack: 28 nodes grouped into 10 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 28/28, LLM Calls: 1, Cache Hits: 9
+
+🎯 [Step 201/506] Text attack: 5 new nodes (skipped 389 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 1
+
+🎯 [Step 202/506] Text attack: 8 new nodes (skipped 312 already attacked)
+🔥 Text Attack: 8 nodes grouped into 3 clusters (min/avg/max = 2/2.7/3).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 203/506] Text attack: 9 new nodes (skipped 352 already attacked)
+🔥 Text Attack: 9 nodes grouped into 3 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 204/506] Text attack: 8 new nodes (skipped 583 already attacked)
+🔥 Text Attack: 8 nodes grouped into 3 clusters (min/avg/max = 2/2.7/4).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 1, Cache Hits: 2
+
+🎯 [Step 205/506] Text attack: 25 new nodes (skipped 398 already attacked)
+🔥 Text Attack: 25 nodes grouped into 8 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 25/25, LLM Calls: 1, Cache Hits: 7
+
+🎯 [Step 206/506] Text attack: 28 new nodes (skipped 431 already attacked)
+🔥 Text Attack: 28 nodes grouped into 9 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 28/28, LLM Calls: 4, Cache Hits: 5
+
+🎯 [Step 207/506] Text attack: 9 new nodes (skipped 349 already attacked)
+🔥 Text Attack: 9 nodes grouped into 3 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 208/506] Text attack: 27 new nodes (skipped 271 already attacked)
+🔥 Text Attack: 27 nodes grouped into 9 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 27/27, LLM Calls: 1, Cache Hits: 8
+
+🎯 [Step 209/506] Text attack: 12 new nodes (skipped 469 already attacked)
+🔥 Text Attack: 12 nodes grouped into 4 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 0, Cache Hits: 4
+
+🎯 [Step 210/506] Text attack: 18 new nodes (skipped 557 already attacked)
+🔥 Text Attack: 18 nodes grouped into 6 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 18/18, LLM Calls: 2, Cache Hits: 4
+
+🎯 [Step 211/506] Text attack: 46 new nodes (skipped 537 already attacked)
+🔥 Text Attack: 46 nodes grouped into 16 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 46/46, LLM Calls: 8, Cache Hits: 8
+
+🎯 [Step 212/506] Text attack: 26 new nodes (skipped 556 already attacked)
+🔥 Text Attack: 26 nodes grouped into 8 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 26/26, LLM Calls: 2, Cache Hits: 6
+
+🎯 [Step 213/506] Text attack: 46 new nodes (skipped 456 already attacked)
+🔥 Text Attack: 46 nodes grouped into 15 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 46/46, LLM Calls: 3, Cache Hits: 12
+
+🎯 [Step 214/506] Text attack: 29 new nodes (skipped 511 already attacked)
+🔥 Text Attack: 29 nodes grouped into 9 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 29/29, LLM Calls: 0, Cache Hits: 9
+
+🎯 [Step 215/506] Text attack: 21 new nodes (skipped 387 already attacked)
+🔥 Text Attack: 21 nodes grouped into 6 clusters (min/avg/max = 2/3.5/4).
+✅ Cluster Attack Done. Success: 21/21, LLM Calls: 1, Cache Hits: 5
+
+⏭️ [Step 216/506] All 298 nodes already attacked, skipping
+
+🎯 [Step 217/506] Text attack: 29 new nodes (skipped 378 already attacked)
+🔥 Text Attack: 29 nodes grouped into 9 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 29/29, LLM Calls: 1, Cache Hits: 8
+
+🎯 [Step 218/506] Text attack: 31 new nodes (skipped 311 already attacked)
+🔥 Text Attack: 31 nodes grouped into 11 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 31/31, LLM Calls: 2, Cache Hits: 9
+
+🎯 [Step 219/506] Text attack: 3 new nodes (skipped 295 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 220/506] Text attack: 5 new nodes (skipped 374 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 221/506] Text attack: 12 new nodes (skipped 347 already attacked)
+🔥 Text Attack: 12 nodes grouped into 4 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 0, Cache Hits: 4
+
+🎯 [Step 222/506] Text attack: 1 new nodes (skipped 372 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 223/506] Text attack: 3 new nodes (skipped 477 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 224/506] Text attack: 1 new nodes (skipped 297 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 225/506] Text attack: 3 new nodes (skipped 387 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 226/506] Text attack: 10 new nodes (skipped 335 already attacked)
+🔥 Text Attack: 10 nodes grouped into 4 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 10/10, LLM Calls: 1, Cache Hits: 3
+
+🎯 [Step 227/506] Text attack: 29 new nodes (skipped 540 already attacked)
+🔥 Text Attack: 29 nodes grouped into 10 clusters (min/avg/max = 2/2.9/4).
+✅ Cluster Attack Done. Success: 29/29, LLM Calls: 0, Cache Hits: 10
+
+🎯 [Step 228/506] Text attack: 5 new nodes (skipped 391 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 229/506] Text attack: 5 new nodes (skipped 389 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 1
+
+🎯 [Step 230/506] Text attack: 5 new nodes (skipped 328 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 231/506] Text attack: 7 new nodes (skipped 521 already attacked)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 3/3.5/4).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 232/506] Text attack: 7 new nodes (skipped 570 already attacked)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 3/3.5/4).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 233/506] Text attack: 13 new nodes (skipped 448 already attacked)
+🔥 Text Attack: 13 nodes grouped into 4 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 1, Cache Hits: 3
+
+🎯 [Step 234/506] Text attack: 11 new nodes (skipped 581 already attacked)
+🔥 Text Attack: 11 nodes grouped into 4 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 0, Cache Hits: 4
+
+🎯 [Step 235/506] Text attack: 7 new nodes (skipped 307 already attacked)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 3/3.5/4).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 236/506] Text attack: 4 new nodes (skipped 294 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 237/506] Text attack: 4 new nodes (skipped 420 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 238/506] Text attack: 4 new nodes (skipped 578 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 239/506] Text attack: 2 new nodes (skipped 393 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 240/506] Text attack: 3 new nodes (skipped 578 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 241/506] Text attack: 31 new nodes (skipped 267 already attacked)
+🔥 Text Attack: 31 nodes grouped into 10 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 31/31, LLM Calls: 0, Cache Hits: 10
+
+🎯 [Step 242/506] Text attack: 23 new nodes (skipped 561 already attacked)
+🔥 Text Attack: 23 nodes grouped into 7 clusters (min/avg/max = 2/3.3/4).
+✅ Cluster Attack Done. Success: 23/23, LLM Calls: 4, Cache Hits: 3
+
+🎯 [Step 243/506] Text attack: 2 new nodes (skipped 352 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 244/506] Text attack: 15 new nodes (skipped 392 already attacked)
+🔥 Text Attack: 15 nodes grouped into 5 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 15/15, LLM Calls: 0, Cache Hits: 5
+
+🎯 [Step 245/506] Text attack: 17 new nodes (skipped 562 already attacked)
+🔥 Text Attack: 17 nodes grouped into 5 clusters (min/avg/max = 2/3.4/4).
+✅ Cluster Attack Done. Success: 17/17, LLM Calls: 1, Cache Hits: 4
+
+🎯 [Step 246/506] Text attack: 24 new nodes (skipped 337 already attacked)
+🔥 Text Attack: 24 nodes grouped into 8 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 24/24, LLM Calls: 1, Cache Hits: 7
+
+🎯 [Step 247/506] Text attack: 27 new nodes (skipped 271 already attacked)
+🔥 Text Attack: 27 nodes grouped into 9 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 27/27, LLM Calls: 1, Cache Hits: 8
+
+🎯 [Step 248/506] Text attack: 9 new nodes (skipped 430 already attacked)
+🔥 Text Attack: 9 nodes grouped into 3 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 249/506] Text attack: 2 new nodes (skipped 420 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 250/506] Text attack: 10 new nodes (skipped 401 already attacked)
+🔥 Text Attack: 10 nodes grouped into 3 clusters (min/avg/max = 3/3.3/4).
+✅ Cluster Attack Done. Success: 10/10, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 251/506] Text attack: 11 new nodes (skipped 287 already attacked)
+🔥 Text Attack: 11 nodes grouped into 3 clusters (min/avg/max = 3/3.7/4).
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 252/506] Text attack: 6 new nodes (skipped 426 already attacked)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 253/506] Text attack: 1 new nodes (skipped 379 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 254/506] All 298 nodes already attacked, skipping
+
+🎯 [Step 255/506] Text attack: 8 new nodes (skipped 404 already attacked)
+🔥 Text Attack: 8 nodes grouped into 3 clusters (min/avg/max = 2/2.7/3).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 0, Cache Hits: 3
+
+⏭️ [Step 256/506] All 445 nodes already attacked, skipping
+
+🎯 [Step 257/506] Text attack: 7 new nodes (skipped 291 already attacked)
+🔥 Text Attack: 7 nodes grouped into 3 clusters (min/avg/max = 2/2.3/3).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 258/506] Text attack: 13 new nodes (skipped 478 already attacked)
+🔥 Text Attack: 13 nodes grouped into 5 clusters (min/avg/max = 2/2.6/4).
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 1, Cache Hits: 4
+
+🎯 [Step 259/506] Text attack: 1 new nodes (skipped 583 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 260/506] All 534 nodes already attacked, skipping
+
+🎯 [Step 261/506] Text attack: 8 new nodes (skipped 560 already attacked)
+🔥 Text Attack: 8 nodes grouped into 2 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 1, Cache Hits: 1
+
+🎯 [Step 262/506] Text attack: 2 new nodes (skipped 496 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 263/506] All 332 nodes already attacked, skipping
+
+🎯 [Step 264/506] Text attack: 31 new nodes (skipped 267 already attacked)
+🔥 Text Attack: 31 nodes grouped into 10 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 31/31, LLM Calls: 4, Cache Hits: 6
+
+🎯 [Step 265/506] Text attack: 6 new nodes (skipped 409 already attacked)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 266/506] Text attack: 22 new nodes (skipped 555 already attacked)
+🔥 Text Attack: 22 nodes grouped into 7 clusters (min/avg/max = 2/3.1/4).
+✅ Cluster Attack Done. Success: 22/22, LLM Calls: 1, Cache Hits: 6
+
+🎯 [Step 267/506] Text attack: 5 new nodes (skipped 318 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 268/506] Text attack: 4 new nodes (skipped 411 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 269/506] Text attack: 13 new nodes (skipped 303 already attacked)
+🔥 Text Attack: 13 nodes grouped into 4 clusters (min/avg/max = 3/3.2/4).
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 1, Cache Hits: 3
+
+🎯 [Step 270/506] Text attack: 1 new nodes (skipped 581 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 271/506] Text attack: 2 new nodes (skipped 334 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 272/506] Text attack: 3 new nodes (skipped 295 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 273/506] Text attack: 13 new nodes (skipped 449 already attacked)
+🔥 Text Attack: 13 nodes grouped into 5 clusters (min/avg/max = 2/2.6/3).
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 1, Cache Hits: 4
+
+🎯 [Step 274/506] Text attack: 9 new nodes (skipped 577 already attacked)
+🔥 Text Attack: 9 nodes grouped into 3 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 1, Cache Hits: 2
+
+🎯 [Step 275/506] Text attack: 3 new nodes (skipped 465 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 276/506] Text attack: 12 new nodes (skipped 286 already attacked)
+🔥 Text Attack: 12 nodes grouped into 4 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 1, Cache Hits: 3
+
+⏭️ [Step 277/506] All 298 nodes already attacked, skipping
+
+⏭️ [Step 278/506] All 298 nodes already attacked, skipping
+
+⏭️ [Step 279/506] All 365 nodes already attacked, skipping
+
+🎯 [Step 280/506] Text attack: 20 new nodes (skipped 543 already attacked)
+🔥 Text Attack: 20 nodes grouped into 6 clusters (min/avg/max = 2/3.3/4).
+✅ Cluster Attack Done. Success: 20/20, LLM Calls: 3, Cache Hits: 3
+
+🎯 [Step 281/506] Text attack: 6 new nodes (skipped 360 already attacked)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 0, Cache Hits: 2
+
+⏭️ [Step 282/506] All 376 nodes already attacked, skipping
+
+⏭️ [Step 283/506] All 298 nodes already attacked, skipping
+
+🎯 [Step 284/506] Text attack: 2 new nodes (skipped 416 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 285/506] All 342 nodes already attacked, skipping
+
+🎯 [Step 286/506] Text attack: 7 new nodes (skipped 291 already attacked)
+🔥 Text Attack: 7 nodes grouped into 3 clusters (min/avg/max = 2/2.3/3).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 287/506] Text attack: 2 new nodes (skipped 534 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 288/506] Text attack: 6 new nodes (skipped 292 already attacked)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 289/506] Text attack: 1 new nodes (skipped 326 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 290/506] Text attack: 15 new nodes (skipped 477 already attacked)
+🔥 Text Attack: 15 nodes grouped into 4 clusters (min/avg/max = 3/3.8/4).
+✅ Cluster Attack Done. Success: 15/15, LLM Calls: 1, Cache Hits: 3
+
+🎯 [Step 291/506] Text attack: 5 new nodes (skipped 527 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 1
+
+⏭️ [Step 292/506] All 325 nodes already attacked, skipping
+
+🎯 [Step 293/506] Text attack: 4 new nodes (skipped 369 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 294/506] Text attack: 3 new nodes (skipped 336 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 295/506] Text attack: 6 new nodes (skipped 292 already attacked)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 1, Cache Hits: 1
+
+🎯 [Step 296/506] Text attack: 16 new nodes (skipped 551 already attacked)
+🔥 Text Attack: 16 nodes grouped into 5 clusters (min/avg/max = 3/3.2/4).
+✅ Cluster Attack Done. Success: 16/16, LLM Calls: 2, Cache Hits: 3
+
+🎯 [Step 297/506] Text attack: 31 new nodes (skipped 316 already attacked)
+🔥 Text Attack: 31 nodes grouped into 12 clusters (min/avg/max = 2/2.6/3).
+✅ Cluster Attack Done. Success: 31/31, LLM Calls: 1, Cache Hits: 11
+
+🎯 [Step 298/506] Text attack: 7 new nodes (skipped 552 already attacked)
+🔥 Text Attack: 7 nodes grouped into 3 clusters (min/avg/max = 2/2.3/3).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 299/506] Text attack: 1 new nodes (skipped 387 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 300/506] Text attack: 5 new nodes (skipped 393 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 301/506] Text attack: 5 new nodes (skipped 293 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 1
+
+🎯 [Step 302/506] Text attack: 2 new nodes (skipped 482 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 303/506] Text attack: 1 new nodes (skipped 572 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 304/506] All 408 nodes already attacked, skipping
+
+🎯 [Step 305/506] Text attack: 3 new nodes (skipped 322 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 306/506] Text attack: 2 new nodes (skipped 566 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 307/506] Text attack: 1 new nodes (skipped 340 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 308/506] Text attack: 1 new nodes (skipped 475 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 309/506] Text attack: 1 new nodes (skipped 387 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 310/506] Text attack: 8 new nodes (skipped 541 already attacked)
+🔥 Text Attack: 8 nodes grouped into 2 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 1, Cache Hits: 1
+
+🎯 [Step 311/506] Text attack: 1 new nodes (skipped 402 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 312/506] Text attack: 1 new nodes (skipped 384 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 313/506] All 298 nodes already attacked, skipping
+
+🎯 [Step 314/506] Text attack: 1 new nodes (skipped 407 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 315/506] Text attack: 3 new nodes (skipped 338 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 316/506] Text attack: 3 new nodes (skipped 584 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 317/506] All 387 nodes already attacked, skipping
+
+🎯 [Step 318/506] Text attack: 1 new nodes (skipped 373 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 319/506] Text attack: 5 new nodes (skipped 372 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 0, Cache Hits: 2
+
+⏭️ [Step 320/506] All 361 nodes already attacked, skipping
+
+🎯 [Step 321/506] Text attack: 6 new nodes (skipped 390 already attacked)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 322/506] Text attack: 6 new nodes (skipped 292 already attacked)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 323/506] Text attack: 4 new nodes (skipped 367 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 324/506] Text attack: 15 new nodes (skipped 553 already attacked)
+🔥 Text Attack: 15 nodes grouped into 4 clusters (min/avg/max = 3/3.8/4).
+✅ Cluster Attack Done. Success: 15/15, LLM Calls: 1, Cache Hits: 3
+
+🎯 [Step 325/506] Text attack: 4 new nodes (skipped 580 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 326/506] Text attack: 1 new nodes (skipped 326 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 327/506] Text attack: 2 new nodes (skipped 547 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 328/506] Text attack: 5 new nodes (skipped 305 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 1
+
+🎯 [Step 329/506] Text attack: 3 new nodes (skipped 378 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 330/506] Text attack: 3 new nodes (skipped 295 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 331/506] Text attack: 9 new nodes (skipped 354 already attacked)
+🔥 Text Attack: 9 nodes grouped into 3 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 332/506] Text attack: 3 new nodes (skipped 511 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 333/506] Text attack: 1 new nodes (skipped 347 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 334/506] All 404 nodes already attacked, skipping
+
+🎯 [Step 335/506] Text attack: 17 new nodes (skipped 519 already attacked)
+🔥 Text Attack: 17 nodes grouped into 6 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 17/17, LLM Calls: 0, Cache Hits: 6
+
+🎯 [Step 336/506] Text attack: 8 new nodes (skipped 331 already attacked)
+🔥 Text Attack: 8 nodes grouped into 3 clusters (min/avg/max = 2/2.7/3).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 337/506] Text attack: 7 new nodes (skipped 291 already attacked)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 3/3.5/4).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 338/506] Text attack: 4 new nodes (skipped 535 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 339/506] Text attack: 1 new nodes (skipped 581 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 340/506] All 347 nodes already attacked, skipping
+
+⏭️ [Step 341/506] All 571 nodes already attacked, skipping
+
+🎯 [Step 342/506] Text attack: 2 new nodes (skipped 316 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 343/506] Text attack: 9 new nodes (skipped 289 already attacked)
+🔥 Text Attack: 9 nodes grouped into 3 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 344/506] Text attack: 22 new nodes (skipped 276 already attacked)
+🔥 Text Attack: 22 nodes grouped into 8 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 22/22, LLM Calls: 2, Cache Hits: 6
+
+🎯 [Step 345/506] Text attack: 21 new nodes (skipped 300 already attacked)
+🔥 Text Attack: 21 nodes grouped into 7 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 21/21, LLM Calls: 0, Cache Hits: 7
+
+⏭️ [Step 346/506] All 393 nodes already attacked, skipping
+
+🎯 [Step 347/506] Text attack: 4 new nodes (skipped 334 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 348/506] All 298 nodes already attacked, skipping
+
+⏭️ [Step 349/506] All 404 nodes already attacked, skipping
+
+🎯 [Step 350/506] Text attack: 7 new nodes (skipped 329 already attacked)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 3/3.5/4).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 351/506] Text attack: 1 new nodes (skipped 571 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 352/506] All 298 nodes already attacked, skipping
+
+🎯 [Step 353/506] Text attack: 2 new nodes (skipped 438 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 354/506] Text attack: 19 new nodes (skipped 574 already attacked)
+🔥 Text Attack: 19 nodes grouped into 6 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 19/19, LLM Calls: 2, Cache Hits: 4
+
+⏭️ [Step 355/506] All 432 nodes already attacked, skipping
+
+🎯 [Step 356/506] Text attack: 3 new nodes (skipped 295 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 357/506] All 395 nodes already attacked, skipping
+
+🎯 [Step 358/506] Text attack: 1 new nodes (skipped 554 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 359/506] Text attack: 2 new nodes (skipped 531 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 360/506] Text attack: 18 new nodes (skipped 280 already attacked)
+🔥 Text Attack: 18 nodes grouped into 5 clusters (min/avg/max = 3/3.6/4).
+✅ Cluster Attack Done. Success: 18/18, LLM Calls: 0, Cache Hits: 5
+
+🎯 [Step 361/506] Text attack: 15 new nodes (skipped 417 already attacked)
+🔥 Text Attack: 15 nodes grouped into 5 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 15/15, LLM Calls: 1, Cache Hits: 4
+
+⏭️ [Step 362/506] All 389 nodes already attacked, skipping
+
+⏭️ [Step 363/506] All 316 nodes already attacked, skipping
+
+⏭️ [Step 364/506] All 564 nodes already attacked, skipping
+
+🎯 [Step 365/506] Text attack: 14 new nodes (skipped 558 already attacked)
+🔥 Text Attack: 14 nodes grouped into 4 clusters (min/avg/max = 3/3.5/4).
+✅ Cluster Attack Done. Success: 14/14, LLM Calls: 0, Cache Hits: 4
+
+⏭️ [Step 366/506] All 382 nodes already attacked, skipping
+
+🎯 [Step 367/506] Text attack: 2 new nodes (skipped 296 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 368/506] Text attack: 7 new nodes (skipped 291 already attacked)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 3/3.5/4).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 369/506] Text attack: 11 new nodes (skipped 383 already attacked)
+🔥 Text Attack: 11 nodes grouped into 3 clusters (min/avg/max = 3/3.7/4).
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 370/506] Text attack: 12 new nodes (skipped 347 already attacked)
+🔥 Text Attack: 12 nodes grouped into 4 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 1, Cache Hits: 3
+
+⏭️ [Step 371/506] All 298 nodes already attacked, skipping
+
+⏭️ [Step 372/506] All 578 nodes already attacked, skipping
+
+⏭️ [Step 373/506] All 579 nodes already attacked, skipping
+
+🎯 [Step 374/506] Text attack: 1 new nodes (skipped 322 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 375/506] Text attack: 4 new nodes (skipped 542 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 376/506] All 323 nodes already attacked, skipping
+
+⏭️ [Step 377/506] All 440 nodes already attacked, skipping
+
+⏭️ [Step 378/506] All 341 nodes already attacked, skipping
+
+⏭️ [Step 379/506] All 305 nodes already attacked, skipping
+
+⏭️ [Step 380/506] All 403 nodes already attacked, skipping
+
+🎯 [Step 381/506] Text attack: 12 new nodes (skipped 286 already attacked)
+🔥 Text Attack: 12 nodes grouped into 4 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 0, Cache Hits: 4
+
+🎯 [Step 382/506] Text attack: 3 new nodes (skipped 593 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 383/506] Text attack: 1 new nodes (skipped 583 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 384/506] Text attack: 13 new nodes (skipped 552 already attacked)
+🔥 Text Attack: 13 nodes grouped into 4 clusters (min/avg/max = 3/3.2/4).
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 1, Cache Hits: 3
+
+⏭️ [Step 385/506] All 298 nodes already attacked, skipping
+
+🎯 [Step 386/506] Text attack: 1 new nodes (skipped 384 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 387/506] Text attack: 2 new nodes (skipped 568 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 388/506] Text attack: 11 new nodes (skipped 536 already attacked)
+🔥 Text Attack: 11 nodes grouped into 4 clusters (min/avg/max = 2/2.8/3).
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 1, Cache Hits: 3
+
+🎯 [Step 389/506] Text attack: 12 new nodes (skipped 531 already attacked)
+🔥 Text Attack: 12 nodes grouped into 4 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 1, Cache Hits: 3
+
+🎯 [Step 390/506] Text attack: 7 new nodes (skipped 556 already attacked)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 3/3.5/4).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 1, Cache Hits: 1
+
+🎯 [Step 391/506] Text attack: 11 new nodes (skipped 287 already attacked)
+🔥 Text Attack: 11 nodes grouped into 3 clusters (min/avg/max = 3/3.7/4).
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 392/506] Text attack: 15 new nodes (skipped 524 already attacked)
+🔥 Text Attack: 15 nodes grouped into 5 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 15/15, LLM Calls: 2, Cache Hits: 3
+
+🎯 [Step 393/506] Text attack: 17 new nodes (skipped 301 already attacked)
+🔥 Text Attack: 17 nodes grouped into 6 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 17/17, LLM Calls: 0, Cache Hits: 6
+
+🎯 [Step 394/506] Text attack: 8 new nodes (skipped 560 already attacked)
+🔥 Text Attack: 8 nodes grouped into 3 clusters (min/avg/max = 2/2.7/3).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 1, Cache Hits: 2
+
+⏭️ [Step 395/506] All 398 nodes already attacked, skipping
+
+🎯 [Step 396/506] Text attack: 10 new nodes (skipped 490 already attacked)
+🔥 Text Attack: 10 nodes grouped into 4 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 10/10, LLM Calls: 1, Cache Hits: 3
+
+⏭️ [Step 397/506] All 298 nodes already attacked, skipping
+
+🎯 [Step 398/506] Text attack: 7 new nodes (skipped 502 already attacked)
+🔥 Text Attack: 7 nodes grouped into 3 clusters (min/avg/max = 2/2.3/3).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 1, Cache Hits: 2
+
+⏭️ [Step 399/506] All 521 nodes already attacked, skipping
+
+⏭️ [Step 400/506] All 381 nodes already attacked, skipping
+
+🎯 [Step 401/506] Text attack: 5 new nodes (skipped 341 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 402/506] Text attack: 1 new nodes (skipped 411 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 403/506] Text attack: 1 new nodes (skipped 354 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 404/506] Text attack: 5 new nodes (skipped 380 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 1
+
+⏭️ [Step 405/506] All 362 nodes already attacked, skipping
+
+⏭️ [Step 406/506] All 358 nodes already attacked, skipping
+
+🎯 [Step 407/506] Text attack: 2 new nodes (skipped 485 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 408/506] Text attack: 1 new nodes (skipped 297 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 409/506] Text attack: 1 new nodes (skipped 368 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 410/506] Text attack: 13 new nodes (skipped 579 already attacked)
+🔥 Text Attack: 13 nodes grouped into 5 clusters (min/avg/max = 2/2.6/3).
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 0, Cache Hits: 5
+
+🎯 [Step 411/506] Text attack: 17 new nodes (skipped 290 already attacked)
+🔥 Text Attack: 17 nodes grouped into 5 clusters (min/avg/max = 3/3.4/4).
+✅ Cluster Attack Done. Success: 17/17, LLM Calls: 0, Cache Hits: 5
+
+🎯 [Step 412/506] Text attack: 11 new nodes (skipped 326 already attacked)
+🔥 Text Attack: 11 nodes grouped into 3 clusters (min/avg/max = 3/3.7/4).
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 0, Cache Hits: 3
+
+🎯 [Step 413/506] Text attack: 36 new nodes (skipped 523 already attacked)
+🔥 Text Attack: 36 nodes grouped into 13 clusters (min/avg/max = 2/2.8/4).
+✅ Cluster Attack Done. Success: 36/36, LLM Calls: 4, Cache Hits: 9
+
+🎯 [Step 414/506] Text attack: 2 new nodes (skipped 339 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 415/506] Text attack: 3 new nodes (skipped 322 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 416/506] Text attack: 16 new nodes (skipped 503 already attacked)
+🔥 Text Attack: 16 nodes grouped into 7 clusters (min/avg/max = 2/2.3/3).
+✅ Cluster Attack Done. Success: 16/16, LLM Calls: 2, Cache Hits: 5
+
+🎯 [Step 417/506] Text attack: 10 new nodes (skipped 373 already attacked)
+🔥 Text Attack: 10 nodes grouped into 3 clusters (min/avg/max = 2/3.3/4).
+✅ Cluster Attack Done. Success: 10/10, LLM Calls: 0, Cache Hits: 3
+
+⏭️ [Step 418/506] All 415 nodes already attacked, skipping
+
+🎯 [Step 419/506] Text attack: 3 new nodes (skipped 493 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 420/506] All 388 nodes already attacked, skipping
+
+⏭️ [Step 421/506] All 298 nodes already attacked, skipping
+
+🎯 [Step 422/506] Text attack: 1 new nodes (skipped 394 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 423/506] All 322 nodes already attacked, skipping
+
+🎯 [Step 424/506] Text attack: 2 new nodes (skipped 296 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 425/506] Text attack: 13 new nodes (skipped 389 already attacked)
+🔥 Text Attack: 13 nodes grouped into 5 clusters (min/avg/max = 2/2.6/3).
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 1, Cache Hits: 4
+
+⏭️ [Step 426/506] All 370 nodes already attacked, skipping
+
+🎯 [Step 427/506] Text attack: 6 new nodes (skipped 292 already attacked)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 428/506] Text attack: 2 new nodes (skipped 384 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 429/506] Text attack: 1 new nodes (skipped 430 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 430/506] All 474 nodes already attacked, skipping
+
+🎯 [Step 431/506] Text attack: 13 new nodes (skipped 440 already attacked)
+🔥 Text Attack: 13 nodes grouped into 5 clusters (min/avg/max = 2/2.6/4).
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 1, Cache Hits: 4
+
+🎯 [Step 432/506] Text attack: 1 new nodes (skipped 340 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 433/506] Text attack: 3 new nodes (skipped 508 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 434/506] Text attack: 3 new nodes (skipped 365 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 435/506] Text attack: 4 new nodes (skipped 333 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 436/506] Text attack: 1 new nodes (skipped 582 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 437/506] Text attack: 2 new nodes (skipped 296 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 438/506] Text attack: 1 new nodes (skipped 380 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 439/506] Text attack: 2 new nodes (skipped 368 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 440/506] All 298 nodes already attacked, skipping
+
+⏭️ [Step 441/506] All 389 nodes already attacked, skipping
+
+⏭️ [Step 442/506] All 379 nodes already attacked, skipping
+
+⏭️ [Step 443/506] All 298 nodes already attacked, skipping
+
+⏭️ [Step 444/506] All 356 nodes already attacked, skipping
+
+⏭️ [Step 445/506] All 425 nodes already attacked, skipping
+
+⏭️ [Step 446/506] All 355 nodes already attacked, skipping
+
+🎯 [Step 447/506] Text attack: 5 new nodes (skipped 552 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 448/506] Text attack: 1 new nodes (skipped 297 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 449/506] All 380 nodes already attacked, skipping
+
+⏭️ [Step 450/506] All 584 nodes already attacked, skipping
+
+⏭️ [Step 451/506] All 408 nodes already attacked, skipping
+
+🎯 [Step 452/506] Text attack: 1 new nodes (skipped 349 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 453/506] Text attack: 7 new nodes (skipped 506 already attacked)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 3/3.5/4).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 454/506] Text attack: 8 new nodes (skipped 317 already attacked)
+🔥 Text Attack: 8 nodes grouped into 2 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 0, Cache Hits: 2
+
+⏭️ [Step 455/506] All 323 nodes already attacked, skipping
+
+⏭️ [Step 456/506] All 396 nodes already attacked, skipping
+
+🎯 [Step 457/506] Text attack: 9 new nodes (skipped 329 already attacked)
+🔥 Text Attack: 9 nodes grouped into 3 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 1, Cache Hits: 2
+
+🎯 [Step 458/506] Text attack: 8 new nodes (skipped 347 already attacked)
+🔥 Text Attack: 8 nodes grouped into 2 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 0, Cache Hits: 2
+
+⏭️ [Step 459/506] All 348 nodes already attacked, skipping
+
+⏭️ [Step 460/506] All 419 nodes already attacked, skipping
+
+🎯 [Step 461/506] Text attack: 8 new nodes (skipped 436 already attacked)
+🔥 Text Attack: 8 nodes grouped into 3 clusters (min/avg/max = 2/2.7/3).
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 1, Cache Hits: 2
+
+🎯 [Step 462/506] Text attack: 4 new nodes (skipped 418 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 463/506] Text attack: 1 new nodes (skipped 558 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 464/506] All 370 nodes already attacked, skipping
+
+🎯 [Step 465/506] Text attack: 5 new nodes (skipped 564 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 0, Cache Hits: 2
+
+⏭️ [Step 466/506] All 357 nodes already attacked, skipping
+
+⏭️ [Step 467/506] All 593 nodes already attacked, skipping
+
+🎯 [Step 468/506] Text attack: 4 new nodes (skipped 567 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 469/506] All 499 nodes already attacked, skipping
+
+🎯 [Step 470/506] Text attack: 3 new nodes (skipped 565 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 471/506] Text attack: 3 new nodes (skipped 335 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 472/506] All 352 nodes already attacked, skipping
+
+⏭️ [Step 473/506] All 348 nodes already attacked, skipping
+
+⏭️ [Step 474/506] All 495 nodes already attacked, skipping
+
+🎯 [Step 475/506] Text attack: 2 new nodes (skipped 359 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 476/506] All 341 nodes already attacked, skipping
+
+⏭️ [Step 477/506] All 325 nodes already attacked, skipping
+
+🎯 [Step 478/506] Text attack: 4 new nodes (skipped 362 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 479/506] Text attack: 7 new nodes (skipped 382 already attacked)
+🔥 Text Attack: 7 nodes grouped into 3 clusters (min/avg/max = 2/2.3/3).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 1, Cache Hits: 2
+
+⏭️ [Step 480/506] All 357 nodes already attacked, skipping
+
+🎯 [Step 481/506] Text attack: 9 new nodes (skipped 404 already attacked)
+🔥 Text Attack: 9 nodes grouped into 3 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 0, Cache Hits: 3
+
+⏭️ [Step 482/506] All 399 nodes already attacked, skipping
+
+🎯 [Step 483/506] Text attack: 5 new nodes (skipped 364 already attacked)
+🔥 Text Attack: 5 nodes grouped into 2 clusters (min/avg/max = 2/2.5/3).
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 0, Cache Hits: 2
+
+⏭️ [Step 484/506] All 534 nodes already attacked, skipping
+
+🎯 [Step 485/506] Text attack: 3 new nodes (skipped 448 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 486/506] Text attack: 4 new nodes (skipped 402 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 487/506] All 379 nodes already attacked, skipping
+
+🎯 [Step 488/506] Text attack: 2 new nodes (skipped 593 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 489/506] All 298 nodes already attacked, skipping
+
+⏭️ [Step 490/506] All 353 nodes already attacked, skipping
+
+⏭️ [Step 491/506] All 298 nodes already attacked, skipping
+
+🎯 [Step 492/506] Text attack: 1 new nodes (skipped 557 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 493/506] Text attack: 16 new nodes (skipped 551 already attacked)
+🔥 Text Attack: 16 nodes grouped into 5 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 16/16, LLM Calls: 1, Cache Hits: 4
+
+⏭️ [Step 494/506] All 449 nodes already attacked, skipping
+
+🎯 [Step 495/506] Text attack: 9 new nodes (skipped 393 already attacked)
+🔥 Text Attack: 9 nodes grouped into 3 clusters (min/avg/max = 2/3.0/4).
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 0, Cache Hits: 3
+
+⏭️ [Step 496/506] All 425 nodes already attacked, skipping
+
+⏭️ [Step 497/506] All 324 nodes already attacked, skipping
+
+⏭️ [Step 498/506] All 298 nodes already attacked, skipping
+
+⏭️ [Step 499/506] All 321 nodes already attacked, skipping
+
+⏭️ [Step 500/506] All 545 nodes already attacked, skipping
+
+🎯 [Step 501/506] Text attack: 7 new nodes (skipped 584 already attacked)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 3/3.5/4).
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 0, Cache Hits: 2
+
+🎯 [Step 502/506] Text attack: 1 new nodes (skipped 567 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 503/506] All 402 nodes already attacked, skipping
+
+⏭️ [Step 504/506] All 371 nodes already attacked, skipping
+
+🎯 [Step 505/506] Text attack: 4 new nodes (skipped 364 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 506/506] Text attack: 2 new nodes (skipped 546 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+✅ Attack completed: Structure perturbations=506, Text attacks executed in-loop
+
+============================================================
+📊 Evaluation Results
+============================================================
+
+=== Clean graph ===
+Clean graph results: loss= 0.6233 accuracy= 0.8239
+
+=== Edge-only attack ===
+Edge-only attack results: loss= 0.6366 accuracy= 0.8163
+
+=== Feature-only attack ===
+Feature-only attack results: loss= 1.2960 accuracy= 0.6013
+
+=== Combined attack (edge + feature) ===
+Combined attack results: loss= 1.5132 accuracy= 0.5682
+
+============================================================
+📈 Attack Performance Summary
+============================================================
+  Clean accuracy:         0.8239
+  Edge attack accuracy:   0.8163 (drop: 0.0076)
+  Feature attack accuracy: 0.6013 (drop: 0.2226)
+  Combined accuracy:      0.5682 (drop: 0.2557)
+  Misclassification:      0.4318
+============================================================
+

@@ -631,15 +631,16 @@ class Heirattack(BaseAttack):
             feat_np = np.asarray(full_features)
 
         global_mean = feat_np.mean(axis=0)
-        diff = cluster_center - global_mean  # 正=簇高于全局, 负=簇低于全局
 
-        # 跨类混淆词：选取簇中心远低于全局均值的维度（即该簇缺少的词）
-        # 以及簇中心远高于全局均值的维度（即该簇特有的词）
-        # 取绝对差异最大的 topk 个维度
+        # 优先注入簇内缺失但全图常见的词，减少“只复述本簇属性”的保守扰动。
         vocab = self.text_generator.vocab
-        n_vocab = min(len(vocab), len(diff))
-        abs_diff = np.abs(diff[:n_vocab])
-        top_indices = np.argsort(-abs_diff)[:topk]
+        n_vocab = min(len(vocab), len(cluster_center), len(global_mean))
+        if n_vocab <= 0:
+            return []
+        missing_scores = np.maximum(global_mean[:n_vocab] - cluster_center[:n_vocab], 0)
+        if np.max(missing_scores) <= 1e-12:
+            missing_scores = np.abs(cluster_center[:n_vocab] - global_mean[:n_vocab])
+        top_indices = np.argsort(-missing_scores)[:topk]
         discriminative_words = [vocab[i] for i in top_indices if i < len(vocab)]
         return discriminative_words
 
@@ -766,11 +767,17 @@ class Heirattack(BaseAttack):
                             )
                         )
                         used_words = used_words[:budget_per_node]
+                        force_words = list(
+                            dict.fromkeys(
+                                discriminative_words[: self.text_cdl_topk]
+                                + used_words
+                            )
+                        )
 
-                        # Lightweight Adaptation: Fill missing words
-                        # Check which used_words are missing in template
+                        # Lightweight Adaptation: explicitly force confusing words
+                        # plus node-specific words into the vectorized text.
                         missing = [
-                            w for w in used_words if w.lower() not in template.lower()
+                            w for w in force_words if w.lower() not in template.lower()
                         ]
 
                         adapted_text = template
