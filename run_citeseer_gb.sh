@@ -8,7 +8,7 @@ ARGS=(
   --dataset citeseer
   --model Meta-Both
   --coarsen_method gb
-  --ptb_rate 0.20
+  --ptb_rate 0.1
 
   --level 4
   --step 1
