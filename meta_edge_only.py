@@ -146,9 +146,11 @@ if device != "cpu":
 pyg_flag = False
 amazon = "Computers"
 
+deeprobust_datasets = {"acm", "cora_ml", "polblogs", "blogcatalog", "uai", "flickr"}
+
 if args.dataset == "physics" or args.dataset == "cs":
     gb_data = get_coauthor_dataset(args.dataset, split=args.split_data)
-elif args.dataset == "acm" or args.dataset == "cora_ml" or args.dataset == "polblogs":
+elif args.dataset in deeprobust_datasets:
     gb_data = get_deeproubust_dataset(args.dataset, split=args.split_data)
 elif args.dataset == "computers" or args.dataset == "photo":
     gb_data = get_amazon_dataset(args.dataset, split=args.split_data)

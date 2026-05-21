@@ -1,0 +1,3555 @@
+Loading polblogs dataset...
+Selecting 1 largest connected components
+Loading polblogs dataset...
+Selecting 1 largest connected components
+(1222, 1490) (1,) (1222, 1222) 121 123 978
+Test set results: loss= 0.2562 accuracy= 0.9376
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (text generation or direct feature planning)
+============================================================
+
+⚠️ BoW vocabulary not found at ./bow_cache/polblogs.pkl; using fallback feature vocabulary with 1490 tokens for LLM-guided direct feature attack.
+Vocab size: 1490, Feature dim: 1490
+🦙 Detected Ollama - using model: llama3.2:1b-instruct-fp16
+Initialized GPT client with model: llama3.2:1b-instruct-fp16
+LLM direct feature planner enabled (no natural-language text generation).
+✅ LLM-guided direct identity feature attack initialized
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 1671 edges
+  Perturbation rate: 10.0%
+  Attack mode: Meta-Both
+  Structure search: method=gb, level=2, step=1, miter=420, lr=0.012
+  Global PPR: ratio=0.45, alpha=0.06, iters=180, seed=degree, label_w=0.0
+  Structure features: frozen to original features
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.14, alpha=0.22, iters=80, budget=64, per_step=None, max_visits=8, cluster=1-4, sim>=0.0, cdl_topk=120, cluster_attr_topk=120, max_added=64
+
+⚡ Identity-style features detected; using structural PPR and LLM-guided direct feature flips on unlabeled nodes.
+
+🎯 [Step 1/1671] Feature attack: 258 new nodes (skipped 26 already attacked)
+⚡ LLM-guided direct identity feature attack: 258/258 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=1, fallback_plans=1, cache_hits=256, llm_limit_skips=0).
+
+🎯 [Step 2/1671] Feature attack: 284 new nodes (skipped 26 already attacked)
+⚡ LLM-guided direct identity feature attack: 284/284 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=2, fallback_plans=0, cache_hits=282, llm_limit_skips=0).
+
+🎯 [Step 3/1671] Feature attack: 252 new nodes (skipped 28 already attacked)
+⚡ LLM-guided direct identity feature attack: 252/252 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=1, fallback_plans=1, cache_hits=250, llm_limit_skips=0).
+
+🎯 [Step 4/1671] Feature attack: 294 new nodes (skipped 31 already attacked)
+⚡ LLM-guided direct identity feature attack: 294/294 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=1, fallback_plans=1, cache_hits=292, llm_limit_skips=0).
+
+🎯 [Step 5/1671] Feature attack: 154 new nodes (skipped 17 already attacked)
+⚠️ LLM direct feature planner failed; using fallback. Expecting ':' delimiter: line 3 column 1 (char 16)
+⚡ LLM-guided direct identity feature attack: 154/154 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=153, llm_limit_skips=0).
+
+🎯 [Step 6/1671] Feature attack: 232 new nodes (skipped 21 already attacked)
+⚡ LLM-guided direct identity feature attack: 232/232 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=1, fallback_plans=1, cache_hits=230, llm_limit_skips=0).
+
+🎯 [Step 7/1671] Feature attack: 252 new nodes (skipped 22 already attacked)
+⚡ LLM-guided direct identity feature attack: 252/252 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=1, fallback_plans=1, cache_hits=250, llm_limit_skips=0).
+
+🎯 [Step 8/1671] Feature attack: 307 new nodes (skipped 35 already attacked)
+⚠️ LLM direct feature planner failed; using fallback. Expecting ',' delimiter: line 307 column 4 (char 4127)
+⚡ LLM-guided direct identity feature attack: 307/307 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=305, llm_limit_skips=0).
+
+🎯 [Step 9/1671] Feature attack: 270 new nodes (skipped 29 already attacked)
+⚡ LLM-guided direct identity feature attack: 270/270 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=268, llm_limit_skips=0).
+
+🎯 [Step 10/1671] Feature attack: 307 new nodes (skipped 35 already attacked)
+⚡ LLM-guided direct identity feature attack: 307/307 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=1, fallback_plans=1, cache_hits=305, llm_limit_skips=0).
+
+🎯 [Step 11/1671] Feature attack: 288 new nodes (skipped 32 already attacked)
+⚠️ LLM direct feature planner failed; using fallback. Expecting ':' delimiter: line 32 column 18 (char 768)
+⚠️ LLM direct feature planner failed; using fallback. Expecting ',' delimiter: line 90 column 2 (char 786)
+⚡ LLM-guided direct identity feature attack: 288/288 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=286, llm_limit_skips=0).
+
+🎯 [Step 12/1671] Feature attack: 314 new nodes (skipped 27 already attacked)
+⚠️ LLM direct feature planner failed; using fallback. Expecting ':' delimiter: line 3 column 141 (char 161)
+⚡ LLM-guided direct identity feature attack: 314/314 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=312, llm_limit_skips=0).
+
+🎯 [Step 13/1671] Feature attack: 297 new nodes (skipped 36 already attacked)
+⚡ LLM-guided direct identity feature attack: 297/297 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=2, fallback_plans=0, cache_hits=295, llm_limit_skips=0).
+
+🎯 [Step 14/1671] Feature attack: 193 new nodes (skipped 28 already attacked)
+⚡ LLM-guided direct identity feature attack: 193/193 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=1, fallback_plans=1, cache_hits=191, llm_limit_skips=0).
+
+🎯 [Step 15/1671] Feature attack: 277 new nodes (skipped 51 already attacked)
+⚠️ LLM direct feature planner failed; using fallback. Expecting ',' delimiter: line 99 column 2 (char 937)
+⚡ LLM-guided direct identity feature attack: 277/277 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=1, fallback_plans=1, cache_hits=275, llm_limit_skips=0).
+
+🎯 [Step 16/1671] Feature attack: 236 new nodes (skipped 60 already attacked)
+⚠️ LLM direct feature planner failed; using fallback. Expecting value: line 2 column 18 (char 19)
+⚡ LLM-guided direct identity feature attack: 236/236 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=234, llm_limit_skips=0).
+
+🎯 [Step 17/1671] Feature attack: 269 new nodes (skipped 49 already attacked)
+⚠️ LLM direct feature planner failed; using fallback. Expecting value: line 2 column 318 (char 319)
+⚡ LLM-guided direct identity feature attack: 269/269 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=267, llm_limit_skips=0).
+
+🎯 [Step 18/1671] Feature attack: 265 new nodes (skipped 77 already attacked)
+⚡ LLM-guided direct identity feature attack: 265/265 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=1, fallback_plans=1, cache_hits=263, llm_limit_skips=0).
+
+🎯 [Step 19/1671] Feature attack: 243 new nodes (skipped 99 already attacked)
+⚡ LLM-guided direct identity feature attack: 243/243 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=2, fallback_plans=0, cache_hits=241, llm_limit_skips=0).
+
+🎯 [Step 20/1671] Feature attack: 166 new nodes (skipped 172 already attacked)
+⚠️ LLM direct feature planner failed; using fallback. Expecting ':' delimiter: line 2 column 14 (char 15)
+⚡ LLM-guided direct identity feature attack: 166/166 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=164, llm_limit_skips=0).
+
+🎯 [Step 21/1671] Feature attack: 233 new nodes (skipped 108 already attacked)
+⚠️ LLM direct feature planner failed; using fallback. Expecting value: line 2 column 17 (char 18)
+⚡ LLM-guided direct identity feature attack: 233/233 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=1, fallback_plans=1, cache_hits=231, llm_limit_skips=0).
+
+🎯 [Step 22/1671] Feature attack: 231 new nodes (skipped 101 already attacked)
+⚠️ LLM direct feature planner failed; using fallback. Expecting ',' delimiter: line 17 column 32 (char 503)
+⚡ LLM-guided direct identity feature attack: 231/231 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=229, llm_limit_skips=0).
+
+🎯 [Step 23/1671] Feature attack: 197 new nodes (skipped 125 already attacked)
+⚡ LLM-guided direct identity feature attack: 197/197 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=1, fallback_plans=1, cache_hits=195, llm_limit_skips=0).
+
+🎯 [Step 24/1671] Feature attack: 163 new nodes (skipped 88 already attacked)
+⚡ LLM-guided direct identity feature attack: 163/163 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=1, fallback_plans=1, cache_hits=161, llm_limit_skips=0).
+
+🎯 [Step 25/1671] Feature attack: 187 new nodes (skipped 154 already attacked)
+⚡ LLM-guided direct identity feature attack: 187/187 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=185, llm_limit_skips=1).
+
+🎯 [Step 26/1671] Feature attack: 92 new nodes (skipped 240 already attacked)
+⚡ LLM-guided direct identity feature attack: 92/92 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=90, llm_limit_skips=2).
+
+🎯 [Step 27/1671] Feature attack: 175 new nodes (skipped 156 already attacked)
+⚡ LLM-guided direct identity feature attack: 175/175 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=173, llm_limit_skips=2).
+
+🎯 [Step 28/1671] Feature attack: 194 new nodes (skipped 139 already attacked)
+⚡ LLM-guided direct identity feature attack: 194/194 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=192, llm_limit_skips=2).
+
+🎯 [Step 29/1671] Feature attack: 152 new nodes (skipped 190 already attacked)
+⚡ LLM-guided direct identity feature attack: 152/152 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=150, llm_limit_skips=2).
+
+🎯 [Step 30/1671] Feature attack: 177 new nodes (skipped 154 already attacked)
+⚡ LLM-guided direct identity feature attack: 177/177 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=175, llm_limit_skips=2).
+
+🎯 [Step 31/1671] Feature attack: 80 new nodes (skipped 241 already attacked)
+⚡ LLM-guided direct identity feature attack: 80/80 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=78, llm_limit_skips=2).
+
+🎯 [Step 32/1671] Feature attack: 148 new nodes (skipped 193 already attacked)
+⚡ LLM-guided direct identity feature attack: 148/148 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=146, llm_limit_skips=2).
+
+🎯 [Step 33/1671] Feature attack: 150 new nodes (skipped 191 already attacked)
+⚡ LLM-guided direct identity feature attack: 150/150 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=148, llm_limit_skips=2).
+
+🎯 [Step 34/1671] Feature attack: 152 new nodes (skipped 161 already attacked)
+⚡ LLM-guided direct identity feature attack: 152/152 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=150, llm_limit_skips=2).
+
+🎯 [Step 35/1671] Feature attack: 59 new nodes (skipped 274 already attacked)
+⚡ LLM-guided direct identity feature attack: 59/59 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=57, llm_limit_skips=2).
+
+🎯 [Step 36/1671] Feature attack: 71 new nodes (skipped 191 already attacked)
+⚡ LLM-guided direct identity feature attack: 71/71 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=69, llm_limit_skips=2).
+
+🎯 [Step 37/1671] Feature attack: 38 new nodes (skipped 302 already attacked)
+⚡ LLM-guided direct identity feature attack: 38/38 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=36, llm_limit_skips=2).
+
+🎯 [Step 38/1671] Feature attack: 89 new nodes (skipped 200 already attacked)
+⚡ LLM-guided direct identity feature attack: 89/89 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=87, llm_limit_skips=2).
+
+🎯 [Step 39/1671] Feature attack: 30 new nodes (skipped 276 already attacked)
+⚡ LLM-guided direct identity feature attack: 30/30 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=28, llm_limit_skips=2).
+
+🎯 [Step 40/1671] Feature attack: 16 new nodes (skipped 199 already attacked)
+⚡ LLM-guided direct identity feature attack: 16/16 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=15, llm_limit_skips=1).
+
+🎯 [Step 41/1671] Feature attack: 24 new nodes (skipped 315 already attacked)
+⚡ LLM-guided direct identity feature attack: 24/24 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=22, llm_limit_skips=2).
+
+🎯 [Step 42/1671] Feature attack: 30 new nodes (skipped 284 already attacked)
+⚡ LLM-guided direct identity feature attack: 30/30 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=28, llm_limit_skips=2).
+
+🎯 [Step 43/1671] Feature attack: 69 new nodes (skipped 234 already attacked)
+⚡ LLM-guided direct identity feature attack: 69/69 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=68, llm_limit_skips=1).
+
+🎯 [Step 44/1671] Feature attack: 55 new nodes (skipped 281 already attacked)
+⚡ LLM-guided direct identity feature attack: 55/55 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=53, llm_limit_skips=2).
+
+🎯 [Step 45/1671] Feature attack: 34 new nodes (skipped 277 already attacked)
+⚡ LLM-guided direct identity feature attack: 34/34 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=32, llm_limit_skips=2).
+
+🎯 [Step 46/1671] Feature attack: 25 new nodes (skipped 146 already attacked)
+⚡ LLM-guided direct identity feature attack: 25/25 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=23, llm_limit_skips=2).
+
+🎯 [Step 47/1671] Feature attack: 34 new nodes (skipped 264 already attacked)
+⚡ LLM-guided direct identity feature attack: 34/34 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=32, llm_limit_skips=2).
+
+🎯 [Step 48/1671] Feature attack: 13 new nodes (skipped 158 already attacked)
+⚡ LLM-guided direct identity feature attack: 13/13 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=12, llm_limit_skips=1).
+
+🎯 [Step 49/1671] Feature attack: 22 new nodes (skipped 295 already attacked)
+⚡ LLM-guided direct identity feature attack: 22/22 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=20, llm_limit_skips=2).
+
+🎯 [Step 50/1671] Feature attack: 22 new nodes (skipped 316 already attacked)
+⚡ LLM-guided direct identity feature attack: 22/22 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=20, llm_limit_skips=2).
+
+🎯 [Step 51/1671] Feature attack: 24 new nodes (skipped 318 already attacked)
+⚡ LLM-guided direct identity feature attack: 24/24 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=22, llm_limit_skips=2).
+
+🎯 [Step 52/1671] Feature attack: 15 new nodes (skipped 291 already attacked)
+⚡ LLM-guided direct identity feature attack: 15/15 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=13, llm_limit_skips=2).
+
+🎯 [Step 53/1671] Feature attack: 64 new nodes (skipped 227 already attacked)
+⚡ LLM-guided direct identity feature attack: 64/64 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=62, llm_limit_skips=2).
+
+🎯 [Step 54/1671] Feature attack: 3 new nodes (skipped 317 already attacked)
+⚡ LLM-guided direct identity feature attack: 3/3 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=2, llm_limit_skips=1).
+
+🎯 [Step 55/1671] Feature attack: 28 new nodes (skipped 313 already attacked)
+⚡ LLM-guided direct identity feature attack: 28/28 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=26, llm_limit_skips=2).
+
+🎯 [Step 56/1671] Feature attack: 26 new nodes (skipped 305 already attacked)
+⚡ LLM-guided direct identity feature attack: 26/26 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=24, llm_limit_skips=2).
+
+🎯 [Step 57/1671] Feature attack: 34 new nodes (skipped 305 already attacked)
+⚡ LLM-guided direct identity feature attack: 34/34 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=32, llm_limit_skips=2).
+
+🎯 [Step 58/1671] Feature attack: 13 new nodes (skipped 296 already attacked)
+⚡ LLM-guided direct identity feature attack: 13/13 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=11, llm_limit_skips=2).
+
+🎯 [Step 59/1671] Feature attack: 6 new nodes (skipped 325 already attacked)
+⚡ LLM-guided direct identity feature attack: 6/6 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=4, llm_limit_skips=2).
+
+🎯 [Step 60/1671] Feature attack: 13 new nodes (skipped 230 already attacked)
+⚡ LLM-guided direct identity feature attack: 13/13 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=11, llm_limit_skips=2).
+
+🎯 [Step 61/1671] Feature attack: 7 new nodes (skipped 238 already attacked)
+⚡ LLM-guided direct identity feature attack: 7/7 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=5, llm_limit_skips=2).
+
+🎯 [Step 62/1671] Feature attack: 31 new nodes (skipped 297 already attacked)
+⚡ LLM-guided direct identity feature attack: 31/31 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=29, llm_limit_skips=2).
+
+🎯 [Step 63/1671] Feature attack: 18 new nodes (skipped 308 already attacked)
+⚡ LLM-guided direct identity feature attack: 18/18 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=16, llm_limit_skips=2).
+
+🎯 [Step 64/1671] Feature attack: 34 new nodes (skipped 300 already attacked)
+⚡ LLM-guided direct identity feature attack: 34/34 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=32, llm_limit_skips=2).
+
+🎯 [Step 65/1671] Feature attack: 11 new nodes (skipped 300 already attacked)
+⚡ LLM-guided direct identity feature attack: 11/11 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=9, llm_limit_skips=2).
+
+🎯 [Step 66/1671] Feature attack: 22 new nodes (skipped 316 already attacked)
+⚡ LLM-guided direct identity feature attack: 22/22 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=20, llm_limit_skips=2).
+
+🎯 [Step 67/1671] Feature attack: 11 new nodes (skipped 285 already attacked)
+⚡ LLM-guided direct identity feature attack: 11/11 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=9, llm_limit_skips=2).
+
+🎯 [Step 68/1671] Feature attack: 22 new nodes (skipped 250 already attacked)
+⚡ LLM-guided direct identity feature attack: 22/22 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=20, llm_limit_skips=2).
+
+🎯 [Step 69/1671] Feature attack: 9 new nodes (skipped 303 already attacked)
+⚡ LLM-guided direct identity feature attack: 9/9 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=7, llm_limit_skips=2).
+
+🎯 [Step 70/1671] Feature attack: 8 new nodes (skipped 227 already attacked)
+⚡ LLM-guided direct identity feature attack: 8/8 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=6, llm_limit_skips=2).
+
+🎯 [Step 71/1671] Feature attack: 3 new nodes (skipped 327 already attacked)
+⚡ LLM-guided direct identity feature attack: 3/3 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=1, llm_limit_skips=2).
+
+🎯 [Step 72/1671] Feature attack: 7 new nodes (skipped 334 already attacked)
+⚡ LLM-guided direct identity feature attack: 7/7 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=6, llm_limit_skips=1).
+
+🎯 [Step 73/1671] Feature attack: 9 new nodes (skipped 295 already attacked)
+⚡ LLM-guided direct identity feature attack: 9/9 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=8, llm_limit_skips=1).
+
+🎯 [Step 74/1671] Feature attack: 2 new nodes (skipped 314 already attacked)
+⚡ LLM-guided direct identity feature attack: 2/2 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=0, llm_limit_skips=2).
+
+🎯 [Step 75/1671] Feature attack: 18 new nodes (skipped 324 already attacked)
+⚡ LLM-guided direct identity feature attack: 18/18 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=16, llm_limit_skips=2).
+
+🎯 [Step 76/1671] Feature attack: 4 new nodes (skipped 248 already attacked)
+⚡ LLM-guided direct identity feature attack: 4/4 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=2, llm_limit_skips=2).
+
+🎯 [Step 77/1671] Feature attack: 4 new nodes (skipped 296 already attacked)
+⚡ LLM-guided direct identity feature attack: 4/4 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=3, llm_limit_skips=1).
+
+🎯 [Step 78/1671] Feature attack: 30 new nodes (skipped 311 already attacked)
+⚡ LLM-guided direct identity feature attack: 30/30 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=28, llm_limit_skips=2).
+
+🎯 [Step 79/1671] Feature attack: 6 new nodes (skipped 317 already attacked)
+⚡ LLM-guided direct identity feature attack: 6/6 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=5, llm_limit_skips=1).
+
+🎯 [Step 80/1671] Feature attack: 3 new nodes (skipped 294 already attacked)
+⚡ LLM-guided direct identity feature attack: 3/3 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=2, llm_limit_skips=1).
+
+🎯 [Step 81/1671] Feature attack: 8 new nodes (skipped 329 already attacked)
+⚡ LLM-guided direct identity feature attack: 8/8 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=6, llm_limit_skips=2).
+
+🎯 [Step 82/1671] Feature attack: 10 new nodes (skipped 315 already attacked)
+⚡ LLM-guided direct identity feature attack: 10/10 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=8, llm_limit_skips=2).
+
+🎯 [Step 83/1671] Feature attack: 13 new nodes (skipped 288 already attacked)
+⚡ LLM-guided direct identity feature attack: 13/13 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=11, llm_limit_skips=2).
+
+⏭️ [Step 84/1671] All 338 nodes already attacked, skipping
+
+🎯 [Step 85/1671] Feature attack: 5 new nodes (skipped 333 already attacked)
+⚡ LLM-guided direct identity feature attack: 5/5 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=3, llm_limit_skips=2).
+
+🎯 [Step 86/1671] Feature attack: 11 new nodes (skipped 289 already attacked)
+⚡ LLM-guided direct identity feature attack: 11/11 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=10, llm_limit_skips=1).
+
+🎯 [Step 87/1671] Feature attack: 4 new nodes (skipped 325 already attacked)
+⚡ LLM-guided direct identity feature attack: 4/4 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=2, llm_limit_skips=2).
+
+🎯 [Step 88/1671] Feature attack: 6 new nodes (skipped 295 already attacked)
+⚡ LLM-guided direct identity feature attack: 6/6 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=5, llm_limit_skips=1).
+
+🎯 [Step 89/1671] Feature attack: 4 new nodes (skipped 336 already attacked)
+⚡ LLM-guided direct identity feature attack: 4/4 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=2, llm_limit_skips=2).
+
+🎯 [Step 90/1671] Feature attack: 3 new nodes (skipped 336 already attacked)
+⚡ LLM-guided direct identity feature attack: 3/3 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=1, llm_limit_skips=2).
+
+🎯 [Step 91/1671] Feature attack: 6 new nodes (skipped 334 already attacked)
+⚡ LLM-guided direct identity feature attack: 6/6 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=4, llm_limit_skips=2).
+
+🎯 [Step 92/1671] Feature attack: 5 new nodes (skipped 312 already attacked)
+⚡ LLM-guided direct identity feature attack: 5/5 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=3, llm_limit_skips=2).
+
+🎯 [Step 93/1671] Feature attack: 4 new nodes (skipped 336 already attacked)
+⚡ LLM-guided direct identity feature attack: 4/4 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=3, llm_limit_skips=1).
+
+🎯 [Step 94/1671] Feature attack: 1 new nodes (skipped 256 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+🎯 [Step 95/1671] Feature attack: 4 new nodes (skipped 338 already attacked)
+⚡ LLM-guided direct identity feature attack: 4/4 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=2, llm_limit_skips=2).
+
+🎯 [Step 96/1671] Feature attack: 1 new nodes (skipped 336 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+🎯 [Step 97/1671] Feature attack: 3 new nodes (skipped 327 already attacked)
+⚡ LLM-guided direct identity feature attack: 3/3 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=1, llm_limit_skips=2).
+
+🎯 [Step 98/1671] Feature attack: 5 new nodes (skipped 291 already attacked)
+⚡ LLM-guided direct identity feature attack: 5/5 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=3, llm_limit_skips=2).
+
+🎯 [Step 99/1671] Feature attack: 6 new nodes (skipped 314 already attacked)
+⚡ LLM-guided direct identity feature attack: 6/6 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=4, llm_limit_skips=2).
+
+🎯 [Step 100/1671] Feature attack: 1 new nodes (skipped 201 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+🎯 [Step 101/1671] Feature attack: 4 new nodes (skipped 333 already attacked)
+⚡ LLM-guided direct identity feature attack: 4/4 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=2, llm_limit_skips=2).
+
+🎯 [Step 102/1671] Feature attack: 3 new nodes (skipped 287 already attacked)
+⚡ LLM-guided direct identity feature attack: 3/3 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=1, llm_limit_skips=2).
+
+🎯 [Step 103/1671] Feature attack: 2 new nodes (skipped 315 already attacked)
+⚡ LLM-guided direct identity feature attack: 2/2 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=1, llm_limit_skips=1).
+
+🎯 [Step 104/1671] Feature attack: 4 new nodes (skipped 245 already attacked)
+⚡ LLM-guided direct identity feature attack: 4/4 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=3, llm_limit_skips=1).
+
+⏭️ [Step 105/1671] All 184 nodes already attacked, skipping
+
+🎯 [Step 106/1671] Feature attack: 1 new nodes (skipped 332 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+🎯 [Step 107/1671] Feature attack: 2 new nodes (skipped 335 already attacked)
+⚡ LLM-guided direct identity feature attack: 2/2 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=1, llm_limit_skips=1).
+
+⏭️ [Step 108/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 109/1671] All 296 nodes already attacked, skipping
+
+🎯 [Step 110/1671] Feature attack: 3 new nodes (skipped 296 already attacked)
+⚡ LLM-guided direct identity feature attack: 3/3 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=2, llm_limit_skips=1).
+
+🎯 [Step 111/1671] Feature attack: 16 new nodes (skipped 325 already attacked)
+⚡ LLM-guided direct identity feature attack: 16/16 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=14, llm_limit_skips=2).
+
+🎯 [Step 112/1671] Feature attack: 3 new nodes (skipped 335 already attacked)
+⚡ LLM-guided direct identity feature attack: 3/3 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=2, llm_limit_skips=1).
+
+🎯 [Step 113/1671] Feature attack: 3 new nodes (skipped 334 already attacked)
+⚡ LLM-guided direct identity feature attack: 3/3 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=2, llm_limit_skips=1).
+
+🎯 [Step 114/1671] Feature attack: 1 new nodes (skipped 309 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+🎯 [Step 115/1671] Feature attack: 6 new nodes (skipped 318 already attacked)
+⚡ LLM-guided direct identity feature attack: 6/6 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=5, llm_limit_skips=1).
+
+🎯 [Step 116/1671] Feature attack: 3 new nodes (skipped 338 already attacked)
+⚡ LLM-guided direct identity feature attack: 3/3 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=1, llm_limit_skips=2).
+
+🎯 [Step 117/1671] Feature attack: 1 new nodes (skipped 301 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+🎯 [Step 118/1671] Feature attack: 5 new nodes (skipped 316 already attacked)
+⚡ LLM-guided direct identity feature attack: 5/5 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=3, llm_limit_skips=2).
+
+⏭️ [Step 119/1671] All 280 nodes already attacked, skipping
+
+🎯 [Step 120/1671] Feature attack: 5 new nodes (skipped 326 already attacked)
+⚡ LLM-guided direct identity feature attack: 5/5 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=4, llm_limit_skips=1).
+
+⏭️ [Step 121/1671] All 312 nodes already attacked, skipping
+
+🎯 [Step 122/1671] Feature attack: 1 new nodes (skipped 334 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+🎯 [Step 123/1671] Feature attack: 4 new nodes (skipped 303 already attacked)
+⚡ LLM-guided direct identity feature attack: 4/4 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=3, llm_limit_skips=1).
+
+🎯 [Step 124/1671] Feature attack: 3 new nodes (skipped 336 already attacked)
+⚡ LLM-guided direct identity feature attack: 3/3 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=1, llm_limit_skips=2).
+
+⏭️ [Step 125/1671] All 254 nodes already attacked, skipping
+
+🎯 [Step 126/1671] Feature attack: 3 new nodes (skipped 338 already attacked)
+⚡ LLM-guided direct identity feature attack: 3/3 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=1, llm_limit_skips=2).
+
+🎯 [Step 127/1671] Feature attack: 5 new nodes (skipped 328 already attacked)
+⚡ LLM-guided direct identity feature attack: 5/5 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=3, llm_limit_skips=2).
+
+🎯 [Step 128/1671] Feature attack: 3 new nodes (skipped 318 already attacked)
+⚡ LLM-guided direct identity feature attack: 3/3 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=2, llm_limit_skips=1).
+
+🎯 [Step 129/1671] Feature attack: 1 new nodes (skipped 204 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+🎯 [Step 130/1671] Feature attack: 1 new nodes (skipped 292 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+⏭️ [Step 131/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 132/1671] All 316 nodes already attacked, skipping
+
+🎯 [Step 133/1671] Feature attack: 1 new nodes (skipped 337 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+🎯 [Step 134/1671] Feature attack: 1 new nodes (skipped 331 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+🎯 [Step 135/1671] Feature attack: 1 new nodes (skipped 321 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+🎯 [Step 136/1671] Feature attack: 1 new nodes (skipped 295 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+⏭️ [Step 137/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 138/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 139/1671] All 329 nodes already attacked, skipping
+
+🎯 [Step 140/1671] Feature attack: 4 new nodes (skipped 332 already attacked)
+⚡ LLM-guided direct identity feature attack: 4/4 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=2, cache_hits=2, llm_limit_skips=2).
+
+🎯 [Step 141/1671] Feature attack: 1 new nodes (skipped 339 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+⏭️ [Step 142/1671] All 280 nodes already attacked, skipping
+
+⏭️ [Step 143/1671] All 342 nodes already attacked, skipping
+
+🎯 [Step 144/1671] Feature attack: 1 new nodes (skipped 324 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+⏭️ [Step 145/1671] All 265 nodes already attacked, skipping
+
+⏭️ [Step 146/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 147/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 148/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 149/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 150/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 151/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 152/1671] All 308 nodes already attacked, skipping
+
+🎯 [Step 153/1671] Feature attack: 1 new nodes (skipped 339 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+⏭️ [Step 154/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 155/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 156/1671] All 318 nodes already attacked, skipping
+
+🎯 [Step 157/1671] Feature attack: 1 new nodes (skipped 268 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+⏭️ [Step 158/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 159/1671] All 221 nodes already attacked, skipping
+
+⏭️ [Step 160/1671] All 300 nodes already attacked, skipping
+
+⏭️ [Step 161/1671] All 270 nodes already attacked, skipping
+
+⏭️ [Step 162/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 163/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 164/1671] All 302 nodes already attacked, skipping
+
+🎯 [Step 165/1671] Feature attack: 1 new nodes (skipped 341 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+⏭️ [Step 166/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 167/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 168/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 169/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 170/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 171/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 172/1671] All 285 nodes already attacked, skipping
+
+⏭️ [Step 173/1671] All 341 nodes already attacked, skipping
+
+🎯 [Step 174/1671] Feature attack: 1 new nodes (skipped 325 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+🎯 [Step 175/1671] Feature attack: 1 new nodes (skipped 304 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+🎯 [Step 176/1671] Feature attack: 1 new nodes (skipped 318 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+⏭️ [Step 177/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 178/1671] All 313 nodes already attacked, skipping
+
+⏭️ [Step 179/1671] All 246 nodes already attacked, skipping
+
+⏭️ [Step 180/1671] All 274 nodes already attacked, skipping
+
+⏭️ [Step 181/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 182/1671] All 240 nodes already attacked, skipping
+
+⏭️ [Step 183/1671] All 307 nodes already attacked, skipping
+
+🎯 [Step 184/1671] Feature attack: 1 new nodes (skipped 310 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+⏭️ [Step 185/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 186/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 187/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 188/1671] All 297 nodes already attacked, skipping
+
+🎯 [Step 189/1671] Feature attack: 1 new nodes (skipped 336 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+⏭️ [Step 190/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 191/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 192/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 193/1671] All 318 nodes already attacked, skipping
+
+🎯 [Step 194/1671] Feature attack: 1 new nodes (skipped 325 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+⏭️ [Step 195/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 196/1671] All 203 nodes already attacked, skipping
+
+⏭️ [Step 197/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 198/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 199/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 200/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 201/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 202/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 203/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 204/1671] All 300 nodes already attacked, skipping
+
+⏭️ [Step 205/1671] All 221 nodes already attacked, skipping
+
+⏭️ [Step 206/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 207/1671] All 303 nodes already attacked, skipping
+
+🎯 [Step 208/1671] Feature attack: 1 new nodes (skipped 325 already attacked)
+⚡ LLM-guided direct identity feature attack: 1/1 nodes, 64 opposite-label feature dimensions per node (new_llm_plans=0, fallback_plans=1, cache_hits=0, llm_limit_skips=1).
+
+⏭️ [Step 209/1671] All 273 nodes already attacked, skipping
+
+⏭️ [Step 210/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 211/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 212/1671] All 263 nodes already attacked, skipping
+
+⏭️ [Step 213/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 214/1671] All 255 nodes already attacked, skipping
+
+⏭️ [Step 215/1671] All 254 nodes already attacked, skipping
+
+⏭️ [Step 216/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 217/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 218/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 219/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 220/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 221/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 222/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 223/1671] All 227 nodes already attacked, skipping
+
+⏭️ [Step 224/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 225/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 226/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 227/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 228/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 229/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 230/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 231/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 232/1671] All 270 nodes already attacked, skipping
+
+⏭️ [Step 233/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 234/1671] All 265 nodes already attacked, skipping
+
+⏭️ [Step 235/1671] All 284 nodes already attacked, skipping
+
+⏭️ [Step 236/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 237/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 238/1671] All 244 nodes already attacked, skipping
+
+⏭️ [Step 239/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 240/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 241/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 242/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 243/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 244/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 245/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 246/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 247/1671] All 237 nodes already attacked, skipping
+
+⏭️ [Step 248/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 249/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 250/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 251/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 252/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 253/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 254/1671] All 312 nodes already attacked, skipping
+
+⏭️ [Step 255/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 256/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 257/1671] All 268 nodes already attacked, skipping
+
+⏭️ [Step 258/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 259/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 260/1671] All 255 nodes already attacked, skipping
+
+⏭️ [Step 261/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 262/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 263/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 264/1671] All 313 nodes already attacked, skipping
+
+⏭️ [Step 265/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 266/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 267/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 268/1671] All 268 nodes already attacked, skipping
+
+⏭️ [Step 269/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 270/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 271/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 272/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 273/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 274/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 275/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 276/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 277/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 278/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 279/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 280/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 281/1671] All 300 nodes already attacked, skipping
+
+⏭️ [Step 282/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 283/1671] All 267 nodes already attacked, skipping
+
+⏭️ [Step 284/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 285/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 286/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 287/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 288/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 289/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 290/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 291/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 292/1671] All 255 nodes already attacked, skipping
+
+⏭️ [Step 293/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 294/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 295/1671] All 208 nodes already attacked, skipping
+
+⏭️ [Step 296/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 297/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 298/1671] All 174 nodes already attacked, skipping
+
+⏭️ [Step 299/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 300/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 301/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 302/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 303/1671] All 171 nodes already attacked, skipping
+
+⏭️ [Step 304/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 305/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 306/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 307/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 308/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 309/1671] All 291 nodes already attacked, skipping
+
+⏭️ [Step 310/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 311/1671] All 298 nodes already attacked, skipping
+
+⏭️ [Step 312/1671] All 273 nodes already attacked, skipping
+
+⏭️ [Step 313/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 314/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 315/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 316/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 317/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 318/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 319/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 320/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 321/1671] All 277 nodes already attacked, skipping
+
+⏭️ [Step 322/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 323/1671] All 287 nodes already attacked, skipping
+
+⏭️ [Step 324/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 325/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 326/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 327/1671] All 264 nodes already attacked, skipping
+
+⏭️ [Step 328/1671] All 240 nodes already attacked, skipping
+
+⏭️ [Step 329/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 330/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 331/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 332/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 333/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 334/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 335/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 336/1671] All 241 nodes already attacked, skipping
+
+⏭️ [Step 337/1671] All 284 nodes already attacked, skipping
+
+⏭️ [Step 338/1671] All 248 nodes already attacked, skipping
+
+⏭️ [Step 339/1671] All 276 nodes already attacked, skipping
+
+⏭️ [Step 340/1671] All 270 nodes already attacked, skipping
+
+⏭️ [Step 341/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 342/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 343/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 344/1671] All 266 nodes already attacked, skipping
+
+⏭️ [Step 345/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 346/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 347/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 348/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 349/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 350/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 351/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 352/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 353/1671] All 229 nodes already attacked, skipping
+
+⏭️ [Step 354/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 355/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 356/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 357/1671] All 277 nodes already attacked, skipping
+
+⏭️ [Step 358/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 359/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 360/1671] All 290 nodes already attacked, skipping
+
+⏭️ [Step 361/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 362/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 363/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 364/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 365/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 366/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 367/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 368/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 369/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 370/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 371/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 372/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 373/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 374/1671] All 298 nodes already attacked, skipping
+
+⏭️ [Step 375/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 376/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 377/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 378/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 379/1671] All 312 nodes already attacked, skipping
+
+⏭️ [Step 380/1671] All 269 nodes already attacked, skipping
+
+⏭️ [Step 381/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 382/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 383/1671] All 221 nodes already attacked, skipping
+
+⏭️ [Step 384/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 385/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 386/1671] All 257 nodes already attacked, skipping
+
+⏭️ [Step 387/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 388/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 389/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 390/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 391/1671] All 274 nodes already attacked, skipping
+
+⏭️ [Step 392/1671] All 234 nodes already attacked, skipping
+
+⏭️ [Step 393/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 394/1671] All 275 nodes already attacked, skipping
+
+⏭️ [Step 395/1671] All 282 nodes already attacked, skipping
+
+⏭️ [Step 396/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 397/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 398/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 399/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 400/1671] All 264 nodes already attacked, skipping
+
+⏭️ [Step 401/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 402/1671] All 269 nodes already attacked, skipping
+
+⏭️ [Step 403/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 404/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 405/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 406/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 407/1671] All 225 nodes already attacked, skipping
+
+⏭️ [Step 408/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 409/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 410/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 411/1671] All 277 nodes already attacked, skipping
+
+⏭️ [Step 412/1671] All 250 nodes already attacked, skipping
+
+⏭️ [Step 413/1671] All 257 nodes already attacked, skipping
+
+⏭️ [Step 414/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 415/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 416/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 417/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 418/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 419/1671] All 312 nodes already attacked, skipping
+
+⏭️ [Step 420/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 421/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 422/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 423/1671] All 257 nodes already attacked, skipping
+
+⏭️ [Step 424/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 425/1671] All 257 nodes already attacked, skipping
+
+⏭️ [Step 426/1671] All 270 nodes already attacked, skipping
+
+⏭️ [Step 427/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 428/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 429/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 430/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 431/1671] All 282 nodes already attacked, skipping
+
+⏭️ [Step 432/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 433/1671] All 289 nodes already attacked, skipping
+
+⏭️ [Step 434/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 435/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 436/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 437/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 438/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 439/1671] All 258 nodes already attacked, skipping
+
+⏭️ [Step 440/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 441/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 442/1671] All 230 nodes already attacked, skipping
+
+⏭️ [Step 443/1671] All 249 nodes already attacked, skipping
+
+⏭️ [Step 444/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 445/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 446/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 447/1671] All 282 nodes already attacked, skipping
+
+⏭️ [Step 448/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 449/1671] All 244 nodes already attacked, skipping
+
+⏭️ [Step 450/1671] All 262 nodes already attacked, skipping
+
+⏭️ [Step 451/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 452/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 453/1671] All 252 nodes already attacked, skipping
+
+⏭️ [Step 454/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 455/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 456/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 457/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 458/1671] All 269 nodes already attacked, skipping
+
+⏭️ [Step 459/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 460/1671] All 247 nodes already attacked, skipping
+
+⏭️ [Step 461/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 462/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 463/1671] All 270 nodes already attacked, skipping
+
+⏭️ [Step 464/1671] All 261 nodes already attacked, skipping
+
+⏭️ [Step 465/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 466/1671] All 247 nodes already attacked, skipping
+
+⏭️ [Step 467/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 468/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 469/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 470/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 471/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 472/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 473/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 474/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 475/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 476/1671] All 287 nodes already attacked, skipping
+
+⏭️ [Step 477/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 478/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 479/1671] All 248 nodes already attacked, skipping
+
+⏭️ [Step 480/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 481/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 482/1671] All 270 nodes already attacked, skipping
+
+⏭️ [Step 483/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 484/1671] All 264 nodes already attacked, skipping
+
+⏭️ [Step 485/1671] All 266 nodes already attacked, skipping
+
+⏭️ [Step 486/1671] All 282 nodes already attacked, skipping
+
+⏭️ [Step 487/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 488/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 489/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 490/1671] All 253 nodes already attacked, skipping
+
+⏭️ [Step 491/1671] All 217 nodes already attacked, skipping
+
+⏭️ [Step 492/1671] All 273 nodes already attacked, skipping
+
+⏭️ [Step 493/1671] All 313 nodes already attacked, skipping
+
+⏭️ [Step 494/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 495/1671] All 267 nodes already attacked, skipping
+
+⏭️ [Step 496/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 497/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 498/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 499/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 500/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 501/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 502/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 503/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 504/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 505/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 506/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 507/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 508/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 509/1671] All 263 nodes already attacked, skipping
+
+⏭️ [Step 510/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 511/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 512/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 513/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 514/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 515/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 516/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 517/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 518/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 519/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 520/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 521/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 522/1671] All 232 nodes already attacked, skipping
+
+⏭️ [Step 523/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 524/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 525/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 526/1671] All 284 nodes already attacked, skipping
+
+⏭️ [Step 527/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 528/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 529/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 530/1671] All 282 nodes already attacked, skipping
+
+⏭️ [Step 531/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 532/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 533/1671] All 273 nodes already attacked, skipping
+
+⏭️ [Step 534/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 535/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 536/1671] All 272 nodes already attacked, skipping
+
+⏭️ [Step 537/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 538/1671] All 240 nodes already attacked, skipping
+
+⏭️ [Step 539/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 540/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 541/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 542/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 543/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 544/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 545/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 546/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 547/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 548/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 549/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 550/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 551/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 552/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 553/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 554/1671] All 313 nodes already attacked, skipping
+
+⏭️ [Step 555/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 556/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 557/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 558/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 559/1671] All 208 nodes already attacked, skipping
+
+⏭️ [Step 560/1671] All 291 nodes already attacked, skipping
+
+⏭️ [Step 561/1671] All 313 nodes already attacked, skipping
+
+⏭️ [Step 562/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 563/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 564/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 565/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 566/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 567/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 568/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 569/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 570/1671] All 247 nodes already attacked, skipping
+
+⏭️ [Step 571/1671] All 291 nodes already attacked, skipping
+
+⏭️ [Step 572/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 573/1671] All 291 nodes already attacked, skipping
+
+⏭️ [Step 574/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 575/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 576/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 577/1671] All 282 nodes already attacked, skipping
+
+⏭️ [Step 578/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 579/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 580/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 581/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 582/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 583/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 584/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 585/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 586/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 587/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 588/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 589/1671] All 285 nodes already attacked, skipping
+
+⏭️ [Step 590/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 591/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 592/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 593/1671] All 247 nodes already attacked, skipping
+
+⏭️ [Step 594/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 595/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 596/1671] All 270 nodes already attacked, skipping
+
+⏭️ [Step 597/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 598/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 599/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 600/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 601/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 602/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 603/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 604/1671] All 273 nodes already attacked, skipping
+
+⏭️ [Step 605/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 606/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 607/1671] All 208 nodes already attacked, skipping
+
+⏭️ [Step 608/1671] All 271 nodes already attacked, skipping
+
+⏭️ [Step 609/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 610/1671] All 280 nodes already attacked, skipping
+
+⏭️ [Step 611/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 612/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 613/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 614/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 615/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 616/1671] All 266 nodes already attacked, skipping
+
+⏭️ [Step 617/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 618/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 619/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 620/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 621/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 622/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 623/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 624/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 625/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 626/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 627/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 628/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 629/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 630/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 631/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 632/1671] All 239 nodes already attacked, skipping
+
+⏭️ [Step 633/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 634/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 635/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 636/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 637/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 638/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 639/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 640/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 641/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 642/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 643/1671] All 287 nodes already attacked, skipping
+
+⏭️ [Step 644/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 645/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 646/1671] All 264 nodes already attacked, skipping
+
+⏭️ [Step 647/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 648/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 649/1671] All 298 nodes already attacked, skipping
+
+⏭️ [Step 650/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 651/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 652/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 653/1671] All 242 nodes already attacked, skipping
+
+⏭️ [Step 654/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 655/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 656/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 657/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 658/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 659/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 660/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 661/1671] All 269 nodes already attacked, skipping
+
+⏭️ [Step 662/1671] All 313 nodes already attacked, skipping
+
+⏭️ [Step 663/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 664/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 665/1671] All 268 nodes already attacked, skipping
+
+⏭️ [Step 666/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 667/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 668/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 669/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 670/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 671/1671] All 219 nodes already attacked, skipping
+
+⏭️ [Step 672/1671] All 265 nodes already attacked, skipping
+
+⏭️ [Step 673/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 674/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 675/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 676/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 677/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 678/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 679/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 680/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 681/1671] All 269 nodes already attacked, skipping
+
+⏭️ [Step 682/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 683/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 684/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 685/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 686/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 687/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 688/1671] All 284 nodes already attacked, skipping
+
+⏭️ [Step 689/1671] All 284 nodes already attacked, skipping
+
+⏭️ [Step 690/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 691/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 692/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 693/1671] All 289 nodes already attacked, skipping
+
+⏭️ [Step 694/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 695/1671] All 278 nodes already attacked, skipping
+
+⏭️ [Step 696/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 697/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 698/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 699/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 700/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 701/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 702/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 703/1671] All 298 nodes already attacked, skipping
+
+⏭️ [Step 704/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 705/1671] All 290 nodes already attacked, skipping
+
+⏭️ [Step 706/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 707/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 708/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 709/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 710/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 711/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 712/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 713/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 714/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 715/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 716/1671] All 312 nodes already attacked, skipping
+
+⏭️ [Step 717/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 718/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 719/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 720/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 721/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 722/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 723/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 724/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 725/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 726/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 727/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 728/1671] All 270 nodes already attacked, skipping
+
+⏭️ [Step 729/1671] All 291 nodes already attacked, skipping
+
+⏭️ [Step 730/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 731/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 732/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 733/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 734/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 735/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 736/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 737/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 738/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 739/1671] All 277 nodes already attacked, skipping
+
+⏭️ [Step 740/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 741/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 742/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 743/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 744/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 745/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 746/1671] All 242 nodes already attacked, skipping
+
+⏭️ [Step 747/1671] All 285 nodes already attacked, skipping
+
+⏭️ [Step 748/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 749/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 750/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 751/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 752/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 753/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 754/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 755/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 756/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 757/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 758/1671] All 276 nodes already attacked, skipping
+
+⏭️ [Step 759/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 760/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 761/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 762/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 763/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 764/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 765/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 766/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 767/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 768/1671] All 271 nodes already attacked, skipping
+
+⏭️ [Step 769/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 770/1671] All 260 nodes already attacked, skipping
+
+⏭️ [Step 771/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 772/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 773/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 774/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 775/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 776/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 777/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 778/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 779/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 780/1671] All 254 nodes already attacked, skipping
+
+⏭️ [Step 781/1671] All 263 nodes already attacked, skipping
+
+⏭️ [Step 782/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 783/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 784/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 785/1671] All 219 nodes already attacked, skipping
+
+⏭️ [Step 786/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 787/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 788/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 789/1671] All 278 nodes already attacked, skipping
+
+⏭️ [Step 790/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 791/1671] All 266 nodes already attacked, skipping
+
+⏭️ [Step 792/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 793/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 794/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 795/1671] All 238 nodes already attacked, skipping
+
+⏭️ [Step 796/1671] All 290 nodes already attacked, skipping
+
+⏭️ [Step 797/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 798/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 799/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 800/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 801/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 802/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 803/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 804/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 805/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 806/1671] All 260 nodes already attacked, skipping
+
+⏭️ [Step 807/1671] All 290 nodes already attacked, skipping
+
+⏭️ [Step 808/1671] All 234 nodes already attacked, skipping
+
+⏭️ [Step 809/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 810/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 811/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 812/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 813/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 814/1671] All 264 nodes already attacked, skipping
+
+⏭️ [Step 815/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 816/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 817/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 818/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 819/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 820/1671] All 259 nodes already attacked, skipping
+
+⏭️ [Step 821/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 822/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 823/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 824/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 825/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 826/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 827/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 828/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 829/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 830/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 831/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 832/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 833/1671] All 230 nodes already attacked, skipping
+
+⏭️ [Step 834/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 835/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 836/1671] All 282 nodes already attacked, skipping
+
+⏭️ [Step 837/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 838/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 839/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 840/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 841/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 842/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 843/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 844/1671] All 262 nodes already attacked, skipping
+
+⏭️ [Step 845/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 846/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 847/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 848/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 849/1671] All 267 nodes already attacked, skipping
+
+⏭️ [Step 850/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 851/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 852/1671] All 251 nodes already attacked, skipping
+
+⏭️ [Step 853/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 854/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 855/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 856/1671] All 262 nodes already attacked, skipping
+
+⏭️ [Step 857/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 858/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 859/1671] All 269 nodes already attacked, skipping
+
+⏭️ [Step 860/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 861/1671] All 282 nodes already attacked, skipping
+
+⏭️ [Step 862/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 863/1671] All 289 nodes already attacked, skipping
+
+⏭️ [Step 864/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 865/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 866/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 867/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 868/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 869/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 870/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 871/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 872/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 873/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 874/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 875/1671] All 291 nodes already attacked, skipping
+
+⏭️ [Step 876/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 877/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 878/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 879/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 880/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 881/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 882/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 883/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 884/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 885/1671] All 214 nodes already attacked, skipping
+
+⏭️ [Step 886/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 887/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 888/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 889/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 890/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 891/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 892/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 893/1671] All 275 nodes already attacked, skipping
+
+⏭️ [Step 894/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 895/1671] All 222 nodes already attacked, skipping
+
+⏭️ [Step 896/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 897/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 898/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 899/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 900/1671] All 256 nodes already attacked, skipping
+
+⏭️ [Step 901/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 902/1671] All 261 nodes already attacked, skipping
+
+⏭️ [Step 903/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 904/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 905/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 906/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 907/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 908/1671] All 209 nodes already attacked, skipping
+
+⏭️ [Step 909/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 910/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 911/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 912/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 913/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 914/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 915/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 916/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 917/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 918/1671] All 247 nodes already attacked, skipping
+
+⏭️ [Step 919/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 920/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 921/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 922/1671] All 265 nodes already attacked, skipping
+
+⏭️ [Step 923/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 924/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 925/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 926/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 927/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 928/1671] All 242 nodes already attacked, skipping
+
+⏭️ [Step 929/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 930/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 931/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 932/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 933/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 934/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 935/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 936/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 937/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 938/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 939/1671] All 312 nodes already attacked, skipping
+
+⏭️ [Step 940/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 941/1671] All 278 nodes already attacked, skipping
+
+⏭️ [Step 942/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 943/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 944/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 945/1671] All 269 nodes already attacked, skipping
+
+⏭️ [Step 946/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 947/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 948/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 949/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 950/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 951/1671] All 253 nodes already attacked, skipping
+
+⏭️ [Step 952/1671] All 254 nodes already attacked, skipping
+
+⏭️ [Step 953/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 954/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 955/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 956/1671] All 268 nodes already attacked, skipping
+
+⏭️ [Step 957/1671] All 268 nodes already attacked, skipping
+
+⏭️ [Step 958/1671] All 287 nodes already attacked, skipping
+
+⏭️ [Step 959/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 960/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 961/1671] All 264 nodes already attacked, skipping
+
+⏭️ [Step 962/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 963/1671] All 255 nodes already attacked, skipping
+
+⏭️ [Step 964/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 965/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 966/1671] All 289 nodes already attacked, skipping
+
+⏭️ [Step 967/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 968/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 969/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 970/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 971/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 972/1671] All 259 nodes already attacked, skipping
+
+⏭️ [Step 973/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 974/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 975/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 976/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 977/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 978/1671] All 282 nodes already attacked, skipping
+
+⏭️ [Step 979/1671] All 280 nodes already attacked, skipping
+
+⏭️ [Step 980/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 981/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 982/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 983/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 984/1671] All 272 nodes already attacked, skipping
+
+⏭️ [Step 985/1671] All 270 nodes already attacked, skipping
+
+⏭️ [Step 986/1671] All 278 nodes already attacked, skipping
+
+⏭️ [Step 987/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 988/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 989/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 990/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 991/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 992/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 993/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 994/1671] All 284 nodes already attacked, skipping
+
+⏭️ [Step 995/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 996/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 997/1671] All 285 nodes already attacked, skipping
+
+⏭️ [Step 998/1671] All 278 nodes already attacked, skipping
+
+⏭️ [Step 999/1671] All 276 nodes already attacked, skipping
+
+⏭️ [Step 1000/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 1001/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 1002/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1003/1671] All 277 nodes already attacked, skipping
+
+⏭️ [Step 1004/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 1005/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1006/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1007/1671] All 313 nodes already attacked, skipping
+
+⏭️ [Step 1008/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 1009/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 1010/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 1011/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 1012/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 1013/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 1014/1671] All 275 nodes already attacked, skipping
+
+⏭️ [Step 1015/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 1016/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1017/1671] All 237 nodes already attacked, skipping
+
+⏭️ [Step 1018/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 1019/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 1020/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 1021/1671] All 300 nodes already attacked, skipping
+
+⏭️ [Step 1022/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 1023/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 1024/1671] All 277 nodes already attacked, skipping
+
+⏭️ [Step 1025/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 1026/1671] All 276 nodes already attacked, skipping
+
+⏭️ [Step 1027/1671] All 276 nodes already attacked, skipping
+
+⏭️ [Step 1028/1671] All 255 nodes already attacked, skipping
+
+⏭️ [Step 1029/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 1030/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1031/1671] All 265 nodes already attacked, skipping
+
+⏭️ [Step 1032/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 1033/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 1034/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 1035/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1036/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1037/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 1038/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 1039/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 1040/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 1041/1671] All 284 nodes already attacked, skipping
+
+⏭️ [Step 1042/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1043/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 1044/1671] All 264 nodes already attacked, skipping
+
+⏭️ [Step 1045/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 1046/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1047/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1048/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1049/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 1050/1671] All 268 nodes already attacked, skipping
+
+⏭️ [Step 1051/1671] All 272 nodes already attacked, skipping
+
+⏭️ [Step 1052/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 1053/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 1054/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 1055/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 1056/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 1057/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 1058/1671] All 282 nodes already attacked, skipping
+
+⏭️ [Step 1059/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 1060/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 1061/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 1062/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 1063/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 1064/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1065/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 1066/1671] All 291 nodes already attacked, skipping
+
+⏭️ [Step 1067/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 1068/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 1069/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 1070/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1071/1671] All 276 nodes already attacked, skipping
+
+⏭️ [Step 1072/1671] All 248 nodes already attacked, skipping
+
+⏭️ [Step 1073/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 1074/1671] All 265 nodes already attacked, skipping
+
+⏭️ [Step 1075/1671] All 282 nodes already attacked, skipping
+
+⏭️ [Step 1076/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 1077/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 1078/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 1079/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 1080/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 1081/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 1082/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 1083/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 1084/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 1085/1671] All 268 nodes already attacked, skipping
+
+⏭️ [Step 1086/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 1087/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 1088/1671] All 298 nodes already attacked, skipping
+
+⏭️ [Step 1089/1671] All 275 nodes already attacked, skipping
+
+⏭️ [Step 1090/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 1091/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1092/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 1093/1671] All 275 nodes already attacked, skipping
+
+⏭️ [Step 1094/1671] All 284 nodes already attacked, skipping
+
+⏭️ [Step 1095/1671] All 277 nodes already attacked, skipping
+
+⏭️ [Step 1096/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1097/1671] All 237 nodes already attacked, skipping
+
+⏭️ [Step 1098/1671] All 284 nodes already attacked, skipping
+
+⏭️ [Step 1099/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 1100/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1101/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 1102/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 1103/1671] All 298 nodes already attacked, skipping
+
+⏭️ [Step 1104/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1105/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 1106/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 1107/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 1108/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 1109/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 1110/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 1111/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 1112/1671] All 285 nodes already attacked, skipping
+
+⏭️ [Step 1113/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1114/1671] All 235 nodes already attacked, skipping
+
+⏭️ [Step 1115/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 1116/1671] All 277 nodes already attacked, skipping
+
+⏭️ [Step 1117/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 1118/1671] All 275 nodes already attacked, skipping
+
+⏭️ [Step 1119/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 1120/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 1121/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 1122/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1123/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 1124/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 1125/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1126/1671] All 264 nodes already attacked, skipping
+
+⏭️ [Step 1127/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 1128/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 1129/1671] All 285 nodes already attacked, skipping
+
+⏭️ [Step 1130/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 1131/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1132/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 1133/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1134/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 1135/1671] All 274 nodes already attacked, skipping
+
+⏭️ [Step 1136/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 1137/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 1138/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 1139/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 1140/1671] All 249 nodes already attacked, skipping
+
+⏭️ [Step 1141/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 1142/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1143/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 1144/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1145/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 1146/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 1147/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 1148/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 1149/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 1150/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 1151/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 1152/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 1153/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1154/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 1155/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 1156/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 1157/1671] All 268 nodes already attacked, skipping
+
+⏭️ [Step 1158/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 1159/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1160/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 1161/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 1162/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 1163/1671] All 272 nodes already attacked, skipping
+
+⏭️ [Step 1164/1671] All 183 nodes already attacked, skipping
+
+⏭️ [Step 1165/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 1166/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1167/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 1168/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 1169/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 1170/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 1171/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 1172/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1173/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 1174/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 1175/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1176/1671] All 278 nodes already attacked, skipping
+
+⏭️ [Step 1177/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1178/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 1179/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 1180/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1181/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 1182/1671] All 298 nodes already attacked, skipping
+
+⏭️ [Step 1183/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 1184/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 1185/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 1186/1671] All 277 nodes already attacked, skipping
+
+⏭️ [Step 1187/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1188/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 1189/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 1190/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 1191/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 1192/1671] All 274 nodes already attacked, skipping
+
+⏭️ [Step 1193/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 1194/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 1195/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 1196/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 1197/1671] All 260 nodes already attacked, skipping
+
+⏭️ [Step 1198/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 1199/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 1200/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 1201/1671] All 280 nodes already attacked, skipping
+
+⏭️ [Step 1202/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 1203/1671] All 257 nodes already attacked, skipping
+
+⏭️ [Step 1204/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 1205/1671] All 254 nodes already attacked, skipping
+
+⏭️ [Step 1206/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1207/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 1208/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 1209/1671] All 267 nodes already attacked, skipping
+
+⏭️ [Step 1210/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 1211/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1212/1671] All 277 nodes already attacked, skipping
+
+⏭️ [Step 1213/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 1214/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 1215/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 1216/1671] All 312 nodes already attacked, skipping
+
+⏭️ [Step 1217/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 1218/1671] All 278 nodes already attacked, skipping
+
+⏭️ [Step 1219/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 1220/1671] All 225 nodes already attacked, skipping
+
+⏭️ [Step 1221/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 1222/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 1223/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 1224/1671] All 287 nodes already attacked, skipping
+
+⏭️ [Step 1225/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 1226/1671] All 300 nodes already attacked, skipping
+
+⏭️ [Step 1227/1671] All 260 nodes already attacked, skipping
+
+⏭️ [Step 1228/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 1229/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1230/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 1231/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 1232/1671] All 275 nodes already attacked, skipping
+
+⏭️ [Step 1233/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 1234/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1235/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1236/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 1237/1671] All 241 nodes already attacked, skipping
+
+⏭️ [Step 1238/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 1239/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1240/1671] All 298 nodes already attacked, skipping
+
+⏭️ [Step 1241/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 1242/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 1243/1671] All 300 nodes already attacked, skipping
+
+⏭️ [Step 1244/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 1245/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1246/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 1247/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 1248/1671] All 268 nodes already attacked, skipping
+
+⏭️ [Step 1249/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 1250/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 1251/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 1252/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 1253/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 1254/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 1255/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 1256/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 1257/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 1258/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 1259/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1260/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 1261/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1262/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 1263/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 1264/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 1265/1671] All 276 nodes already attacked, skipping
+
+⏭️ [Step 1266/1671] All 259 nodes already attacked, skipping
+
+⏭️ [Step 1267/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1268/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1269/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1270/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1271/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 1272/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 1273/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 1274/1671] All 312 nodes already attacked, skipping
+
+⏭️ [Step 1275/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 1276/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 1277/1671] All 248 nodes already attacked, skipping
+
+⏭️ [Step 1278/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 1279/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 1280/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 1281/1671] All 276 nodes already attacked, skipping
+
+⏭️ [Step 1282/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 1283/1671] All 312 nodes already attacked, skipping
+
+⏭️ [Step 1284/1671] All 265 nodes already attacked, skipping
+
+⏭️ [Step 1285/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1286/1671] All 267 nodes already attacked, skipping
+
+⏭️ [Step 1287/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 1288/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 1289/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 1290/1671] All 266 nodes already attacked, skipping
+
+⏭️ [Step 1291/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 1292/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 1293/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 1294/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 1295/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1296/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1297/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 1298/1671] All 291 nodes already attacked, skipping
+
+⏭️ [Step 1299/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1300/1671] All 273 nodes already attacked, skipping
+
+⏭️ [Step 1301/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 1302/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 1303/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 1304/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 1305/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 1306/1671] All 270 nodes already attacked, skipping
+
+⏭️ [Step 1307/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 1308/1671] All 272 nodes already attacked, skipping
+
+⏭️ [Step 1309/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 1310/1671] All 312 nodes already attacked, skipping
+
+⏭️ [Step 1311/1671] All 290 nodes already attacked, skipping
+
+⏭️ [Step 1312/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 1313/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 1314/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 1315/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1316/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1317/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 1318/1671] All 300 nodes already attacked, skipping
+
+⏭️ [Step 1319/1671] All 276 nodes already attacked, skipping
+
+⏭️ [Step 1320/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 1321/1671] All 252 nodes already attacked, skipping
+
+⏭️ [Step 1322/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 1323/1671] All 290 nodes already attacked, skipping
+
+⏭️ [Step 1324/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1325/1671] All 312 nodes already attacked, skipping
+
+⏭️ [Step 1326/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 1327/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 1328/1671] All 236 nodes already attacked, skipping
+
+⏭️ [Step 1329/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 1330/1671] All 300 nodes already attacked, skipping
+
+⏭️ [Step 1331/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 1332/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 1333/1671] All 269 nodes already attacked, skipping
+
+⏭️ [Step 1334/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1335/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 1336/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 1337/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 1338/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 1339/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 1340/1671] All 301 nodes already attacked, skipping
+
+⏭️ [Step 1341/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 1342/1671] All 313 nodes already attacked, skipping
+
+⏭️ [Step 1343/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 1344/1671] All 282 nodes already attacked, skipping
+
+⏭️ [Step 1345/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 1346/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 1347/1671] All 270 nodes already attacked, skipping
+
+⏭️ [Step 1348/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 1349/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 1350/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 1351/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1352/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 1353/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1354/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 1355/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1356/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 1357/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1358/1671] All 276 nodes already attacked, skipping
+
+⏭️ [Step 1359/1671] All 265 nodes already attacked, skipping
+
+⏭️ [Step 1360/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 1361/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 1362/1671] All 259 nodes already attacked, skipping
+
+⏭️ [Step 1363/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 1364/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 1365/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1366/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 1367/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1368/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 1369/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 1370/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 1371/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 1372/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1373/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 1374/1671] All 312 nodes already attacked, skipping
+
+⏭️ [Step 1375/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1376/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 1377/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 1378/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1379/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 1380/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 1381/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 1382/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1383/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1384/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1385/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1386/1671] All 312 nodes already attacked, skipping
+
+⏭️ [Step 1387/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 1388/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1389/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 1390/1671] All 300 nodes already attacked, skipping
+
+⏭️ [Step 1391/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1392/1671] All 296 nodes already attacked, skipping
+
+⏭️ [Step 1393/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 1394/1671] All 280 nodes already attacked, skipping
+
+⏭️ [Step 1395/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1396/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1397/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 1398/1671] All 269 nodes already attacked, skipping
+
+⏭️ [Step 1399/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 1400/1671] All 290 nodes already attacked, skipping
+
+⏭️ [Step 1401/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 1402/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 1403/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 1404/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 1405/1671] All 300 nodes already attacked, skipping
+
+⏭️ [Step 1406/1671] All 228 nodes already attacked, skipping
+
+⏭️ [Step 1407/1671] All 287 nodes already attacked, skipping
+
+⏭️ [Step 1408/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 1409/1671] All 256 nodes already attacked, skipping
+
+⏭️ [Step 1410/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 1411/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 1412/1671] All 269 nodes already attacked, skipping
+
+⏭️ [Step 1413/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 1414/1671] All 242 nodes already attacked, skipping
+
+⏭️ [Step 1415/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 1416/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 1417/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1418/1671] All 250 nodes already attacked, skipping
+
+⏭️ [Step 1419/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 1420/1671] All 300 nodes already attacked, skipping
+
+⏭️ [Step 1421/1671] All 274 nodes already attacked, skipping
+
+⏭️ [Step 1422/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 1423/1671] All 259 nodes already attacked, skipping
+
+⏭️ [Step 1424/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1425/1671] All 267 nodes already attacked, skipping
+
+⏭️ [Step 1426/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 1427/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 1428/1671] All 317 nodes already attacked, skipping
+
+⏭️ [Step 1429/1671] All 253 nodes already attacked, skipping
+
+⏭️ [Step 1430/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1431/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1432/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 1433/1671] All 269 nodes already attacked, skipping
+
+⏭️ [Step 1434/1671] All 237 nodes already attacked, skipping
+
+⏭️ [Step 1435/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 1436/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1437/1671] All 313 nodes already attacked, skipping
+
+⏭️ [Step 1438/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 1439/1671] All 232 nodes already attacked, skipping
+
+⏭️ [Step 1440/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1441/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 1442/1671] All 276 nodes already attacked, skipping
+
+⏭️ [Step 1443/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1444/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1445/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 1446/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 1447/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 1448/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 1449/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 1450/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 1451/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 1452/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1453/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 1454/1671] All 313 nodes already attacked, skipping
+
+⏭️ [Step 1455/1671] All 243 nodes already attacked, skipping
+
+⏭️ [Step 1456/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 1457/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1458/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1459/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 1460/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1461/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 1462/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1463/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1464/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 1465/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 1466/1671] All 264 nodes already attacked, skipping
+
+⏭️ [Step 1467/1671] All 294 nodes already attacked, skipping
+
+⏭️ [Step 1468/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 1469/1671] All 290 nodes already attacked, skipping
+
+⏭️ [Step 1470/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 1471/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1472/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 1473/1671] All 291 nodes already attacked, skipping
+
+⏭️ [Step 1474/1671] All 260 nodes already attacked, skipping
+
+⏭️ [Step 1475/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1476/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 1477/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 1478/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 1479/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 1480/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 1481/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 1482/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 1483/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 1484/1671] All 300 nodes already attacked, skipping
+
+⏭️ [Step 1485/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 1486/1671] All 338 nodes already attacked, skipping
+
+⏭️ [Step 1487/1671] All 276 nodes already attacked, skipping
+
+⏭️ [Step 1488/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 1489/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 1490/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 1491/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 1492/1671] All 263 nodes already attacked, skipping
+
+⏭️ [Step 1493/1671] All 248 nodes already attacked, skipping
+
+⏭️ [Step 1494/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 1495/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 1496/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 1497/1671] All 253 nodes already attacked, skipping
+
+⏭️ [Step 1498/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1499/1671] All 287 nodes already attacked, skipping
+
+⏭️ [Step 1500/1671] All 257 nodes already attacked, skipping
+
+⏭️ [Step 1501/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1502/1671] All 311 nodes already attacked, skipping
+
+⏭️ [Step 1503/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 1504/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 1505/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1506/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 1507/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1508/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 1509/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 1510/1671] All 258 nodes already attacked, skipping
+
+⏭️ [Step 1511/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 1512/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 1513/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 1514/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 1515/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1516/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1517/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 1518/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 1519/1671] All 306 nodes already attacked, skipping
+
+⏭️ [Step 1520/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 1521/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 1522/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 1523/1671] All 257 nodes already attacked, skipping
+
+⏭️ [Step 1524/1671] All 335 nodes already attacked, skipping
+
+⏭️ [Step 1525/1671] All 293 nodes already attacked, skipping
+
+⏭️ [Step 1526/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 1527/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 1528/1671] All 300 nodes already attacked, skipping
+
+⏭️ [Step 1529/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1530/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1531/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 1532/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 1533/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1534/1671] All 244 nodes already attacked, skipping
+
+⏭️ [Step 1535/1671] All 298 nodes already attacked, skipping
+
+⏭️ [Step 1536/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1537/1671] All 263 nodes already attacked, skipping
+
+⏭️ [Step 1538/1671] All 261 nodes already attacked, skipping
+
+⏭️ [Step 1539/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 1540/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 1541/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 1542/1671] All 281 nodes already attacked, skipping
+
+⏭️ [Step 1543/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1544/1671] All 243 nodes already attacked, skipping
+
+⏭️ [Step 1545/1671] All 282 nodes already attacked, skipping
+
+⏭️ [Step 1546/1671] All 261 nodes already attacked, skipping
+
+⏭️ [Step 1547/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1548/1671] All 291 nodes already attacked, skipping
+
+⏭️ [Step 1549/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 1550/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1551/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 1552/1671] All 278 nodes already attacked, skipping
+
+⏭️ [Step 1553/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 1554/1671] All 266 nodes already attacked, skipping
+
+⏭️ [Step 1555/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 1556/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 1557/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 1558/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 1559/1671] All 313 nodes already attacked, skipping
+
+⏭️ [Step 1560/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1561/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 1562/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 1563/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 1564/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 1565/1671] All 327 nodes already attacked, skipping
+
+⏭️ [Step 1566/1671] All 262 nodes already attacked, skipping
+
+⏭️ [Step 1567/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 1568/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 1569/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 1570/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 1571/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 1572/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1573/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 1574/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 1575/1671] All 287 nodes already attacked, skipping
+
+⏭️ [Step 1576/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1577/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1578/1671] All 246 nodes already attacked, skipping
+
+⏭️ [Step 1579/1671] All 305 nodes already attacked, skipping
+
+⏭️ [Step 1580/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 1581/1671] All 265 nodes already attacked, skipping
+
+⏭️ [Step 1582/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 1583/1671] All 340 nodes already attacked, skipping
+
+⏭️ [Step 1584/1671] All 292 nodes already attacked, skipping
+
+⏭️ [Step 1585/1671] All 336 nodes already attacked, skipping
+
+⏭️ [Step 1586/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 1587/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 1588/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1589/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 1590/1671] All 321 nodes already attacked, skipping
+
+⏭️ [Step 1591/1671] All 323 nodes already attacked, skipping
+
+⏭️ [Step 1592/1671] All 284 nodes already attacked, skipping
+
+⏭️ [Step 1593/1671] All 283 nodes already attacked, skipping
+
+⏭️ [Step 1594/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 1595/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 1596/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 1597/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1598/1671] All 332 nodes already attacked, skipping
+
+⏭️ [Step 1599/1671] All 330 nodes already attacked, skipping
+
+⏭️ [Step 1600/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 1601/1671] All 287 nodes already attacked, skipping
+
+⏭️ [Step 1602/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 1603/1671] All 313 nodes already attacked, skipping
+
+⏭️ [Step 1604/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1605/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 1606/1671] All 318 nodes already attacked, skipping
+
+⏭️ [Step 1607/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 1608/1671] All 307 nodes already attacked, skipping
+
+⏭️ [Step 1609/1671] All 342 nodes already attacked, skipping
+
+⏭️ [Step 1610/1671] All 309 nodes already attacked, skipping
+
+⏭️ [Step 1611/1671] All 243 nodes already attacked, skipping
+
+⏭️ [Step 1612/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 1613/1671] All 319 nodes already attacked, skipping
+
+⏭️ [Step 1614/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1615/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1616/1671] All 295 nodes already attacked, skipping
+
+⏭️ [Step 1617/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 1618/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 1619/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 1620/1671] All 260 nodes already attacked, skipping
+
+⏭️ [Step 1621/1671] All 334 nodes already attacked, skipping
+
+⏭️ [Step 1622/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 1623/1671] All 308 nodes already attacked, skipping
+
+⏭️ [Step 1624/1671] All 315 nodes already attacked, skipping
+
+⏭️ [Step 1625/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 1626/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 1627/1671] All 314 nodes already attacked, skipping
+
+⏭️ [Step 1628/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 1629/1671] All 297 nodes already attacked, skipping
+
+⏭️ [Step 1630/1671] All 291 nodes already attacked, skipping
+
+⏭️ [Step 1631/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1632/1671] All 256 nodes already attacked, skipping
+
+⏭️ [Step 1633/1671] All 304 nodes already attacked, skipping
+
+⏭️ [Step 1634/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1635/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1636/1671] All 288 nodes already attacked, skipping
+
+⏭️ [Step 1637/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 1638/1671] All 324 nodes already attacked, skipping
+
+⏭️ [Step 1639/1671] All 333 nodes already attacked, skipping
+
+⏭️ [Step 1640/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 1641/1671] All 337 nodes already attacked, skipping
+
+⏭️ [Step 1642/1671] All 302 nodes already attacked, skipping
+
+⏭️ [Step 1643/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 1644/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1645/1671] All 269 nodes already attacked, skipping
+
+⏭️ [Step 1646/1671] All 279 nodes already attacked, skipping
+
+⏭️ [Step 1647/1671] All 312 nodes already attacked, skipping
+
+⏭️ [Step 1648/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 1649/1671] All 325 nodes already attacked, skipping
+
+⏭️ [Step 1650/1671] All 339 nodes already attacked, skipping
+
+⏭️ [Step 1651/1671] All 267 nodes already attacked, skipping
+
+⏭️ [Step 1652/1671] All 286 nodes already attacked, skipping
+
+⏭️ [Step 1653/1671] All 303 nodes already attacked, skipping
+
+⏭️ [Step 1654/1671] All 251 nodes already attacked, skipping
+
+⏭️ [Step 1655/1671] All 268 nodes already attacked, skipping
+
+⏭️ [Step 1656/1671] All 341 nodes already attacked, skipping
+
+⏭️ [Step 1657/1671] All 241 nodes already attacked, skipping
+
+⏭️ [Step 1658/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 1659/1671] All 299 nodes already attacked, skipping
+
+⏭️ [Step 1660/1671] All 313 nodes already attacked, skipping
+
+⏭️ [Step 1661/1671] All 326 nodes already attacked, skipping
+
+⏭️ [Step 1662/1671] All 310 nodes already attacked, skipping
+
+⏭️ [Step 1663/1671] All 328 nodes already attacked, skipping
+
+⏭️ [Step 1664/1671] All 316 nodes already attacked, skipping
+
+⏭️ [Step 1665/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1666/1671] All 320 nodes already attacked, skipping
+
+⏭️ [Step 1667/1671] All 329 nodes already attacked, skipping
+
+⏭️ [Step 1668/1671] All 322 nodes already attacked, skipping
+
+⏭️ [Step 1669/1671] All 331 nodes already attacked, skipping
+
+⏭️ [Step 1670/1671] All 263 nodes already attacked, skipping
+
+⏭️ [Step 1671/1671] All 322 nodes already attacked, skipping
+
+✅ Attack completed: Structure perturbations=1671, Text attacks executed in-loop
+
+============================================================
+📊 Evaluation Results
+============================================================
+
+=== Clean graph ===
+Clean graph results: loss= 0.2007 accuracy= 0.9464
+
+=== Edge-only attack ===
+Edge-only attack results: loss= 0.3507 accuracy= 0.8411
+
+=== Feature-only attack ===
+Feature-only attack results: loss= 0.4641 accuracy= 0.9201
+
+=== Combined attack (edge + feature) ===
+Combined attack results: loss= 0.3309 accuracy= 0.8819
+
+============================================================
+📈 Attack Performance Summary
+============================================================
+  Clean accuracy:         0.9464
+  Edge attack accuracy:   0.8411 (drop: 0.1054)
+  Feature attack accuracy: 0.9201 (drop: 0.0263)
+  Combined accuracy:      0.8819 (drop: 0.0645)
+  Misclassification:      0.1181
+============================================================
+

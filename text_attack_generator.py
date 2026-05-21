@@ -76,7 +76,13 @@ class TextAttackGenerator:
             with open(vectorizer_path, "rb") as f:
                 self.vectorizer = pickle.load(f)
             self.vocab = self.vectorizer.get_feature_names_out()
-            print(f"Loaded BoW vocabulary: {len(self.vocab)} words")
+            if self._is_feature_aligned_vocabulary(self.vocab, feature_dim):
+                print(
+                    f"Loaded feature-aligned BoW vocabulary: "
+                    f"{len(self.vocab)} tokens; using LLM text generation path"
+                )
+            else:
+                print(f"Loaded BoW vocabulary: {len(self.vocab)} words")
         elif feature_dim is not None:
             feature_dim = int(feature_dim)
             if feature_dim <= 0:
@@ -136,6 +142,16 @@ class TextAttackGenerator:
             print(f"Initialized Llama model from: {model_path}")
         else:
             raise ValueError(f"Unsupported llm_type: {llm_type}. Use 'gpt' or 'llama'")
+
+    @staticmethod
+    def _is_feature_aligned_vocabulary(vocab, feature_dim: Optional[int] = None) -> bool:
+        """Return True for synthetic feature_i vocabularies aligned to feature columns."""
+        vocab = list(vocab)
+        if feature_dim is not None and len(vocab) != int(feature_dim):
+            return False
+        if not vocab:
+            return False
+        return all(token == f"feature_{idx}" for idx, token in enumerate(vocab))
 
     def _init_llama(self, model_path: str):
         """初始化Llama模型"""
