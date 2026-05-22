@@ -1,0 +1,55 @@
+Loading citeseer dataset...
+Selecting 1 largest connected components
+(2110, 3703) (1,) (2110, 2110) 210 211 1688
+Test set results: loss= 2.0000 accuracy= 0.7014
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+Loaded BoW vocabulary: 500 words
+Vocab size: 500, Feature dim: 3703
+🦙 Detected Ollama - using model: llama3.2:1b-instruct-fp16
+Initialized GPT client with model: llama3.2:1b-instruct-fp16
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 366 edges
+  Perturbation rate: 10.0%
+  Attack mode: Meta-Both
+  Structure search: method=gb, level=4, step=1, miter=60, lr=0.05
+  Global PPR: ratio=0.45, alpha=0.08, iters=120, seed=degree, label_w=0.0
+  Structure features: frozen to original features
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.08, alpha=0.26, iters=30, budget=35, per_step=None, max_visits=4, cluster=2-5, sim>=0.65, cdl_topk=14, cluster_attr_topk=14, max_added=40
+
+
+Independent attribute selection enabled
+  Attribute seeds: strategy=feature_grad, count=2, pool=all
+
+[Step 1/366] Independent text attack: structure_edge=(364, 377), attr_seeds=[1235, 671], selected=295/295, exhausted=0
+🔥 Text Attack: 295 nodes grouped into 81 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 295/295, LLM Calls: 81, Cache Hits: 0
+
+[Step 2/366] Independent text attack: structure_edge=(1347, 1351), attr_seeds=[1073, 671], selected=169/169, exhausted=0
+🔥 Text Attack: 169 nodes grouped into 45 clusters (min/avg/max = 2/3.8/5).
+✅ Cluster Attack Done. Success: 169/169, LLM Calls: 45, Cache Hits: 0
+
+[Step 3/366] Independent text attack: structure_edge=(413, 46), attr_seeds=[671, 1073], selected=169/169, exhausted=0
+🔥 Text Attack: 169 nodes grouped into 49 clusters (min/avg/max = 2/3.4/5).
+✅ Cluster Attack Done. Success: 169/169, LLM Calls: 49, Cache Hits: 0
+
+[Step 4/366] Independent text attack: structure_edge=(1683, 1421), attr_seeds=[671, 337], selected=231/231, exhausted=0
+🔥 Text Attack: 231 nodes grouped into 67 clusters (min/avg/max = 2/3.4/5).
+✅ Cluster Attack Done. Success: 231/231, LLM Calls: 67, Cache Hits: 0
+
+[Step 5/366] Independent text attack: structure_edge=(790, 780), attr_seeds=[1181, 424], selected=141/173, exhausted=32
+🔥 Text Attack: 141 nodes grouped into 39 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 141/141, LLM Calls: 39, Cache Hits: 0
+
+[Step 6/366] Independent text attack: structure_edge=(648, 522), attr_seeds=[1181, 424], selected=141/176, exhausted=35
+🔥 Text Attack: 141 nodes grouped into 39 clusters (min/avg/max = 2/3.6/5).
