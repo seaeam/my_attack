@@ -9,6 +9,7 @@ from deeprobust.graph.utils import *
 from deeprobust.graph.data import Dataset
 import argparse
 from heir import Heirattack
+from target_models import train_and_evaluate_target
 from deeprobust.graph.global_attack import DICE, MetaApprox
 
 import math
@@ -105,9 +106,26 @@ parser.add_argument(
     default=5e-4,
     help="Weight decay (L2 loss on parameters).",
 )
-parser.add_argument("--hidden", type=int, default=16, help="Number of hidden units.")
+parser.add_argument(
+    "--hidden",
+    type=int,
+    default=8,
+    help="Number of hidden units in the GIN target model.",
+)
 parser.add_argument(
     "--dropout", type=float, default=0.5, help="Dropout rate (1 - keep probability)."
+)
+parser.add_argument(
+    "--target_lr",
+    type=float,
+    default=0.01,
+    help="Learning rate for retraining the GIN target model.",
+)
+parser.add_argument(
+    "--target_patience",
+    type=int,
+    default=30,
+    help="Early-stopping patience for the GIN target model.",
 )
 parser.add_argument("--dataset", type=str, default="citeseer", help="dataset")
 parser.add_argument("--ptb_rate", type=float, default=0.05, help="pertubation rate")
@@ -249,7 +267,7 @@ args = parser.parse_args()
 if not os.path.exists("logs"):
     os.makedirs("logs")
 timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-log_filename = f"logs/result_{args.dataset}_{args.model}_{timestamp}.txt"
+log_filename = f"logs/result_{args.dataset}_{args.model}_GIN_{timestamp}.txt"
 sys.stdout = Logger(log_filename)
 
 device = torch.device(
@@ -462,35 +480,30 @@ model = model.to(device)
 
 
 def test(adj, features, idx_eval, description="Test set"):
-    """Test GCN and ensure tensors are on CPU for deeprobust."""
-    import scipy.sparse as sp
-
-    # 将 features 和 adj 转到 CPU
-    if torch.is_tensor(features) and features.is_cuda:
-        features = features.cpu()
-    if torch.is_tensor(adj) and adj.is_cuda:
-        adj = adj.cpu()
-    elif sp.issparse(adj):
-        adj = adj.tocoo()  # 保留 sparse 格式
-
-    gcn = GCN(
-        nfeat=features.shape[1],
-        nhid=args.hidden,
-        nclass=labels.max().item() + 1,
-        dropout=args.dropout,
+    """Retrain and evaluate a GIN target model on the supplied graph."""
+    result = train_and_evaluate_target(
+        target_model_name="gin",
+        adj=adj,
+        features=features,
+        labels=labels,
+        idx_train=idx_train,
+        idx_val=idx_val,
+        idx_eval=idx_eval,
         device=device,
+        hidden=args.hidden,
+        dropout=args.dropout,
+        learning_rate=args.target_lr,
+        weight_decay=args.weight_decay,
+        epochs=args.epochs,
+        patience=args.target_patience,
+        seed=args.seed,
     )
-    gcn = gcn.to(device)
-    gcn.fit(features, adj, labels, idx_train)
-    output = gcn.output.cpu()
-    loss_test = F.nll_loss(output[idx_eval], labels[idx_eval])
-    acc_test = accuracy(output[idx_eval], labels[idx_eval])
     print(
-        f"{description} results:",
-        "loss= {:.4f}".format(loss_test.item()),
-        "accuracy= {:.4f}".format(acc_test.item()),
+        f"{description} GIN results:",
+        "loss= {:.4f}".format(result.loss),
+        "accuracy= {:.4f}".format(result.accuracy),
     )
-    return acc_test.item()
+    return result.accuracy
 
 
 def main():
@@ -499,6 +512,7 @@ def main():
     print(f"  Perturbation budget: {perturbations} edges")
     print(f"  Perturbation rate: {args.ptb_rate * 100}%")
     print(f"  Attack mode: {args.model}")
+    print("  Surrogate / target: GCN / GIN")
     print(
         "  Structure search: "
         f"method={args.coarsen_method}, level={args.level}, step={args.step}, "
@@ -543,7 +557,7 @@ def main():
     modified_features = model.modified_features
 
     print("\n" + "=" * 60)
-    print("📊 Evaluation Results")
+    print("📊 GIN Transfer Evaluation Results")
     print("=" * 60 + "\n")
 
     print("=== Clean graph ===")

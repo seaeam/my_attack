@@ -1,0 +1,1235 @@
+/Users/shemingcong/anaconda3/envs/smc/lib/python3.13/site-packages/torch_geometric/data/in_memory_dataset.py:131: UserWarning: Weights only load failed. Please file an issue to make `torch.load(weights_only=True)` compatible in your case. Please use `torch.serialization.add_safe_globals([torch_geometric.data.data.DataEdgeAttr])` to allowlist this global.
+  out = fs.torch_load(path)
+Loading citeseer dataset...
+Selecting 1 largest connected components
+(2110, 3703) (1,) (2110, 2110) 210 211 1688
+Test set results: loss= 2.0000 accuracy= 0.7014
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+/Users/shemingcong/anaconda3/envs/smc/lib/python3.13/site-packages/sklearn/base.py:442: InconsistentVersionWarning: Trying to unpickle estimator CountVectorizer from version 1.3.2 when using version 1.7.2. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:
+https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations
+  warnings.warn(
+Loaded BoW vocabulary: 500 words
+Vocab size: 500, Feature dim: 3703
+🦙 Detected Ollama - using model: llama3.2:1b-instruct-fp16
+Initialized GPT client with model: llama3.2:1b-instruct-fp16
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 366 edges
+  Perturbation rate: 10.0%
+  Attack mode: Meta-Both
+  Structure search: method=gb, level=4, step=1, miter=60, lr=0.05
+  Global PPR: ratio=0.45, alpha=0.08, iters=120, seed=degree, label_w=0.0
+  Structure features: frozen to original features
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.08, alpha=0.26, iters=30, budget=35, per_step=32, max_visits=4, candidate=global_pagerank, hops=2, cluster=2-5, sim>=0.65, cdl_topk=14, cluster_attr_topk=14, max_added=40
+
+/Users/shemingcong/anaconda3/envs/smc/lib/python3.13/site-packages/deeprobust/graph/utils.py:356: UserWarning: torch.sparse.SparseTensor(indices, values, shape, *, device=) is deprecated.  Please use torch.sparse_coo_tensor(indices, values, shape, dtype=, device=). (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:656.)
+  return torch.sparse.FloatTensor(sparseconcat.t(),sparsedata,torch.Size(sparse_mx.shape))
+Perturbing graph:   0%|          | 0/366 [00:00<?, ?it/s]
+🎯 [Step 1/366] Text attack: 32 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 32 nodes grouped into 9 clusters (min/avg/max = 2/3.6/5).
+
+Cluster Attack:   0%|          | 0/9 [00:00<?, ?it/s][A
+Cluster Attack:  11%|█         | 1/9 [00:01<00:10,  1.33s/it][A
+Cluster Attack:  22%|██▏       | 2/9 [00:02<00:08,  1.20s/it][A
+Cluster Attack:  33%|███▎      | 3/9 [00:03<00:06,  1.16s/it][A
+Cluster Attack:  44%|████▍     | 4/9 [00:04<00:05,  1.13s/it][A
+Cluster Attack:  56%|█████▌    | 5/9 [00:05<00:04,  1.12s/it][A
+Cluster Attack:  67%|██████▋   | 6/9 [00:06<00:03,  1.11s/it][A
+Cluster Attack:  78%|███████▊  | 7/9 [00:07<00:02,  1.10s/it][A
+Cluster Attack:  89%|████████▉ | 8/9 [00:09<00:01,  1.10s/it][A
+Cluster Attack: 100%|██████████| 9/9 [00:10<00:00,  1.10s/it][ACluster Attack: 100%|██████████| 9/9 [00:10<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 9, Cache Hits: 0
+/Users/shemingcong/anaconda3/envs/smc/lib/python3.13/site-packages/scipy/sparse/_index.py:168: SparseEfficiencyWarning: Changing the sparsity structure of a csr_matrix is expensive. lil and dok are more efficient.
+  self._set_intXint(row, col, x.flat[0])
+Perturbing graph:   0%|          | 1/366 [00:12<1:18:49, 12.96s/it]
+🎯 [Step 2/366] Text attack: 32 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 32 nodes grouped into 9 clusters (min/avg/max = 2/3.6/5).
+
+Cluster Attack:   0%|          | 0/9 [00:00<?, ?it/s][A
+Cluster Attack:  11%|█         | 1/9 [00:01<00:08,  1.11s/it][A
+Cluster Attack:  22%|██▏       | 2/9 [00:02<00:07,  1.10s/it][A
+Cluster Attack:  33%|███▎      | 3/9 [00:03<00:06,  1.10s/it][A
+Cluster Attack:  44%|████▍     | 4/9 [00:04<00:05,  1.10s/it][A
+Cluster Attack:  56%|█████▌    | 5/9 [00:05<00:04,  1.10s/it][A
+Cluster Attack:  67%|██████▋   | 6/9 [00:06<00:03,  1.09s/it][A
+Cluster Attack:  78%|███████▊  | 7/9 [00:07<00:02,  1.10s/it][A
+Cluster Attack:  89%|████████▉ | 8/9 [00:08<00:01,  1.10s/it][A
+Cluster Attack: 100%|██████████| 9/9 [00:09<00:00,  1.10s/it][ACluster Attack: 100%|██████████| 9/9 [00:09<00:00,  1.10s/it]
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 9, Cache Hits: 0
+Perturbing graph:   1%|          | 2/366 [00:25<1:17:56, 12.85s/it]
+🎯 [Step 3/366] Text attack: 32 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 32 nodes grouped into 10 clusters (min/avg/max = 2/3.2/4).
+
+Cluster Attack:   0%|          | 0/10 [00:00<?, ?it/s][A
+Cluster Attack:  10%|█         | 1/10 [00:01<00:10,  1.11s/it][A
+Cluster Attack:  20%|██        | 2/10 [00:02<00:08,  1.11s/it][A
+Cluster Attack:  30%|███       | 3/10 [00:03<00:07,  1.10s/it][A
+Cluster Attack:  40%|████      | 4/10 [00:04<00:06,  1.10s/it][A
+Cluster Attack:  50%|█████     | 5/10 [00:05<00:05,  1.10s/it][A
+Cluster Attack:  60%|██████    | 6/10 [00:06<00:04,  1.10s/it][A
+Cluster Attack:  70%|███████   | 7/10 [00:07<00:03,  1.10s/it][A
+Cluster Attack:  80%|████████  | 8/10 [00:08<00:02,  1.11s/it][A
+Cluster Attack:  90%|█████████ | 9/10 [00:09<00:01,  1.11s/it][A
+Cluster Attack: 100%|██████████| 10/10 [00:11<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 10/10 [00:11<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 10, Cache Hits: 0
+Perturbing graph:   1%|          | 3/366 [00:39<1:20:39, 13.33s/it]
+🎯 [Step 4/366] Text attack: 32 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 32 nodes grouped into 9 clusters (min/avg/max = 2/3.6/5).
+
+Cluster Attack:   0%|          | 0/9 [00:00<?, ?it/s][A
+Cluster Attack:  11%|█         | 1/9 [00:01<00:09,  1.15s/it][A
+Cluster Attack:  22%|██▏       | 2/9 [00:02<00:07,  1.13s/it][A
+Cluster Attack:  33%|███▎      | 3/9 [00:03<00:06,  1.13s/it][A
+Cluster Attack:  44%|████▍     | 4/9 [00:04<00:05,  1.12s/it][A
+Cluster Attack:  56%|█████▌    | 5/9 [00:05<00:04,  1.12s/it][A
+Cluster Attack:  67%|██████▋   | 6/9 [00:06<00:03,  1.11s/it][A
+Cluster Attack:  78%|███████▊  | 7/9 [00:07<00:02,  1.11s/it][A
+Cluster Attack:  89%|████████▉ | 8/9 [00:08<00:01,  1.11s/it][A
+Cluster Attack: 100%|██████████| 9/9 [00:10<00:00,  1.10s/it][ACluster Attack: 100%|██████████| 9/9 [00:10<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 9, Cache Hits: 0
+Perturbing graph:   1%|          | 4/366 [00:52<1:19:16, 13.14s/it]
+🎯 [Step 5/366] Text attack: 11 new nodes (skipped 21 already attacked)
+🔥 Text Attack: 11 nodes grouped into 3 clusters (min/avg/max = 3/3.7/4).
+
+Cluster Attack:   0%|          | 0/3 [00:00<?, ?it/s][A
+Cluster Attack:  33%|███▎      | 1/3 [00:01<00:02,  1.13s/it][A
+Cluster Attack:  67%|██████▋   | 2/3 [00:02<00:01,  1.11s/it][A
+Cluster Attack: 100%|██████████| 3/3 [00:03<00:00,  1.10s/it][ACluster Attack: 100%|██████████| 3/3 [00:03<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 3, Cache Hits: 0
+Perturbing graph:   1%|▏         | 5/366 [00:58<1:04:37, 10.74s/it]
+🎯 [Step 6/366] Text attack: 4 new nodes (skipped 28 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it]
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:   2%|▏         | 6/366 [01:03<50:48,  8.47s/it]  
+⏭️ [Step 7/366] All 32 nodes already attacked, skipping
+Perturbing graph:   2%|▏         | 7/366 [01:05<39:35,  6.62s/it]
+⏭️ [Step 8/366] All 32 nodes already attacked, skipping
+Perturbing graph:   2%|▏         | 8/366 [01:08<32:15,  5.41s/it]
+🎯 [Step 9/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:   2%|▏         | 9/366 [01:12<29:45,  5.00s/it]
+⏭️ [Step 10/366] All 32 nodes already attacked, skipping
+Perturbing graph:   3%|▎         | 10/366 [01:15<25:34,  4.31s/it]
+⏭️ [Step 11/366] All 32 nodes already attacked, skipping
+Perturbing graph:   3%|▎         | 11/366 [01:18<22:51,  3.86s/it]
+⏭️ [Step 12/366] All 32 nodes already attacked, skipping
+Perturbing graph:   3%|▎         | 12/366 [01:21<20:50,  3.53s/it]
+⏭️ [Step 13/366] All 32 nodes already attacked, skipping
+Perturbing graph:   4%|▎         | 13/366 [01:23<19:24,  3.30s/it]
+⏭️ [Step 14/366] All 32 nodes already attacked, skipping
+Perturbing graph:   4%|▍         | 14/366 [01:26<18:26,  3.14s/it]
+⏭️ [Step 15/366] All 32 nodes already attacked, skipping
+Perturbing graph:   4%|▍         | 15/366 [01:29<17:39,  3.02s/it]
+⏭️ [Step 16/366] All 32 nodes already attacked, skipping
+Perturbing graph:   4%|▍         | 16/366 [01:32<17:07,  2.94s/it]
+⏭️ [Step 17/366] All 32 nodes already attacked, skipping
+Perturbing graph:   5%|▍         | 17/366 [01:35<17:02,  2.93s/it]
+⏭️ [Step 18/366] All 32 nodes already attacked, skipping
+Perturbing graph:   5%|▍         | 18/366 [01:38<17:48,  3.07s/it]
+⏭️ [Step 19/366] All 32 nodes already attacked, skipping
+Perturbing graph:   5%|▌         | 19/366 [01:41<17:22,  3.00s/it]
+⏭️ [Step 20/366] All 32 nodes already attacked, skipping
+Perturbing graph:   5%|▌         | 20/366 [01:44<16:59,  2.95s/it]
+⏭️ [Step 21/366] All 32 nodes already attacked, skipping
+Perturbing graph:   6%|▌         | 21/366 [01:46<16:37,  2.89s/it]
+⏭️ [Step 22/366] All 32 nodes already attacked, skipping
+Perturbing graph:   6%|▌         | 22/366 [01:49<16:22,  2.86s/it]
+⏭️ [Step 23/366] All 32 nodes already attacked, skipping
+Perturbing graph:   6%|▋         | 23/366 [01:52<16:04,  2.81s/it]
+⏭️ [Step 24/366] All 32 nodes already attacked, skipping
+Perturbing graph:   7%|▋         | 24/366 [01:55<15:50,  2.78s/it]
+⏭️ [Step 25/366] All 32 nodes already attacked, skipping
+Perturbing graph:   7%|▋         | 25/366 [01:57<15:38,  2.75s/it]
+⏭️ [Step 26/366] All 32 nodes already attacked, skipping
+Perturbing graph:   7%|▋         | 26/366 [02:00<15:34,  2.75s/it]
+⏭️ [Step 27/366] All 32 nodes already attacked, skipping
+Perturbing graph:   7%|▋         | 27/366 [02:03<15:35,  2.76s/it]
+⏭️ [Step 28/366] All 32 nodes already attacked, skipping
+Perturbing graph:   8%|▊         | 28/366 [02:06<15:36,  2.77s/it]
+⏭️ [Step 29/366] All 32 nodes already attacked, skipping
+Perturbing graph:   8%|▊         | 29/366 [02:08<15:32,  2.77s/it]
+⏭️ [Step 30/366] All 32 nodes already attacked, skipping
+Perturbing graph:   8%|▊         | 30/366 [02:12<16:20,  2.92s/it]
+⏭️ [Step 31/366] All 32 nodes already attacked, skipping
+Perturbing graph:   8%|▊         | 31/366 [02:14<16:09,  2.89s/it]
+⏭️ [Step 32/366] All 32 nodes already attacked, skipping
+Perturbing graph:   9%|▊         | 32/366 [02:17<15:51,  2.85s/it]
+⏭️ [Step 33/366] All 32 nodes already attacked, skipping
+Perturbing graph:   9%|▉         | 33/366 [02:20<15:47,  2.84s/it]
+⏭️ [Step 34/366] All 32 nodes already attacked, skipping
+Perturbing graph:   9%|▉         | 34/366 [02:23<15:43,  2.84s/it]
+⏭️ [Step 35/366] All 32 nodes already attacked, skipping
+Perturbing graph:  10%|▉         | 35/366 [02:26<15:31,  2.81s/it]
+⏭️ [Step 36/366] All 32 nodes already attacked, skipping
+Perturbing graph:  10%|▉         | 36/366 [02:28<15:12,  2.77s/it]
+⏭️ [Step 37/366] All 32 nodes already attacked, skipping
+Perturbing graph:  10%|█         | 37/366 [02:31<15:17,  2.79s/it]
+⏭️ [Step 38/366] All 32 nodes already attacked, skipping
+Perturbing graph:  10%|█         | 38/366 [02:34<15:21,  2.81s/it]
+⏭️ [Step 39/366] All 32 nodes already attacked, skipping
+Perturbing graph:  11%|█         | 39/366 [02:37<15:22,  2.82s/it]
+⏭️ [Step 40/366] All 32 nodes already attacked, skipping
+Perturbing graph:  11%|█         | 40/366 [02:40<15:13,  2.80s/it]
+⏭️ [Step 41/366] All 32 nodes already attacked, skipping
+Perturbing graph:  11%|█         | 41/366 [02:42<14:54,  2.75s/it]
+⏭️ [Step 42/366] All 32 nodes already attacked, skipping
+Perturbing graph:  11%|█▏        | 42/366 [02:45<15:36,  2.89s/it]
+⏭️ [Step 43/366] All 32 nodes already attacked, skipping
+Perturbing graph:  12%|█▏        | 43/366 [02:48<15:14,  2.83s/it]
+⏭️ [Step 44/366] All 32 nodes already attacked, skipping
+Perturbing graph:  12%|█▏        | 44/366 [02:51<15:00,  2.80s/it]
+⏭️ [Step 45/366] All 32 nodes already attacked, skipping
+Perturbing graph:  12%|█▏        | 45/366 [02:54<14:54,  2.79s/it]
+⏭️ [Step 46/366] All 32 nodes already attacked, skipping
+Perturbing graph:  13%|█▎        | 46/366 [02:56<14:53,  2.79s/it]
+⏭️ [Step 47/366] All 32 nodes already attacked, skipping
+Perturbing graph:  13%|█▎        | 47/366 [02:59<14:44,  2.77s/it]
+⏭️ [Step 48/366] All 32 nodes already attacked, skipping
+Perturbing graph:  13%|█▎        | 48/366 [03:02<14:47,  2.79s/it]
+⏭️ [Step 49/366] All 32 nodes already attacked, skipping
+Perturbing graph:  13%|█▎        | 49/366 [03:05<14:44,  2.79s/it]
+⏭️ [Step 50/366] All 32 nodes already attacked, skipping
+Perturbing graph:  14%|█▎        | 50/366 [03:08<14:41,  2.79s/it]
+⏭️ [Step 51/366] All 32 nodes already attacked, skipping
+Perturbing graph:  14%|█▍        | 51/366 [03:10<14:35,  2.78s/it]
+⏭️ [Step 52/366] All 32 nodes already attacked, skipping
+Perturbing graph:  14%|█▍        | 52/366 [03:13<14:30,  2.77s/it]
+⏭️ [Step 53/366] All 32 nodes already attacked, skipping
+Perturbing graph:  14%|█▍        | 53/366 [03:16<14:23,  2.76s/it]
+⏭️ [Step 54/366] All 32 nodes already attacked, skipping
+Perturbing graph:  15%|█▍        | 54/366 [03:19<14:58,  2.88s/it]
+⏭️ [Step 55/366] All 32 nodes already attacked, skipping
+Perturbing graph:  15%|█▌        | 55/366 [03:22<14:49,  2.86s/it]
+⏭️ [Step 56/366] All 32 nodes already attacked, skipping
+Perturbing graph:  15%|█▌        | 56/366 [03:24<14:34,  2.82s/it]
+⏭️ [Step 57/366] All 32 nodes already attacked, skipping
+Perturbing graph:  16%|█▌        | 57/366 [03:27<14:32,  2.82s/it]
+⏭️ [Step 58/366] All 32 nodes already attacked, skipping
+Perturbing graph:  16%|█▌        | 58/366 [03:30<14:20,  2.79s/it]
+⏭️ [Step 59/366] All 32 nodes already attacked, skipping
+Perturbing graph:  16%|█▌        | 59/366 [03:33<14:05,  2.75s/it]
+⏭️ [Step 60/366] All 32 nodes already attacked, skipping
+Perturbing graph:  16%|█▋        | 60/366 [03:35<14:06,  2.77s/it]
+⏭️ [Step 61/366] All 32 nodes already attacked, skipping
+Perturbing graph:  17%|█▋        | 61/366 [03:38<14:01,  2.76s/it]
+⏭️ [Step 62/366] All 32 nodes already attacked, skipping
+Perturbing graph:  17%|█▋        | 62/366 [03:41<14:04,  2.78s/it]
+⏭️ [Step 63/366] All 32 nodes already attacked, skipping
+Perturbing graph:  17%|█▋        | 63/366 [03:44<13:58,  2.77s/it]
+⏭️ [Step 64/366] All 32 nodes already attacked, skipping
+Perturbing graph:  17%|█▋        | 64/366 [03:47<13:59,  2.78s/it]
+⏭️ [Step 65/366] All 32 nodes already attacked, skipping
+Perturbing graph:  18%|█▊        | 65/366 [03:50<14:36,  2.91s/it]
+⏭️ [Step 66/366] All 32 nodes already attacked, skipping
+Perturbing graph:  18%|█▊        | 66/366 [03:53<14:23,  2.88s/it]
+⏭️ [Step 67/366] All 32 nodes already attacked, skipping
+Perturbing graph:  18%|█▊        | 67/366 [03:55<14:12,  2.85s/it]
+⏭️ [Step 68/366] All 32 nodes already attacked, skipping
+Perturbing graph:  19%|█▊        | 68/366 [03:58<14:01,  2.83s/it]
+⏭️ [Step 69/366] All 32 nodes already attacked, skipping
+Perturbing graph:  19%|█▉        | 69/366 [04:01<13:49,  2.79s/it]
+⏭️ [Step 70/366] All 32 nodes already attacked, skipping
+Perturbing graph:  19%|█▉        | 70/366 [04:04<13:46,  2.79s/it]
+⏭️ [Step 71/366] All 32 nodes already attacked, skipping
+Perturbing graph:  19%|█▉        | 71/366 [04:06<13:43,  2.79s/it]
+⏭️ [Step 72/366] All 32 nodes already attacked, skipping
+Perturbing graph:  20%|█▉        | 72/366 [04:09<13:45,  2.81s/it]
+⏭️ [Step 73/366] All 32 nodes already attacked, skipping
+Perturbing graph:  20%|█▉        | 73/366 [04:12<13:37,  2.79s/it]
+⏭️ [Step 74/366] All 32 nodes already attacked, skipping
+Perturbing graph:  20%|██        | 74/366 [04:15<13:30,  2.78s/it]
+⏭️ [Step 75/366] All 32 nodes already attacked, skipping
+Perturbing graph:  20%|██        | 75/366 [04:18<13:29,  2.78s/it]
+⏭️ [Step 76/366] All 32 nodes already attacked, skipping
+Perturbing graph:  21%|██        | 76/366 [04:20<13:24,  2.77s/it]
+⏭️ [Step 77/366] All 32 nodes already attacked, skipping
+Perturbing graph:  21%|██        | 77/366 [04:24<13:59,  2.91s/it]
+⏭️ [Step 78/366] All 32 nodes already attacked, skipping
+Perturbing graph:  21%|██▏       | 78/366 [04:26<13:44,  2.86s/it]
+⏭️ [Step 79/366] All 32 nodes already attacked, skipping
+Perturbing graph:  22%|██▏       | 79/366 [04:29<13:39,  2.86s/it]
+⏭️ [Step 80/366] All 32 nodes already attacked, skipping
+Perturbing graph:  22%|██▏       | 80/366 [04:32<13:28,  2.83s/it]
+⏭️ [Step 81/366] All 32 nodes already attacked, skipping
+Perturbing graph:  22%|██▏       | 81/366 [04:35<13:12,  2.78s/it]
+⏭️ [Step 82/366] All 32 nodes already attacked, skipping
+Perturbing graph:  22%|██▏       | 82/366 [04:37<13:02,  2.76s/it]
+⏭️ [Step 83/366] All 32 nodes already attacked, skipping
+Perturbing graph:  23%|██▎       | 83/366 [04:40<12:51,  2.73s/it]
+⏭️ [Step 84/366] All 32 nodes already attacked, skipping
+Perturbing graph:  23%|██▎       | 84/366 [04:43<12:46,  2.72s/it]
+⏭️ [Step 85/366] All 32 nodes already attacked, skipping
+Perturbing graph:  23%|██▎       | 85/366 [04:45<12:42,  2.71s/it]
+🎯 [Step 86/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.19s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.19s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  23%|██▎       | 86/366 [04:49<14:27,  3.10s/it]
+🎯 [Step 87/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  24%|██▍       | 87/366 [04:53<15:35,  3.35s/it]
+🎯 [Step 88/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  24%|██▍       | 88/366 [04:57<16:08,  3.48s/it]
+🎯 [Step 89/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.15s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  24%|██▍       | 89/366 [05:02<17:36,  3.81s/it]
+🎯 [Step 90/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.14s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  25%|██▍       | 90/366 [05:06<17:50,  3.88s/it]
+🎯 [Step 91/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.26s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  25%|██▍       | 91/366 [05:10<18:24,  4.02s/it]
+🎯 [Step 92/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  25%|██▌       | 92/366 [05:14<18:18,  4.01s/it]
+🎯 [Step 93/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.15s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  25%|██▌       | 93/366 [05:18<18:14,  4.01s/it]
+🎯 [Step 94/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.15s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  26%|██▌       | 94/366 [05:22<18:21,  4.05s/it]
+🎯 [Step 95/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  26%|██▌       | 95/366 [05:26<18:08,  4.01s/it]
+🎯 [Step 96/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  26%|██▌       | 96/366 [05:30<17:55,  3.98s/it]
+🎯 [Step 97/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  27%|██▋       | 97/366 [05:34<17:52,  3.99s/it]
+🎯 [Step 98/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  27%|██▋       | 98/366 [05:38<17:41,  3.96s/it]
+🎯 [Step 99/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  27%|██▋       | 99/366 [05:42<17:30,  3.93s/it]
+🎯 [Step 100/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  27%|██▋       | 100/366 [05:46<17:26,  3.93s/it]
+🎯 [Step 101/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  28%|██▊       | 101/366 [05:50<18:05,  4.10s/it]
+🎯 [Step 102/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  28%|██▊       | 102/366 [05:54<17:47,  4.04s/it]
+🎯 [Step 103/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  28%|██▊       | 103/366 [05:58<17:32,  4.00s/it]
+🎯 [Step 104/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  28%|██▊       | 104/366 [06:02<17:18,  3.96s/it]
+🎯 [Step 105/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  29%|██▊       | 105/366 [06:06<17:13,  3.96s/it]
+🎯 [Step 106/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  29%|██▉       | 106/366 [06:10<17:07,  3.95s/it]
+🎯 [Step 107/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  29%|██▉       | 107/366 [06:14<17:02,  3.95s/it]
+🎯 [Step 108/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  30%|██▉       | 108/366 [06:18<16:53,  3.93s/it]
+🎯 [Step 109/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  30%|██▉       | 109/366 [06:22<16:46,  3.91s/it]
+🎯 [Step 110/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  30%|███       | 110/366 [06:25<16:45,  3.93s/it]
+🎯 [Step 111/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.10s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.10s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  30%|███       | 111/366 [06:29<16:37,  3.91s/it]
+🎯 [Step 112/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  31%|███       | 112/366 [06:33<16:32,  3.91s/it]
+🎯 [Step 113/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  31%|███       | 113/366 [06:38<17:06,  4.06s/it]
+🎯 [Step 114/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  31%|███       | 114/366 [06:41<16:46,  3.99s/it]
+🎯 [Step 115/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  31%|███▏      | 115/366 [06:45<16:37,  3.97s/it]
+🎯 [Step 116/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.14s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  32%|███▏      | 116/366 [06:50<16:46,  4.02s/it]
+🎯 [Step 117/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  32%|███▏      | 117/366 [06:53<16:32,  3.99s/it]
+🎯 [Step 118/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  32%|███▏      | 118/366 [06:57<16:23,  3.97s/it]
+🎯 [Step 119/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  33%|███▎      | 119/366 [07:01<16:19,  3.97s/it]
+🎯 [Step 120/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  33%|███▎      | 120/366 [07:05<16:12,  3.95s/it]
+🎯 [Step 121/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  33%|███▎      | 121/366 [07:09<16:02,  3.93s/it]
+🎯 [Step 122/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  33%|███▎      | 122/366 [07:13<16:03,  3.95s/it]
+🎯 [Step 123/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  34%|███▎      | 123/366 [07:17<15:53,  3.93s/it]
+🎯 [Step 124/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  34%|███▍      | 124/366 [07:21<15:45,  3.91s/it]
+🎯 [Step 125/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it]
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  34%|███▍      | 125/366 [07:25<16:23,  4.08s/it]
+🎯 [Step 126/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.10s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.10s/it]
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  34%|███▍      | 126/366 [07:29<16:02,  4.01s/it]
+🎯 [Step 127/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  35%|███▍      | 127/366 [07:33<15:56,  4.00s/it]
+🎯 [Step 128/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it]
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  35%|███▍      | 128/366 [07:37<15:49,  3.99s/it]
+⏭️ [Step 129/366] All 32 nodes already attacked, skipping
+Perturbing graph:  35%|███▌      | 129/366 [07:40<14:13,  3.60s/it]
+⏭️ [Step 130/366] All 32 nodes already attacked, skipping
+Perturbing graph:  36%|███▌      | 130/366 [07:43<13:15,  3.37s/it]
+🎯 [Step 131/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  36%|███▌      | 131/366 [07:47<13:54,  3.55s/it]
+🎯 [Step 132/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  36%|███▌      | 132/366 [07:51<14:12,  3.64s/it]
+🎯 [Step 133/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  36%|███▋      | 133/366 [07:54<14:26,  3.72s/it]
+🎯 [Step 134/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  37%|███▋      | 134/366 [07:58<14:32,  3.76s/it]
+⏭️ [Step 135/366] All 32 nodes already attacked, skipping
+Perturbing graph:  37%|███▋      | 135/366 [08:01<13:17,  3.45s/it]
+⏭️ [Step 136/366] All 32 nodes already attacked, skipping
+Perturbing graph:  37%|███▋      | 136/366 [08:04<12:32,  3.27s/it]
+⏭️ [Step 137/366] All 32 nodes already attacked, skipping
+Perturbing graph:  37%|███▋      | 137/366 [08:07<12:31,  3.28s/it]
+⏭️ [Step 138/366] All 32 nodes already attacked, skipping
+Perturbing graph:  38%|███▊      | 138/366 [08:10<11:57,  3.15s/it]
+⏭️ [Step 139/366] All 32 nodes already attacked, skipping
+Perturbing graph:  38%|███▊      | 139/366 [08:13<11:30,  3.04s/it]
+⏭️ [Step 140/366] All 32 nodes already attacked, skipping
+Perturbing graph:  38%|███▊      | 140/366 [08:16<11:08,  2.96s/it]
+⏭️ [Step 141/366] All 32 nodes already attacked, skipping
+Perturbing graph:  39%|███▊      | 141/366 [08:18<10:53,  2.90s/it]
+⏭️ [Step 142/366] All 32 nodes already attacked, skipping
+Perturbing graph:  39%|███▉      | 142/366 [08:21<10:44,  2.88s/it]
+⏭️ [Step 143/366] All 32 nodes already attacked, skipping
+Perturbing graph:  39%|███▉      | 143/366 [08:24<10:32,  2.84s/it]
+⏭️ [Step 144/366] All 32 nodes already attacked, skipping
+Perturbing graph:  39%|███▉      | 144/366 [08:27<10:28,  2.83s/it]
+⏭️ [Step 145/366] All 32 nodes already attacked, skipping
+Perturbing graph:  40%|███▉      | 145/366 [08:29<10:22,  2.82s/it]
+⏭️ [Step 146/366] All 32 nodes already attacked, skipping
+Perturbing graph:  40%|███▉      | 146/366 [08:32<10:18,  2.81s/it]
+⏭️ [Step 147/366] All 32 nodes already attacked, skipping
+Perturbing graph:  40%|████      | 147/366 [08:35<10:16,  2.81s/it]
+⏭️ [Step 148/366] All 32 nodes already attacked, skipping
+Perturbing graph:  40%|████      | 148/366 [08:38<10:50,  2.98s/it]
+⏭️ [Step 149/366] All 32 nodes already attacked, skipping
+Perturbing graph:  41%|████      | 149/366 [08:41<10:38,  2.94s/it]
+⏭️ [Step 150/366] All 32 nodes already attacked, skipping
+Perturbing graph:  41%|████      | 150/366 [08:44<10:29,  2.91s/it]
+⏭️ [Step 151/366] All 32 nodes already attacked, skipping
+Perturbing graph:  41%|████▏     | 151/366 [08:47<10:17,  2.87s/it]
+⏭️ [Step 152/366] All 32 nodes already attacked, skipping
+Perturbing graph:  42%|████▏     | 152/366 [08:50<10:10,  2.85s/it]
+🎯 [Step 153/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  42%|████▏     | 153/366 [08:54<11:17,  3.18s/it]
+🎯 [Step 154/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.14s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  42%|████▏     | 154/366 [08:58<12:20,  3.49s/it]
+🎯 [Step 155/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  42%|████▏     | 155/366 [09:02<12:42,  3.61s/it]
+🎯 [Step 156/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  43%|████▎     | 156/366 [09:06<12:51,  3.67s/it]
+⏭️ [Step 157/366] All 32 nodes already attacked, skipping
+Perturbing graph:  43%|████▎     | 157/366 [09:08<11:47,  3.39s/it]
+⏭️ [Step 158/366] All 32 nodes already attacked, skipping
+Perturbing graph:  43%|████▎     | 158/366 [09:11<11:07,  3.21s/it]
+⏭️ [Step 159/366] All 32 nodes already attacked, skipping
+Perturbing graph:  43%|████▎     | 159/366 [09:14<10:36,  3.08s/it]
+⏭️ [Step 160/366] All 32 nodes already attacked, skipping
+Perturbing graph:  44%|████▎     | 160/366 [09:17<10:44,  3.13s/it]
+⏭️ [Step 161/366] All 32 nodes already attacked, skipping
+Perturbing graph:  44%|████▍     | 161/366 [09:20<10:16,  3.01s/it]
+⏭️ [Step 162/366] All 32 nodes already attacked, skipping
+Perturbing graph:  44%|████▍     | 162/366 [09:23<09:59,  2.94s/it]
+⏭️ [Step 163/366] All 32 nodes already attacked, skipping
+Perturbing graph:  45%|████▍     | 163/366 [09:25<09:45,  2.88s/it]
+⏭️ [Step 164/366] All 32 nodes already attacked, skipping
+Perturbing graph:  45%|████▍     | 164/366 [09:28<09:37,  2.86s/it]
+⏭️ [Step 165/366] All 32 nodes already attacked, skipping
+Perturbing graph:  45%|████▌     | 165/366 [09:31<09:32,  2.85s/it]
+⏭️ [Step 166/366] All 32 nodes already attacked, skipping
+Perturbing graph:  45%|████▌     | 166/366 [09:34<09:22,  2.81s/it]
+🎯 [Step 167/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  46%|████▌     | 167/366 [09:38<10:30,  3.17s/it]
+🎯 [Step 168/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  46%|████▌     | 168/366 [09:42<11:09,  3.38s/it]
+🎯 [Step 169/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  46%|████▌     | 169/366 [09:46<11:45,  3.58s/it]
+🎯 [Step 170/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  46%|████▋     | 170/366 [09:50<12:00,  3.68s/it]
+🎯 [Step 171/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  47%|████▋     | 171/366 [09:54<12:34,  3.87s/it]
+🎯 [Step 172/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  47%|████▋     | 172/366 [09:58<12:41,  3.92s/it]
+🎯 [Step 173/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  47%|████▋     | 173/366 [10:02<12:39,  3.93s/it]
+🎯 [Step 174/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  48%|████▊     | 174/366 [10:06<12:40,  3.96s/it]
+⏭️ [Step 175/366] All 32 nodes already attacked, skipping
+Perturbing graph:  48%|████▊     | 175/366 [10:09<11:33,  3.63s/it]
+⏭️ [Step 176/366] All 32 nodes already attacked, skipping
+Perturbing graph:  48%|████▊     | 176/366 [10:12<10:47,  3.41s/it]
+⏭️ [Step 177/366] All 32 nodes already attacked, skipping
+Perturbing graph:  48%|████▊     | 177/366 [10:14<10:06,  3.21s/it]
+⏭️ [Step 178/366] All 32 nodes already attacked, skipping
+Perturbing graph:  49%|████▊     | 178/366 [10:17<09:43,  3.11s/it]
+⏭️ [Step 179/366] All 32 nodes already attacked, skipping
+Perturbing graph:  49%|████▉     | 179/366 [10:20<09:24,  3.02s/it]
+⏭️ [Step 180/366] All 32 nodes already attacked, skipping
+Perturbing graph:  49%|████▉     | 180/366 [10:23<09:10,  2.96s/it]
+⏭️ [Step 181/366] All 32 nodes already attacked, skipping
+Perturbing graph:  49%|████▉     | 181/366 [10:26<09:01,  2.92s/it]
+⏭️ [Step 182/366] All 32 nodes already attacked, skipping
+Perturbing graph:  50%|████▉     | 182/366 [10:29<08:49,  2.88s/it]
+⏭️ [Step 183/366] All 32 nodes already attacked, skipping
+Perturbing graph:  50%|█████     | 183/366 [10:32<09:07,  2.99s/it]
+⏭️ [Step 184/366] All 32 nodes already attacked, skipping
+Perturbing graph:  50%|█████     | 184/366 [10:35<08:49,  2.91s/it]
+⏭️ [Step 185/366] All 32 nodes already attacked, skipping
+Perturbing graph:  51%|█████     | 185/366 [10:37<08:37,  2.86s/it]
+⏭️ [Step 186/366] All 32 nodes already attacked, skipping
+Perturbing graph:  51%|█████     | 186/366 [10:40<08:30,  2.84s/it]
+⏭️ [Step 187/366] All 32 nodes already attacked, skipping
+Perturbing graph:  51%|█████     | 187/366 [10:43<08:20,  2.79s/it]
+🎯 [Step 188/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  51%|█████▏    | 188/366 [10:47<09:15,  3.12s/it]
+🎯 [Step 189/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  52%|█████▏    | 189/366 [10:50<09:47,  3.32s/it]
+⏭️ [Step 190/366] All 32 nodes already attacked, skipping
+Perturbing graph:  52%|█████▏    | 190/366 [10:53<09:15,  3.15s/it]
+⏭️ [Step 191/366] All 32 nodes already attacked, skipping
+Perturbing graph:  52%|█████▏    | 191/366 [10:56<09:00,  3.09s/it]
+🎯 [Step 192/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.11s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  52%|█████▏    | 192/366 [11:00<09:43,  3.35s/it]
+🎯 [Step 193/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  53%|█████▎    | 193/366 [11:04<10:14,  3.55s/it]
+⏭️ [Step 194/366] All 32 nodes already attacked, skipping
+Perturbing graph:  53%|█████▎    | 194/366 [11:07<09:25,  3.29s/it]
+⏭️ [Step 195/366] All 32 nodes already attacked, skipping
+Perturbing graph:  53%|█████▎    | 195/366 [11:10<08:59,  3.16s/it]
+⏭️ [Step 196/366] All 32 nodes already attacked, skipping
+Perturbing graph:  54%|█████▎    | 196/366 [11:12<08:37,  3.04s/it]
+⏭️ [Step 197/366] All 32 nodes already attacked, skipping
+Perturbing graph:  54%|█████▍    | 197/366 [11:16<08:44,  3.10s/it]
+⏭️ [Step 198/366] All 32 nodes already attacked, skipping
+Perturbing graph:  54%|█████▍    | 198/366 [11:18<08:25,  3.01s/it]
+⏭️ [Step 199/366] All 32 nodes already attacked, skipping
+Perturbing graph:  54%|█████▍    | 199/366 [11:21<08:14,  2.96s/it]
+⏭️ [Step 200/366] All 32 nodes already attacked, skipping
+Perturbing graph:  55%|█████▍    | 200/366 [11:24<08:01,  2.90s/it]
+⏭️ [Step 201/366] All 32 nodes already attacked, skipping
+Perturbing graph:  55%|█████▍    | 201/366 [11:27<07:51,  2.86s/it]
+⏭️ [Step 202/366] All 32 nodes already attacked, skipping
+Perturbing graph:  55%|█████▌    | 202/366 [11:30<07:49,  2.86s/it]
+⏭️ [Step 203/366] All 32 nodes already attacked, skipping
+Perturbing graph:  55%|█████▌    | 203/366 [11:33<07:45,  2.85s/it]
+⏭️ [Step 204/366] All 32 nodes already attacked, skipping
+Perturbing graph:  56%|█████▌    | 204/366 [11:35<07:38,  2.83s/it]
+⏭️ [Step 205/366] All 32 nodes already attacked, skipping
+Perturbing graph:  56%|█████▌    | 205/366 [11:38<07:31,  2.81s/it]
+⏭️ [Step 206/366] All 32 nodes already attacked, skipping
+Perturbing graph:  56%|█████▋    | 206/366 [11:41<07:23,  2.77s/it]
+⏭️ [Step 207/366] All 32 nodes already attacked, skipping
+Perturbing graph:  57%|█████▋    | 207/366 [11:44<07:21,  2.78s/it]
+⏭️ [Step 208/366] All 32 nodes already attacked, skipping
+Perturbing graph:  57%|█████▋    | 208/366 [11:47<07:49,  2.97s/it]
+⏭️ [Step 209/366] All 32 nodes already attacked, skipping
+Perturbing graph:  57%|█████▋    | 209/366 [11:50<07:34,  2.89s/it]
+⏭️ [Step 210/366] All 32 nodes already attacked, skipping
+Perturbing graph:  57%|█████▋    | 210/366 [11:52<07:27,  2.87s/it]
+⏭️ [Step 211/366] All 32 nodes already attacked, skipping
+Perturbing graph:  58%|█████▊    | 211/366 [11:55<07:17,  2.82s/it]
+⏭️ [Step 212/366] All 32 nodes already attacked, skipping
+Perturbing graph:  58%|█████▊    | 212/366 [11:58<07:11,  2.80s/it]
+⏭️ [Step 213/366] All 32 nodes already attacked, skipping
+Perturbing graph:  58%|█████▊    | 213/366 [12:01<07:03,  2.77s/it]
+⏭️ [Step 214/366] All 32 nodes already attacked, skipping
+Perturbing graph:  58%|█████▊    | 214/366 [12:03<07:00,  2.76s/it]
+⏭️ [Step 215/366] All 32 nodes already attacked, skipping
+Perturbing graph:  59%|█████▊    | 215/366 [12:06<06:58,  2.77s/it]
+⏭️ [Step 216/366] All 32 nodes already attacked, skipping
+Perturbing graph:  59%|█████▉    | 216/366 [12:09<06:54,  2.77s/it]
+⏭️ [Step 217/366] All 32 nodes already attacked, skipping
+Perturbing graph:  59%|█████▉    | 217/366 [12:12<06:52,  2.77s/it]
+⏭️ [Step 218/366] All 32 nodes already attacked, skipping
+Perturbing graph:  60%|█████▉    | 218/366 [12:15<06:56,  2.81s/it]
+⏭️ [Step 219/366] All 32 nodes already attacked, skipping
+Perturbing graph:  60%|█████▉    | 219/366 [12:18<07:10,  2.93s/it]
+⏭️ [Step 220/366] All 32 nodes already attacked, skipping
+Perturbing graph:  60%|██████    | 220/366 [12:21<07:01,  2.89s/it]
+⏭️ [Step 221/366] All 32 nodes already attacked, skipping
+Perturbing graph:  60%|██████    | 221/366 [12:23<06:56,  2.87s/it]
+⏭️ [Step 222/366] All 32 nodes already attacked, skipping
+Perturbing graph:  61%|██████    | 222/366 [12:26<06:48,  2.84s/it]
+⏭️ [Step 223/366] All 32 nodes already attacked, skipping
+Perturbing graph:  61%|██████    | 223/366 [12:29<06:43,  2.82s/it]
+⏭️ [Step 224/366] All 32 nodes already attacked, skipping
+Perturbing graph:  61%|██████    | 224/366 [12:32<06:36,  2.79s/it]
+⏭️ [Step 225/366] All 32 nodes already attacked, skipping
+Perturbing graph:  61%|██████▏   | 225/366 [12:35<06:34,  2.79s/it]
+⏭️ [Step 226/366] All 32 nodes already attacked, skipping
+Perturbing graph:  62%|██████▏   | 226/366 [12:37<06:28,  2.78s/it]
+⏭️ [Step 227/366] All 32 nodes already attacked, skipping
+Perturbing graph:  62%|██████▏   | 227/366 [12:40<06:22,  2.75s/it]
+⏭️ [Step 228/366] All 32 nodes already attacked, skipping
+Perturbing graph:  62%|██████▏   | 228/366 [12:43<06:21,  2.76s/it]
+⏭️ [Step 229/366] All 32 nodes already attacked, skipping
+Perturbing graph:  63%|██████▎   | 229/366 [12:45<06:15,  2.74s/it]
+⏭️ [Step 230/366] All 32 nodes already attacked, skipping
+Perturbing graph:  63%|██████▎   | 230/366 [12:48<06:13,  2.74s/it]
+⏭️ [Step 231/366] All 32 nodes already attacked, skipping
+Perturbing graph:  63%|██████▎   | 231/366 [12:51<06:10,  2.74s/it]
+⏭️ [Step 232/366] All 32 nodes already attacked, skipping
+Perturbing graph:  63%|██████▎   | 232/366 [12:54<06:26,  2.88s/it]
+⏭️ [Step 233/366] All 32 nodes already attacked, skipping
+Perturbing graph:  64%|██████▎   | 233/366 [12:57<06:18,  2.85s/it]
+⏭️ [Step 234/366] All 32 nodes already attacked, skipping
+Perturbing graph:  64%|██████▍   | 234/366 [13:00<06:11,  2.82s/it]
+⏭️ [Step 235/366] All 32 nodes already attacked, skipping
+Perturbing graph:  64%|██████▍   | 235/366 [13:02<06:04,  2.78s/it]
+⏭️ [Step 236/366] All 32 nodes already attacked, skipping
+Perturbing graph:  64%|██████▍   | 236/366 [13:05<06:02,  2.79s/it]
+⏭️ [Step 237/366] All 32 nodes already attacked, skipping
+Perturbing graph:  65%|██████▍   | 237/366 [13:08<06:02,  2.81s/it]
+⏭️ [Step 238/366] All 32 nodes already attacked, skipping
+Perturbing graph:  65%|██████▌   | 238/366 [13:11<05:56,  2.79s/it]
+⏭️ [Step 239/366] All 32 nodes already attacked, skipping
+Perturbing graph:  65%|██████▌   | 239/366 [13:13<05:52,  2.78s/it]
+⏭️ [Step 240/366] All 32 nodes already attacked, skipping
+Perturbing graph:  66%|██████▌   | 240/366 [13:16<05:45,  2.74s/it]
+⏭️ [Step 241/366] All 32 nodes already attacked, skipping
+Perturbing graph:  66%|██████▌   | 241/366 [13:19<05:41,  2.73s/it]
+⏭️ [Step 242/366] All 32 nodes already attacked, skipping
+Perturbing graph:  66%|██████▌   | 242/366 [13:22<05:38,  2.73s/it]
+⏭️ [Step 243/366] All 32 nodes already attacked, skipping
+Perturbing graph:  66%|██████▋   | 243/366 [13:24<05:35,  2.73s/it]
+⏭️ [Step 244/366] All 32 nodes already attacked, skipping
+Perturbing graph:  67%|██████▋   | 244/366 [13:28<05:51,  2.88s/it]
+⏭️ [Step 245/366] All 32 nodes already attacked, skipping
+Perturbing graph:  67%|██████▋   | 245/366 [13:30<05:42,  2.83s/it]
+⏭️ [Step 246/366] All 32 nodes already attacked, skipping
+Perturbing graph:  67%|██████▋   | 246/366 [13:33<05:40,  2.83s/it]
+⏭️ [Step 247/366] All 32 nodes already attacked, skipping
+Perturbing graph:  67%|██████▋   | 247/366 [13:36<05:32,  2.80s/it]
+⏭️ [Step 248/366] All 32 nodes already attacked, skipping
+Perturbing graph:  68%|██████▊   | 248/366 [13:39<05:29,  2.79s/it]
+⏭️ [Step 249/366] All 32 nodes already attacked, skipping
+Perturbing graph:  68%|██████▊   | 249/366 [13:41<05:23,  2.76s/it]
+⏭️ [Step 250/366] All 32 nodes already attacked, skipping
+Perturbing graph:  68%|██████▊   | 250/366 [13:44<05:23,  2.79s/it]
+⏭️ [Step 251/366] All 32 nodes already attacked, skipping
+Perturbing graph:  69%|██████▊   | 251/366 [13:47<05:19,  2.78s/it]
+⏭️ [Step 252/366] All 32 nodes already attacked, skipping
+Perturbing graph:  69%|██████▉   | 252/366 [13:50<05:17,  2.79s/it]
+⏭️ [Step 253/366] All 32 nodes already attacked, skipping
+Perturbing graph:  69%|██████▉   | 253/366 [13:52<05:15,  2.79s/it]
+⏭️ [Step 254/366] All 32 nodes already attacked, skipping
+Perturbing graph:  69%|██████▉   | 254/366 [13:55<05:17,  2.84s/it]
+⏭️ [Step 255/366] All 32 nodes already attacked, skipping
+Perturbing graph:  70%|██████▉   | 255/366 [13:58<05:14,  2.83s/it]
+⏭️ [Step 256/366] All 32 nodes already attacked, skipping
+Perturbing graph:  70%|██████▉   | 256/366 [14:01<05:23,  2.94s/it]
+⏭️ [Step 257/366] All 32 nodes already attacked, skipping
+Perturbing graph:  70%|███████   | 257/366 [14:04<05:17,  2.91s/it]
+⏭️ [Step 258/366] All 32 nodes already attacked, skipping
+Perturbing graph:  70%|███████   | 258/366 [14:07<05:10,  2.87s/it]
+⏭️ [Step 259/366] All 32 nodes already attacked, skipping
+Perturbing graph:  71%|███████   | 259/366 [14:10<05:07,  2.87s/it]
+⏭️ [Step 260/366] All 32 nodes already attacked, skipping
+Perturbing graph:  71%|███████   | 260/366 [14:13<05:02,  2.85s/it]
+⏭️ [Step 261/366] All 32 nodes already attacked, skipping
+Perturbing graph:  71%|███████▏  | 261/366 [14:15<04:55,  2.82s/it]
+⏭️ [Step 262/366] All 32 nodes already attacked, skipping
+Perturbing graph:  72%|███████▏  | 262/366 [14:18<04:52,  2.81s/it]
+⏭️ [Step 263/366] All 32 nodes already attacked, skipping
+Perturbing graph:  72%|███████▏  | 263/366 [14:21<04:47,  2.79s/it]
+⏭️ [Step 264/366] All 32 nodes already attacked, skipping
+Perturbing graph:  72%|███████▏  | 264/366 [14:24<04:47,  2.82s/it]
+⏭️ [Step 265/366] All 32 nodes already attacked, skipping
+Perturbing graph:  72%|███████▏  | 265/366 [14:27<04:42,  2.80s/it]
+⏭️ [Step 266/366] All 32 nodes already attacked, skipping
+Perturbing graph:  73%|███████▎  | 266/366 [14:29<04:39,  2.79s/it]
+⏭️ [Step 267/366] All 32 nodes already attacked, skipping
+Perturbing graph:  73%|███████▎  | 267/366 [14:32<04:36,  2.79s/it]
+⏭️ [Step 268/366] All 32 nodes already attacked, skipping
+Perturbing graph:  73%|███████▎  | 268/366 [14:36<04:50,  2.96s/it]
+⏭️ [Step 269/366] All 32 nodes already attacked, skipping
+Perturbing graph:  73%|███████▎  | 269/366 [14:38<04:42,  2.92s/it]
+⏭️ [Step 270/366] All 32 nodes already attacked, skipping
+Perturbing graph:  74%|███████▍  | 270/366 [14:41<04:38,  2.90s/it]
+⏭️ [Step 271/366] All 32 nodes already attacked, skipping
+Perturbing graph:  74%|███████▍  | 271/366 [14:44<04:34,  2.89s/it]
+⏭️ [Step 272/366] All 32 nodes already attacked, skipping
+Perturbing graph:  74%|███████▍  | 272/366 [14:47<04:28,  2.86s/it]
+⏭️ [Step 273/366] All 32 nodes already attacked, skipping
+Perturbing graph:  75%|███████▍  | 273/366 [14:50<04:22,  2.82s/it]
+⏭️ [Step 274/366] All 32 nodes already attacked, skipping
+Perturbing graph:  75%|███████▍  | 274/366 [14:52<04:19,  2.82s/it]
+⏭️ [Step 275/366] All 32 nodes already attacked, skipping
+Perturbing graph:  75%|███████▌  | 275/366 [14:55<04:14,  2.80s/it]
+⏭️ [Step 276/366] All 32 nodes already attacked, skipping
+Perturbing graph:  75%|███████▌  | 276/366 [14:58<04:10,  2.78s/it]
+⏭️ [Step 277/366] All 32 nodes already attacked, skipping
+Perturbing graph:  76%|███████▌  | 277/366 [15:01<04:07,  2.78s/it]
+⏭️ [Step 278/366] All 32 nodes already attacked, skipping
+Perturbing graph:  76%|███████▌  | 278/366 [15:04<04:05,  2.78s/it]
+⏭️ [Step 279/366] All 32 nodes already attacked, skipping
+Perturbing graph:  76%|███████▌  | 279/366 [15:06<04:01,  2.78s/it]
+⏭️ [Step 280/366] All 32 nodes already attacked, skipping
+Perturbing graph:  77%|███████▋  | 280/366 [15:09<04:07,  2.88s/it]
+⏭️ [Step 281/366] All 32 nodes already attacked, skipping
+Perturbing graph:  77%|███████▋  | 281/366 [15:12<04:03,  2.87s/it]
+⏭️ [Step 282/366] All 32 nodes already attacked, skipping
+Perturbing graph:  77%|███████▋  | 282/366 [15:15<03:59,  2.85s/it]
+⏭️ [Step 283/366] All 32 nodes already attacked, skipping
+Perturbing graph:  77%|███████▋  | 283/366 [15:18<03:57,  2.86s/it]
+⏭️ [Step 284/366] All 32 nodes already attacked, skipping
+Perturbing graph:  78%|███████▊  | 284/366 [15:21<03:51,  2.83s/it]
+⏭️ [Step 285/366] All 32 nodes already attacked, skipping
+Perturbing graph:  78%|███████▊  | 285/366 [15:23<03:46,  2.79s/it]
+⏭️ [Step 286/366] All 32 nodes already attacked, skipping
+Perturbing graph:  78%|███████▊  | 286/366 [15:26<03:44,  2.80s/it]
+⏭️ [Step 287/366] All 32 nodes already attacked, skipping
+Perturbing graph:  78%|███████▊  | 287/366 [15:29<03:41,  2.81s/it]
+⏭️ [Step 288/366] All 32 nodes already attacked, skipping
+Perturbing graph:  79%|███████▊  | 288/366 [15:32<03:38,  2.80s/it]
+⏭️ [Step 289/366] All 32 nodes already attacked, skipping
+Perturbing graph:  79%|███████▉  | 289/366 [15:35<03:34,  2.78s/it]
+⏭️ [Step 290/366] All 32 nodes already attacked, skipping
+Perturbing graph:  79%|███████▉  | 290/366 [15:37<03:32,  2.79s/it]
+⏭️ [Step 291/366] All 32 nodes already attacked, skipping
+Perturbing graph:  80%|███████▉  | 291/366 [15:40<03:28,  2.78s/it]
+⏭️ [Step 292/366] All 32 nodes already attacked, skipping
+Perturbing graph:  80%|███████▉  | 292/366 [15:43<03:36,  2.92s/it]
+⏭️ [Step 293/366] All 32 nodes already attacked, skipping
+Perturbing graph:  80%|████████  | 293/366 [15:46<03:29,  2.86s/it]
+⏭️ [Step 294/366] All 32 nodes already attacked, skipping
+Perturbing graph:  80%|████████  | 294/366 [15:49<03:23,  2.83s/it]
+⏭️ [Step 295/366] All 32 nodes already attacked, skipping
+Perturbing graph:  81%|████████  | 295/366 [15:52<03:20,  2.82s/it]
+⏭️ [Step 296/366] All 32 nodes already attacked, skipping
+Perturbing graph:  81%|████████  | 296/366 [15:54<03:16,  2.81s/it]
+⏭️ [Step 297/366] All 32 nodes already attacked, skipping
+Perturbing graph:  81%|████████  | 297/366 [15:57<03:13,  2.80s/it]
+⏭️ [Step 298/366] All 32 nodes already attacked, skipping
+Perturbing graph:  81%|████████▏ | 298/366 [16:00<03:09,  2.79s/it]
+⏭️ [Step 299/366] All 32 nodes already attacked, skipping
+Perturbing graph:  82%|████████▏ | 299/366 [16:03<03:06,  2.78s/it]
+⏭️ [Step 300/366] All 32 nodes already attacked, skipping
+Perturbing graph:  82%|████████▏ | 300/366 [16:06<03:04,  2.80s/it]
+⏭️ [Step 301/366] All 32 nodes already attacked, skipping
+Perturbing graph:  82%|████████▏ | 301/366 [16:08<03:02,  2.81s/it]
+⏭️ [Step 302/366] All 32 nodes already attacked, skipping
+Perturbing graph:  83%|████████▎ | 302/366 [16:11<03:00,  2.82s/it]
+⏭️ [Step 303/366] All 32 nodes already attacked, skipping
+Perturbing graph:  83%|████████▎ | 303/366 [16:14<02:55,  2.79s/it]
+⏭️ [Step 304/366] All 32 nodes already attacked, skipping
+Perturbing graph:  83%|████████▎ | 304/366 [16:17<02:53,  2.80s/it]
+⏭️ [Step 305/366] All 32 nodes already attacked, skipping
+Perturbing graph:  83%|████████▎ | 305/366 [16:20<02:57,  2.91s/it]
+⏭️ [Step 306/366] All 32 nodes already attacked, skipping
+Perturbing graph:  84%|████████▎ | 306/366 [16:23<02:52,  2.87s/it]
+⏭️ [Step 307/366] All 32 nodes already attacked, skipping
+Perturbing graph:  84%|████████▍ | 307/366 [16:25<02:47,  2.83s/it]
+⏭️ [Step 308/366] All 32 nodes already attacked, skipping
+Perturbing graph:  84%|████████▍ | 308/366 [16:28<02:43,  2.82s/it]
+⏭️ [Step 309/366] All 32 nodes already attacked, skipping
+Perturbing graph:  84%|████████▍ | 309/366 [16:31<02:39,  2.80s/it]
+🎯 [Step 310/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:02<00:00,  2.79s/it][ACluster Attack: 100%|██████████| 1/1 [00:02<00:00,  2.79s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  85%|████████▍ | 310/366 [16:37<03:23,  3.63s/it]
+⏭️ [Step 311/366] All 32 nodes already attacked, skipping
+Perturbing graph:  85%|████████▍ | 311/366 [16:39<03:06,  3.40s/it]
+🎯 [Step 312/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.14s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  85%|████████▌ | 312/366 [16:44<03:15,  3.63s/it]
+🎯 [Step 313/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  86%|████████▌ | 313/366 [16:48<03:17,  3.72s/it]
+🎯 [Step 314/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  86%|████████▌ | 314/366 [16:52<03:17,  3.81s/it]
+⏭️ [Step 315/366] All 32 nodes already attacked, skipping
+Perturbing graph:  86%|████████▌ | 315/366 [16:54<02:58,  3.50s/it]
+⏭️ [Step 316/366] All 32 nodes already attacked, skipping
+Perturbing graph:  86%|████████▋ | 316/366 [16:58<02:53,  3.48s/it]
+⏭️ [Step 317/366] All 32 nodes already attacked, skipping
+Perturbing graph:  87%|████████▋ | 317/366 [17:01<02:42,  3.31s/it]
+⏭️ [Step 318/366] All 32 nodes already attacked, skipping
+Perturbing graph:  87%|████████▋ | 318/366 [17:04<02:33,  3.20s/it]
+🎯 [Step 319/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.15s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  87%|████████▋ | 319/366 [17:08<02:42,  3.45s/it]
+🎯 [Step 320/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  87%|████████▋ | 320/366 [17:12<02:46,  3.61s/it]
+🎯 [Step 321/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  88%|████████▊ | 321/366 [17:16<02:46,  3.70s/it]
+🎯 [Step 322/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.12s/it]
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+Perturbing graph:  88%|████████▊ | 322/366 [17:20<02:47,  3.81s/it]
+⏭️ [Step 323/366] All 32 nodes already attacked, skipping
+Perturbing graph:  88%|████████▊ | 323/366 [17:22<02:31,  3.52s/it]
+⏭️ [Step 324/366] All 32 nodes already attacked, skipping
+Perturbing graph:  89%|████████▊ | 324/366 [17:25<02:19,  3.32s/it]
+⏭️ [Step 325/366] All 32 nodes already attacked, skipping
+Perturbing graph:  89%|████████▉ | 325/366 [17:28<02:10,  3.18s/it]
+⏭️ [Step 326/366] All 32 nodes already attacked, skipping
+Perturbing graph:  89%|████████▉ | 326/366 [17:31<02:04,  3.11s/it]
+⏭️ [Step 327/366] All 32 nodes already attacked, skipping
+Perturbing graph:  89%|████████▉ | 327/366 [17:34<01:57,  3.01s/it]
+⏭️ [Step 328/366] All 32 nodes already attacked, skipping
+Perturbing graph:  90%|████████▉ | 328/366 [17:37<01:58,  3.11s/it]
+⏭️ [Step 329/366] All 32 nodes already attacked, skipping
+Perturbing graph:  90%|████████▉ | 329/366 [17:40<01:51,  3.03s/it]
+⏭️ [Step 330/366] All 32 nodes already attacked, skipping
+Perturbing graph:  90%|█████████ | 330/366 [17:43<01:47,  2.99s/it]
+⏭️ [Step 331/366] All 32 nodes already attacked, skipping
+Perturbing graph:  90%|█████████ | 331/366 [17:46<01:42,  2.93s/it]
+⏭️ [Step 332/366] All 32 nodes already attacked, skipping
+Perturbing graph:  91%|█████████ | 332/366 [17:49<01:37,  2.88s/it]
+⏭️ [Step 333/366] All 32 nodes already attacked, skipping
+Perturbing graph:  91%|█████████ | 333/366 [17:51<01:34,  2.87s/it]
+⏭️ [Step 334/366] All 32 nodes already attacked, skipping
+Perturbing graph:  91%|█████████▏| 334/366 [17:54<01:31,  2.86s/it]
+⏭️ [Step 335/366] All 32 nodes already attacked, skipping
+Perturbing graph:  92%|█████████▏| 335/366 [17:57<01:28,  2.86s/it]
+⏭️ [Step 336/366] All 32 nodes already attacked, skipping
+Perturbing graph:  92%|█████████▏| 336/366 [18:00<01:25,  2.85s/it]
+⏭️ [Step 337/366] All 32 nodes already attacked, skipping
+Perturbing graph:  92%|█████████▏| 337/366 [18:03<01:22,  2.85s/it]
+⏭️ [Step 338/366] All 32 nodes already attacked, skipping
+Perturbing graph:  92%|█████████▏| 338/366 [18:06<01:19,  2.83s/it]
+⏭️ [Step 339/366] All 32 nodes already attacked, skipping
+Perturbing graph:  93%|█████████▎| 339/366 [18:08<01:16,  2.84s/it]
+⏭️ [Step 340/366] All 32 nodes already attacked, skipping
+Perturbing graph:  93%|█████████▎| 340/366 [18:12<01:16,  2.95s/it]
+⏭️ [Step 341/366] All 32 nodes already attacked, skipping
+Perturbing graph:  93%|█████████▎| 341/366 [18:14<01:12,  2.91s/it]
+⏭️ [Step 342/366] All 32 nodes already attacked, skipping
+Perturbing graph:  93%|█████████▎| 342/366 [18:17<01:08,  2.86s/it]
+⏭️ [Step 343/366] All 32 nodes already attacked, skipping
+Perturbing graph:  94%|█████████▎| 343/366 [18:20<01:05,  2.86s/it]
+⏭️ [Step 344/366] All 32 nodes already attacked, skipping
+Perturbing graph:  94%|█████████▍| 344/366 [18:23<01:02,  2.84s/it]
+⏭️ [Step 345/366] All 32 nodes already attacked, skipping
+Perturbing graph:  94%|█████████▍| 345/366 [18:26<00:59,  2.84s/it]
+⏭️ [Step 346/366] All 32 nodes already attacked, skipping
+Perturbing graph:  95%|█████████▍| 346/366 [18:29<00:56,  2.84s/it]
+⏭️ [Step 347/366] All 32 nodes already attacked, skipping
+Perturbing graph:  95%|█████████▍| 347/366 [18:31<00:54,  2.88s/it]
+⏭️ [Step 348/366] All 32 nodes already attacked, skipping
+Perturbing graph:  95%|█████████▌| 348/366 [18:34<00:51,  2.89s/it]
+⏭️ [Step 349/366] All 32 nodes already attacked, skipping
+Perturbing graph:  95%|█████████▌| 349/366 [18:37<00:48,  2.85s/it]
+⏭️ [Step 350/366] All 32 nodes already attacked, skipping
+Perturbing graph:  96%|█████████▌| 350/366 [18:40<00:45,  2.83s/it]
+⏭️ [Step 351/366] All 32 nodes already attacked, skipping
+Perturbing graph:  96%|█████████▌| 351/366 [18:43<00:42,  2.82s/it]
+⏭️ [Step 352/366] All 32 nodes already attacked, skipping
+Perturbing graph:  96%|█████████▌| 352/366 [18:46<00:41,  2.98s/it]
+⏭️ [Step 353/366] All 32 nodes already attacked, skipping
+Perturbing graph:  96%|█████████▋| 353/366 [18:49<00:38,  2.94s/it]
+⏭️ [Step 354/366] All 32 nodes already attacked, skipping
+Perturbing graph:  97%|█████████▋| 354/366 [18:52<00:34,  2.90s/it]
+⏭️ [Step 355/366] All 32 nodes already attacked, skipping
+Perturbing graph:  97%|█████████▋| 355/366 [18:55<00:31,  2.88s/it]
+⏭️ [Step 356/366] All 32 nodes already attacked, skipping
+Perturbing graph:  97%|█████████▋| 356/366 [18:57<00:28,  2.89s/it]
+⏭️ [Step 357/366] All 32 nodes already attacked, skipping
+Perturbing graph:  98%|█████████▊| 357/366 [19:00<00:26,  2.90s/it]
+⏭️ [Step 358/366] All 32 nodes already attacked, skipping
+Perturbing graph:  98%|█████████▊| 358/366 [19:03<00:23,  2.88s/it]
+⏭️ [Step 359/366] All 32 nodes already attacked, skipping
+Perturbing graph:  98%|█████████▊| 359/366 [19:06<00:20,  2.86s/it]
+⏭️ [Step 360/366] All 32 nodes already attacked, skipping
+Perturbing graph:  98%|█████████▊| 360/366 [19:09<00:17,  2.86s/it]
+⏭️ [Step 361/366] All 32 nodes already attacked, skipping
+Perturbing graph:  99%|█████████▊| 361/366 [19:12<00:14,  2.85s/it]
+⏭️ [Step 362/366] All 32 nodes already attacked, skipping
+Perturbing graph:  99%|█████████▉| 362/366 [19:15<00:11,  2.82s/it]
+⏭️ [Step 363/366] All 32 nodes already attacked, skipping
+Perturbing graph:  99%|█████████▉| 363/366 [19:17<00:08,  2.84s/it]
+⏭️ [Step 364/366] All 32 nodes already attacked, skipping
+Perturbing graph:  99%|█████████▉| 364/366 [19:21<00:05,  2.99s/it]
+🎯 [Step 365/366] Text attack: 3 new nodes (skipped 29 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it]
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+Perturbing graph: 100%|█████████▉| 365/366 [19:25<00:03,  3.28s/it]
+🎯 [Step 366/366] Text attack: 3 new nodes (skipped 29 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+
+Cluster Attack:   0%|          | 0/1 [00:00<?, ?it/s][A
+Cluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it][ACluster Attack: 100%|██████████| 1/1 [00:01<00:00,  1.13s/it]
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+Perturbing graph: 100%|██████████| 366/366 [19:29<00:00,  3.50s/it]Perturbing graph: 100%|██████████| 366/366 [19:29<00:00,  3.19s/it]
+
+✅ Attack completed: Structure perturbations=366, Text attacks executed in-loop
+
+============================================================
+📊 Evaluation Results
+============================================================
+
+=== Clean graph ===
+Clean graph results: loss= 1.2627 accuracy= 0.7156
+
+=== Edge-only attack ===
+Edge-only attack results: loss= 1.4058 accuracy= 0.6661
+
+=== Feature-only attack ===
+Feature-only attack results: loss= 1.2557 accuracy= 0.7141
+
+=== Combined attack (edge + feature) ===
+Combined attack results: loss= 1.4025 accuracy= 0.6656
+
+============================================================
+📈 Attack Performance Summary
+============================================================
+  Clean accuracy:         0.7156
+  Edge attack accuracy:   0.6661 (drop: 0.0495)
+  Feature attack accuracy: 0.7141 (drop: 0.0016)
+  Combined accuracy:      0.6656 (drop: 0.0500)
+  Misclassification:      0.3344
+============================================================
+

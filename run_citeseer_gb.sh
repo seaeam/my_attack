@@ -42,4 +42,5 @@ ARGS=(
   --text_max_added_words 40
 )
 
-python meta.py "${ARGS[@]}"
+# python meta.py "${ARGS[@]}"
+python meta_gin.py "${ARGS[@]}"

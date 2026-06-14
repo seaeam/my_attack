@@ -118,9 +118,17 @@ class Heirattack(BaseAttack):
             getattr(args, "freeze_structure_features", False)
         )
         self.text_budget_per_node = int(getattr(args, "text_budget_per_node", 15))
+        text_attack_nodes = getattr(args, "text_attack_nodes", None)
+        self.text_attack_nodes = (
+            None if text_attack_nodes is None else max(1, int(text_attack_nodes))
+        )
         self.text_topk_ratio = float(getattr(args, "text_topk_ratio", 0.05))
         self.text_ppr_alpha = float(getattr(args, "text_ppr_alpha", 0.20))
         self.text_ppr_iters = int(getattr(args, "text_ppr_iters", 25))
+        self.local_candidate_strategy = getattr(
+            args, "local_candidate_strategy", "local_ae_ppr"
+        ).lower()
+        self.local_candidate_hops = int(getattr(args, "local_candidate_hops", 2))
         self.text_min_cluster_size = int(getattr(args, "text_min_cluster_size", 2))
         self.text_max_cluster_size = int(getattr(args, "text_max_cluster_size", 8))
         self.text_attack_max_visits = int(getattr(args, "text_attack_max_visits", 1))
@@ -132,6 +140,7 @@ class Heirattack(BaseAttack):
         # 缓存
         self.template_cache = {}  # 簇模板缓存
         self.node2cluster = {}  # 节点到簇ID的映射
+        self.local_candidate_rng = np.random.default_rng(getattr(args, "seed", None))
 
         # ========== 文本攻击生成器初始化 ==========
         self.use_text_attack = getattr(args, "use_text_attack", False)
@@ -1150,28 +1159,13 @@ class Heirattack(BaseAttack):
 
                     # ===== 文本/特征攻击（仅在 attack_features 开启时执行）=====
                     if self.attack_features:
-                        #    分别从两个 seed 出发调用 att_walk，得到各自 Top-k
-                        topk_nodes_1, scores_1 = self.ppr_topk_from_seed(
+                        # ===== 文本攻击：根据结构扰动端点选择属性攻击候选节点 =====
+                        U = self.select_text_candidate_nodes(
                             fea=full_features,
                             adj=full_adj_cpu,
-                            seed_u=row_idx,
-                            topk_ratio=self.text_topk_ratio,
-                            alpha=self.text_ppr_alpha,
-                            N=self.text_ppr_iters,
-                            use_cos_sim=True,
+                            row_idx=row_idx,
+                            col_idx=col_idx,
                         )
-
-                        topk_nodes_2, scores_2 = self.ppr_topk_from_seed(
-                            fea=full_features,
-                            adj=full_adj_cpu,
-                            seed_u=col_idx,
-                            topk_ratio=self.text_topk_ratio,
-                            alpha=self.text_ppr_alpha,
-                            N=self.text_ppr_iters,
-                            use_cos_sim=True,
-                        )
-                        # ===== 文本攻击：针对 PPR Top-k 并集 U 执行对抗性文本生成 =====
-                        U = np.unique(np.concatenate([topk_nodes_1, topk_nodes_2]))
 
                         # 使用文本生成方法攻击 PPR 邻居节点 - 只攻击未攻击过的节点
                         if self.use_text_attack and self.text_generator is not None:
@@ -1323,6 +1317,144 @@ class Heirattack(BaseAttack):
             s += x
 
         k = max(1, int(round(topk_ratio * n)))
+        idx = np.argpartition(s, -k)[-k:]
+        topk_idx = idx[np.argsort(-s[idx])]
+        return topk_idx, s
+
+    def select_text_candidate_nodes(
+        self,
+        fea: torch.Tensor,
+        adj: sp.spmatrix,
+        row_idx: int,
+        col_idx: int,
+    ):
+        k = self._text_candidate_budget(adj.shape[0])
+        strategy = self.local_candidate_strategy
+
+        if strategy == "local_ae_ppr":
+            topk_idx, _ = self.ppr_topk_from_seeds(
+                fea=fea,
+                adj=adj,
+                seed_nodes=[row_idx, col_idx],
+                topk=k,
+                alpha=self.text_ppr_alpha,
+                N=self.text_ppr_iters,
+                use_cos_sim=True,
+            )
+            return topk_idx
+
+        if strategy == "random":
+            pool = self.local_neighborhood_nodes(
+                adj, [row_idx, col_idx], hops=self.local_candidate_hops
+            )
+            if pool.size <= k:
+                return pool
+            return np.sort(self.local_candidate_rng.choice(pool, size=k, replace=False))
+
+        if strategy == "local_degree":
+            pool = self.local_neighborhood_nodes(
+                adj, [row_idx, col_idx], hops=self.local_candidate_hops
+            )
+            degrees = np.asarray(adj.tocsr().sum(axis=1)).reshape(-1)
+            order = np.lexsort((pool, -degrees[pool]))
+            return pool[order[:k]]
+
+        if strategy == "global_pagerank":
+            scores = self.compute_global_ppr(
+                fea=fea,
+                adj=adj,
+                topk_ratio=self.text_topk_ratio,
+                alpha=self.global_ppr_alpha,
+                N=self.global_ppr_iters,
+                use_cos_sim=False,
+                seed_strategy="uniform",
+            )
+            idx = np.argpartition(scores, -k)[-k:]
+            return idx[np.argsort(-scores[idx])]
+
+        raise ValueError(f"Unsupported local_candidate_strategy: {strategy}")
+
+    def _text_candidate_budget(self, n_nodes: int):
+        if self.text_attack_nodes is not None:
+            return min(n_nodes, self.text_attack_nodes)
+        return max(1, int(round(self.text_topk_ratio * n_nodes)))
+
+    def local_neighborhood_nodes(self, adj: sp.spmatrix, seed_nodes, hops: int = 2):
+        A = adj.tocsr().astype(np.float32)
+        A.setdiag(0)
+        A.eliminate_zeros()
+
+        seeds = [int(node) for node in seed_nodes]
+        seen = set(seeds)
+        frontier = np.asarray(seeds, dtype=np.int64)
+
+        for _ in range(max(0, hops)):
+            if frontier.size == 0:
+                break
+            neighbors = np.unique(A[frontier].nonzero()[1]).astype(np.int64)
+            next_frontier = np.asarray(
+                [int(node) for node in neighbors.tolist() if int(node) not in seen],
+                dtype=np.int64,
+            )
+            if next_frontier.size == 0:
+                break
+            seen.update(next_frontier.tolist())
+            frontier = next_frontier
+
+        return np.asarray(sorted(seen), dtype=np.int64)
+
+    def ppr_topk_from_seeds(
+        self,
+        fea: torch.Tensor,
+        adj: sp.spmatrix,
+        seed_nodes,
+        topk: int,
+        alpha: float = 0.2,
+        N: int = 25,
+        eps: float = 1e-12,
+        use_cos_sim: bool = True,
+    ):
+        n = adj.shape[0]
+        A = adj.tocsr().astype(np.float32)
+        A.setdiag(0)
+        A.eliminate_zeros()
+
+        if use_cos_sim:
+            fea_cpu = fea.detach().to("cpu").float()
+            if fea_cpu.is_sparse:
+                fea_cpu = fea_cpu.to_dense()
+            X = F.normalize(fea_cpu, p=2, dim=1).numpy()
+            r, c = A.nonzero()
+            sim = (X[r] * X[c]).sum(axis=1)
+            sim = np.clip(sim, 0.0, 1.0)
+            W = sp.csr_matrix((sim, (r, c)), shape=(n, n), dtype=np.float32)
+        else:
+            W = A.copy()
+
+        d = np.asarray(W.sum(axis=1)).reshape(-1)
+        iso = d < eps
+        if iso.any():
+            W = W.tolil()
+            for u in np.where(iso)[0]:
+                W[u, u] = 1.0
+            W = W.tocsr()
+            d = np.asarray(W.sum(axis=1)).reshape(-1)
+
+        Dinv = sp.diags(1.0 / np.maximum(d, eps), format="csr")
+        P = Dinv @ W
+
+        v = np.zeros((n,), dtype=np.float32)
+        valid_seeds = [int(node) for node in seed_nodes if 0 <= int(node) < n]
+        if not valid_seeds:
+            valid_seeds = [0]
+        for seed in valid_seeds:
+            v[seed] += 1.0 / len(valid_seeds)
+
+        s = v.copy()
+        for _ in range(max(1, N)):
+            s = alpha * v + (1.0 - alpha) * (P.T @ s)
+
+        k = min(n, max(1, int(topk)))
         idx = np.argpartition(s, -k)[-k:]
         topk_idx = idx[np.argsort(-s[idx])]
         return topk_idx, s

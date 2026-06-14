@@ -5,6 +5,7 @@ Text Attack Generator: 将 WTGIA 的文本生成方法集成到 heir attack
 
 import os
 import re
+import time
 import torch
 import torch.nn.functional as F
 import numpy as np
@@ -12,6 +13,7 @@ import pickle
 from tqdm import tqdm
 from typing import List, Tuple, Optional, Dict
 from sklearn.feature_extraction.text import CountVectorizer
+import httpx
 from openai import OpenAI
 from transformers import (
     AutoTokenizer,
@@ -57,7 +59,7 @@ class TextAttackGenerator:
             base_url: API基础URL（如 https://api.openai.com/v1）
             device: 设备
             max_tokens: 最大生成token数
-            num_retries: 生成失败时重试次数
+            num_retries: 生成失败时重试次数，也用于瞬时 API 错误重试
             llm_type: LLM类型（"gpt" 或 "llama"）
             model_path: 本地模型路径（llm_type="llama"时需要）
             feature_dim: 数据集特征维度（用于对齐BoW向量）
@@ -118,7 +120,20 @@ class TextAttackGenerator:
         if self.llm_type == "gpt":
             if api_key is None:
                 raise ValueError("api_key must be provided for GPT")
-            self.client = OpenAI(api_key=api_key, base_url=base_url)
+            http_client = None
+            if base_url and (
+                "localhost" in base_url
+                or "127.0.0.1" in base_url
+                or "::1" in base_url
+            ):
+                # macOS/Python can pick up system proxies even when env is clean.
+                # Local Ollama calls must bypass those proxies or httpx may return 502.
+                http_client = httpx.Client(trust_env=False)
+            self.client = OpenAI(
+                api_key=api_key,
+                base_url=base_url,
+                http_client=http_client,
+            )
 
             # 检测是否为Ollama（通过base_url判断）
             if base_url and "localhost:11434" in base_url:
@@ -388,12 +403,7 @@ class TextAttackGenerator:
     def generate_text(self, messages: List[Dict[str, str]]) -> str:
         """调用LLM生成文本"""
         if self.llm_type == "gpt":
-            # 使用GPT API
-            response = self.client.chat.completions.create(
-                model=self.model_name,
-                messages=messages,
-                max_tokens=self.max_tokens,
-            )
+            response = self._generate_text_with_api_retry(messages)
             return response.choices[0].message.content
         elif self.llm_type == "llama":
             # 使用本地Llama模型
@@ -417,6 +427,52 @@ class TextAttackGenerator:
             return text
         else:
             raise ValueError(f"Unsupported llm_type: {self.llm_type}")
+
+    def _generate_text_with_api_retry(self, messages: List[Dict[str, str]]):
+        attempts = max(1, int(self.num_retries) + 1)
+        last_error = None
+
+        for attempt in range(attempts):
+            try:
+                return self.client.chat.completions.create(
+                    model=self.model_name,
+                    messages=messages,
+                    max_tokens=self.max_tokens,
+                )
+            except Exception as e:
+                last_error = e
+                if attempt >= attempts - 1 or not self._is_retryable_api_error(e):
+                    raise
+
+                sleep_s = min(2.0 * (attempt + 1), 8.0)
+                print(
+                    "⚠️ LLM API transient error "
+                    f"({e}); retry {attempt + 1}/{attempts - 1} "
+                    f"after {sleep_s:.1f}s"
+                )
+                time.sleep(sleep_s)
+
+        raise last_error
+
+    @staticmethod
+    def _is_retryable_api_error(error: Exception) -> bool:
+        status_code = getattr(error, "status_code", None)
+        if status_code in {408, 409, 429, 500, 502, 503, 504}:
+            return True
+
+        message = str(error).lower()
+        retryable_markers = (
+            "timeout",
+            "timed out",
+            "temporarily",
+            "try again",
+            "connection",
+            "502",
+            "503",
+            "504",
+            "429",
+        )
+        return any(marker in message for marker in retryable_markers)
 
     def calculate_usage_rates(
         self, text: str, should_use_words: List[str], should_not_use_words: List[str]

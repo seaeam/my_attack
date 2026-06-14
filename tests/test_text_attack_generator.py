@@ -6,6 +6,15 @@ import unittest
 
 
 def _install_optional_dependency_stubs():
+    httpx_module = types.ModuleType("httpx")
+
+    class Client:
+        def __init__(self, *args, **kwargs):
+            pass
+
+    httpx_module.Client = Client
+    sys.modules.setdefault("httpx", httpx_module)
+
     openai_module = types.ModuleType("openai")
 
     class OpenAI:

@@ -1,0 +1,950 @@
+Loading citeseer dataset...
+Selecting 1 largest connected components
+(2110, 3703) (1,) (2110, 2110) 210 211 1688
+Test set results: loss= 2.0000 accuracy= 0.7014
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+Loaded BoW vocabulary: 500 words
+Vocab size: 500, Feature dim: 3703
+🦙 Detected Ollama - using model: llama3.2:1b-instruct-fp16
+Initialized GPT client with model: llama3.2:1b-instruct-fp16
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 366 edges
+  Perturbation rate: 10.0%
+  Attack mode: Meta-Both
+  Structure search: method=gb, level=4, step=1, miter=60, lr=0.05
+  Global PPR: ratio=0.45, alpha=0.08, iters=120, seed=degree, label_w=0.0
+  Structure features: frozen to original features
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.08, alpha=0.26, iters=30, budget=35, per_step=32, max_visits=4, candidate=global_pagerank, hops=2, cluster=2-5, sim>=0.65, cdl_topk=14, cluster_attr_topk=14, max_added=40
+
+
+🎯 [Step 1/366] Text attack: 32 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 32 nodes grouped into 9 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 9, Cache Hits: 0
+
+🎯 [Step 2/366] Text attack: 32 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 32 nodes grouped into 9 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 9, Cache Hits: 0
+
+🎯 [Step 3/366] Text attack: 32 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 32 nodes grouped into 10 clusters (min/avg/max = 2/3.2/4).
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 10, Cache Hits: 0
+
+🎯 [Step 4/366] Text attack: 32 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 32 nodes grouped into 9 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 9, Cache Hits: 0
+
+🎯 [Step 5/366] Text attack: 11 new nodes (skipped 21 already attacked)
+🔥 Text Attack: 11 nodes grouped into 3 clusters (min/avg/max = 3/3.7/4).
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 3, Cache Hits: 0
+
+🎯 [Step 6/366] Text attack: 4 new nodes (skipped 28 already attacked)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 7/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 8/366] All 32 nodes already attacked, skipping
+
+🎯 [Step 9/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 10/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 11/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 12/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 13/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 14/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 15/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 16/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 17/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 18/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 19/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 20/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 21/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 22/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 23/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 24/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 25/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 26/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 27/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 28/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 29/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 30/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 31/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 32/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 33/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 34/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 35/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 36/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 37/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 38/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 39/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 40/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 41/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 42/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 43/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 44/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 45/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 46/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 47/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 48/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 49/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 50/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 51/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 52/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 53/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 54/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 55/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 56/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 57/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 58/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 59/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 60/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 61/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 62/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 63/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 64/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 65/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 66/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 67/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 68/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 69/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 70/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 71/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 72/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 73/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 74/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 75/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 76/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 77/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 78/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 79/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 80/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 81/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 82/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 83/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 84/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 85/366] All 32 nodes already attacked, skipping
+
+🎯 [Step 86/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 87/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 88/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 89/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 90/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 91/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 92/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 93/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 94/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 95/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 96/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 97/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 98/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 99/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 100/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 101/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 102/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 103/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 104/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 105/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 106/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 107/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 108/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 109/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 110/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 111/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 112/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 113/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 114/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 115/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 116/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 117/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 118/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 119/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 120/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 121/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 122/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 123/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 124/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 125/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 126/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 127/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 128/366] Text attack: 2 new nodes (skipped 30 already attacked)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 129/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 130/366] All 32 nodes already attacked, skipping
+
+🎯 [Step 131/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 132/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 133/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 134/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 135/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 136/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 137/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 138/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 139/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 140/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 141/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 142/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 143/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 144/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 145/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 146/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 147/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 148/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 149/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 150/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 151/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 152/366] All 32 nodes already attacked, skipping
+
+🎯 [Step 153/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 154/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 155/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 156/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 157/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 158/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 159/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 160/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 161/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 162/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 163/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 164/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 165/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 166/366] All 32 nodes already attacked, skipping
+
+🎯 [Step 167/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 168/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 169/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 170/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 171/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 172/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 173/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 174/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 175/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 176/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 177/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 178/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 179/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 180/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 181/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 182/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 183/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 184/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 185/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 186/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 187/366] All 32 nodes already attacked, skipping
+
+🎯 [Step 188/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 189/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 190/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 191/366] All 32 nodes already attacked, skipping
+
+🎯 [Step 192/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 193/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 194/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 195/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 196/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 197/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 198/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 199/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 200/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 201/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 202/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 203/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 204/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 205/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 206/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 207/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 208/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 209/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 210/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 211/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 212/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 213/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 214/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 215/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 216/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 217/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 218/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 219/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 220/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 221/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 222/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 223/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 224/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 225/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 226/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 227/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 228/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 229/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 230/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 231/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 232/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 233/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 234/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 235/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 236/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 237/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 238/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 239/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 240/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 241/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 242/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 243/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 244/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 245/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 246/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 247/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 248/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 249/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 250/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 251/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 252/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 253/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 254/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 255/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 256/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 257/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 258/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 259/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 260/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 261/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 262/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 263/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 264/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 265/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 266/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 267/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 268/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 269/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 270/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 271/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 272/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 273/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 274/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 275/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 276/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 277/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 278/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 279/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 280/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 281/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 282/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 283/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 284/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 285/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 286/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 287/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 288/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 289/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 290/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 291/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 292/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 293/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 294/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 295/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 296/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 297/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 298/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 299/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 300/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 301/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 302/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 303/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 304/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 305/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 306/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 307/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 308/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 309/366] All 32 nodes already attacked, skipping
+
+🎯 [Step 310/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 311/366] All 32 nodes already attacked, skipping
+
+🎯 [Step 312/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 313/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 314/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 315/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 316/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 317/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 318/366] All 32 nodes already attacked, skipping
+
+🎯 [Step 319/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 320/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 321/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 322/366] Text attack: 1 new nodes (skipped 31 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 323/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 324/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 325/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 326/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 327/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 328/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 329/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 330/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 331/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 332/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 333/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 334/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 335/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 336/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 337/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 338/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 339/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 340/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 341/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 342/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 343/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 344/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 345/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 346/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 347/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 348/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 349/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 350/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 351/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 352/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 353/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 354/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 355/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 356/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 357/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 358/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 359/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 360/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 361/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 362/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 363/366] All 32 nodes already attacked, skipping
+
+⏭️ [Step 364/366] All 32 nodes already attacked, skipping
+
+🎯 [Step 365/366] Text attack: 3 new nodes (skipped 29 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 366/366] Text attack: 3 new nodes (skipped 29 already attacked)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+✅ Attack completed: Structure perturbations=366, Text attacks executed in-loop
+
+============================================================
+📊 Evaluation Results
+============================================================
+
+=== Clean graph ===
+Clean graph results: loss= 1.2627 accuracy= 0.7156
+
+=== Edge-only attack ===
+Edge-only attack results: loss= 1.4058 accuracy= 0.6661
+
+=== Feature-only attack ===
+Feature-only attack results: loss= 1.2557 accuracy= 0.7141
+
+=== Combined attack (edge + feature) ===
+Combined attack results: loss= 1.4025 accuracy= 0.6656
+
+============================================================
+📈 Attack Performance Summary
+============================================================
+  Clean accuracy:         0.7156
+  Edge attack accuracy:   0.6661 (drop: 0.0495)
+  Feature attack accuracy: 0.7141 (drop: 0.0016)
+  Combined accuracy:      0.6656 (drop: 0.0500)
+  Misclassification:      0.3344
+============================================================
+

@@ -1,0 +1,33 @@
+Loading blogcatalog dataset...
+Loading blogcatalog dataset...
+(5196, 8189) (1,) (5196, 5196) 519 520 4157
+Test set results: loss= 0.6979 accuracy= 0.7503
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+⚠️ BoW vocabulary not found at ./bow_cache/blogcatalog.pkl; using fallback feature vocabulary with 8189 tokens.
+Vocab size: 8189, Feature dim: 8189
+🦙 Detected Ollama - using model: llama3.2:1b-instruct-fp16
+Initialized GPT client with model: llama3.2:1b-instruct-fp16
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 3434 edges
+  Perturbation rate: 2.0%
+  Attack mode: Meta-Both
+  Structure search: method=gb, level=3, step=1, miter=260, lr=0.012
+  Global PPR: ratio=0.25, alpha=0.08, iters=140, seed=degree, label_w=0.0
+  Structure features: frozen to original features
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.06, alpha=0.24, iters=50, budget=80, per_step=32, max_visits=8, candidate=local_ae_ppr, hops=2, cluster=2-5, sim>=0.0, cdl_topk=48, cluster_attr_topk=48, max_added=80
+
+
+🎯 [Step 1/3434] Text attack: 32 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 32 nodes grouped into 9 clusters (min/avg/max = 2/3.6/5).
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 9, Cache Hits: 0
