@@ -42,4 +42,6 @@ ARGS=(
   --text_max_added_words 70          # 更强注入，优先压低Feature-only
 )
 
-python meta.py "${ARGS[@]}"
+# python meta.py "${ARGS[@]}"
+python meta_gin.py "${ARGS[@]}"
+# python meta_gsage.py "${ARGS[@]}"

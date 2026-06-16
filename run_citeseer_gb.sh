@@ -43,4 +43,5 @@ ARGS=(
 )
 
 # python meta.py "${ARGS[@]}"
-python meta_gin.py "${ARGS[@]}"
+# python meta_gin.py "${ARGS[@]}"
+# python meta_gsage.py "${ARGS[@]}"
