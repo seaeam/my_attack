@@ -1,0 +1,30 @@
+============================================================
+  Ablation: Edge-Only Attack (no feature/text attack)
+============================================================
+Loading citeseer dataset...
+Selecting 1 largest connected components
+(2110, 3703) (1,) (2110, 2110) 210 211 1688
+Test set results: loss= 2.0000 accuracy= 0.7014
+
+  Dataset: citeseer
+  Perturbation budget: 1 edges (0.03%)
+  Attack mode: Meta-Both
+  Structure search: level=2, step=1, miter=1, lr=0.01
+  Global PPR: ratio=0.01, alpha=0.15, iters=2, seed=degree
+  Feature attack: DISABLED (edge-only ablation)
+
+
+✅ Attack completed: Structure perturbations=1 (edge-only, feature attack disabled)
+
+============================================================
+  Ablation Results: Edge-Only Attack
+============================================================
+
+Clean graph results: loss= 1.2889 accuracy= 0.7246
+Edge-only attack results: loss= 1.2713 accuracy= 0.7214
+
+============================================================
+  Clean accuracy:       0.7246
+  Edge attack accuracy: 0.7214 (drop: 0.0032)
+============================================================
+

@@ -38,6 +38,7 @@ from split_test import (
     get_deeproubust_dataset,
     get_planetoid_dataset,
 )
+from dataset_support import DEEPROBUST_DATASETS, normalize_dataset_name
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -109,7 +110,12 @@ parser.add_argument("--hidden", type=int, default=16, help="Number of hidden uni
 parser.add_argument(
     "--dropout", type=float, default=0.5, help="Dropout rate (1 - keep probability)."
 )
-parser.add_argument("--dataset", type=str, default="citeseer", help="dataset")
+parser.add_argument(
+    "--dataset",
+    type=normalize_dataset_name,
+    default="citeseer",
+    help="dataset (supports cora_ml/cora-ml, acm, and polblogs)",
+)
 parser.add_argument("--ptb_rate", type=float, default=0.05, help="pertubation rate")
 parser.add_argument(
     "--model",
@@ -125,6 +131,12 @@ parser.add_argument(
     action="store_true",
     default=False,
     help="Enable text generation attack for node features",
+)
+parser.add_argument(
+    "--allow_fallback_vocabulary",
+    action="store_true",
+    default=False,
+    help="Explicitly allow feature_i placeholders when no aligned BoW cache exists",
 )
 parser.add_argument(
     "--llm_type",
@@ -268,12 +280,12 @@ pyg_flag = False
 amazon = "Computers"
 # amazon = 'Photo'
 
-deeprobust_datasets = {"acm", "cora_ml", "polblogs", "blogcatalog", "uai", "flickr"}
-
 if args.dataset == "physics" or args.dataset == "cs":
     gb_data = get_coauthor_dataset(args.dataset, split=args.split_data)
-elif args.dataset in deeprobust_datasets:
-    gb_data = get_deeproubust_dataset(args.dataset, split=args.split_data)
+elif args.dataset in DEEPROBUST_DATASETS:
+    gb_data = get_deeproubust_dataset(
+        args.dataset, split=args.split_data, seed=args.seed
+    )
 elif args.dataset == "computers" or args.dataset == "photo":
     gb_data = get_amazon_dataset(args.dataset, split=args.split_data)
 else:
@@ -321,7 +333,9 @@ elif "ogbn" in args.dataset:
     dataset = PygNodePropPredDataset(name=args.dataset)
     pyg_flag = True
 else:
-    data = Dataset(root="./Data/", name=args.dataset, setting="nettack")
+    data = Dataset(
+        root="./Data/", name=args.dataset, setting="nettack", seed=args.seed
+    )
     adj, features, labels = data.adj, data.features, data.labels
     idx_train, idx_val, idx_test = data.idx_train, data.idx_val, data.idx_test
 

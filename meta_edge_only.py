@@ -43,6 +43,7 @@ from split_test import (
     get_deeproubust_dataset,
     get_planetoid_dataset,
 )
+from dataset_support import DEEPROBUST_DATASETS, normalize_dataset_name
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -95,7 +96,12 @@ parser.add_argument(
 )
 parser.add_argument("--hidden", type=int, default=16)
 parser.add_argument("--dropout", type=float, default=0.5)
-parser.add_argument("--dataset", type=str, default="citeseer")
+parser.add_argument(
+    "--dataset",
+    type=normalize_dataset_name,
+    default="citeseer",
+    help="dataset (supports cora_ml/cora-ml, acm, and polblogs)",
+)
 parser.add_argument("--ptb_rate", type=float, default=0.05)
 parser.add_argument(
     "--model",
@@ -146,12 +152,12 @@ if device != "cpu":
 pyg_flag = False
 amazon = "Computers"
 
-deeprobust_datasets = {"acm", "cora_ml", "polblogs", "blogcatalog", "uai", "flickr"}
-
 if args.dataset == "physics" or args.dataset == "cs":
     gb_data = get_coauthor_dataset(args.dataset, split=args.split_data)
-elif args.dataset in deeprobust_datasets:
-    gb_data = get_deeproubust_dataset(args.dataset, split=args.split_data)
+elif args.dataset in DEEPROBUST_DATASETS:
+    gb_data = get_deeproubust_dataset(
+        args.dataset, split=args.split_data, seed=args.seed
+    )
 elif args.dataset == "computers" or args.dataset == "photo":
     gb_data = get_amazon_dataset(args.dataset, split=args.split_data)
 else:
@@ -194,7 +200,9 @@ elif "ogbn" in args.dataset:
     dataset = PygNodePropPredDataset(name=args.dataset)
     pyg_flag = True
 else:
-    data = Dataset(root="./Data/", name=args.dataset, setting="nettack")
+    data = Dataset(
+        root="./Data/", name=args.dataset, setting="nettack", seed=args.seed
+    )
     adj, features, labels = data.adj, data.features, data.labels
     idx_train, idx_val, idx_test = data.idx_train, data.idx_val, data.idx_test
 

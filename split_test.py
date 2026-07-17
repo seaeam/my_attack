@@ -188,11 +188,16 @@ def get_amazon_dataset(
 
 
 def get_deeproubust_dataset(
-    name, normalize_features=False, transform=None, split="normal", require_lcc=True
+    name,
+    normalize_features=False,
+    transform=None,
+    split="normal",
+    require_lcc=True,
+    seed=None,
 ):
     # 顺序划分
     if split == "complete":
-        dataset = Dataset(root="./Data/", name=name)
+        dataset = Dataset(root="./Data/", name=name, seed=seed)
         dataset.num_nodes = dataset.adj.shape[0]
         num_nodes = dataset.num_nodes
 
@@ -213,15 +218,19 @@ def get_deeproubust_dataset(
         dataset.test_mask[idx_test] = True
     # 按比例划分
     elif split == "normal":
-        dataset = Dataset(root="./Data/", name=name)
+        dataset = Dataset(root="./Data/", name=name, seed=seed)
         # DeepRobust's default Dataset(setting="nettack") already keeps the largest
         # connected component in this code path.
         # Do not pass it to the PyG-only LCC helper.
         dataset.num_nodes = dataset.adj.shape[0]
         num_nodes = dataset.num_nodes
 
-        # 生成随机排列的索引
-        idx_rand = torch.randperm(num_nodes)  # 随机打乱索引
+        # Use a local generator so the requested split is reproducible without
+        # consuming or depending on the process-wide torch RNG state.
+        generator = None
+        if seed is not None:
+            generator = torch.Generator().manual_seed(int(seed))
+        idx_rand = torch.randperm(num_nodes, generator=generator)
 
         # 按6:2:2划分
         num_train = int(num_nodes * 0.6)

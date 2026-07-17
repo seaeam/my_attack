@@ -1,0 +1,60 @@
+Loading cora_ml dataset...
+Selecting 1 largest connected components
+Loading cora_ml dataset...
+Selecting 1 largest connected components
+(2810, 2879) (1,) (2810, 2810) 280 282 2248
+Test set results: loss= 0.5743 accuracy= 0.8421
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+Deterministic non-LLM text control initialized with 2879 aligned tokens
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 1 edges
+  Perturbation rate: 0.02%
+  Attack mode: Meta-Both
+  Structure search: method=gb, level=2, step=1, miter=1, lr=0.01
+  Global PPR: ratio=0.01, alpha=0.15, iters=2, seed=degree, label_w=0.0
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.05, alpha=0.2, iters=2, budget=2, per_step=1, max_visits=1, candidate=local_ae_ppr, hops=2, cluster=1-1, sim>=0.85, cdl_topk=2, cluster_attr_topk=2, max_added=2
+
+
+🎯 [Step 1/1] Text attack: 1 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+✅ Attack completed: Structure perturbations=1, text attacks executed in-loop
+
+============================================================
+📊 Evaluation Results
+============================================================
+
+=== Clean graph ===
+Clean graph results: loss= 0.4647 accuracy= 0.8534
+
+=== Edge-only attack ===
+Edge-only attack results: loss= 0.4551 accuracy= 0.8565
+
+=== Feature-only attack ===
+Feature-only attack results: loss= 0.4668 accuracy= 0.8518
+
+=== Combined attack (edge + feature) ===
+Combined attack results: loss= 0.4551 accuracy= 0.8522
+
+============================================================
+📈 Attack Performance Summary
+============================================================
+  Clean accuracy:         0.8534
+  Edge attack accuracy:   0.8565 (drop: -0.0032)
+  Feature attack accuracy: 0.8518 (drop: 0.0016)
+  Combined accuracy:      0.8522 (drop: 0.0012)
+  Misclassification:      0.1478
+============================================================
+

@@ -161,6 +161,9 @@ class Heirattack(BaseAttack):
                     model_path=model_path,
                     device=self.device,
                     feature_dim=self.nfeat,
+                    allow_fallback_vocabulary=getattr(
+                        args, "allow_fallback_vocabulary", False
+                    ),
                 )
                 print(
                     f"✅ Text attack generator initialized with local Llama model: {model_path}"
@@ -180,6 +183,9 @@ class Heirattack(BaseAttack):
                     device=self.device,
                     llm_type=llm_type,
                     feature_dim=self.nfeat,
+                    allow_fallback_vocabulary=getattr(
+                        args, "allow_fallback_vocabulary", False
+                    ),
                     num_retries=getattr(args, "text_retries", 1),  # 默认只重试1次
                 )
                 print(
@@ -1247,8 +1253,13 @@ class Heirattack(BaseAttack):
         if self.attack_features:
             # 文本攻击已在循环中完成，直接保存最终特征
             self.modified_features = full_features.detach()
+            feature_status = (
+                "text attacks executed in-loop"
+                if self.use_text_attack and self.text_generator is not None
+                else "text attack disabled; features unchanged"
+            )
             print(
-                f"\n✅ Attack completed: Structure perturbations={num_add+num_del}, Text attacks executed in-loop"
+                f"\n✅ Attack completed: Structure perturbations={num_add+num_del}, {feature_status}"
             )
         else:
             self.modified_features = full_features.detach()

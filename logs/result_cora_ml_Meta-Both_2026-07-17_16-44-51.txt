@@ -1,0 +1,61 @@
+Loading cora_ml dataset...
+Selecting 1 largest connected components
+Loading cora_ml dataset...
+Selecting 1 largest connected components
+(2810, 2879) (1,) (2810, 2810) 280 282 2248
+Test set results: loss= 0.5743 accuracy= 0.8421
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+Deterministic non-LLM text control initialized with 2879 aligned tokens
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 1 edges
+  Perturbation rate: 0.02%
+  Attack mode: Meta-Both
+  Structure search: method=gb, level=2, step=1, miter=1, lr=0.01
+  Global PPR: ratio=0.10, alpha=0.15, iters=2, seed=degree, label_w=0.0
+  Structure features: frozen to original features
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.01, alpha=0.2, iters=2, budget=3, per_step=1, max_visits=1, candidate=local_ae_ppr, hops=2, cluster=1-2, sim>=0.85, cdl_topk=2, cluster_attr_topk=2, max_added=2
+
+
+[Feature step 1/1] seeds=[2259, 1919], selected=1/56, exhausted=0
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+Feature-only attack completed: Structure perturbations=0, attribute rounds=1
+
+============================================================
+📊 Evaluation Results
+============================================================
+
+=== Clean graph ===
+Clean graph results: loss= 0.4647 accuracy= 0.8534
+
+=== Edge-only attack ===
+Edge-only attack results: loss= 0.4564 accuracy= 0.8542
+
+=== Feature-only attack ===
+Feature-only attack results: loss= 0.4671 accuracy= 0.8510
+
+=== Combined attack (edge + feature) ===
+Combined attack results: loss= 0.4566 accuracy= 0.8510
+
+============================================================
+📈 Attack Performance Summary
+============================================================
+  Clean accuracy:         0.8534
+  Edge attack accuracy:   0.8542 (drop: -0.0008)
+  Feature attack accuracy: 0.8510 (drop: 0.0024)
+  Combined accuracy:      0.8510 (drop: 0.0024)
+  Misclassification:      0.1490
+============================================================
+

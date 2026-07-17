@@ -12,6 +12,7 @@ import numpy as np
 import pickle
 from tqdm import tqdm
 from typing import List, Tuple, Optional, Dict
+from urllib.parse import urlsplit
 from sklearn.feature_extraction.text import CountVectorizer
 import httpx
 from openai import OpenAI
@@ -50,6 +51,7 @@ class TextAttackGenerator:
         llm_type: str = "gpt",
         model_path: str = None,
         feature_dim: int = None,
+        allow_fallback_vocabulary: bool = False,
     ):
         """
         Args:
@@ -63,6 +65,7 @@ class TextAttackGenerator:
             llm_type: LLM类型（"gpt" 或 "llama"）
             model_path: 本地模型路径（llm_type="llama"时需要）
             feature_dim: 数据集特征维度（用于对齐BoW向量）
+            allow_fallback_vocabulary: 显式允许用feature_i占位词代替真实词表
         """
         self.dataset_name = dataset_name
         self.device = device
@@ -73,7 +76,38 @@ class TextAttackGenerator:
 
         # 加载BoW词表
         vectorizer_path = os.path.join(bow_cache_dir, f"{dataset_name}.pkl")
+        if (
+            not os.path.exists(vectorizer_path)
+            and dataset_name in {"cora_ml", "cora-ml"}
+            and feature_dim is not None
+        ):
+            # Direct `python meta*.py --dataset cora_ml --use_text_attack` runs
+            # after DeepRobust has downloaded Data/cora_ml.npz, so prepare its
+            # aligned attr_names cache here as well as in the shell launcher.
+            from prepare_small_datasets import prepare_cora_ml_vocabulary
+
+            prepare_cora_ml_vocabulary("./Data", bow_cache_dir, feature_dim)
+
         self.uses_fallback_vocabulary = False
+
+        def install_fallback_vocabulary(reason):
+            aligned_dim = int(feature_dim) if feature_dim is not None else 0
+            if aligned_dim <= 0:
+                raise ValueError(
+                    "feature_dim must be positive when fallback vocabulary is used"
+                )
+            fallback_vocabulary = [f"feature_{i}" for i in range(aligned_dim)]
+            self.vectorizer = CountVectorizer(
+                vocabulary=fallback_vocabulary,
+                token_pattern=r"(?u)\b\w+\b",
+            )
+            self.vocab = self.vectorizer.get_feature_names_out()
+            self.uses_fallback_vocabulary = True
+            print(
+                f"⚠️ {reason}; using explicit fallback feature vocabulary "
+                f"with {len(self.vocab)} tokens."
+            )
+
         if os.path.exists(vectorizer_path):
             with open(vectorizer_path, "rb") as f:
                 self.vectorizer = pickle.load(f)
@@ -83,30 +117,28 @@ class TextAttackGenerator:
                     f"Loaded feature-aligned BoW vocabulary: "
                     f"{len(self.vocab)} tokens; using LLM text generation path"
                 )
-            else:
-                print(f"Loaded BoW vocabulary: {len(self.vocab)} words")
-        elif feature_dim is not None:
-            feature_dim = int(feature_dim)
-            if feature_dim <= 0:
-                raise ValueError(
-                    "feature_dim must be positive when BoW cache is missing"
+            elif allow_fallback_vocabulary:
+                install_fallback_vocabulary(
+                    f"BoW vocabulary at {vectorizer_path} has {len(self.vocab)} "
+                    f"tokens but the feature dimension is {feature_dim}"
                 )
-
-            fallback_vocabulary = [f"feature_{i}" for i in range(feature_dim)]
-            self.vectorizer = CountVectorizer(
-                vocabulary=fallback_vocabulary,
-                token_pattern=r"(?u)\b\w+\b",
-            )
-            self.vocab = self.vectorizer.get_feature_names_out()
-            self.uses_fallback_vocabulary = True
-            print(
-                f"⚠️ BoW vocabulary not found at {vectorizer_path}; "
-                f"using fallback feature vocabulary with {len(self.vocab)} tokens."
+            else:
+                raise ValueError(
+                    f"BoW vocabulary/feature mismatch at {vectorizer_path}: "
+                    f"{len(self.vocab)} != {feature_dim}. Disable text attack, "
+                    "rebuild an aligned vocabulary, or explicitly pass "
+                    "allow_fallback_vocabulary=True for a feature-space ablation."
+                )
+        elif feature_dim is not None and allow_fallback_vocabulary:
+            install_fallback_vocabulary(
+                f"BoW vocabulary not found at {vectorizer_path}"
             )
         else:
             raise FileNotFoundError(
                 f"BoW vocabulary not found at {vectorizer_path}. "
-                f"Please run data preprocessing first or pass feature_dim."
+                "Run prepare_small_datasets.py first. If the downloaded dataset "
+                "does not provide aligned feature names, disable text attack or "
+                "explicitly pass allow_fallback_vocabulary=True."
             )
 
         # 记录词表大小
@@ -121,11 +153,7 @@ class TextAttackGenerator:
             if api_key is None:
                 raise ValueError("api_key must be provided for GPT")
             http_client = None
-            if base_url and (
-                "localhost" in base_url
-                or "127.0.0.1" in base_url
-                or "::1" in base_url
-            ):
+            if self._is_loopback_url(base_url):
                 # macOS/Python can pick up system proxies even when env is clean.
                 # Local Ollama calls must bypass those proxies or httpx may return 502.
                 http_client = httpx.Client(trust_env=False)
@@ -136,7 +164,7 @@ class TextAttackGenerator:
             )
 
             # 检测是否为Ollama（通过base_url判断）
-            if base_url and "localhost:11434" in base_url:
+            if self._is_local_ollama_url(base_url):
                 # Ollama模式：从环境变量或参数获取模型名
                 self.model_name = os.environ.get(
                     "OLLAMA_MODEL", "llama3.2:1b-instruct-fp16"
@@ -160,13 +188,22 @@ class TextAttackGenerator:
 
     @staticmethod
     def _is_feature_aligned_vocabulary(vocab, feature_dim: Optional[int] = None) -> bool:
-        """Return True for synthetic feature_i vocabularies aligned to feature columns."""
+        """Return True when the vocabulary covers every feature column."""
         vocab = list(vocab)
-        if feature_dim is not None and len(vocab) != int(feature_dim):
+        return bool(vocab) and feature_dim is not None and len(vocab) == int(feature_dim)
+
+    @staticmethod
+    def _is_loopback_url(base_url: Optional[str]) -> bool:
+        if not base_url:
             return False
-        if not vocab:
+        return urlsplit(base_url).hostname in {"localhost", "127.0.0.1", "::1"}
+
+    @classmethod
+    def _is_local_ollama_url(cls, base_url: Optional[str]) -> bool:
+        if not cls._is_loopback_url(base_url):
             return False
-        return all(token == f"feature_{idx}" for idx, token in enumerate(vocab))
+        parsed = urlsplit(base_url)
+        return parsed.port == 11434
 
     def _init_llama(self, model_path: str):
         """初始化Llama模型"""
