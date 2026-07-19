@@ -125,7 +125,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         for ptb_rate in args.ptb_rates:
             for seed in args.seeds:
                 for variant in variants:
-                    if variant.small_only and dataset not in SMALL_DATASETS:
+                    if variant.allowed_datasets:
+                        if dataset not in variant.allowed_datasets:
+                            print(
+                                f"SKIP {dataset}/{variant.name}: dataset is not in the variant allowlist"
+                            )
+                            continue
+                    elif variant.small_only and dataset not in SMALL_DATASETS:
                         print(
                             f"SKIP {dataset}/{variant.name}: node-level search is restricted to small graphs"
                         )

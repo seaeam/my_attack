@@ -25,6 +25,7 @@ EDGE_ONLY_UNSUPPORTED_OPTIONS = {
     "--freeze_structure_features": 0,
     "--use_text_attack": 0,
     "--allow_fallback_vocabulary": 0,
+    "--allow_partial_vocabulary": 0,
     "--llm_type": 1,
     "--openai_api_key": 1,
     "--api_base_url": 1,
@@ -167,6 +168,7 @@ def runtime_environment() -> Dict[str, Any]:
         "python": platform.python_version(),
         "cpu_count": os.cpu_count(),
         "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
+        "ollama_model": os.environ.get("OLLAMA_MODEL"),
     }
     nvidia_smi = shutil.which("nvidia-smi")
     if nvidia_smi:

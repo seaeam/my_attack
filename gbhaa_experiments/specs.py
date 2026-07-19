@@ -16,6 +16,7 @@ class Variant:
     primary_metric: str = "combined_accuracy"
     needs_text_attack: bool = False
     uses_external_llm: bool = False
+    allowed_datasets: Tuple[str, ...] = ()
     small_only: bool = False
     description: str = ""
 
@@ -27,28 +28,34 @@ EXPERIMENTS: Mapping[str, Tuple[Variant, ...]] = {
     "efficiency": (
         Variant(
             "gb",
-            "meta_edge_only.py",
+            "meta.py",
             args=("--coarsen_method", "gb"),
-            accepts_text_args=False,
-            primary_metric="edge_accuracy",
-            description="Granular-Ball hierarchical structural search.",
+            primary_metric="combined_accuracy",
+            needs_text_attack=True,
+            uses_external_llm=True,
+            allowed_datasets=("citeseer", "cora"),
+            description="Complete GB-coarsened structure and LLM-attribute attack.",
         ),
         Variant(
             "kmeans",
-            "meta_edge_only.py",
+            "meta.py",
             args=("--coarsen_method", "kmeans"),
-            accepts_text_args=False,
-            primary_metric="edge_accuracy",
-            description="Matched K-Means hierarchy.",
+            primary_metric="combined_accuracy",
+            needs_text_attack=True,
+            uses_external_llm=True,
+            allowed_datasets=("citeseer", "cora"),
+            description="Complete K-Means-coarsened structure and LLM-attribute attack.",
         ),
         Variant(
             "node_level",
-            "meta_edge_only.py",
+            "meta.py",
             args=("--coarsen_method", "gb", "--level", "1"),
-            accepts_text_args=False,
-            primary_metric="edge_accuracy",
+            primary_metric="combined_accuracy",
+            needs_text_attack=True,
+            uses_external_llm=True,
+            allowed_datasets=("citeseer", "cora"),
             small_only=True,
-            description="No-coarsening node-level search; small graphs only.",
+            description="Complete node-level structure and LLM-attribute attack without coarsening.",
         ),
     ),
     "gb_ablation": (

@@ -18,16 +18,15 @@ gbhaa_experiments/
 ├── run_stealthiness.py              # 生成攻击产物并执行隐蔽性分析
 ├── aggregate_results.py             # 跨随机种子计算均值和标准差
 ├── entrypoints/                     # 独立实验攻击入口
-├── launchers/                       # 每项实验对应的启动脚本
-└── tests/                           # 实验框架单元测试
+└── launchers/                       # 每项实验对应的启动脚本
 ```
 
 实验结果统一写入 `gbhaa_experiments/results/`。每次实际运行会保存：
 
 - 完整的标准输出和错误日志；
 - 已隐藏 API Key 的实验命令；
-- 总运行时间；
-- 系统支持时由 `/usr/bin/time` 记录的峰值常驻内存；
+- 整条攻击命令的墙钟时间，包括阻塞等待外部 LLM 响应的时间；
+- 系统支持时由 `/usr/bin/time` 记录攻击命令进程的峰值常驻内存（不包括独立 Ollama 进程及其 GPU 显存）；
 - 操作系统、Python 版本、CPU 数量和可见 CUDA 设备；
 - 系统存在 `nvidia-smi` 时记录 GPU 型号和驱动版本；
 - 干净图、结构攻击、特征攻击和联合攻击准确率；
@@ -35,50 +34,52 @@ gbhaa_experiments/
 
 ## 执行策略
 
-所有启动脚本默认只执行 **dry-run（命令预览）**。完整实验矩阵包含大量 GNN 训练和 LLM 请求，因此应先检查打印出的命令，再设置 `EXECUTE=1` 正式运行：
+所有启动脚本现在默认直接执行正式实验。完整实验矩阵包含大量 GNN 训练和 LLM 请求，请在运行前确认当前 Python 环境、数据和模型服务已经准备好：
 
 ```bash
-cd /Users/bytedance/Downloads/Github/my_attack
-EXECUTE=1 bash gbhaa_experiments/launchers/run_gb_ablation.sh
+# 在仓库根目录执行
+bash gbhaa_experiments/launchers/run_gb_ablation.sh
 ```
 
-如果项目使用的 Python 环境不是默认环境，可通过 `PYTHON_BIN` 指定：
+启动脚本默认使用当前环境中 `command -v python` 解析到的解释器。如果需要覆盖，可通过 `PYTHON_BIN` 指定：
 
 ```bash
-PYTHON_BIN=/path/to/python EXECUTE=1 \
+PYTHON_BIN=/path/to/python \
   bash gbhaa_experiments/launchers/run_efficiency.sh
 ```
 
-无需修改脚本即可覆盖默认数据集：
+如需只预览命令而不执行实验，可显式设置 `EXECUTE=0`：
 
 ```bash
-DATASETS="citeseer" EXECUTE=1 \
+EXECUTE=0 bash gbhaa_experiments/launchers/run_efficiency.sh
+```
+
+只有实际读取 `DATASETS` 的 `run_gb_ablation.sh`、`run_hybrid_ablation.sh`、`run_llm_ablation.sh`、`run_ae_ppr_comparison.sh` 和 `run_stealthiness.sh` 可以用该变量覆盖默认数据集，例如：
+
+```bash
+DATASETS="citeseer" \
   bash gbhaa_experiments/launchers/run_hybrid_ablation.sh
 ```
 
+`run_efficiency.sh` 固定串行 Citeseer 和 Cora，不读取 `DATASETS`，因此不能用该变量改变效率矩阵。
+
 需要外部模型的实验默认连接本地 Ollama 兼容接口。可通过 `OPENAI_API_KEY`、`OPENAI_BASE_URL` 和 `OLLAMA_MODEL` 切换服务或模型。实验元数据不会保存明文 API Key。
 
-## Citeseer 特征词表说明
+## 特征词表与报告边界
 
-本套件中所有小图实验统一使用 `citeseer`，不使用其他小图数据集。
+效率实验固定为 Citeseer 和 Cora，分别使用现有 `bow_cache/citeseer.pkl` 和 `bow_cache/cora.pkl` 中的 500 个可读词项。该启动器显式传入 `--allow_partial_vocabulary`；当前代码只保留缓存顺序并按位置映射到特征矩阵最前面的 500 列（Citeseer 共 3,703 维，Cora 共 1,433 维），没有验证这些词项与数据集原始特征名在语义上同一。不显式选择部分缓存词表或回退词表时，词表与特征维数不匹配仍会严格报错。
 
-Citeseer 节点特征为 3,703 维，但仓库现有 Citeseer 缓存词表只有 500 个词，二者不存在完整的一一对应关系。因此，文本相关启动脚本会显式启用 3,703 个 `feature_i` 占位特征词，使每个占位词与一列节点特征严格对应。
+效率实验的属性写回路径是：LLM 生成文本先仅在这 500 个缓存词上向量化，再向 3,703/1,433 维特征宽度补零，然后依次应用新增词上限和余弦相似度投影。因此，补零后的原始生成向量在后续列上是 0；若未达相似度下限，与原始完整特征做线性插值时可按比例恢复这些后续列。
 
-这意味着：
+效率启动器不使用 `feature_i`，也不传入 `--allow_fallback_vocabulary`。它可以表述为遵循历史脚本的可读缓存词表路径，但因为上述位置映射未验证语义同一性，仍不能声称自然语言语义有效或语义保持。其他仍显式传入回退词表参数的启动器则是离散特征空间消融：`feature_i` 仅表示特征列，不得据此声称自然语言语义攻击、语义保持或文本流畅性。
 
-- Citeseer 上的相关实验属于离散特征空间中的 LLM 辅助扰动；
-- 不能将 `feature_i` 解释成真实单词；
-- 不能将实验表述为自然语言语义攻击；
-- 不显式允许占位特征词时，词表维数不匹配会直接导致实验停止；
-- 是否使用占位特征词会记录在命令和运行日志中。
-
-## 1. 大规模效率实验
+## 1. 端到端效率实验
 
 ```bash
 bash gbhaa_experiments/launchers/run_efficiency.sh
 ```
 
-默认数据集为 Citeseer、Pubmed 和 CS，攻击预算为 1%、5% 和 10%，随机种子为 15、16、17、18、19。
+这是尚待执行的 90 个完整攻击运行协议：数据集固定为 Citeseer 和 Cora，攻击预算为 1%、5% 和 10%，随机种子为 15、16、17、18、19，且两个数据集都运行 `gb`、`kmeans` 和 `node_level`。每个子任务都通过 `meta.py` 执行结构攻击与外部 LLM 属性攻击。
 
 实验变体：
 
@@ -86,17 +87,15 @@ bash gbhaa_experiments/launchers/run_efficiency.sh
 - `kmeans`：使用相同聚类数量的 K-Means 层次搜索；
 - `node_level`：设置 `--level 1`，将候选细化为单节点，作为无粗化参考。
 
-`node_level` 只在 Citeseer 上运行。Pubmed 和 CS 只比较 GB 与 K-Means。
+主指标为 Combined Accuracy，同时记录：
 
-该实验只执行结构攻击，不启用属性或 LLM 攻击，避免模型调用延迟掩盖结构搜索成本。主要记录：
+- Clean、Edge、Feature 和 Combined Accuracy，以及各攻击相对 Clean Accuracy 的 drop；
+- `LLM Calls` 与 `Cache Hits`：前者是当前代码记录的 cluster-level 模板生成缓存未命中/生成调用计数，后者是对应模板缓存命中数；API 传输重试不会单独增加 `LLM Calls`，因此它不是 HTTP 请求数或成本计数，实际请求数应使用 Ollama/provider telemetry；
+- 实际完成的结构扰动数；
+- 整条攻击命令的墙钟时间（包括阻塞的 LLM 延迟）；
+- 仅在 `/usr/bin/time` 存在且输出可解析时，记录攻击命令进程的峰值 RSS；该值不包括独立 Ollama 服务进程及其 GPU 显存。
 
-- Edge Accuracy；
-- 相对干净图的准确率下降；
-- 总运行时间；
-- 峰值内存；
-- 实际完成的结构扰动数量。
-
-CS 需要项目环境已经安装 PyG 相关依赖。当前不默认运行 `ogbn-arxiv`，因为原始数据加载路径尚未经过完整可执行验证。
+效率的主比较是 `gb` 与 `node_level`；`gb` 与 `kmeans` 的对照只用于隔离粗化分组类型的影响。效率启动器只复制根目录 [`run_citeseer_gb.sh`](../run_citeseer_gb.sh) 和 [`run_cora.sh`](../run_cora.sh) 中列出的数据集专用参数值：Citeseer 使用 level/miter/lr = 4/60/0.05，Cora 使用 2/450/0.012；PPR、属性预算和文本约束的完整取值见[完整协议](./EXPERIMENT_SUPPLEMENT_PLAN_ZH.md#23-固定参数)。效率入口始终统一为 `meta.py`；`run_cora.sh` 当前的实际执行行可能是 `meta_gsage.py`，但本实验不复制该入口。上述均为计划协议，不代表已获得的正式结果。
 
 ## 2. Granular-Ball 消融实验
 
@@ -296,7 +295,7 @@ bash gbhaa_experiments/launchers/run_stealthiness.sh
 使用方式：
 
 ```bash
-/opt/miniconda3/bin/python -m gbhaa_experiments.aggregate_results \
+python -m gbhaa_experiments.aggregate_results \
   gbhaa_experiments/results/gb_ablation/runs.jsonl \
   --output gbhaa_experiments/results/gb_ablation/summary.csv
 ```
@@ -310,13 +309,14 @@ bash gbhaa_experiments/launchers/run_stealthiness.sh
 - 均值和标准差；
 - 实验硬件信息。
 
+正式矩阵计划为每组 5 个种子，但聚合会先排除失败记录，并对每个数据集/变体/预算/种子只保留最新的成功记录，所以实际 `n` 可能小于 5。论文的完整正式行必须确认 `n=5`，并逐组披露 `n`；不得将失败被排除后的行笼统表述为“五个种子的统计”。
+
 ## 低成本验证
 
 ```bash
-/opt/miniconda3/bin/python -m unittest discover \
-  -s gbhaa_experiments/tests -v
-
-/opt/miniconda3/bin/python -m compileall -q gbhaa_experiments
+python -m compileall -q gbhaa_experiments
 
 bash -n gbhaa_experiments/launchers/*.sh
+
+EXECUTE=0 bash gbhaa_experiments/launchers/run_efficiency.sh
 ```

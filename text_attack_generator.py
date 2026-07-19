@@ -52,6 +52,7 @@ class TextAttackGenerator:
         model_path: str = None,
         feature_dim: int = None,
         allow_fallback_vocabulary: bool = False,
+        allow_partial_vocabulary: bool = False,
     ):
         """
         Args:
@@ -66,7 +67,15 @@ class TextAttackGenerator:
             model_path: 本地模型路径（llm_type="llama"时需要）
             feature_dim: 数据集特征维度（用于对齐BoW向量）
             allow_fallback_vocabulary: 显式允许用feature_i占位词代替真实词表
+            allow_partial_vocabulary: 显式允许使用短于feature_dim的非空真实缓存词表，
+                并保留现有的前导列写回行为
         """
+        if allow_partial_vocabulary and allow_fallback_vocabulary:
+            raise ValueError(
+                "allow_partial_vocabulary and allow_fallback_vocabulary cannot "
+                "both be enabled"
+            )
+
         self.dataset_name = dataset_name
         self.device = device
         self.max_tokens = max_tokens
@@ -80,6 +89,7 @@ class TextAttackGenerator:
             not os.path.exists(vectorizer_path)
             and dataset_name in {"cora_ml", "cora-ml"}
             and feature_dim is not None
+            and not allow_partial_vocabulary
         ):
             # Direct `python meta*.py --dataset cora_ml --use_text_attack` runs
             # after DeepRobust has downloaded Data/cora_ml.npz, so prepare its
@@ -89,6 +99,7 @@ class TextAttackGenerator:
             prepare_cora_ml_vocabulary("./Data", bow_cache_dir, feature_dim)
 
         self.uses_fallback_vocabulary = False
+        self.uses_partial_vocabulary = False
 
         def install_fallback_vocabulary(reason):
             aligned_dim = int(feature_dim) if feature_dim is not None else 0
@@ -117,6 +128,34 @@ class TextAttackGenerator:
                     f"Loaded feature-aligned BoW vocabulary: "
                     f"{len(self.vocab)} tokens; using LLM text generation path"
                 )
+            elif allow_partial_vocabulary:
+                if feature_dim is None:
+                    raise ValueError(
+                        "Vocabulary alignment requires a positive feature_dim. "
+                        "Provide one, then explicitly choose "
+                        "allow_partial_vocabulary=True to preserve a nonempty "
+                        "shorter real cache with leading-column write-back, or "
+                        "allow_fallback_vocabulary=True for a feature-space "
+                        "ablation."
+                    )
+                if not 0 < len(self.vocab) < int(feature_dim):
+                    raise ValueError(
+                        f"Partial BoW vocabulary/feature mismatch at "
+                        f"{vectorizer_path}: partial mode requires a nonempty "
+                        f"cached real vocabulary shorter than feature_dim, but got "
+                        f"{len(self.vocab)} tokens for feature dimension "
+                        f"{feature_dim}. Rebuild an aligned vocabulary, explicitly "
+                        "pass allow_partial_vocabulary=True only with a nonempty "
+                        "shorter real cache, or disable partial mode and explicitly "
+                        "pass allow_fallback_vocabulary=True for a feature-space "
+                        "ablation."
+                    )
+                self.uses_partial_vocabulary = True
+                print(
+                    f"Loaded partial real BoW vocabulary: {len(self.vocab)} tokens "
+                    f"for feature dimension {feature_dim}; preserving cached "
+                    "vocabulary order and existing leading-column write-back"
+                )
             elif allow_fallback_vocabulary:
                 install_fallback_vocabulary(
                     f"BoW vocabulary at {vectorizer_path} has {len(self.vocab)} "
@@ -126,10 +165,16 @@ class TextAttackGenerator:
                 raise ValueError(
                     f"BoW vocabulary/feature mismatch at {vectorizer_path}: "
                     f"{len(self.vocab)} != {feature_dim}. Disable text attack, "
-                    "rebuild an aligned vocabulary, or explicitly pass "
+                    "rebuild an aligned vocabulary, explicitly pass "
+                    "allow_partial_vocabulary=True to preserve a nonempty shorter "
+                    "real cache with leading-column write-back, or explicitly pass "
                     "allow_fallback_vocabulary=True for a feature-space ablation."
                 )
-        elif feature_dim is not None and allow_fallback_vocabulary:
+        elif (
+            feature_dim is not None
+            and allow_fallback_vocabulary
+            and not allow_partial_vocabulary
+        ):
             install_fallback_vocabulary(
                 f"BoW vocabulary not found at {vectorizer_path}"
             )
@@ -137,8 +182,11 @@ class TextAttackGenerator:
             raise FileNotFoundError(
                 f"BoW vocabulary not found at {vectorizer_path}. "
                 "Run prepare_small_datasets.py first. If the downloaded dataset "
-                "does not provide aligned feature names, disable text attack or "
-                "explicitly pass allow_fallback_vocabulary=True."
+                "does not provide aligned feature names, disable text attack or, "
+                "with allow_partial_vocabulary disabled, explicitly pass "
+                "allow_fallback_vocabulary=True; "
+                "allow_partial_vocabulary=True only accepts an existing nonempty "
+                "shorter real cache."
             )
 
         # 记录词表大小
@@ -320,6 +368,18 @@ class TextAttackGenerator:
         if isinstance(gradient, torch.Tensor):
             gradient = gradient.detach().cpu().numpy()
 
+        original_bow = np.asarray(original_bow).reshape(-1)
+        gradient = np.asarray(gradient).reshape(-1)
+        vocab_size = len(self.vocab)
+        if len(original_bow) < vocab_size or len(gradient) < vocab_size:
+            raise ValueError(
+                "original_bow and gradient must each contain at least "
+                f"{vocab_size} values for the loaded vocabulary; got "
+                f"{len(original_bow)} and {len(gradient)}"
+            )
+        original_bow = original_bow[:vocab_size]
+        gradient = gradient[:vocab_size]
+
         if use_gradient_for_selection:
             # 基于梯度选择：
             # - 对于0->1：梯度大的词（模型希望增加）
@@ -425,17 +485,14 @@ class TextAttackGenerator:
             {"role": "user", "content": prompt},
         ]
 
-        try:
-            response_text = self.generate_text(messages)
-            # Parse response
-            templates = [t.strip() for t in response_text.split("|||") if t.strip()]
-            # Fallback if separator not found but text exists
-            if not templates and response_text:
-                templates = [response_text.strip()]
-            return templates
-        except Exception as e:
-            print(f"Error generating cluster templates: {e}")
-            return []
+        response_text = self.generate_text(messages)
+        if not response_text or not response_text.strip():
+            raise RuntimeError("Text provider returned an empty template response")
+
+        templates = [t.strip() for t in response_text.split("|||") if t.strip()]
+        if not templates:
+            raise RuntimeError("Text provider response contained no parsed templates")
+        return templates
 
     def generate_text(self, messages: List[Dict[str, str]]) -> str:
         """调用LLM生成文本"""

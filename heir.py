@@ -13,12 +13,14 @@ from deeprobust.graph.global_attack import BaseAttack
 from gb_division_simple import GBCluster, KMeansCluster
 
 # 文本攻击生成器导入
+TEXT_ATTACK_IMPORT_ERROR = None
 try:
     from text_attack_generator import TextAttackGenerator
 
     TEXT_ATTACK_AVAILABLE = True
-except ImportError:
+except ImportError as exc:
     TEXT_ATTACK_AVAILABLE = False
+    TEXT_ATTACK_IMPORT_ERROR = exc
     print("Warning: TextAttackGenerator not available. Text attack will be disabled.")
 
 
@@ -42,6 +44,13 @@ class Heirattack(BaseAttack):
         levels=2,
         use_oracle=False,
     ):
+        requested_text_attack = getattr(args, "use_text_attack", False)
+        if requested_text_attack and not TEXT_ATTACK_AVAILABLE:
+            raise RuntimeError(
+                "Text attack was requested, but TextAttackGenerator could not be "
+                "imported. Install the text-attack dependencies or disable "
+                "--use_text_attack."
+            ) from TEXT_ATTACK_IMPORT_ERROR
 
         super(Heirattack, self).__init__(
             model, nnodes, attack_structure, attack_features, device
@@ -143,8 +152,8 @@ class Heirattack(BaseAttack):
         self.local_candidate_rng = np.random.default_rng(getattr(args, "seed", None))
 
         # ========== 文本攻击生成器初始化 ==========
-        self.use_text_attack = getattr(args, "use_text_attack", False)
-        if self.use_text_attack and TEXT_ATTACK_AVAILABLE:
+        self.use_text_attack = requested_text_attack
+        if self.use_text_attack:
             llm_type = getattr(args, "llm_type", "gpt")
 
             # 根据LLM类型设置参数
@@ -163,6 +172,9 @@ class Heirattack(BaseAttack):
                     feature_dim=self.nfeat,
                     allow_fallback_vocabulary=getattr(
                         args, "allow_fallback_vocabulary", False
+                    ),
+                    allow_partial_vocabulary=getattr(
+                        args, "allow_partial_vocabulary", False
                     ),
                 )
                 print(
@@ -186,6 +198,9 @@ class Heirattack(BaseAttack):
                     allow_fallback_vocabulary=getattr(
                         args, "allow_fallback_vocabulary", False
                     ),
+                    allow_partial_vocabulary=getattr(
+                        args, "allow_partial_vocabulary", False
+                    ),
                     num_retries=getattr(args, "text_retries", 1),  # 默认只重试1次
                 )
                 print(
@@ -193,10 +208,6 @@ class Heirattack(BaseAttack):
                 )
         else:
             self.text_generator = None
-            if self.use_text_attack:
-                print(
-                    "⚠️ Text attack requested but not available. Falling back to gradient-based attack."
-                )
 
     def _make_clusterer(self, n_clusters, args=None):
         args = self.args if args is None else args
@@ -671,9 +682,12 @@ class Heirattack(BaseAttack):
         """
         Cluster-based Text Attack Generation
         """
-        if not self.use_text_attack or self.text_generator is None:
-            print("⚠️ Text attack not available, skipping feature attack")
+        if not self.use_text_attack:
             return full_features
+        if self.text_generator is None:
+            raise RuntimeError(
+                "Text attack was requested, but the text generator is not initialized."
+            )
 
         modified_features = full_features.clone()
 
@@ -706,9 +720,15 @@ class Heirattack(BaseAttack):
             print(f"🔥 Text Attack: {len(target_nodes)} nodes grouped into 0 clusters.")
 
         # Stats
-        total_llm_calls = 0
+        targets = len(target_nodes)
+        template_attempts = 0
+        template_successes = 0
+        template_failures = 0
         cache_hits = 0
-        success_count = 0
+        feature_writes = 0
+        feature_changes = 0
+        node_failures = 0
+        cluster_failures = 0
 
         # 2. Process each cluster
         for cid, nodes in tqdm(clusters.items(), desc="Cluster Attack"):
@@ -740,6 +760,10 @@ class Heirattack(BaseAttack):
                 # Check Cache
                 if signature in self.template_cache:
                     templates = self.template_cache[signature]
+                    if not templates:
+                        raise RuntimeError(
+                            f"Cached template batch is empty for cluster {cid}"
+                        )
                     cache_hits += 1
                 else:
                     # Select Representative Node (Highest PPR score)
@@ -749,19 +773,24 @@ class Heirattack(BaseAttack):
                         rep_node = nodes[0]  # Fallback
 
                     # Generate Templates
-                    templates = self.text_generator.generate_cluster_template(
-                        cluster_attributes=cluster_attrs,
-                        discriminative_words=discriminative_words,
-                        num_candidates=3,
-                    )
-                    total_llm_calls += 1
+                    template_attempts += 1
+                    try:
+                        templates = self.text_generator.generate_cluster_template(
+                            cluster_attributes=cluster_attrs,
+                            discriminative_words=discriminative_words,
+                            num_candidates=3,
+                        )
+                        if not templates:
+                            raise RuntimeError(
+                                f"Generated template batch is empty for cluster {cid}"
+                            )
+                    except Exception:
+                        template_failures += 1
+                        raise
+                    template_successes += 1
 
                     # Cache
-                    if templates:
-                        self.template_cache[signature] = templates
-
-                if not templates:
-                    continue
+                    self.template_cache[signature] = templates
 
                 # 3. Adapt for each node
                 for node in nodes:
@@ -857,23 +886,45 @@ class Heirattack(BaseAttack):
                                         hi = mid
                                 new_bow = lo * new_vec + (1.0 - lo) * orig_vec
 
+                        feature_changed = not np.allclose(new_bow, current_bow)
                         modified_features[node] = (
                             torch.from_numpy(new_bow).float().to(self.device)
                         )
-                        success_count += 1
+                        feature_writes += 1
+                        if feature_changed:
+                            feature_changes += 1
 
                     except Exception as e:
-                        # Fallback or skip
-                        pass
+                        node_failures += 1
+                        print(f"Error processing text attack node {node}: {e}")
 
             except Exception as e:
+                cluster_failures += 1
                 print(f"Error processing cluster {cid}: {e}")
                 continue
 
-        print(
-            f"✅ Cluster Attack Done. Success: {success_count}/{len(target_nodes)}, "
-            f"LLM Calls: {total_llm_calls}, Cache Hits: {cache_hits}"
+        completed = int(
+            template_successes + cache_hits > 0
+            and feature_writes > 0
+            and feature_changes > 0
         )
+        print(
+            "Text Attack Completion: "
+            f"targets={targets}, template_attempts={template_attempts}, "
+            f"template_successes={template_successes}, "
+            f"template_failures={template_failures}, cache_hits={cache_hits}, "
+            f"feature_writes={feature_writes}, feature_changes={feature_changes}, "
+            f"node_failures={node_failures}, cluster_failures={cluster_failures}, "
+            f"completed={completed}"
+        )
+        print(
+            f"✅ Cluster Attack Done. Success: {feature_writes}/{targets}, "
+            f"LLM Calls: {template_attempts}, Cache Hits: {cache_hits}"
+        )
+        if not completed:
+            raise RuntimeError(
+                "Text attack did not produce at least one actual feature change."
+            )
         return modified_features
 
     # 层次化图对抗攻击的多步元攻击主函数

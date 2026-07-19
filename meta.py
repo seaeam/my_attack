@@ -139,6 +139,15 @@ parser.add_argument(
     help="Explicitly allow feature_i placeholders when no aligned BoW cache exists",
 )
 parser.add_argument(
+    "--allow_partial_vocabulary",
+    action="store_true",
+    default=False,
+    help=(
+        "Allow a nonempty cached real vocabulary shorter than feature_dim and "
+        "preserve existing leading-column write-back"
+    ),
+)
+parser.add_argument(
     "--llm_type",
     type=str,
     default="gpt",
@@ -148,8 +157,11 @@ parser.add_argument(
 parser.add_argument(
     "--openai_api_key",
     type=str,
-    default=None,
-    help="API key (required if using GPT or DeepSeek)",
+    default=os.environ.get("OPENAI_API_KEY"),
+    help=(
+        "API key for GPT or DeepSeek (defaults to the OPENAI_API_KEY "
+        "environment variable)"
+    ),
 )
 parser.add_argument(
     "--api_base_url",
@@ -256,6 +268,11 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
+if args.allow_partial_vocabulary and args.allow_fallback_vocabulary:
+    parser.error(
+        "--allow_partial_vocabulary and --allow_fallback_vocabulary cannot be "
+        "used together"
+    )
 
 # Setup logger
 if not os.path.exists("logs"):

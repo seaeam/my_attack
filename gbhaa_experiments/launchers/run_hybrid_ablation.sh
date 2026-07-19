@@ -4,8 +4,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-PYTHON_BIN="${PYTHON_BIN:-/opt/miniconda3/bin/python}"
-EXECUTE="${EXECUTE:-0}"
+PYTHON_BIN="${PYTHON_BIN:-$(command -v python)}"
+EXECUTE="${EXECUTE:-1}"
 read -r -a DATASETS <<< "${DATASETS:-citeseer}"
 
 export OLLAMA_MODEL="${OLLAMA_MODEL:-llama3.2:1b-instruct-fp16}"
