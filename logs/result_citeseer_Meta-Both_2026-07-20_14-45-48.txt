@@ -1,0 +1,934 @@
+Loading citeseer dataset...
+Selecting 1 largest connected components
+(2110, 3703) (1,) (2110, 2110) 210 211 1688
+Test set results: loss= 1.9173 accuracy= 0.6955
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+⚠️ BoW vocabulary at ./bow_cache/citeseer.pkl has 500 tokens but the feature dimension is 3703; using explicit fallback feature vocabulary with 3703 tokens.
+Vocab size: 3703, Feature dim: 3703
+🦙 Detected Ollama - using model: llama3.2:1b-instruct-fp16
+Initialized GPT client with model: llama3.2:1b-instruct-fp16
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 366 edges
+  Perturbation rate: 10.0%
+  Attack mode: Meta-Both
+  Structure search: method=gb, level=2, step=1, miter=10, lr=0.01
+  Global PPR: ratio=0.10, alpha=0.15, iters=30, seed=degree, label_w=0.0
+  Structure features: frozen to original features
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.05, alpha=0.2, iters=25, budget=15, per_step=None, max_visits=1, candidate=local_ae_ppr, hops=2, cluster=2-8, sim>=0.85, cdl_topk=10, cluster_attr_topk=10, max_added=20
+
+
+Independent attribute selection enabled
+  Attribute seeds: strategy=feature_grad, count=2, pool=all
+
+[Step 1/366] Independent text attack: structure_edge=(2060, 2024), attr_seeds=[1014, 603], selected=212/212, exhausted=0
+🔥 Text Attack: 212 nodes grouped into 43 clusters (min/avg/max = 2/4.9/7).
+Text Attack Completion: targets=212, template_attempts=43, template_successes=43, template_failures=0, cache_hits=0, feature_writes=212, feature_changes=212, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 212/212, LLM Calls: 43, Cache Hits: 0
+
+[Step 2/366] Independent text attack: structure_edge=(1357, 674), attr_seeds=[1874, 140], selected=205/205, exhausted=0
+🔥 Text Attack: 205 nodes grouped into 42 clusters (min/avg/max = 2/4.9/8).
+Text Attack Completion: targets=205, template_attempts=42, template_successes=42, template_failures=0, cache_hits=0, feature_writes=205, feature_changes=205, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 205/205, LLM Calls: 42, Cache Hits: 0
+
+[Step 3/366] Independent text attack: structure_edge=(483, 753), attr_seeds=[1535, 1795], selected=175/212, exhausted=37
+🔥 Text Attack: 175 nodes grouped into 36 clusters (min/avg/max = 2/4.9/8).
+Text Attack Completion: targets=175, template_attempts=36, template_successes=36, template_failures=0, cache_hits=0, feature_writes=175, feature_changes=175, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 175/175, LLM Calls: 36, Cache Hits: 0
+
+[Step 4/366] Independent text attack: structure_edge=(1878, 252), attr_seeds=[99, 1827], selected=103/203, exhausted=100
+🔥 Text Attack: 103 nodes grouped into 21 clusters (min/avg/max = 2/4.9/8).
+Text Attack Completion: targets=103, template_attempts=21, template_successes=21, template_failures=0, cache_hits=0, feature_writes=103, feature_changes=103, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 103/103, LLM Calls: 21, Cache Hits: 0
+
+[Step 5/366] Independent text attack: structure_edge=(1995, 11), attr_seeds=[311, 1448], selected=150/212, exhausted=62
+🔥 Text Attack: 150 nodes grouped into 28 clusters (min/avg/max = 2/5.4/8).
+Text Attack Completion: targets=150, template_attempts=28, template_successes=28, template_failures=0, cache_hits=0, feature_writes=150, feature_changes=150, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 150/150, LLM Calls: 28, Cache Hits: 0
+
+[Step 6/366] Independent text attack: structure_edge=(700, 1096), attr_seeds=[1348, 649], selected=101/182, exhausted=81
+🔥 Text Attack: 101 nodes grouped into 21 clusters (min/avg/max = 2/4.8/7).
+Text Attack Completion: targets=101, template_attempts=21, template_successes=21, template_failures=0, cache_hits=0, feature_writes=101, feature_changes=101, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 101/101, LLM Calls: 21, Cache Hits: 0
+
+[Step 7/366] Independent text attack: structure_edge=(293, 1405), attr_seeds=[1700, 1153], selected=122/209, exhausted=87
+🔥 Text Attack: 122 nodes grouped into 26 clusters (min/avg/max = 2/4.7/8).
+Text Attack Completion: targets=122, template_attempts=26, template_successes=26, template_failures=0, cache_hits=0, feature_writes=122, feature_changes=122, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 122/122, LLM Calls: 26, Cache Hits: 0
+
+[Step 8/366] Independent text attack: structure_edge=(507, 1814), attr_seeds=[811, 116], selected=67/211, exhausted=144
+🔥 Text Attack: 67 nodes grouped into 13 clusters (min/avg/max = 2/5.2/7).
+Text Attack Completion: targets=67, template_attempts=13, template_successes=13, template_failures=0, cache_hits=0, feature_writes=67, feature_changes=67, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 67/67, LLM Calls: 13, Cache Hits: 0
+
+[Step 9/366] Independent text attack: structure_edge=(859, 588), attr_seeds=[874, 321], selected=108/212, exhausted=104
+🔥 Text Attack: 108 nodes grouped into 21 clusters (min/avg/max = 2/5.1/8).
+Text Attack Completion: targets=108, template_attempts=21, template_successes=21, template_failures=0, cache_hits=0, feature_writes=108, feature_changes=108, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 108/108, LLM Calls: 21, Cache Hits: 0
+
+[Step 10/366] Independent text attack: structure_edge=(329, 909), attr_seeds=[492, 319], selected=36/212, exhausted=176
+🔥 Text Attack: 36 nodes grouped into 7 clusters (min/avg/max = 2/5.1/7).
+Text Attack Completion: targets=36, template_attempts=7, template_successes=7, template_failures=0, cache_hits=0, feature_writes=36, feature_changes=36, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 36/36, LLM Calls: 7, Cache Hits: 0
+
+[Step 11/366] Independent text attack: structure_edge=(1340, 1019), attr_seeds=[1626, 1853], selected=52/212, exhausted=160
+🔥 Text Attack: 52 nodes grouped into 10 clusters (min/avg/max = 2/5.2/7).
+Text Attack Completion: targets=52, template_attempts=10, template_successes=10, template_failures=0, cache_hits=0, feature_writes=52, feature_changes=52, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 52/52, LLM Calls: 10, Cache Hits: 0
+
+[Step 12/366] Independent text attack: structure_edge=(836, 1944), attr_seeds=[1605, 1305], selected=53/212, exhausted=159
+🔥 Text Attack: 53 nodes grouped into 12 clusters (min/avg/max = 2/4.4/6).
+Text Attack Completion: targets=53, template_attempts=12, template_successes=12, template_failures=0, cache_hits=0, feature_writes=53, feature_changes=53, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 53/53, LLM Calls: 12, Cache Hits: 0
+
+[Step 13/366] Independent text attack: structure_edge=(1049, 1394), attr_seeds=[985, 865], selected=44/207, exhausted=163
+🔥 Text Attack: 44 nodes grouped into 10 clusters (min/avg/max = 2/4.4/8).
+Text Attack Completion: targets=44, template_attempts=10, template_successes=10, template_failures=0, cache_hits=0, feature_writes=44, feature_changes=44, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 44/44, LLM Calls: 10, Cache Hits: 0
+
+[Step 14/366] Independent text attack: structure_edge=(1326, 1229), attr_seeds=[1681, 1443], selected=112/212, exhausted=100
+🔥 Text Attack: 112 nodes grouped into 22 clusters (min/avg/max = 2/5.1/8).
+Text Attack Completion: targets=112, template_attempts=22, template_successes=22, template_failures=0, cache_hits=0, feature_writes=112, feature_changes=112, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 112/112, LLM Calls: 22, Cache Hits: 0
+
+[Step 15/366] Independent text attack: structure_edge=(421, 2053), attr_seeds=[885, 76], selected=87/210, exhausted=123
+🔥 Text Attack: 87 nodes grouped into 20 clusters (min/avg/max = 2/4.3/8).
+Text Attack Completion: targets=87, template_attempts=20, template_successes=20, template_failures=0, cache_hits=0, feature_writes=87, feature_changes=87, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 87/87, LLM Calls: 20, Cache Hits: 0
+
+[Step 16/366] Independent text attack: structure_edge=(311, 722), attr_seeds=[1009, 395], selected=64/210, exhausted=146
+🔥 Text Attack: 64 nodes grouped into 14 clusters (min/avg/max = 2/4.6/8).
+Text Attack Completion: targets=64, template_attempts=14, template_successes=14, template_failures=0, cache_hits=0, feature_writes=64, feature_changes=64, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 64/64, LLM Calls: 14, Cache Hits: 0
+
+[Step 17/366] Independent text attack: structure_edge=(533, 582), attr_seeds=[20, 1682], selected=16/208, exhausted=192
+🔥 Text Attack: 16 nodes grouped into 3 clusters (min/avg/max = 4/5.3/7).
+Text Attack Completion: targets=16, template_attempts=3, template_successes=3, template_failures=0, cache_hits=0, feature_writes=16, feature_changes=16, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 16/16, LLM Calls: 3, Cache Hits: 0
+
+[Step 18/366] Independent text attack: structure_edge=(1840, 351), attr_seeds=[1138, 1959], selected=22/135, exhausted=113
+🔥 Text Attack: 22 nodes grouped into 5 clusters (min/avg/max = 3/4.4/5).
+Text Attack Completion: targets=22, template_attempts=5, template_successes=5, template_failures=0, cache_hits=0, feature_writes=22, feature_changes=22, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 22/22, LLM Calls: 5, Cache Hits: 0
+
+[Step 19/366] Independent text attack: structure_edge=(1374, 1160), attr_seeds=[1033, 536], selected=63/211, exhausted=148
+🔥 Text Attack: 63 nodes grouped into 16 clusters (min/avg/max = 2/3.9/6).
+Text Attack Completion: targets=63, template_attempts=16, template_successes=16, template_failures=0, cache_hits=0, feature_writes=63, feature_changes=63, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 63/63, LLM Calls: 16, Cache Hits: 0
+
+[Step 20/366] Independent text attack: structure_edge=(947, 781), attr_seeds=[656, 2038], selected=47/212, exhausted=165
+🔥 Text Attack: 47 nodes grouped into 9 clusters (min/avg/max = 2/5.2/8).
+Text Attack Completion: targets=47, template_attempts=9, template_successes=9, template_failures=0, cache_hits=0, feature_writes=47, feature_changes=47, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 47/47, LLM Calls: 9, Cache Hits: 0
+
+[Step 21/366] Independent text attack: structure_edge=(874, 1196), attr_seeds=[1940, 922], selected=56/106, exhausted=50
+🔥 Text Attack: 56 nodes grouped into 11 clusters (min/avg/max = 2/5.1/7).
+Text Attack Completion: targets=56, template_attempts=11, template_successes=11, template_failures=0, cache_hits=0, feature_writes=56, feature_changes=56, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 56/56, LLM Calls: 11, Cache Hits: 0
+
+[Step 22/366] Independent text attack: structure_edge=(1837, 1168), attr_seeds=[298, 969], selected=20/106, exhausted=86
+🔥 Text Attack: 20 nodes grouped into 4 clusters (min/avg/max = 4/5.0/6).
+Text Attack Completion: targets=20, template_attempts=4, template_successes=4, template_failures=0, cache_hits=0, feature_writes=20, feature_changes=20, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 20/20, LLM Calls: 4, Cache Hits: 0
+
+[Step 23/366] Independent text attack: structure_edge=(1033, 1030), attr_seeds=[82, 1657], selected=4/106, exhausted=102
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+Text Attack Completion: targets=4, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=4, feature_changes=4, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+[Step 24/366] Independent text attack: structure_edge=(868, 214), attr_seeds=[2028, 552], selected=22/212, exhausted=190
+🔥 Text Attack: 22 nodes grouped into 4 clusters (min/avg/max = 5/5.5/7).
+Text Attack Completion: targets=22, template_attempts=4, template_successes=4, template_failures=0, cache_hits=0, feature_writes=22, feature_changes=22, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 22/22, LLM Calls: 4, Cache Hits: 0
+
+[Step 25/366] Independent text attack: structure_edge=(1596, 755), attr_seeds=[1939, 946], selected=19/209, exhausted=190
+🔥 Text Attack: 19 nodes grouped into 4 clusters (min/avg/max = 2/4.8/7).
+Text Attack Completion: targets=19, template_attempts=4, template_successes=4, template_failures=0, cache_hits=0, feature_writes=19, feature_changes=19, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 19/19, LLM Calls: 4, Cache Hits: 0
+
+[Step 26/366] Independent text attack: structure_edge=(1014, 1892), attr_seeds=[1989, 1563], selected=44/211, exhausted=167
+🔥 Text Attack: 44 nodes grouped into 10 clusters (min/avg/max = 2/4.4/7).
+Text Attack Completion: targets=44, template_attempts=10, template_successes=10, template_failures=0, cache_hits=0, feature_writes=44, feature_changes=44, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 44/44, LLM Calls: 10, Cache Hits: 0
+
+[Step 27/366] Independent text attack: structure_edge=(1418, 675), attr_seeds=[1521, 505], selected=8/106, exhausted=98
+🔥 Text Attack: 8 nodes grouped into 1 clusters (min/avg/max = 8/8.0/8).
+Text Attack Completion: targets=8, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=8, feature_changes=8, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 1, Cache Hits: 0
+
+[Step 28/366] Independent text attack: structure_edge=(1067, 886), attr_seeds=[1995, 1053], selected=6/134, exhausted=128
+🔥 Text Attack: 6 nodes grouped into 1 clusters (min/avg/max = 6/6.0/6).
+Text Attack Completion: targets=6, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=6, feature_changes=6, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 1, Cache Hits: 0
+
+[Step 29/366] Independent text attack: structure_edge=(1326, 1883), attr_seeds=[1937, 526], selected=2/106, exhausted=104
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+[Step 30/366] Independent text attack: structure_edge=(997, 1881), attr_seeds=[2021, 1432], selected=5/180, exhausted=175
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+Text Attack Completion: targets=5, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=5, feature_changes=5, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+[Step 31/366] Independent text attack: structure_edge=(536, 1641), attr_seeds=[1533, 835], selected=5/212, exhausted=207
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+Text Attack Completion: targets=5, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=5, feature_changes=5, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+[Step 32/366] Independent text attack: structure_edge=(1614, 1552), attr_seeds=[1575, 1927], selected=11/211, exhausted=200
+🔥 Text Attack: 11 nodes grouped into 2 clusters (min/avg/max = 4/5.5/7).
+Text Attack Completion: targets=11, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=11, feature_changes=11, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 2, Cache Hits: 0
+
+[Step 33/366] Independent text attack: structure_edge=(1195, 1194), attr_seeds=[1852, 840], selected=10/110, exhausted=100
+🔥 Text Attack: 10 nodes grouped into 2 clusters (min/avg/max = 5/5.0/5).
+Text Attack Completion: targets=10, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=10, feature_changes=10, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 10/10, LLM Calls: 2, Cache Hits: 0
+
+[Step 34/366] Independent text attack: structure_edge=(1015, 47), attr_seeds=[65, 509], selected=10/206, exhausted=196
+🔥 Text Attack: 10 nodes grouped into 2 clusters (min/avg/max = 4/5.0/6).
+Text Attack Completion: targets=10, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=10, feature_changes=10, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 10/10, LLM Calls: 2, Cache Hits: 0
+
+[Step 35/366] Independent text attack: structure_edge=(157, 684), attr_seeds=[1644, 217], selected=8/212, exhausted=204
+🔥 Text Attack: 8 nodes grouped into 1 clusters (min/avg/max = 8/8.0/8).
+Text Attack Completion: targets=8, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=8, feature_changes=8, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 1, Cache Hits: 0
+
+[Step 36/366] Independent text attack: structure_edge=(702, 317), attr_seeds=[1394, 1509], selected=3/210, exhausted=207
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=3, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=3, feature_changes=3, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+[Step 37/366] Independent text attack: structure_edge=(1501, 1271), attr_seeds=[26, 81], selected=2/106, exhausted=104
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+[Step 38/366] Independent text attack: structure_edge=(1423, 1970), attr_seeds=[1916, 867], selected=2/204, exhausted=202
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+[Step 39/366] Independent text attack: structure_edge=(1702, 528), attr_seeds=[263, 1236], selected=9/106, exhausted=97
+🔥 Text Attack: 9 nodes grouped into 2 clusters (min/avg/max = 2/4.5/7).
+Text Attack Completion: targets=9, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=9, feature_changes=9, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 2, Cache Hits: 0
+
+[Step 40/366] Independent text attack: structure_edge=(1782, 1702), attr_seeds=[530, 460], selected=8/212, exhausted=204
+🔥 Text Attack: 8 nodes grouped into 1 clusters (min/avg/max = 8/8.0/8).
+Text Attack Completion: targets=8, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=8, feature_changes=8, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 1, Cache Hits: 0
+
+[Step 41/366] Independent text attack: structure_edge=(2069, 518), attr_seeds=[408, 1214], selected=2/108, exhausted=106
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+[Step 42/366] Independent text attack: structure_edge=(900, 543), attr_seeds=[1971, 1309], selected=2/106, exhausted=104
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+[Step 43/366] Independent text attack: structure_edge=(1162, 1783), attr_seeds=[461, 1500], selected=5/201, exhausted=196
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+Text Attack Completion: targets=5, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=5, feature_changes=5, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+[Step 44/366] Independent text attack: structure_edge=(2038, 181), attr_seeds=[1890, 1489], selected=3/207, exhausted=204
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=3, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=3, feature_changes=3, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+[Step 45/366] Independent text attack: structure_edge=(762, 1194), attr_seeds=[1763, 1712], selected=2/163, exhausted=161
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+[Step 46/366] Independent text attack: structure_edge=(664, 953), attr_seeds=[262, 1844], selected=2/107, exhausted=105
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+[Step 47/366] Independent text attack: structure_edge=(82, 317), attr_seeds=[849], selected=1/106, exhausted=105
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+[Step 48/366] Independent text attack skipped: no eligible nodes
+
+[Step 49/366] Independent text attack skipped: no eligible nodes
+
+[Step 50/366] Independent text attack skipped: no eligible nodes
+
+[Step 51/366] Independent text attack skipped: no eligible nodes
+
+[Step 52/366] Independent text attack skipped: no eligible nodes
+
+[Step 53/366] Independent text attack skipped: no eligible nodes
+
+[Step 54/366] Independent text attack skipped: no eligible nodes
+
+[Step 55/366] Independent text attack skipped: no eligible nodes
+
+[Step 56/366] Independent text attack skipped: no eligible nodes
+
+[Step 57/366] Independent text attack skipped: no eligible nodes
+
+[Step 58/366] Independent text attack skipped: no eligible nodes
+
+[Step 59/366] Independent text attack skipped: no eligible nodes
+
+[Step 60/366] Independent text attack skipped: no eligible nodes
+
+[Step 61/366] Independent text attack skipped: no eligible nodes
+
+[Step 62/366] Independent text attack skipped: no eligible nodes
+
+[Step 63/366] Independent text attack skipped: no eligible nodes
+
+[Step 64/366] Independent text attack skipped: no eligible nodes
+
+[Step 65/366] Independent text attack skipped: no eligible nodes
+
+[Step 66/366] Independent text attack skipped: no eligible nodes
+
+[Step 67/366] Independent text attack skipped: no eligible nodes
+
+[Step 68/366] Independent text attack skipped: no eligible nodes
+
+[Step 69/366] Independent text attack skipped: no eligible nodes
+
+[Step 70/366] Independent text attack skipped: no eligible nodes
+
+[Step 71/366] Independent text attack skipped: no eligible nodes
+
+[Step 72/366] Independent text attack skipped: no eligible nodes
+
+[Step 73/366] Independent text attack skipped: no eligible nodes
+
+[Step 74/366] Independent text attack skipped: no eligible nodes
+
+[Step 75/366] Independent text attack skipped: no eligible nodes
+
+[Step 76/366] Independent text attack skipped: no eligible nodes
+
+[Step 77/366] Independent text attack skipped: no eligible nodes
+
+[Step 78/366] Independent text attack skipped: no eligible nodes
+
+[Step 79/366] Independent text attack skipped: no eligible nodes
+
+[Step 80/366] Independent text attack skipped: no eligible nodes
+
+[Step 81/366] Independent text attack skipped: no eligible nodes
+
+[Step 82/366] Independent text attack skipped: no eligible nodes
+
+[Step 83/366] Independent text attack skipped: no eligible nodes
+
+[Step 84/366] Independent text attack skipped: no eligible nodes
+
+[Step 85/366] Independent text attack skipped: no eligible nodes
+
+[Step 86/366] Independent text attack skipped: no eligible nodes
+
+[Step 87/366] Independent text attack skipped: no eligible nodes
+
+[Step 88/366] Independent text attack skipped: no eligible nodes
+
+[Step 89/366] Independent text attack skipped: no eligible nodes
+
+[Step 90/366] Independent text attack skipped: no eligible nodes
+
+[Step 91/366] Independent text attack skipped: no eligible nodes
+
+[Step 92/366] Independent text attack skipped: no eligible nodes
+
+[Step 93/366] Independent text attack skipped: no eligible nodes
+
+[Step 94/366] Independent text attack skipped: no eligible nodes
+
+[Step 95/366] Independent text attack skipped: no eligible nodes
+
+[Step 96/366] Independent text attack skipped: no eligible nodes
+
+[Step 97/366] Independent text attack skipped: no eligible nodes
+
+[Step 98/366] Independent text attack skipped: no eligible nodes
+
+[Step 99/366] Independent text attack skipped: no eligible nodes
+
+[Step 100/366] Independent text attack skipped: no eligible nodes
+
+[Step 101/366] Independent text attack skipped: no eligible nodes
+
+[Step 102/366] Independent text attack skipped: no eligible nodes
+
+[Step 103/366] Independent text attack skipped: no eligible nodes
+
+[Step 104/366] Independent text attack skipped: no eligible nodes
+
+[Step 105/366] Independent text attack skipped: no eligible nodes
+
+[Step 106/366] Independent text attack skipped: no eligible nodes
+
+[Step 107/366] Independent text attack skipped: no eligible nodes
+
+[Step 108/366] Independent text attack skipped: no eligible nodes
+
+[Step 109/366] Independent text attack skipped: no eligible nodes
+
+[Step 110/366] Independent text attack skipped: no eligible nodes
+
+[Step 111/366] Independent text attack skipped: no eligible nodes
+
+[Step 112/366] Independent text attack skipped: no eligible nodes
+
+[Step 113/366] Independent text attack skipped: no eligible nodes
+
+[Step 114/366] Independent text attack skipped: no eligible nodes
+
+[Step 115/366] Independent text attack skipped: no eligible nodes
+
+[Step 116/366] Independent text attack skipped: no eligible nodes
+
+[Step 117/366] Independent text attack skipped: no eligible nodes
+
+[Step 118/366] Independent text attack skipped: no eligible nodes
+
+[Step 119/366] Independent text attack skipped: no eligible nodes
+
+[Step 120/366] Independent text attack skipped: no eligible nodes
+
+[Step 121/366] Independent text attack skipped: no eligible nodes
+
+[Step 122/366] Independent text attack skipped: no eligible nodes
+
+[Step 123/366] Independent text attack skipped: no eligible nodes
+
+[Step 124/366] Independent text attack skipped: no eligible nodes
+
+[Step 125/366] Independent text attack skipped: no eligible nodes
+
+[Step 126/366] Independent text attack skipped: no eligible nodes
+
+[Step 127/366] Independent text attack skipped: no eligible nodes
+
+[Step 128/366] Independent text attack skipped: no eligible nodes
+
+[Step 129/366] Independent text attack skipped: no eligible nodes
+
+[Step 130/366] Independent text attack skipped: no eligible nodes
+
+[Step 131/366] Independent text attack skipped: no eligible nodes
+
+[Step 132/366] Independent text attack skipped: no eligible nodes
+
+[Step 133/366] Independent text attack skipped: no eligible nodes
+
+[Step 134/366] Independent text attack skipped: no eligible nodes
+
+[Step 135/366] Independent text attack skipped: no eligible nodes
+
+[Step 136/366] Independent text attack skipped: no eligible nodes
+
+[Step 137/366] Independent text attack skipped: no eligible nodes
+
+[Step 138/366] Independent text attack skipped: no eligible nodes
+
+[Step 139/366] Independent text attack skipped: no eligible nodes
+
+[Step 140/366] Independent text attack skipped: no eligible nodes
+
+[Step 141/366] Independent text attack skipped: no eligible nodes
+
+[Step 142/366] Independent text attack skipped: no eligible nodes
+
+[Step 143/366] Independent text attack skipped: no eligible nodes
+
+[Step 144/366] Independent text attack skipped: no eligible nodes
+
+[Step 145/366] Independent text attack skipped: no eligible nodes
+
+[Step 146/366] Independent text attack skipped: no eligible nodes
+
+[Step 147/366] Independent text attack skipped: no eligible nodes
+
+[Step 148/366] Independent text attack skipped: no eligible nodes
+
+[Step 149/366] Independent text attack skipped: no eligible nodes
+
+[Step 150/366] Independent text attack skipped: no eligible nodes
+
+[Step 151/366] Independent text attack skipped: no eligible nodes
+
+[Step 152/366] Independent text attack skipped: no eligible nodes
+
+[Step 153/366] Independent text attack skipped: no eligible nodes
+
+[Step 154/366] Independent text attack skipped: no eligible nodes
+
+[Step 155/366] Independent text attack skipped: no eligible nodes
+
+[Step 156/366] Independent text attack skipped: no eligible nodes
+
+[Step 157/366] Independent text attack skipped: no eligible nodes
+
+[Step 158/366] Independent text attack skipped: no eligible nodes
+
+[Step 159/366] Independent text attack skipped: no eligible nodes
+
+[Step 160/366] Independent text attack skipped: no eligible nodes
+
+[Step 161/366] Independent text attack skipped: no eligible nodes
+
+[Step 162/366] Independent text attack skipped: no eligible nodes
+
+[Step 163/366] Independent text attack skipped: no eligible nodes
+
+[Step 164/366] Independent text attack skipped: no eligible nodes
+
+[Step 165/366] Independent text attack skipped: no eligible nodes
+
+[Step 166/366] Independent text attack skipped: no eligible nodes
+
+[Step 167/366] Independent text attack skipped: no eligible nodes
+
+[Step 168/366] Independent text attack skipped: no eligible nodes
+
+[Step 169/366] Independent text attack skipped: no eligible nodes
+
+[Step 170/366] Independent text attack skipped: no eligible nodes
+
+[Step 171/366] Independent text attack skipped: no eligible nodes
+
+[Step 172/366] Independent text attack skipped: no eligible nodes
+
+[Step 173/366] Independent text attack skipped: no eligible nodes
+
+[Step 174/366] Independent text attack skipped: no eligible nodes
+
+[Step 175/366] Independent text attack skipped: no eligible nodes
+
+[Step 176/366] Independent text attack skipped: no eligible nodes
+
+[Step 177/366] Independent text attack skipped: no eligible nodes
+
+[Step 178/366] Independent text attack skipped: no eligible nodes
+
+[Step 179/366] Independent text attack skipped: no eligible nodes
+
+[Step 180/366] Independent text attack skipped: no eligible nodes
+
+[Step 181/366] Independent text attack skipped: no eligible nodes
+
+[Step 182/366] Independent text attack skipped: no eligible nodes
+
+[Step 183/366] Independent text attack skipped: no eligible nodes
+
+[Step 184/366] Independent text attack skipped: no eligible nodes
+
+[Step 185/366] Independent text attack skipped: no eligible nodes
+
+[Step 186/366] Independent text attack skipped: no eligible nodes
+
+[Step 187/366] Independent text attack skipped: no eligible nodes
+
+[Step 188/366] Independent text attack skipped: no eligible nodes
+
+[Step 189/366] Independent text attack skipped: no eligible nodes
+
+[Step 190/366] Independent text attack skipped: no eligible nodes
+
+[Step 191/366] Independent text attack skipped: no eligible nodes
+
+[Step 192/366] Independent text attack skipped: no eligible nodes
+
+[Step 193/366] Independent text attack skipped: no eligible nodes
+
+[Step 194/366] Independent text attack skipped: no eligible nodes
+
+[Step 195/366] Independent text attack skipped: no eligible nodes
+
+[Step 196/366] Independent text attack skipped: no eligible nodes
+
+[Step 197/366] Independent text attack skipped: no eligible nodes
+
+[Step 198/366] Independent text attack skipped: no eligible nodes
+
+[Step 199/366] Independent text attack skipped: no eligible nodes
+
+[Step 200/366] Independent text attack skipped: no eligible nodes
+
+[Step 201/366] Independent text attack skipped: no eligible nodes
+
+[Step 202/366] Independent text attack skipped: no eligible nodes
+
+[Step 203/366] Independent text attack skipped: no eligible nodes
+
+[Step 204/366] Independent text attack skipped: no eligible nodes
+
+[Step 205/366] Independent text attack skipped: no eligible nodes
+
+[Step 206/366] Independent text attack skipped: no eligible nodes
+
+[Step 207/366] Independent text attack skipped: no eligible nodes
+
+[Step 208/366] Independent text attack skipped: no eligible nodes
+
+[Step 209/366] Independent text attack skipped: no eligible nodes
+
+[Step 210/366] Independent text attack skipped: no eligible nodes
+
+[Step 211/366] Independent text attack skipped: no eligible nodes
+
+[Step 212/366] Independent text attack skipped: no eligible nodes
+
+[Step 213/366] Independent text attack skipped: no eligible nodes
+
+[Step 214/366] Independent text attack skipped: no eligible nodes
+
+[Step 215/366] Independent text attack skipped: no eligible nodes
+
+[Step 216/366] Independent text attack skipped: no eligible nodes
+
+[Step 217/366] Independent text attack skipped: no eligible nodes
+
+[Step 218/366] Independent text attack skipped: no eligible nodes
+
+[Step 219/366] Independent text attack skipped: no eligible nodes
+
+[Step 220/366] Independent text attack skipped: no eligible nodes
+
+[Step 221/366] Independent text attack skipped: no eligible nodes
+
+[Step 222/366] Independent text attack skipped: no eligible nodes
+
+[Step 223/366] Independent text attack skipped: no eligible nodes
+
+[Step 224/366] Independent text attack skipped: no eligible nodes
+
+[Step 225/366] Independent text attack skipped: no eligible nodes
+
+[Step 226/366] Independent text attack skipped: no eligible nodes
+
+[Step 227/366] Independent text attack skipped: no eligible nodes
+
+[Step 228/366] Independent text attack skipped: no eligible nodes
+
+[Step 229/366] Independent text attack skipped: no eligible nodes
+
+[Step 230/366] Independent text attack skipped: no eligible nodes
+
+[Step 231/366] Independent text attack skipped: no eligible nodes
+
+[Step 232/366] Independent text attack skipped: no eligible nodes
+
+[Step 233/366] Independent text attack skipped: no eligible nodes
+
+[Step 234/366] Independent text attack skipped: no eligible nodes
+
+[Step 235/366] Independent text attack skipped: no eligible nodes
+
+[Step 236/366] Independent text attack skipped: no eligible nodes
+
+[Step 237/366] Independent text attack skipped: no eligible nodes
+
+[Step 238/366] Independent text attack skipped: no eligible nodes
+
+[Step 239/366] Independent text attack skipped: no eligible nodes
+
+[Step 240/366] Independent text attack skipped: no eligible nodes
+
+[Step 241/366] Independent text attack skipped: no eligible nodes
+
+[Step 242/366] Independent text attack skipped: no eligible nodes
+
+[Step 243/366] Independent text attack skipped: no eligible nodes
+
+[Step 244/366] Independent text attack skipped: no eligible nodes
+
+[Step 245/366] Independent text attack skipped: no eligible nodes
+
+[Step 246/366] Independent text attack skipped: no eligible nodes
+
+[Step 247/366] Independent text attack skipped: no eligible nodes
+
+[Step 248/366] Independent text attack skipped: no eligible nodes
+
+[Step 249/366] Independent text attack skipped: no eligible nodes
+
+[Step 250/366] Independent text attack skipped: no eligible nodes
+
+[Step 251/366] Independent text attack skipped: no eligible nodes
+
+[Step 252/366] Independent text attack skipped: no eligible nodes
+
+[Step 253/366] Independent text attack skipped: no eligible nodes
+
+[Step 254/366] Independent text attack skipped: no eligible nodes
+
+[Step 255/366] Independent text attack skipped: no eligible nodes
+
+[Step 256/366] Independent text attack skipped: no eligible nodes
+
+[Step 257/366] Independent text attack skipped: no eligible nodes
+
+[Step 258/366] Independent text attack skipped: no eligible nodes
+
+[Step 259/366] Independent text attack skipped: no eligible nodes
+
+[Step 260/366] Independent text attack skipped: no eligible nodes
+
+[Step 261/366] Independent text attack skipped: no eligible nodes
+
+[Step 262/366] Independent text attack skipped: no eligible nodes
+
+[Step 263/366] Independent text attack skipped: no eligible nodes
+
+[Step 264/366] Independent text attack skipped: no eligible nodes
+
+[Step 265/366] Independent text attack skipped: no eligible nodes
+
+[Step 266/366] Independent text attack skipped: no eligible nodes
+
+[Step 267/366] Independent text attack skipped: no eligible nodes
+
+[Step 268/366] Independent text attack skipped: no eligible nodes
+
+[Step 269/366] Independent text attack skipped: no eligible nodes
+
+[Step 270/366] Independent text attack skipped: no eligible nodes
+
+[Step 271/366] Independent text attack skipped: no eligible nodes
+
+[Step 272/366] Independent text attack skipped: no eligible nodes
+
+[Step 273/366] Independent text attack skipped: no eligible nodes
+
+[Step 274/366] Independent text attack skipped: no eligible nodes
+
+[Step 275/366] Independent text attack skipped: no eligible nodes
+
+[Step 276/366] Independent text attack skipped: no eligible nodes
+
+[Step 277/366] Independent text attack skipped: no eligible nodes
+
+[Step 278/366] Independent text attack skipped: no eligible nodes
+
+[Step 279/366] Independent text attack skipped: no eligible nodes
+
+[Step 280/366] Independent text attack skipped: no eligible nodes
+
+[Step 281/366] Independent text attack skipped: no eligible nodes
+
+[Step 282/366] Independent text attack skipped: no eligible nodes
+
+[Step 283/366] Independent text attack skipped: no eligible nodes
+
+[Step 284/366] Independent text attack skipped: no eligible nodes
+
+[Step 285/366] Independent text attack skipped: no eligible nodes
+
+[Step 286/366] Independent text attack skipped: no eligible nodes
+
+[Step 287/366] Independent text attack skipped: no eligible nodes
+
+[Step 288/366] Independent text attack skipped: no eligible nodes
+
+[Step 289/366] Independent text attack skipped: no eligible nodes
+
+[Step 290/366] Independent text attack skipped: no eligible nodes
+
+[Step 291/366] Independent text attack skipped: no eligible nodes
+
+[Step 292/366] Independent text attack skipped: no eligible nodes
+
+[Step 293/366] Independent text attack skipped: no eligible nodes
+
+[Step 294/366] Independent text attack skipped: no eligible nodes
+
+[Step 295/366] Independent text attack skipped: no eligible nodes
+
+[Step 296/366] Independent text attack skipped: no eligible nodes
+
+[Step 297/366] Independent text attack skipped: no eligible nodes
+
+[Step 298/366] Independent text attack skipped: no eligible nodes
+
+[Step 299/366] Independent text attack skipped: no eligible nodes
+
+[Step 300/366] Independent text attack skipped: no eligible nodes
+
+[Step 301/366] Independent text attack skipped: no eligible nodes
+
+[Step 302/366] Independent text attack skipped: no eligible nodes
+
+[Step 303/366] Independent text attack skipped: no eligible nodes
+
+[Step 304/366] Independent text attack skipped: no eligible nodes
+
+[Step 305/366] Independent text attack skipped: no eligible nodes
+
+[Step 306/366] Independent text attack skipped: no eligible nodes
+
+[Step 307/366] Independent text attack skipped: no eligible nodes
+
+[Step 308/366] Independent text attack skipped: no eligible nodes
+
+[Step 309/366] Independent text attack skipped: no eligible nodes
+
+[Step 310/366] Independent text attack skipped: no eligible nodes
+
+[Step 311/366] Independent text attack skipped: no eligible nodes
+
+[Step 312/366] Independent text attack skipped: no eligible nodes
+
+[Step 313/366] Independent text attack skipped: no eligible nodes
+
+[Step 314/366] Independent text attack skipped: no eligible nodes
+
+[Step 315/366] Independent text attack skipped: no eligible nodes
+
+[Step 316/366] Independent text attack skipped: no eligible nodes
+
+[Step 317/366] Independent text attack skipped: no eligible nodes
+
+[Step 318/366] Independent text attack skipped: no eligible nodes
+
+[Step 319/366] Independent text attack skipped: no eligible nodes
+
+[Step 320/366] Independent text attack skipped: no eligible nodes
+
+[Step 321/366] Independent text attack skipped: no eligible nodes
+
+[Step 322/366] Independent text attack skipped: no eligible nodes
+
+[Step 323/366] Independent text attack skipped: no eligible nodes
+
+[Step 324/366] Independent text attack skipped: no eligible nodes
+
+[Step 325/366] Independent text attack skipped: no eligible nodes
+
+[Step 326/366] Independent text attack skipped: no eligible nodes
+
+[Step 327/366] Independent text attack skipped: no eligible nodes
+
+[Step 328/366] Independent text attack skipped: no eligible nodes
+
+[Step 329/366] Independent text attack skipped: no eligible nodes
+
+[Step 330/366] Independent text attack skipped: no eligible nodes
+
+[Step 331/366] Independent text attack skipped: no eligible nodes
+
+[Step 332/366] Independent text attack skipped: no eligible nodes
+
+[Step 333/366] Independent text attack skipped: no eligible nodes
+
+[Step 334/366] Independent text attack skipped: no eligible nodes
+
+[Step 335/366] Independent text attack skipped: no eligible nodes
+
+[Step 336/366] Independent text attack skipped: no eligible nodes
+
+[Step 337/366] Independent text attack skipped: no eligible nodes
+
+[Step 338/366] Independent text attack skipped: no eligible nodes
+
+[Step 339/366] Independent text attack skipped: no eligible nodes
+
+[Step 340/366] Independent text attack skipped: no eligible nodes
+
+[Step 341/366] Independent text attack skipped: no eligible nodes
+
+[Step 342/366] Independent text attack skipped: no eligible nodes
+
+[Step 343/366] Independent text attack skipped: no eligible nodes
+
+[Step 344/366] Independent text attack skipped: no eligible nodes
+
+[Step 345/366] Independent text attack skipped: no eligible nodes
+
+[Step 346/366] Independent text attack skipped: no eligible nodes
+
+[Step 347/366] Independent text attack skipped: no eligible nodes
+
+[Step 348/366] Independent text attack skipped: no eligible nodes
+
+[Step 349/366] Independent text attack skipped: no eligible nodes
+
+[Step 350/366] Independent text attack skipped: no eligible nodes
+
+[Step 351/366] Independent text attack skipped: no eligible nodes
+
+[Step 352/366] Independent text attack skipped: no eligible nodes
+
+[Step 353/366] Independent text attack skipped: no eligible nodes
+
+[Step 354/366] Independent text attack skipped: no eligible nodes
+
+[Step 355/366] Independent text attack skipped: no eligible nodes
+
+[Step 356/366] Independent text attack skipped: no eligible nodes
+
+[Step 357/366] Independent text attack skipped: no eligible nodes
+
+[Step 358/366] Independent text attack skipped: no eligible nodes
+
+[Step 359/366] Independent text attack skipped: no eligible nodes
+
+[Step 360/366] Independent text attack skipped: no eligible nodes
+
+[Step 361/366] Independent text attack skipped: no eligible nodes
+
+[Step 362/366] Independent text attack skipped: no eligible nodes
+
+[Step 363/366] Independent text attack skipped: no eligible nodes
+
+[Step 364/366] Independent text attack skipped: no eligible nodes
+
+[Step 365/366] Independent text attack skipped: no eligible nodes
+
+[Step 366/366] Independent text attack skipped: no eligible nodes
+
+Independent attack completed: Structure perturbations=366, attribute perturbations selected independently
+
+============================================================
+📊 Evaluation Results
+============================================================
+
+=== Clean graph ===
+Clean graph results: loss= 1.2029 accuracy= 0.7241
+
+=== Edge-only attack ===
+Edge-only attack results: loss= 1.3287 accuracy= 0.6798
+
+=== Feature-only attack ===
+Feature-only attack results: loss= 1.2283 accuracy= 0.6998
+
+=== Combined attack (edge + feature) ===
+Combined attack results: loss= 1.3381 accuracy= 0.6593
+
+============================================================
+📈 Attack Performance Summary
+============================================================
+  Clean accuracy:         0.7241
+  Edge attack accuracy:   0.6798 (drop: 0.0442)
+  Feature attack accuracy: 0.6998 (drop: 0.0242)
+  Combined accuracy:      0.6593 (drop: 0.0648)
+  Misclassification:      0.3407
+============================================================
+

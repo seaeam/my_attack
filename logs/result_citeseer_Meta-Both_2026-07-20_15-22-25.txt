@@ -1,0 +1,922 @@
+Loading citeseer dataset...
+Selecting 1 largest connected components
+(2110, 3703) (1,) (2110, 2110) 210 211 1688
+Test set results: loss= 1.7555 accuracy= 0.7358
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+⚠️ BoW vocabulary at ./bow_cache/citeseer.pkl has 500 tokens but the feature dimension is 3703; using explicit fallback feature vocabulary with 3703 tokens.
+Vocab size: 3703, Feature dim: 3703
+🦙 Detected Ollama - using model: llama3.2:1b-instruct-fp16
+Initialized GPT client with model: llama3.2:1b-instruct-fp16
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 366 edges
+  Perturbation rate: 10.0%
+  Attack mode: Meta-Both
+  Structure search: method=gb, level=2, step=1, miter=10, lr=0.01
+  Global PPR: ratio=0.10, alpha=0.15, iters=30, seed=degree, label_w=0.0
+  Structure features: frozen to original features
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.05, alpha=0.2, iters=25, budget=15, per_step=None, max_visits=1, candidate=local_ae_ppr, hops=2, cluster=2-8, sim>=0.85, cdl_topk=10, cluster_attr_topk=10, max_added=20
+
+
+[Feature step 1/366] seeds=[1375, 1229], selected=212/212, exhausted=0
+🔥 Text Attack: 212 nodes grouped into 47 clusters (min/avg/max = 2/4.5/8).
+Text Attack Completion: targets=212, template_attempts=47, template_successes=47, template_failures=0, cache_hits=0, feature_writes=212, feature_changes=212, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 212/212, LLM Calls: 47, Cache Hits: 0
+
+[Feature step 2/366] seeds=[1029, 1106], selected=142/197, exhausted=55
+🔥 Text Attack: 142 nodes grouped into 28 clusters (min/avg/max = 2/5.1/8).
+Text Attack Completion: targets=142, template_attempts=28, template_successes=28, template_failures=0, cache_hits=0, feature_writes=142, feature_changes=142, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 142/142, LLM Calls: 28, Cache Hits: 0
+
+[Feature step 3/366] seeds=[911, 1574], selected=202/212, exhausted=10
+🔥 Text Attack: 202 nodes grouped into 40 clusters (min/avg/max = 2/5.0/8).
+Text Attack Completion: targets=202, template_attempts=40, template_successes=40, template_failures=0, cache_hits=0, feature_writes=202, feature_changes=202, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 202/202, LLM Calls: 40, Cache Hits: 0
+
+[Feature step 4/366] seeds=[1320, 321], selected=122/209, exhausted=87
+🔥 Text Attack: 122 nodes grouped into 26 clusters (min/avg/max = 2/4.7/8).
+Text Attack Completion: targets=122, template_attempts=26, template_successes=26, template_failures=0, cache_hits=0, feature_writes=122, feature_changes=122, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 122/122, LLM Calls: 26, Cache Hits: 0
+
+[Feature step 5/366] seeds=[2053, 882], selected=65/106, exhausted=41
+🔥 Text Attack: 65 nodes grouped into 14 clusters (min/avg/max = 2/4.6/8).
+Text Attack Completion: targets=65, template_attempts=14, template_successes=14, template_failures=0, cache_hits=0, feature_writes=65, feature_changes=65, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 65/65, LLM Calls: 14, Cache Hits: 0
+
+[Feature step 6/366] seeds=[23, 1900], selected=110/212, exhausted=102
+🔥 Text Attack: 110 nodes grouped into 19 clusters (min/avg/max = 2/5.8/8).
+Text Attack Completion: targets=110, template_attempts=19, template_successes=19, template_failures=0, cache_hits=0, feature_writes=110, feature_changes=110, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 110/110, LLM Calls: 19, Cache Hits: 0
+
+[Feature step 7/366] seeds=[1296, 303], selected=66/106, exhausted=40
+🔥 Text Attack: 66 nodes grouped into 13 clusters (min/avg/max = 2/5.1/8).
+Text Attack Completion: targets=66, template_attempts=13, template_successes=13, template_failures=0, cache_hits=0, feature_writes=66, feature_changes=66, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 66/66, LLM Calls: 13, Cache Hits: 0
+
+[Feature step 8/366] seeds=[432, 1605], selected=73/200, exhausted=127
+🔥 Text Attack: 73 nodes grouped into 16 clusters (min/avg/max = 2/4.6/8).
+Text Attack Completion: targets=73, template_attempts=16, template_successes=16, template_failures=0, cache_hits=0, feature_writes=73, feature_changes=73, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 73/73, LLM Calls: 16, Cache Hits: 0
+
+[Feature step 9/366] seeds=[206, 1004], selected=151/205, exhausted=54
+🔥 Text Attack: 151 nodes grouped into 32 clusters (min/avg/max = 2/4.7/8).
+Text Attack Completion: targets=151, template_attempts=32, template_successes=32, template_failures=0, cache_hits=0, feature_writes=151, feature_changes=151, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 151/151, LLM Calls: 32, Cache Hits: 0
+
+[Feature step 10/366] seeds=[1156, 949], selected=116/210, exhausted=94
+🔥 Text Attack: 116 nodes grouped into 24 clusters (min/avg/max = 2/4.8/8).
+Text Attack Completion: targets=116, template_attempts=24, template_successes=24, template_failures=0, cache_hits=0, feature_writes=116, feature_changes=116, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 116/116, LLM Calls: 24, Cache Hits: 0
+
+[Feature step 11/366] seeds=[1027, 1416], selected=119/203, exhausted=84
+🔥 Text Attack: 119 nodes grouped into 27 clusters (min/avg/max = 2/4.4/8).
+Text Attack Completion: targets=119, template_attempts=27, template_successes=27, template_failures=0, cache_hits=0, feature_writes=119, feature_changes=119, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 119/119, LLM Calls: 27, Cache Hits: 0
+
+[Feature step 12/366] seeds=[1622, 1621], selected=45/107, exhausted=62
+🔥 Text Attack: 45 nodes grouped into 9 clusters (min/avg/max = 2/5.0/7).
+Text Attack Completion: targets=45, template_attempts=9, template_successes=9, template_failures=0, cache_hits=0, feature_writes=45, feature_changes=45, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 45/45, LLM Calls: 9, Cache Hits: 0
+
+[Feature step 13/366] seeds=[1467, 1465], selected=5/107, exhausted=102
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+Text Attack Completion: targets=5, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=5, feature_changes=5, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+[Feature step 14/366] seeds=[141, 1107], selected=22/207, exhausted=185
+🔥 Text Attack: 22 nodes grouped into 4 clusters (min/avg/max = 2/5.5/8).
+Text Attack Completion: targets=22, template_attempts=4, template_successes=4, template_failures=0, cache_hits=0, feature_writes=22, feature_changes=22, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 22/22, LLM Calls: 4, Cache Hits: 0
+
+[Feature step 15/366] seeds=[582, 1009], selected=76/212, exhausted=136
+🔥 Text Attack: 76 nodes grouped into 14 clusters (min/avg/max = 2/5.4/8).
+Text Attack Completion: targets=76, template_attempts=14, template_successes=14, template_failures=0, cache_hits=0, feature_writes=76, feature_changes=76, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 76/76, LLM Calls: 14, Cache Hits: 0
+
+[Feature step 16/366] seeds=[822, 1117], selected=84/212, exhausted=128
+🔥 Text Attack: 84 nodes grouped into 17 clusters (min/avg/max = 2/4.9/8).
+Text Attack Completion: targets=84, template_attempts=17, template_successes=17, template_failures=0, cache_hits=0, feature_writes=84, feature_changes=84, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 84/84, LLM Calls: 17, Cache Hits: 0
+
+[Feature step 17/366] seeds=[1851, 1850], selected=12/106, exhausted=94
+🔥 Text Attack: 12 nodes grouped into 3 clusters (min/avg/max = 3/4.0/5).
+Text Attack Completion: targets=12, template_attempts=3, template_successes=3, template_failures=0, cache_hits=0, feature_writes=12, feature_changes=12, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 3, Cache Hits: 0
+
+[Feature step 18/366] seeds=[2028, 5], selected=54/212, exhausted=158
+🔥 Text Attack: 54 nodes grouped into 10 clusters (min/avg/max = 3/5.4/8).
+Text Attack Completion: targets=54, template_attempts=10, template_successes=10, template_failures=0, cache_hits=0, feature_writes=54, feature_changes=54, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 54/54, LLM Calls: 10, Cache Hits: 0
+
+[Feature step 19/366] seeds=[1650, 219], selected=52/210, exhausted=158
+🔥 Text Attack: 52 nodes grouped into 11 clusters (min/avg/max = 2/4.7/8).
+Text Attack Completion: targets=52, template_attempts=11, template_successes=11, template_failures=0, cache_hits=0, feature_writes=52, feature_changes=52, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 52/52, LLM Calls: 11, Cache Hits: 0
+
+[Feature step 20/366] seeds=[1787, 537], selected=77/173, exhausted=96
+🔥 Text Attack: 77 nodes grouped into 16 clusters (min/avg/max = 2/4.8/8).
+Text Attack Completion: targets=77, template_attempts=16, template_successes=16, template_failures=0, cache_hits=0, feature_writes=77, feature_changes=77, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 77/77, LLM Calls: 16, Cache Hits: 0
+
+[Feature step 21/366] seeds=[143, 1519], selected=32/211, exhausted=179
+🔥 Text Attack: 32 nodes grouped into 8 clusters (min/avg/max = 2/4.0/6).
+Text Attack Completion: targets=32, template_attempts=8, template_successes=8, template_failures=0, cache_hits=0, feature_writes=32, feature_changes=32, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 8, Cache Hits: 0
+
+[Feature step 22/366] seeds=[1495, 160], selected=59/204, exhausted=145
+🔥 Text Attack: 59 nodes grouped into 12 clusters (min/avg/max = 2/4.9/8).
+Text Attack Completion: targets=59, template_attempts=12, template_successes=12, template_failures=0, cache_hits=0, feature_writes=59, feature_changes=59, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 59/59, LLM Calls: 12, Cache Hits: 0
+
+[Feature step 23/366] seeds=[1992, 1225], selected=22/211, exhausted=189
+🔥 Text Attack: 22 nodes grouped into 5 clusters (min/avg/max = 2/4.4/7).
+Text Attack Completion: targets=22, template_attempts=5, template_successes=5, template_failures=0, cache_hits=0, feature_writes=22, feature_changes=22, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 22/22, LLM Calls: 5, Cache Hits: 0
+
+[Feature step 24/366] seeds=[2094, 2097], selected=11/106, exhausted=95
+🔥 Text Attack: 11 nodes grouped into 2 clusters (min/avg/max = 5/5.5/6).
+Text Attack Completion: targets=11, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=11, feature_changes=11, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 2, Cache Hits: 0
+
+[Feature step 25/366] seeds=[788, 209], selected=33/204, exhausted=171
+🔥 Text Attack: 33 nodes grouped into 6 clusters (min/avg/max = 3/5.5/7).
+Text Attack Completion: targets=33, template_attempts=6, template_successes=6, template_failures=0, cache_hits=0, feature_writes=33, feature_changes=33, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 33/33, LLM Calls: 6, Cache Hits: 0
+
+[Feature step 26/366] seeds=[865, 526], selected=8/212, exhausted=204
+🔥 Text Attack: 8 nodes grouped into 1 clusters (min/avg/max = 8/8.0/8).
+Text Attack Completion: targets=8, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=8, feature_changes=8, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 8/8, LLM Calls: 1, Cache Hits: 0
+
+[Feature step 27/366] seeds=[82, 1657], selected=4/106, exhausted=102
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+Text Attack Completion: targets=4, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=4, feature_changes=4, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+[Feature step 28/366] seeds=[530, 1533], selected=2/212, exhausted=210
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+[Feature step 29/366] seeds=[1214, 408], selected=2/108, exhausted=106
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+[Feature step 30/366] seeds=[1053, 1624], selected=12/208, exhausted=196
+🔥 Text Attack: 12 nodes grouped into 2 clusters (min/avg/max = 6/6.0/6).
+Text Attack Completion: targets=12, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=12, feature_changes=12, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 2, Cache Hits: 0
+
+[Feature step 31/366] seeds=[751, 1324], selected=9/212, exhausted=203
+🔥 Text Attack: 9 nodes grouped into 2 clusters (min/avg/max = 2/4.5/7).
+Text Attack Completion: targets=9, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=9, feature_changes=9, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 2, Cache Hits: 0
+
+[Feature step 32/366] seeds=[1827, 251], selected=5/106, exhausted=101
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+Text Attack Completion: targets=5, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=5, feature_changes=5, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+[Feature step 33/366] seeds=[1039, 623], selected=15/209, exhausted=194
+🔥 Text Attack: 15 nodes grouped into 4 clusters (min/avg/max = 2/3.8/7).
+Text Attack Completion: targets=15, template_attempts=4, template_successes=4, template_failures=0, cache_hits=0, feature_writes=15, feature_changes=15, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 15/15, LLM Calls: 4, Cache Hits: 0
+
+[Feature step 34/366] seeds=[1717, 1137], selected=13/182, exhausted=169
+🔥 Text Attack: 13 nodes grouped into 2 clusters (min/avg/max = 6/6.5/7).
+Text Attack Completion: targets=13, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=13, feature_changes=13, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 2, Cache Hits: 0
+
+[Feature step 35/366] seeds=[1172, 165], selected=9/165, exhausted=156
+🔥 Text Attack: 9 nodes grouped into 2 clusters (min/avg/max = 3/4.5/6).
+Text Attack Completion: targets=9, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=9, feature_changes=9, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 2, Cache Hits: 0
+
+[Feature step 36/366] seeds=[611, 1446], selected=14/165, exhausted=151
+🔥 Text Attack: 14 nodes grouped into 3 clusters (min/avg/max = 3/4.7/6).
+Text Attack Completion: targets=14, template_attempts=3, template_successes=3, template_failures=0, cache_hits=0, feature_writes=14, feature_changes=14, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 14/14, LLM Calls: 3, Cache Hits: 0
+
+[Feature step 37/366] seeds=[460, 1207], selected=6/206, exhausted=200
+🔥 Text Attack: 6 nodes grouped into 1 clusters (min/avg/max = 6/6.0/6).
+Text Attack Completion: targets=6, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=6, feature_changes=6, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 1, Cache Hits: 0
+
+[Feature step 38/366] seeds=[55, 263], selected=12/212, exhausted=200
+🔥 Text Attack: 12 nodes grouped into 3 clusters (min/avg/max = 3/4.0/5).
+Text Attack Completion: targets=12, template_attempts=3, template_successes=3, template_failures=0, cache_hits=0, feature_writes=12, feature_changes=12, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 3, Cache Hits: 0
+
+[Feature step 39/366] seeds=[1778, 318], selected=20/212, exhausted=192
+🔥 Text Attack: 20 nodes grouped into 4 clusters (min/avg/max = 2/5.0/8).
+Text Attack Completion: targets=20, template_attempts=4, template_successes=4, template_failures=0, cache_hits=0, feature_writes=20, feature_changes=20, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 20/20, LLM Calls: 4, Cache Hits: 0
+
+[Feature step 40/366] seeds=[405, 148], selected=3/106, exhausted=103
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=3, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=3, feature_changes=3, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+[Feature step 41/366] seeds=[81, 1103], selected=2/212, exhausted=210
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+[Feature step 42/366] seeds=[835, 20], selected=5/202, exhausted=197
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+Text Attack Completion: targets=5, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=5, feature_changes=5, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+[Feature step 43/366] seeds=[867, 849], selected=4/209, exhausted=205
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+Text Attack Completion: targets=4, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=4, feature_changes=4, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+[Feature step 44/366] seeds=[573, 1270], selected=3/106, exhausted=103
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=3, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=3, feature_changes=3, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+[Feature step 45/366] skipped: no eligible nodes
+
+[Feature step 46/366] skipped: no eligible nodes
+
+[Feature step 47/366] skipped: no eligible nodes
+
+[Feature step 48/366] skipped: no eligible nodes
+
+[Feature step 49/366] skipped: no eligible nodes
+
+[Feature step 50/366] skipped: no eligible nodes
+
+[Feature step 51/366] skipped: no eligible nodes
+
+[Feature step 52/366] skipped: no eligible nodes
+
+[Feature step 53/366] skipped: no eligible nodes
+
+[Feature step 54/366] skipped: no eligible nodes
+
+[Feature step 55/366] skipped: no eligible nodes
+
+[Feature step 56/366] skipped: no eligible nodes
+
+[Feature step 57/366] skipped: no eligible nodes
+
+[Feature step 58/366] skipped: no eligible nodes
+
+[Feature step 59/366] skipped: no eligible nodes
+
+[Feature step 60/366] skipped: no eligible nodes
+
+[Feature step 61/366] skipped: no eligible nodes
+
+[Feature step 62/366] skipped: no eligible nodes
+
+[Feature step 63/366] skipped: no eligible nodes
+
+[Feature step 64/366] skipped: no eligible nodes
+
+[Feature step 65/366] skipped: no eligible nodes
+
+[Feature step 66/366] skipped: no eligible nodes
+
+[Feature step 67/366] skipped: no eligible nodes
+
+[Feature step 68/366] skipped: no eligible nodes
+
+[Feature step 69/366] skipped: no eligible nodes
+
+[Feature step 70/366] skipped: no eligible nodes
+
+[Feature step 71/366] skipped: no eligible nodes
+
+[Feature step 72/366] skipped: no eligible nodes
+
+[Feature step 73/366] skipped: no eligible nodes
+
+[Feature step 74/366] skipped: no eligible nodes
+
+[Feature step 75/366] skipped: no eligible nodes
+
+[Feature step 76/366] skipped: no eligible nodes
+
+[Feature step 77/366] skipped: no eligible nodes
+
+[Feature step 78/366] skipped: no eligible nodes
+
+[Feature step 79/366] skipped: no eligible nodes
+
+[Feature step 80/366] skipped: no eligible nodes
+
+[Feature step 81/366] skipped: no eligible nodes
+
+[Feature step 82/366] skipped: no eligible nodes
+
+[Feature step 83/366] skipped: no eligible nodes
+
+[Feature step 84/366] skipped: no eligible nodes
+
+[Feature step 85/366] skipped: no eligible nodes
+
+[Feature step 86/366] skipped: no eligible nodes
+
+[Feature step 87/366] skipped: no eligible nodes
+
+[Feature step 88/366] skipped: no eligible nodes
+
+[Feature step 89/366] skipped: no eligible nodes
+
+[Feature step 90/366] skipped: no eligible nodes
+
+[Feature step 91/366] skipped: no eligible nodes
+
+[Feature step 92/366] skipped: no eligible nodes
+
+[Feature step 93/366] skipped: no eligible nodes
+
+[Feature step 94/366] skipped: no eligible nodes
+
+[Feature step 95/366] skipped: no eligible nodes
+
+[Feature step 96/366] skipped: no eligible nodes
+
+[Feature step 97/366] skipped: no eligible nodes
+
+[Feature step 98/366] skipped: no eligible nodes
+
+[Feature step 99/366] skipped: no eligible nodes
+
+[Feature step 100/366] skipped: no eligible nodes
+
+[Feature step 101/366] skipped: no eligible nodes
+
+[Feature step 102/366] skipped: no eligible nodes
+
+[Feature step 103/366] skipped: no eligible nodes
+
+[Feature step 104/366] skipped: no eligible nodes
+
+[Feature step 105/366] skipped: no eligible nodes
+
+[Feature step 106/366] skipped: no eligible nodes
+
+[Feature step 107/366] skipped: no eligible nodes
+
+[Feature step 108/366] skipped: no eligible nodes
+
+[Feature step 109/366] skipped: no eligible nodes
+
+[Feature step 110/366] skipped: no eligible nodes
+
+[Feature step 111/366] skipped: no eligible nodes
+
+[Feature step 112/366] skipped: no eligible nodes
+
+[Feature step 113/366] skipped: no eligible nodes
+
+[Feature step 114/366] skipped: no eligible nodes
+
+[Feature step 115/366] skipped: no eligible nodes
+
+[Feature step 116/366] skipped: no eligible nodes
+
+[Feature step 117/366] skipped: no eligible nodes
+
+[Feature step 118/366] skipped: no eligible nodes
+
+[Feature step 119/366] skipped: no eligible nodes
+
+[Feature step 120/366] skipped: no eligible nodes
+
+[Feature step 121/366] skipped: no eligible nodes
+
+[Feature step 122/366] skipped: no eligible nodes
+
+[Feature step 123/366] skipped: no eligible nodes
+
+[Feature step 124/366] skipped: no eligible nodes
+
+[Feature step 125/366] skipped: no eligible nodes
+
+[Feature step 126/366] skipped: no eligible nodes
+
+[Feature step 127/366] skipped: no eligible nodes
+
+[Feature step 128/366] skipped: no eligible nodes
+
+[Feature step 129/366] skipped: no eligible nodes
+
+[Feature step 130/366] skipped: no eligible nodes
+
+[Feature step 131/366] skipped: no eligible nodes
+
+[Feature step 132/366] skipped: no eligible nodes
+
+[Feature step 133/366] skipped: no eligible nodes
+
+[Feature step 134/366] skipped: no eligible nodes
+
+[Feature step 135/366] skipped: no eligible nodes
+
+[Feature step 136/366] skipped: no eligible nodes
+
+[Feature step 137/366] skipped: no eligible nodes
+
+[Feature step 138/366] skipped: no eligible nodes
+
+[Feature step 139/366] skipped: no eligible nodes
+
+[Feature step 140/366] skipped: no eligible nodes
+
+[Feature step 141/366] skipped: no eligible nodes
+
+[Feature step 142/366] skipped: no eligible nodes
+
+[Feature step 143/366] skipped: no eligible nodes
+
+[Feature step 144/366] skipped: no eligible nodes
+
+[Feature step 145/366] skipped: no eligible nodes
+
+[Feature step 146/366] skipped: no eligible nodes
+
+[Feature step 147/366] skipped: no eligible nodes
+
+[Feature step 148/366] skipped: no eligible nodes
+
+[Feature step 149/366] skipped: no eligible nodes
+
+[Feature step 150/366] skipped: no eligible nodes
+
+[Feature step 151/366] skipped: no eligible nodes
+
+[Feature step 152/366] skipped: no eligible nodes
+
+[Feature step 153/366] skipped: no eligible nodes
+
+[Feature step 154/366] skipped: no eligible nodes
+
+[Feature step 155/366] skipped: no eligible nodes
+
+[Feature step 156/366] skipped: no eligible nodes
+
+[Feature step 157/366] skipped: no eligible nodes
+
+[Feature step 158/366] skipped: no eligible nodes
+
+[Feature step 159/366] skipped: no eligible nodes
+
+[Feature step 160/366] skipped: no eligible nodes
+
+[Feature step 161/366] skipped: no eligible nodes
+
+[Feature step 162/366] skipped: no eligible nodes
+
+[Feature step 163/366] skipped: no eligible nodes
+
+[Feature step 164/366] skipped: no eligible nodes
+
+[Feature step 165/366] skipped: no eligible nodes
+
+[Feature step 166/366] skipped: no eligible nodes
+
+[Feature step 167/366] skipped: no eligible nodes
+
+[Feature step 168/366] skipped: no eligible nodes
+
+[Feature step 169/366] skipped: no eligible nodes
+
+[Feature step 170/366] skipped: no eligible nodes
+
+[Feature step 171/366] skipped: no eligible nodes
+
+[Feature step 172/366] skipped: no eligible nodes
+
+[Feature step 173/366] skipped: no eligible nodes
+
+[Feature step 174/366] skipped: no eligible nodes
+
+[Feature step 175/366] skipped: no eligible nodes
+
+[Feature step 176/366] skipped: no eligible nodes
+
+[Feature step 177/366] skipped: no eligible nodes
+
+[Feature step 178/366] skipped: no eligible nodes
+
+[Feature step 179/366] skipped: no eligible nodes
+
+[Feature step 180/366] skipped: no eligible nodes
+
+[Feature step 181/366] skipped: no eligible nodes
+
+[Feature step 182/366] skipped: no eligible nodes
+
+[Feature step 183/366] skipped: no eligible nodes
+
+[Feature step 184/366] skipped: no eligible nodes
+
+[Feature step 185/366] skipped: no eligible nodes
+
+[Feature step 186/366] skipped: no eligible nodes
+
+[Feature step 187/366] skipped: no eligible nodes
+
+[Feature step 188/366] skipped: no eligible nodes
+
+[Feature step 189/366] skipped: no eligible nodes
+
+[Feature step 190/366] skipped: no eligible nodes
+
+[Feature step 191/366] skipped: no eligible nodes
+
+[Feature step 192/366] skipped: no eligible nodes
+
+[Feature step 193/366] skipped: no eligible nodes
+
+[Feature step 194/366] skipped: no eligible nodes
+
+[Feature step 195/366] skipped: no eligible nodes
+
+[Feature step 196/366] skipped: no eligible nodes
+
+[Feature step 197/366] skipped: no eligible nodes
+
+[Feature step 198/366] skipped: no eligible nodes
+
+[Feature step 199/366] skipped: no eligible nodes
+
+[Feature step 200/366] skipped: no eligible nodes
+
+[Feature step 201/366] skipped: no eligible nodes
+
+[Feature step 202/366] skipped: no eligible nodes
+
+[Feature step 203/366] skipped: no eligible nodes
+
+[Feature step 204/366] skipped: no eligible nodes
+
+[Feature step 205/366] skipped: no eligible nodes
+
+[Feature step 206/366] skipped: no eligible nodes
+
+[Feature step 207/366] skipped: no eligible nodes
+
+[Feature step 208/366] skipped: no eligible nodes
+
+[Feature step 209/366] skipped: no eligible nodes
+
+[Feature step 210/366] skipped: no eligible nodes
+
+[Feature step 211/366] skipped: no eligible nodes
+
+[Feature step 212/366] skipped: no eligible nodes
+
+[Feature step 213/366] skipped: no eligible nodes
+
+[Feature step 214/366] skipped: no eligible nodes
+
+[Feature step 215/366] skipped: no eligible nodes
+
+[Feature step 216/366] skipped: no eligible nodes
+
+[Feature step 217/366] skipped: no eligible nodes
+
+[Feature step 218/366] skipped: no eligible nodes
+
+[Feature step 219/366] skipped: no eligible nodes
+
+[Feature step 220/366] skipped: no eligible nodes
+
+[Feature step 221/366] skipped: no eligible nodes
+
+[Feature step 222/366] skipped: no eligible nodes
+
+[Feature step 223/366] skipped: no eligible nodes
+
+[Feature step 224/366] skipped: no eligible nodes
+
+[Feature step 225/366] skipped: no eligible nodes
+
+[Feature step 226/366] skipped: no eligible nodes
+
+[Feature step 227/366] skipped: no eligible nodes
+
+[Feature step 228/366] skipped: no eligible nodes
+
+[Feature step 229/366] skipped: no eligible nodes
+
+[Feature step 230/366] skipped: no eligible nodes
+
+[Feature step 231/366] skipped: no eligible nodes
+
+[Feature step 232/366] skipped: no eligible nodes
+
+[Feature step 233/366] skipped: no eligible nodes
+
+[Feature step 234/366] skipped: no eligible nodes
+
+[Feature step 235/366] skipped: no eligible nodes
+
+[Feature step 236/366] skipped: no eligible nodes
+
+[Feature step 237/366] skipped: no eligible nodes
+
+[Feature step 238/366] skipped: no eligible nodes
+
+[Feature step 239/366] skipped: no eligible nodes
+
+[Feature step 240/366] skipped: no eligible nodes
+
+[Feature step 241/366] skipped: no eligible nodes
+
+[Feature step 242/366] skipped: no eligible nodes
+
+[Feature step 243/366] skipped: no eligible nodes
+
+[Feature step 244/366] skipped: no eligible nodes
+
+[Feature step 245/366] skipped: no eligible nodes
+
+[Feature step 246/366] skipped: no eligible nodes
+
+[Feature step 247/366] skipped: no eligible nodes
+
+[Feature step 248/366] skipped: no eligible nodes
+
+[Feature step 249/366] skipped: no eligible nodes
+
+[Feature step 250/366] skipped: no eligible nodes
+
+[Feature step 251/366] skipped: no eligible nodes
+
+[Feature step 252/366] skipped: no eligible nodes
+
+[Feature step 253/366] skipped: no eligible nodes
+
+[Feature step 254/366] skipped: no eligible nodes
+
+[Feature step 255/366] skipped: no eligible nodes
+
+[Feature step 256/366] skipped: no eligible nodes
+
+[Feature step 257/366] skipped: no eligible nodes
+
+[Feature step 258/366] skipped: no eligible nodes
+
+[Feature step 259/366] skipped: no eligible nodes
+
+[Feature step 260/366] skipped: no eligible nodes
+
+[Feature step 261/366] skipped: no eligible nodes
+
+[Feature step 262/366] skipped: no eligible nodes
+
+[Feature step 263/366] skipped: no eligible nodes
+
+[Feature step 264/366] skipped: no eligible nodes
+
+[Feature step 265/366] skipped: no eligible nodes
+
+[Feature step 266/366] skipped: no eligible nodes
+
+[Feature step 267/366] skipped: no eligible nodes
+
+[Feature step 268/366] skipped: no eligible nodes
+
+[Feature step 269/366] skipped: no eligible nodes
+
+[Feature step 270/366] skipped: no eligible nodes
+
+[Feature step 271/366] skipped: no eligible nodes
+
+[Feature step 272/366] skipped: no eligible nodes
+
+[Feature step 273/366] skipped: no eligible nodes
+
+[Feature step 274/366] skipped: no eligible nodes
+
+[Feature step 275/366] skipped: no eligible nodes
+
+[Feature step 276/366] skipped: no eligible nodes
+
+[Feature step 277/366] skipped: no eligible nodes
+
+[Feature step 278/366] skipped: no eligible nodes
+
+[Feature step 279/366] skipped: no eligible nodes
+
+[Feature step 280/366] skipped: no eligible nodes
+
+[Feature step 281/366] skipped: no eligible nodes
+
+[Feature step 282/366] skipped: no eligible nodes
+
+[Feature step 283/366] skipped: no eligible nodes
+
+[Feature step 284/366] skipped: no eligible nodes
+
+[Feature step 285/366] skipped: no eligible nodes
+
+[Feature step 286/366] skipped: no eligible nodes
+
+[Feature step 287/366] skipped: no eligible nodes
+
+[Feature step 288/366] skipped: no eligible nodes
+
+[Feature step 289/366] skipped: no eligible nodes
+
+[Feature step 290/366] skipped: no eligible nodes
+
+[Feature step 291/366] skipped: no eligible nodes
+
+[Feature step 292/366] skipped: no eligible nodes
+
+[Feature step 293/366] skipped: no eligible nodes
+
+[Feature step 294/366] skipped: no eligible nodes
+
+[Feature step 295/366] skipped: no eligible nodes
+
+[Feature step 296/366] skipped: no eligible nodes
+
+[Feature step 297/366] skipped: no eligible nodes
+
+[Feature step 298/366] skipped: no eligible nodes
+
+[Feature step 299/366] skipped: no eligible nodes
+
+[Feature step 300/366] skipped: no eligible nodes
+
+[Feature step 301/366] skipped: no eligible nodes
+
+[Feature step 302/366] skipped: no eligible nodes
+
+[Feature step 303/366] skipped: no eligible nodes
+
+[Feature step 304/366] skipped: no eligible nodes
+
+[Feature step 305/366] skipped: no eligible nodes
+
+[Feature step 306/366] skipped: no eligible nodes
+
+[Feature step 307/366] skipped: no eligible nodes
+
+[Feature step 308/366] skipped: no eligible nodes
+
+[Feature step 309/366] skipped: no eligible nodes
+
+[Feature step 310/366] skipped: no eligible nodes
+
+[Feature step 311/366] skipped: no eligible nodes
+
+[Feature step 312/366] skipped: no eligible nodes
+
+[Feature step 313/366] skipped: no eligible nodes
+
+[Feature step 314/366] skipped: no eligible nodes
+
+[Feature step 315/366] skipped: no eligible nodes
+
+[Feature step 316/366] skipped: no eligible nodes
+
+[Feature step 317/366] skipped: no eligible nodes
+
+[Feature step 318/366] skipped: no eligible nodes
+
+[Feature step 319/366] skipped: no eligible nodes
+
+[Feature step 320/366] skipped: no eligible nodes
+
+[Feature step 321/366] skipped: no eligible nodes
+
+[Feature step 322/366] skipped: no eligible nodes
+
+[Feature step 323/366] skipped: no eligible nodes
+
+[Feature step 324/366] skipped: no eligible nodes
+
+[Feature step 325/366] skipped: no eligible nodes
+
+[Feature step 326/366] skipped: no eligible nodes
+
+[Feature step 327/366] skipped: no eligible nodes
+
+[Feature step 328/366] skipped: no eligible nodes
+
+[Feature step 329/366] skipped: no eligible nodes
+
+[Feature step 330/366] skipped: no eligible nodes
+
+[Feature step 331/366] skipped: no eligible nodes
+
+[Feature step 332/366] skipped: no eligible nodes
+
+[Feature step 333/366] skipped: no eligible nodes
+
+[Feature step 334/366] skipped: no eligible nodes
+
+[Feature step 335/366] skipped: no eligible nodes
+
+[Feature step 336/366] skipped: no eligible nodes
+
+[Feature step 337/366] skipped: no eligible nodes
+
+[Feature step 338/366] skipped: no eligible nodes
+
+[Feature step 339/366] skipped: no eligible nodes
+
+[Feature step 340/366] skipped: no eligible nodes
+
+[Feature step 341/366] skipped: no eligible nodes
+
+[Feature step 342/366] skipped: no eligible nodes
+
+[Feature step 343/366] skipped: no eligible nodes
+
+[Feature step 344/366] skipped: no eligible nodes
+
+[Feature step 345/366] skipped: no eligible nodes
+
+[Feature step 346/366] skipped: no eligible nodes
+
+[Feature step 347/366] skipped: no eligible nodes
+
+[Feature step 348/366] skipped: no eligible nodes
+
+[Feature step 349/366] skipped: no eligible nodes
+
+[Feature step 350/366] skipped: no eligible nodes
+
+[Feature step 351/366] skipped: no eligible nodes
+
+[Feature step 352/366] skipped: no eligible nodes
+
+[Feature step 353/366] skipped: no eligible nodes
+
+[Feature step 354/366] skipped: no eligible nodes
+
+[Feature step 355/366] skipped: no eligible nodes
+
+[Feature step 356/366] skipped: no eligible nodes
+
+[Feature step 357/366] skipped: no eligible nodes
+
+[Feature step 358/366] skipped: no eligible nodes
+
+[Feature step 359/366] skipped: no eligible nodes
+
+[Feature step 360/366] skipped: no eligible nodes
+
+[Feature step 361/366] skipped: no eligible nodes
+
+[Feature step 362/366] skipped: no eligible nodes
+
+[Feature step 363/366] skipped: no eligible nodes
+
+[Feature step 364/366] skipped: no eligible nodes
+
+[Feature step 365/366] skipped: no eligible nodes
+
+[Feature step 366/366] skipped: no eligible nodes
+
+Feature-only attack completed: Structure perturbations=0, attribute rounds=366
+
+============================================================
+📊 Evaluation Results
+============================================================
+
+=== Clean graph ===
+Clean graph results: loss= 1.1498 accuracy= 0.7441
+
+=== Edge-only attack ===
+Edge-only attack results: loss= 1.1702 accuracy= 0.7414
+
+=== Feature-only attack ===
+Feature-only attack results: loss= 1.1434 accuracy= 0.7278
+
+=== Combined attack (edge + feature) ===
+Combined attack results: loss= 1.1578 accuracy= 0.7330
+
+============================================================
+📈 Attack Performance Summary
+============================================================
+  Clean accuracy:         0.7441
+  Edge attack accuracy:   0.7414 (drop: 0.0026)
+  Feature attack accuracy: 0.7278 (drop: 0.0163)
+  Combined accuracy:      0.7330 (drop: 0.0111)
+  Misclassification:      0.2670
+============================================================
+

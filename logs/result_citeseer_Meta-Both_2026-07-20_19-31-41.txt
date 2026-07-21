@@ -1,0 +1,57 @@
+Loading citeseer dataset...
+Selecting 1 largest connected components
+(2110, 3703) (1,) (2110, 2110) 210 211 1688
+Test set results: loss= 2.0000 accuracy= 0.7014
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+⚠️ BoW vocabulary at ./bow_cache/citeseer.pkl has 500 tokens but the feature dimension is 3703; using explicit fallback feature vocabulary with 3703 tokens.
+Vocab size: 3703, Feature dim: 3703
+🦙 Detected Ollama - using model: llama3.2:1b-instruct-fp16
+Initialized GPT client with model: llama3.2:1b-instruct-fp16
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 183 edges
+  Perturbation rate: 5.0%
+  Attack mode: Meta-Both
+  Structure search: method=gb, level=2, step=1, miter=10, lr=0.01
+  Global PPR: ratio=0.10, alpha=0.15, iters=30, seed=degree, label_w=0.0
+  Structure features: frozen to original features
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.05, alpha=0.2, iters=25, budget=15, per_step=None, max_visits=1, candidate=local_ae_ppr, hops=2, cluster=2-8, sim>=0.85, cdl_topk=10, cluster_attr_topk=10, max_added=20
+
+
+🎯 [Step 1/183] Text attack: 106 new nodes (skipped 0 already attacked)
+🔥 Text Attack: 106 nodes grouped into 22 clusters (min/avg/max = 2/4.8/8).
+Text Attack Completion: targets=106, template_attempts=22, template_successes=22, template_failures=0, cache_hits=0, feature_writes=106, feature_changes=106, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 106/106, LLM Calls: 22, Cache Hits: 0
+
+🎯 [Step 2/183] Text attack: 85 new nodes (skipped 21 already attacked)
+🔥 Text Attack: 85 nodes grouped into 16 clusters (min/avg/max = 2/5.3/8).
+Text Attack Completion: targets=85, template_attempts=16, template_successes=16, template_failures=0, cache_hits=0, feature_writes=85, feature_changes=85, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 85/85, LLM Calls: 16, Cache Hits: 0
+
+🎯 [Step 3/183] Text attack: 94 new nodes (skipped 12 already attacked)
+🔥 Text Attack: 94 nodes grouped into 20 clusters (min/avg/max = 2/4.7/8).
+Text Attack Completion: targets=94, template_attempts=20, template_successes=20, template_failures=0, cache_hits=0, feature_writes=94, feature_changes=94, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 94/94, LLM Calls: 20, Cache Hits: 0
+
+🎯 [Step 4/183] Text attack: 77 new nodes (skipped 29 already attacked)
+🔥 Text Attack: 77 nodes grouped into 14 clusters (min/avg/max = 2/5.5/8).
+Text Attack Completion: targets=77, template_attempts=14, template_successes=14, template_failures=0, cache_hits=0, feature_writes=77, feature_changes=77, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 77/77, LLM Calls: 14, Cache Hits: 0
+
+🎯 [Step 5/183] Text attack: 35 new nodes (skipped 71 already attacked)
+🔥 Text Attack: 35 nodes grouped into 6 clusters (min/avg/max = 4/5.8/8).
+Text Attack Completion: targets=35, template_attempts=6, template_successes=6, template_failures=0, cache_hits=0, feature_writes=35, feature_changes=35, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 35/35, LLM Calls: 6, Cache Hits: 0
+
+🎯 [Step 6/183] Text attack: 19 new nodes (skipped 87 already attacked)
+🔥 Text Attack: 19 nodes grouped into 3 clusters (min/avg/max = 6/6.3/7).
