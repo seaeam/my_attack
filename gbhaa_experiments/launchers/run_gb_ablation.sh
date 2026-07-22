@@ -21,6 +21,19 @@ BASE_ARGS=(
   --global_ppr_iters 30
   --global_seed_strategy degree
   --freeze_structure_features
+  --allow_fallback_vocabulary
+  --text_attack_max_visits 16
+  --text_retries 3
+  --text_budget_per_node 80
+  --text_topk_ratio 0.12
+  --text_ppr_alpha 0.28
+  --text_ppr_iters 60
+  --text_min_cluster_size 2
+  --text_max_cluster_size 4
+  --text_similarity_min 0.35
+  --text_cdl_topk 36
+  --text_cluster_attr_topk 36
+  --text_max_added_words 70
 )
 
 RUN_FLAGS=()

@@ -1,0 +1,60 @@
+============================================================
+  Ablation: Edge-Only Attack (no feature/text attack)
+============================================================
+============================================================
+  Ablation: Edge-Only Attack (no feature/text attack)
+============================================================
+Loading citeseer dataset...
+Selecting 1 largest connected components
+Loading citeseer dataset...
+Selecting 1 largest connected components
+(2110, 3703) (1,) (2110, 2110) 210 211 1688
+(2110, 3703) (1,) (2110, 2110) 210 211 1688
+Test set results: loss= 2.0000 accuracy= 0.7014
+
+  Dataset: citeseer
+  Perturbation budget: 183 edges (5.0%)
+  Attack mode: Meta-Both
+  Structure search: level=2, step=1, miter=10, lr=0.01
+  Global PPR: ratio=0.1, alpha=0.15, iters=30, seed=degree
+  Feature attack: DISABLED (edge-only ablation)
+
+Test set results: loss= 2.0000 accuracy= 0.7014
+
+  Dataset: citeseer
+  Perturbation budget: 183 edges (5.0%)
+  Attack mode: Meta-Both
+  Structure search: level=2, step=1, miter=10, lr=0.01
+  Global PPR: ratio=0.1, alpha=0.15, iters=30, seed=degree
+  Feature attack: DISABLED (edge-only ablation)
+
+
+✅ Attack completed: Structure perturbations=183 (edge-only, feature attack disabled)
+
+============================================================
+  Ablation Results: Edge-Only Attack
+============================================================
+
+
+✅ Attack completed: Structure perturbations=183 (edge-only, feature attack disabled)
+
+============================================================
+  Ablation Results: Edge-Only Attack
+============================================================
+
+Clean graph results: loss= 1.2858 accuracy= 0.7262
+Clean graph results: loss= 1.2858 accuracy= 0.7262
+Edge-only attack results: loss= 1.3787 accuracy= 0.6909
+
+============================================================
+  Clean accuracy:       0.7262
+  Edge attack accuracy: 0.6909 (drop: 0.0353)
+============================================================
+
+Edge-only attack results: loss= 1.3787 accuracy= 0.6909
+
+============================================================
+  Clean accuracy:       0.7262
+  Edge attack accuracy: 0.6909 (drop: 0.0353)
+============================================================
+

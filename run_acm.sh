@@ -28,7 +28,7 @@ ARGS=(
   --openai_api_key ollama
   --api_base_url http://localhost:11434/v1
 
-  --text_attack_max_visits 12
+  --text_attack_max_visits 16
   --text_retries 3                   # 增加重试，确保生成质量
   --text_budget_per_node 64          # 单节点属性预算
   --text_topk_ratio 0.10             # 每步属性攻击节点覆盖比例

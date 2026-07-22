@@ -27,7 +27,7 @@ BASE_ARGS=(
   --global_seed_strategy degree
   --freeze_structure_features
   --allow_fallback_vocabulary
-  --text_attack_max_visits 1
+  --text_attack_max_visits 16
   --text_retries 0
   --text_budget_per_node 15
   --text_topk_ratio 0.05

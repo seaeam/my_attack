@@ -1,15 +1,14 @@
 {
   "command": [
     "/opt/miniconda3/envs/smc/bin/python",
-    "meta_edge_only.py",
+    "-m",
+    "gbhaa_experiments.entrypoints.meta_coarsen_ablation",
     "--model",
     "Meta-Both",
     "--split_data",
     "normal",
     "--epochs",
     "200",
-    "--coarsen_method",
-    "gb",
     "--level",
     "2",
     "--step",
@@ -26,6 +25,8 @@
     "30",
     "--global_seed_strategy",
     "degree",
+    "--experiment_coarsen_method",
+    "gb",
     "--dataset",
     "citeseer",
     "--seed",
@@ -34,15 +35,15 @@
     "0.05"
   ],
   "dataset": "citeseer",
-  "description": "Structure-only GBHA.",
-  "experiment": "hybrid",
+  "description": "",
+  "experiment": "gb_ablation",
   "metrics": {
     "clean_accuracy": 0.7262,
     "edge_accuracy": 0.6909,
     "edge_drop": 0.0353,
     "structure_perturbations": 183
   },
-  "peak_rss_mib": 3776.171875,
+  "peak_rss_mib": 3790.03125,
   "primary_metric": "edge_accuracy",
   "primary_value": 0.6909,
   "ptb_rate": 0.05,
@@ -51,12 +52,12 @@
     "cpu_count": 18,
     "cuda_visible_devices": null,
     "machine": "arm64",
-    "ollama_model": "llama3.2:1b-instruct-fp16",
+    "ollama_model": null,
     "platform": "macOS-26.5.2-arm64-arm-64bit",
     "processor": "arm",
     "python": "3.11.15"
   },
   "seed": 15,
-  "variant": "edge_only",
-  "wall_time_seconds": 243.32865891698748
+  "variant": "gb",
+  "wall_time_seconds": 251.43275258300127
 }
