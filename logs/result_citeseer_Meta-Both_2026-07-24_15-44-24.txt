@@ -1,0 +1,132 @@
+Loading citeseer dataset...
+Selecting 1 largest connected components
+(2110, 3703) (1,) (2110, 2110) 210 211 1688
+Test set results: loss= 1.8624 accuracy= 0.7162
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+⚠️ BoW vocabulary at ./bow_cache/citeseer.pkl has 500 tokens but the feature dimension is 3703; using explicit fallback feature vocabulary with 3703 tokens.
+Vocab size: 3703, Feature dim: 3703
+🦙 Detected Ollama - using model: llama3.2:1b-instruct-fp16
+Initialized GPT client with model: llama3.2:1b-instruct-fp16
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 366 edges
+  Perturbation rate: 10.0%
+  Attack mode: Meta-Both
+  Structure search: method=gb, level=2, step=1, miter=10, lr=0.01
+  Global PPR: ratio=0.10, alpha=0.15, iters=30, seed=degree, label_w=0.0
+  Structure features: frozen to original features
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.12, alpha=0.28, iters=60, budget=80, per_step=None, max_visits=16, candidate=local_ae_ppr, hops=2, cluster=2-4, sim>=0.35, cdl_topk=36, cluster_attr_topk=36, max_added=70
+
+
+[Feature step 1/366] seeds=[282, 252], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 81 clusters (min/avg/max = 2/3.1/4).
+Text Attack Completion: targets=253, template_attempts=81, template_successes=81, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 81, Cache Hits: 0
+
+[Feature step 2/366] seeds=[282, 252], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 83 clusters (min/avg/max = 2/3.0/4).
+Text Attack Completion: targets=253, template_attempts=83, template_successes=83, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 83, Cache Hits: 0
+
+[Feature step 3/366] seeds=[252, 282], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 84 clusters (min/avg/max = 2/3.0/4).
+Text Attack Completion: targets=253, template_attempts=84, template_successes=84, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 84, Cache Hits: 0
+
+[Feature step 4/366] seeds=[1102, 711], selected=431/431, exhausted=0
+🔥 Text Attack: 431 nodes grouped into 141 clusters (min/avg/max = 2/3.1/4).
+Text Attack Completion: targets=431, template_attempts=141, template_successes=141, template_failures=0, cache_hits=0, feature_writes=431, feature_changes=431, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 431/431, LLM Calls: 141, Cache Hits: 0
+
+[Feature step 5/366] seeds=[610, 2001], selected=506/506, exhausted=0
+🔥 Text Attack: 506 nodes grouped into 170 clusters (min/avg/max = 2/3.0/4).
+Text Attack Completion: targets=506, template_attempts=170, template_successes=170, template_failures=0, cache_hits=0, feature_writes=506, feature_changes=506, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 506/506, LLM Calls: 170, Cache Hits: 0
+
+[Feature step 6/366] seeds=[823, 37], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 82 clusters (min/avg/max = 2/3.1/4).
+Text Attack Completion: targets=253, template_attempts=82, template_successes=82, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 82, Cache Hits: 0
+
+[Feature step 7/366] seeds=[2001, 670], selected=505/505, exhausted=0
+🔥 Text Attack: 505 nodes grouped into 170 clusters (min/avg/max = 2/3.0/4).
+Text Attack Completion: targets=505, template_attempts=170, template_successes=170, template_failures=0, cache_hits=0, feature_writes=505, feature_changes=505, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 505/505, LLM Calls: 170, Cache Hits: 0
+
+[Feature step 8/366] seeds=[282, 252], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 86 clusters (min/avg/max = 2/2.9/4).
+Text Attack Completion: targets=253, template_attempts=86, template_successes=86, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 86, Cache Hits: 0
+
+[Feature step 9/366] seeds=[252, 282], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 85 clusters (min/avg/max = 2/3.0/4).
+Text Attack Completion: targets=253, template_attempts=85, template_successes=85, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 85, Cache Hits: 0
+
+[Feature step 10/366] seeds=[282, 252], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 81 clusters (min/avg/max = 2/3.1/4).
+Text Attack Completion: targets=253, template_attempts=81, template_successes=81, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 81, Cache Hits: 0
+
+[Feature step 11/366] seeds=[282, 252], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 85 clusters (min/avg/max = 2/3.0/4).
+Text Attack Completion: targets=253, template_attempts=85, template_successes=85, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 85, Cache Hits: 0
+
+[Feature step 12/366] seeds=[1961, 282], selected=415/415, exhausted=0
+🔥 Text Attack: 415 nodes grouped into 138 clusters (min/avg/max = 2/3.0/4).
+Text Attack Completion: targets=415, template_attempts=138, template_successes=138, template_failures=0, cache_hits=0, feature_writes=415, feature_changes=415, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 415/415, LLM Calls: 138, Cache Hits: 0
+
+[Feature step 13/366] seeds=[282, 252], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 81 clusters (min/avg/max = 2/3.1/4).
+Text Attack Completion: targets=253, template_attempts=81, template_successes=81, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 81, Cache Hits: 0
+
+[Feature step 14/366] seeds=[37, 823], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 83 clusters (min/avg/max = 2/3.0/4).
+Text Attack Completion: targets=253, template_attempts=83, template_successes=83, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 83, Cache Hits: 0
+
+[Feature step 15/366] seeds=[252, 282], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 80 clusters (min/avg/max = 2/3.2/4).
+Text Attack Completion: targets=253, template_attempts=80, template_successes=80, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 80, Cache Hits: 0
+
+[Feature step 16/366] seeds=[282, 252], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 80 clusters (min/avg/max = 2/3.2/4).
+Text Attack Completion: targets=253, template_attempts=80, template_successes=80, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 80, Cache Hits: 0
+
+[Feature step 17/366] seeds=[2001, 621], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 80 clusters (min/avg/max = 2/3.2/4).
+Text Attack Completion: targets=253, template_attempts=80, template_successes=80, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 80, Cache Hits: 0
+
+[Feature step 18/366] seeds=[252, 282], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 88 clusters (min/avg/max = 2/2.9/4).
+Text Attack Completion: targets=253, template_attempts=88, template_successes=88, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 88, Cache Hits: 0
+
+[Feature step 19/366] seeds=[823, 37], selected=254/254, exhausted=0
+🔥 Text Attack: 254 nodes grouped into 83 clusters (min/avg/max = 2/3.1/4).
+Text Attack Completion: targets=254, template_attempts=83, template_successes=83, template_failures=0, cache_hits=0, feature_writes=254, feature_changes=254, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 254/254, LLM Calls: 83, Cache Hits: 0
+
+[Feature step 20/366] seeds=[37, 823], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 80 clusters (min/avg/max = 2/3.2/4).
+Text Attack Completion: targets=253, template_attempts=80, template_successes=80, template_failures=0, cache_hits=0, feature_writes=253, feature_changes=253, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 253/253, LLM Calls: 80, Cache Hits: 0
+
+[Feature step 21/366] seeds=[252, 282], selected=253/253, exhausted=0
+🔥 Text Attack: 253 nodes grouped into 85 clusters (min/avg/max = 2/3.0/4).
