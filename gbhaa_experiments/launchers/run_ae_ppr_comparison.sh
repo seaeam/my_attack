@@ -51,7 +51,7 @@ cd "$REPO_ROOT"
   --experiment ae_ppr \
   --datasets "${DATASETS[@]}" \
   --seeds 15 16 17 18 19 \
-  --ptb-rates 0.05 0.10 \
+  --ptb-rates 0.05 \
   --python "$PYTHON_BIN" \
   --llm-type gpt \
   --api-base-url "$OPENAI_BASE_URL" \
