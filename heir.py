@@ -131,6 +131,12 @@ class Heirattack(BaseAttack):
         self.text_attack_nodes = (
             None if text_attack_nodes is None else max(1, int(text_attack_nodes))
         )
+        text_attack_total_nodes = getattr(args, "text_attack_total_nodes", None)
+        self.text_attack_total_nodes = (
+            None
+            if text_attack_total_nodes is None
+            else min(self.nnodes, max(0, int(text_attack_total_nodes)))
+        )
         self.text_topk_ratio = float(getattr(args, "text_topk_ratio", 0.05))
         self.text_ppr_alpha = float(getattr(args, "text_ppr_alpha", 0.20))
         self.text_ppr_iters = int(getattr(args, "text_ppr_iters", 25))
@@ -1224,25 +1230,19 @@ class Heirattack(BaseAttack):
                             col_idx=col_idx,
                         )
 
-                        # 使用文本生成方法攻击 PPR 邻居节点 - 只攻击未攻击过的节点
+                        # 使用文本生成方法攻击候选节点，并由全局覆盖和访问次数共同约束。
                         if self.use_text_attack and self.text_generator is not None:
-                            # 过滤掉已达到最大访问次数的节点
+                            # 同时执行全局唯一节点预算和单节点访问次数预算。
                             if not hasattr(self, "_attacked_nodes"):
                                 self._attacked_nodes = {}  # node -> visit_count
 
-                            new_nodes = np.array(
-                                [
-                                    n
-                                    for n in U
-                                    if self._attacked_nodes.get(n, 0)
-                                    < self.text_attack_max_visits
-                                ]
-                            )
+                            new_nodes = self.filter_text_attack_nodes(U)
 
                             if len(new_nodes) > 0:
                                 print(
                                     f"\n🎯 [Step {tot_perturbs}/{n_perturbations}] "
-                                    f"Text attack: {len(new_nodes)} new nodes (skipped {len(U)-len(new_nodes)} already attacked)"
+                                    f"Text attack: {len(new_nodes)} eligible nodes "
+                                    f"(skipped {len(U)-len(new_nodes)} by visit/unique budget)"
                                 )
 
                                 text_embeddings = self.get_embeddings(
@@ -1312,6 +1312,21 @@ class Heirattack(BaseAttack):
             print(
                 f"\n✅ Attack completed: Structure perturbations={num_add+num_del}, {feature_status}"
             )
+            if self.use_text_attack and self.text_generator is not None:
+                attacked_nodes = getattr(self, "_attacked_nodes", {})
+                unique_budget = (
+                    "unlimited"
+                    if self.text_attack_total_nodes is None
+                    else str(self.text_attack_total_nodes)
+                )
+                print(
+                    "Attribute attack coverage: "
+                    f"unique_nodes={len(attacked_nodes)}, "
+                    f"total_visits={sum(attacked_nodes.values())}, "
+                    f"unique_budget={unique_budget}, "
+                    f"max_visits={self.text_attack_max_visits}, "
+                    f"graph_nodes={self.nnodes}"
+                )
         else:
             self.modified_features = full_features.detach()
             print(
@@ -1440,6 +1455,32 @@ class Heirattack(BaseAttack):
         if self.text_attack_nodes is not None:
             return min(n_nodes, self.text_attack_nodes)
         return max(1, int(round(self.text_topk_ratio * n_nodes)))
+
+    def filter_text_attack_nodes(self, candidate_nodes):
+        """Apply per-node visit and global distinct-node budgets in rank order."""
+        if not hasattr(self, "_attacked_nodes"):
+            self._attacked_nodes = {}
+
+        admitted_nodes = set(self._attacked_nodes)
+        selected = []
+        selected_set = set()
+        for raw_node in np.asarray(candidate_nodes, dtype=np.int64).tolist():
+            node = int(raw_node)
+            if node in selected_set:
+                continue
+            if self._attacked_nodes.get(node, 0) >= self.text_attack_max_visits:
+                continue
+            if node not in admitted_nodes:
+                if (
+                    self.text_attack_total_nodes is not None
+                    and len(admitted_nodes) >= self.text_attack_total_nodes
+                ):
+                    continue
+                admitted_nodes.add(node)
+            selected.append(node)
+            selected_set.add(node)
+
+        return np.asarray(selected, dtype=np.int64)
 
     def local_neighborhood_nodes(self, adj: sp.spmatrix, seed_nodes, hops: int = 2):
         A = adj.tocsr().astype(np.float32)

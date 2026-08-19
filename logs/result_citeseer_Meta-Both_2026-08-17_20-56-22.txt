@@ -1,0 +1,1100 @@
+Loading citeseer dataset...
+Selecting 1 largest connected components
+(2110, 3703) (1,) (2110, 2110) 210 211 1688
+Test set results: loss= 2.0000 accuracy= 0.7014
+
+============================================================
+📝 Text Attack Enabled
+============================================================
+  LLM Type: gpt
+  OpenAI API Key: ********************...
+  Attack Target: Node Features (via text generation)
+============================================================
+
+Loaded partial real BoW vocabulary: 500 tokens for feature dimension 3703; preserving cached vocabulary order and existing leading-column write-back
+Vocab size: 500, Feature dim: 3703
+🦙 Detected Ollama - using model: llama3.2:1b-instruct-fp16
+Initialized GPT client with model: llama3.2:1b-instruct-fp16
+✅ Text attack generator initialized with GPT API
+
+🚀 Starting Heir Attack...
+  Perturbation budget: 366 edges
+  Perturbation rate: 10.0%
+  Attack mode: Meta-Both
+  Structure search: method=gb, level=4, step=1, miter=60, lr=0.05
+  Global PPR: ratio=0.45, alpha=0.08, iters=120, seed=degree, label_w=0.0
+  Structure features: frozen to original features
+  Text attack: Enabled (LLM: gpt)
+  Text config: topk_ratio=0.08, alpha=0.26, iters=30, budget=35, per_step=None, total_nodes=100, max_visits=15, candidate=local_ae_ppr, hops=2, cluster=2-5, sim>=0.65, cdl_topk=14, cluster_attr_topk=14, max_added=40
+
+
+🎯 [Step 1/366] Text attack: 100 eligible nodes (skipped 69 by visit/unique budget)
+🔥 Text Attack: 100 nodes grouped into 29 clusters (min/avg/max = 2/3.4/5).
+Text Attack Completion: targets=100, template_attempts=29, template_successes=29, template_failures=0, cache_hits=0, feature_writes=100, feature_changes=100, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 100/100, LLM Calls: 29, Cache Hits: 0
+
+🎯 [Step 2/366] Text attack: 3 eligible nodes (skipped 166 by visit/unique budget)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=3, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=3, feature_changes=3, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 3/366] Text attack: 13 eligible nodes (skipped 156 by visit/unique budget)
+🔥 Text Attack: 13 nodes grouped into 3 clusters (min/avg/max = 3/4.3/5).
+Text Attack Completion: targets=13, template_attempts=3, template_successes=3, template_failures=0, cache_hits=0, feature_writes=13, feature_changes=13, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 3, Cache Hits: 0
+
+🎯 [Step 4/366] Text attack: 9 eligible nodes (skipped 160 by visit/unique budget)
+🔥 Text Attack: 9 nodes grouped into 2 clusters (min/avg/max = 4/4.5/5).
+Text Attack Completion: targets=9, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=9, feature_changes=9, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 5/366] Text attack: 4 eligible nodes (skipped 165 by visit/unique budget)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+Text Attack Completion: targets=4, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=4, feature_changes=4, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 6/366] Text attack: 12 eligible nodes (skipped 157 by visit/unique budget)
+🔥 Text Attack: 12 nodes grouped into 3 clusters (min/avg/max = 3/4.0/5).
+Text Attack Completion: targets=12, template_attempts=3, template_successes=3, template_failures=0, cache_hits=0, feature_writes=12, feature_changes=12, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 3, Cache Hits: 0
+
+🎯 [Step 7/366] Text attack: 14 eligible nodes (skipped 155 by visit/unique budget)
+🔥 Text Attack: 14 nodes grouped into 3 clusters (min/avg/max = 4/4.7/5).
+Text Attack Completion: targets=14, template_attempts=3, template_successes=3, template_failures=0, cache_hits=0, feature_writes=14, feature_changes=14, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 14/14, LLM Calls: 3, Cache Hits: 0
+
+🎯 [Step 8/366] Text attack: 16 eligible nodes (skipped 153 by visit/unique budget)
+🔥 Text Attack: 16 nodes grouped into 4 clusters (min/avg/max = 3/4.0/5).
+Text Attack Completion: targets=16, template_attempts=4, template_successes=4, template_failures=0, cache_hits=0, feature_writes=16, feature_changes=16, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 16/16, LLM Calls: 4, Cache Hits: 0
+
+⏭️ [Step 9/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 10/366] Text attack: 13 eligible nodes (skipped 156 by visit/unique budget)
+🔥 Text Attack: 13 nodes grouped into 3 clusters (min/avg/max = 3/4.3/5).
+Text Attack Completion: targets=13, template_attempts=2, template_successes=2, template_failures=0, cache_hits=1, feature_writes=13, feature_changes=13, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 13/13, LLM Calls: 2, Cache Hits: 1
+
+🎯 [Step 11/366] Text attack: 11 eligible nodes (skipped 158 by visit/unique budget)
+🔥 Text Attack: 11 nodes grouped into 3 clusters (min/avg/max = 3/3.7/5).
+Text Attack Completion: targets=11, template_attempts=3, template_successes=3, template_failures=0, cache_hits=0, feature_writes=11, feature_changes=11, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 3, Cache Hits: 0
+
+🎯 [Step 12/366] Text attack: 6 eligible nodes (skipped 163 by visit/unique budget)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=6, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=6, feature_changes=6, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 13/366] Text attack: 43 eligible nodes (skipped 126 by visit/unique budget)
+🔥 Text Attack: 43 nodes grouped into 12 clusters (min/avg/max = 2/3.6/5).
+Text Attack Completion: targets=43, template_attempts=12, template_successes=12, template_failures=0, cache_hits=0, feature_writes=43, feature_changes=43, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 43/43, LLM Calls: 12, Cache Hits: 0
+
+🎯 [Step 14/366] Text attack: 2 eligible nodes (skipped 167 by visit/unique budget)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 15/366] Text attack: 78 eligible nodes (skipped 91 by visit/unique budget)
+🔥 Text Attack: 78 nodes grouped into 21 clusters (min/avg/max = 2/3.7/5).
+Text Attack Completion: targets=78, template_attempts=21, template_successes=21, template_failures=0, cache_hits=0, feature_writes=78, feature_changes=78, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 78/78, LLM Calls: 21, Cache Hits: 0
+
+🎯 [Step 16/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 17/366] Text attack: 9 eligible nodes (skipped 160 by visit/unique budget)
+🔥 Text Attack: 9 nodes grouped into 2 clusters (min/avg/max = 4/4.5/5).
+Text Attack Completion: targets=9, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=9, feature_changes=9, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 9/9, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 18/366] Text attack: 7 eligible nodes (skipped 162 by visit/unique budget)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 3/3.5/4).
+Text Attack Completion: targets=7, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=7, feature_changes=7, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 19/366] Text attack: 2 eligible nodes (skipped 167 by visit/unique budget)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 20/366] Text attack: 24 eligible nodes (skipped 145 by visit/unique budget)
+🔥 Text Attack: 24 nodes grouped into 6 clusters (min/avg/max = 3/4.0/5).
+Text Attack Completion: targets=24, template_attempts=5, template_successes=5, template_failures=0, cache_hits=1, feature_writes=24, feature_changes=24, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 24/24, LLM Calls: 5, Cache Hits: 1
+
+🎯 [Step 21/366] Text attack: 19 eligible nodes (skipped 150 by visit/unique budget)
+🔥 Text Attack: 19 nodes grouped into 6 clusters (min/avg/max = 2/3.2/4).
+Text Attack Completion: targets=19, template_attempts=5, template_successes=5, template_failures=0, cache_hits=1, feature_writes=19, feature_changes=19, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 19/19, LLM Calls: 5, Cache Hits: 1
+
+⏭️ [Step 22/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 23/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 24/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 25/366] Text attack: 2 eligible nodes (skipped 167 by visit/unique budget)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 26/366] Text attack: 7 eligible nodes (skipped 162 by visit/unique budget)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 3/3.5/4).
+Text Attack Completion: targets=7, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=7, feature_changes=7, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 27/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 28/366] Text attack: 72 eligible nodes (skipped 97 by visit/unique budget)
+🔥 Text Attack: 72 nodes grouped into 19 clusters (min/avg/max = 2/3.8/5).
+Text Attack Completion: targets=72, template_attempts=19, template_successes=19, template_failures=0, cache_hits=0, feature_writes=72, feature_changes=72, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 72/72, LLM Calls: 19, Cache Hits: 0
+
+🎯 [Step 29/366] Text attack: 32 eligible nodes (skipped 137 by visit/unique budget)
+🔥 Text Attack: 32 nodes grouped into 9 clusters (min/avg/max = 2/3.6/5).
+Text Attack Completion: targets=32, template_attempts=9, template_successes=9, template_failures=0, cache_hits=0, feature_writes=32, feature_changes=32, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 32/32, LLM Calls: 9, Cache Hits: 0
+
+🎯 [Step 30/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 31/366] Text attack: 54 eligible nodes (skipped 115 by visit/unique budget)
+🔥 Text Attack: 54 nodes grouped into 16 clusters (min/avg/max = 2/3.4/5).
+Text Attack Completion: targets=54, template_attempts=16, template_successes=16, template_failures=0, cache_hits=0, feature_writes=54, feature_changes=54, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 54/54, LLM Calls: 16, Cache Hits: 0
+
+🎯 [Step 32/366] Text attack: 77 eligible nodes (skipped 92 by visit/unique budget)
+🔥 Text Attack: 77 nodes grouped into 22 clusters (min/avg/max = 2/3.5/5).
+Text Attack Completion: targets=77, template_attempts=22, template_successes=22, template_failures=0, cache_hits=0, feature_writes=77, feature_changes=77, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 77/77, LLM Calls: 22, Cache Hits: 0
+
+🎯 [Step 33/366] Text attack: 65 eligible nodes (skipped 104 by visit/unique budget)
+🔥 Text Attack: 65 nodes grouped into 20 clusters (min/avg/max = 2/3.2/5).
+Text Attack Completion: targets=65, template_attempts=20, template_successes=20, template_failures=0, cache_hits=0, feature_writes=65, feature_changes=65, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 65/65, LLM Calls: 20, Cache Hits: 0
+
+🎯 [Step 34/366] Text attack: 48 eligible nodes (skipped 121 by visit/unique budget)
+🔥 Text Attack: 48 nodes grouped into 14 clusters (min/avg/max = 2/3.4/4).
+Text Attack Completion: targets=48, template_attempts=14, template_successes=14, template_failures=0, cache_hits=0, feature_writes=48, feature_changes=48, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 48/48, LLM Calls: 14, Cache Hits: 0
+
+🎯 [Step 35/366] Text attack: 4 eligible nodes (skipped 165 by visit/unique budget)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+Text Attack Completion: targets=4, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=4, feature_changes=4, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 36/366] Text attack: 71 eligible nodes (skipped 98 by visit/unique budget)
+🔥 Text Attack: 71 nodes grouped into 19 clusters (min/avg/max = 2/3.7/5).
+Text Attack Completion: targets=71, template_attempts=19, template_successes=19, template_failures=0, cache_hits=0, feature_writes=71, feature_changes=71, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 71/71, LLM Calls: 19, Cache Hits: 0
+
+🎯 [Step 37/366] Text attack: 62 eligible nodes (skipped 107 by visit/unique budget)
+🔥 Text Attack: 62 nodes grouped into 19 clusters (min/avg/max = 2/3.3/5).
+Text Attack Completion: targets=62, template_attempts=18, template_successes=18, template_failures=0, cache_hits=1, feature_writes=62, feature_changes=62, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 62/62, LLM Calls: 18, Cache Hits: 1
+
+🎯 [Step 38/366] Text attack: 3 eligible nodes (skipped 166 by visit/unique budget)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=3, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=3, feature_changes=3, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 39/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 40/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 41/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 42/366] Text attack: 22 eligible nodes (skipped 147 by visit/unique budget)
+🔥 Text Attack: 22 nodes grouped into 6 clusters (min/avg/max = 2/3.7/5).
+Text Attack Completion: targets=22, template_attempts=6, template_successes=6, template_failures=0, cache_hits=0, feature_writes=22, feature_changes=22, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 22/22, LLM Calls: 6, Cache Hits: 0
+
+🎯 [Step 43/366] Text attack: 4 eligible nodes (skipped 165 by visit/unique budget)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+Text Attack Completion: targets=4, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=4, feature_changes=4, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 44/366] Text attack: 59 eligible nodes (skipped 110 by visit/unique budget)
+🔥 Text Attack: 59 nodes grouped into 17 clusters (min/avg/max = 2/3.5/5).
+Text Attack Completion: targets=59, template_attempts=15, template_successes=15, template_failures=0, cache_hits=2, feature_writes=59, feature_changes=59, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 59/59, LLM Calls: 15, Cache Hits: 2
+
+🎯 [Step 45/366] Text attack: 2 eligible nodes (skipped 167 by visit/unique budget)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 46/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 47/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 48/366] Text attack: 60 eligible nodes (skipped 109 by visit/unique budget)
+🔥 Text Attack: 60 nodes grouped into 17 clusters (min/avg/max = 2/3.5/5).
+Text Attack Completion: targets=60, template_attempts=14, template_successes=14, template_failures=0, cache_hits=3, feature_writes=60, feature_changes=60, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 60/60, LLM Calls: 14, Cache Hits: 3
+
+⏭️ [Step 49/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 50/366] Text attack: 5 eligible nodes (skipped 164 by visit/unique budget)
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+Text Attack Completion: targets=5, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=5, feature_changes=5, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 51/366] Text attack: 12 eligible nodes (skipped 157 by visit/unique budget)
+🔥 Text Attack: 12 nodes grouped into 3 clusters (min/avg/max = 3/4.0/5).
+Text Attack Completion: targets=12, template_attempts=3, template_successes=3, template_failures=0, cache_hits=0, feature_writes=12, feature_changes=12, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 3, Cache Hits: 0
+
+⏭️ [Step 52/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 53/366] Text attack: 4 eligible nodes (skipped 165 by visit/unique budget)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+Text Attack Completion: targets=4, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=4, feature_changes=4, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 54/366] Text attack: 3 eligible nodes (skipped 166 by visit/unique budget)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=3, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=3, feature_changes=3, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 55/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 56/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 57/366] Text attack: 3 eligible nodes (skipped 166 by visit/unique budget)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=3, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=3, feature_changes=3, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 58/366] Text attack: 4 eligible nodes (skipped 165 by visit/unique budget)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+Text Attack Completion: targets=4, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=4, feature_changes=4, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 59/366] Text attack: 10 eligible nodes (skipped 159 by visit/unique budget)
+🔥 Text Attack: 10 nodes grouped into 2 clusters (min/avg/max = 5/5.0/5).
+Text Attack Completion: targets=10, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=10, feature_changes=10, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 10/10, LLM Calls: 2, Cache Hits: 0
+
+⏭️ [Step 60/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 61/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 62/366] Text attack: 42 eligible nodes (skipped 127 by visit/unique budget)
+🔥 Text Attack: 42 nodes grouped into 12 clusters (min/avg/max = 2/3.5/5).
+Text Attack Completion: targets=42, template_attempts=10, template_successes=10, template_failures=0, cache_hits=2, feature_writes=42, feature_changes=42, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 42/42, LLM Calls: 10, Cache Hits: 2
+
+🎯 [Step 63/366] Text attack: 23 eligible nodes (skipped 146 by visit/unique budget)
+🔥 Text Attack: 23 nodes grouped into 7 clusters (min/avg/max = 2/3.3/5).
+Text Attack Completion: targets=23, template_attempts=7, template_successes=7, template_failures=0, cache_hits=0, feature_writes=23, feature_changes=23, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 23/23, LLM Calls: 7, Cache Hits: 0
+
+🎯 [Step 64/366] Text attack: 2 eligible nodes (skipped 167 by visit/unique budget)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 65/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 66/366] Text attack: 2 eligible nodes (skipped 167 by visit/unique budget)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 67/366] Text attack: 3 eligible nodes (skipped 166 by visit/unique budget)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=3, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=3, feature_changes=3, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 68/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 69/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 70/366] Text attack: 3 eligible nodes (skipped 166 by visit/unique budget)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=3, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=3, feature_changes=3, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 71/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 72/366] Text attack: 10 eligible nodes (skipped 159 by visit/unique budget)
+🔥 Text Attack: 10 nodes grouped into 3 clusters (min/avg/max = 3/3.3/4).
+Text Attack Completion: targets=10, template_attempts=3, template_successes=3, template_failures=0, cache_hits=0, feature_writes=10, feature_changes=10, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 10/10, LLM Calls: 3, Cache Hits: 0
+
+🎯 [Step 73/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 74/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 75/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 76/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 77/366] Text attack: 7 eligible nodes (skipped 162 by visit/unique budget)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 2/3.5/5).
+Text Attack Completion: targets=7, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=7, feature_changes=7, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 2, Cache Hits: 0
+
+🎯 [Step 78/366] Text attack: 12 eligible nodes (skipped 157 by visit/unique budget)
+🔥 Text Attack: 12 nodes grouped into 3 clusters (min/avg/max = 4/4.0/4).
+Text Attack Completion: targets=12, template_attempts=2, template_successes=2, template_failures=0, cache_hits=1, feature_writes=12, feature_changes=12, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 2, Cache Hits: 1
+
+🎯 [Step 79/366] Text attack: 38 eligible nodes (skipped 131 by visit/unique budget)
+🔥 Text Attack: 38 nodes grouped into 12 clusters (min/avg/max = 2/3.2/5).
+Text Attack Completion: targets=38, template_attempts=11, template_successes=11, template_failures=0, cache_hits=1, feature_writes=38, feature_changes=38, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 38/38, LLM Calls: 11, Cache Hits: 1
+
+🎯 [Step 80/366] Text attack: 14 eligible nodes (skipped 155 by visit/unique budget)
+🔥 Text Attack: 14 nodes grouped into 4 clusters (min/avg/max = 2/3.5/5).
+Text Attack Completion: targets=14, template_attempts=2, template_successes=2, template_failures=0, cache_hits=2, feature_writes=14, feature_changes=14, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 14/14, LLM Calls: 2, Cache Hits: 2
+
+🎯 [Step 81/366] Text attack: 23 eligible nodes (skipped 146 by visit/unique budget)
+🔥 Text Attack: 23 nodes grouped into 6 clusters (min/avg/max = 2/3.8/5).
+Text Attack Completion: targets=23, template_attempts=6, template_successes=6, template_failures=0, cache_hits=0, feature_writes=23, feature_changes=23, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 23/23, LLM Calls: 6, Cache Hits: 0
+
+🎯 [Step 82/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 83/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 84/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 85/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 86/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 87/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 88/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 89/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 90/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 91/366] Text attack: 5 eligible nodes (skipped 164 by visit/unique budget)
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+Text Attack Completion: targets=5, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=5, feature_changes=5, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 92/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 93/366] Text attack: 6 eligible nodes (skipped 163 by visit/unique budget)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=6, template_attempts=1, template_successes=1, template_failures=0, cache_hits=1, feature_writes=6, feature_changes=6, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 1, Cache Hits: 1
+
+⏭️ [Step 94/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 95/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 96/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 97/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 98/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 99/366] Text attack: 12 eligible nodes (skipped 157 by visit/unique budget)
+🔥 Text Attack: 12 nodes grouped into 3 clusters (min/avg/max = 3/4.0/5).
+Text Attack Completion: targets=12, template_attempts=1, template_successes=1, template_failures=0, cache_hits=2, feature_writes=12, feature_changes=12, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 12/12, LLM Calls: 1, Cache Hits: 2
+
+⏭️ [Step 100/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 101/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 102/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 103/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 104/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 105/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 106/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 107/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 108/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 109/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 110/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 111/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 112/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 113/366] Text attack: 41 eligible nodes (skipped 128 by visit/unique budget)
+🔥 Text Attack: 41 nodes grouped into 13 clusters (min/avg/max = 2/3.2/5).
+Text Attack Completion: targets=41, template_attempts=10, template_successes=10, template_failures=0, cache_hits=3, feature_writes=41, feature_changes=41, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 41/41, LLM Calls: 10, Cache Hits: 3
+
+⏭️ [Step 114/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 115/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 116/366] Text attack: 3 eligible nodes (skipped 166 by visit/unique budget)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=3, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=3, feature_changes=3, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 117/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 118/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 119/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 120/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 121/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 122/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 123/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 124/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 125/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 126/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 127/366] Text attack: 7 eligible nodes (skipped 162 by visit/unique budget)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 2/3.5/5).
+Text Attack Completion: targets=7, template_attempts=1, template_successes=1, template_failures=0, cache_hits=1, feature_writes=7, feature_changes=7, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 1, Cache Hits: 1
+
+⏭️ [Step 128/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 129/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 130/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 131/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 132/366] Text attack: 2 eligible nodes (skipped 167 by visit/unique budget)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 133/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 134/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 135/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 136/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 137/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 138/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 139/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 140/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 141/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 142/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 143/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 144/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 145/366] Text attack: 10 eligible nodes (skipped 159 by visit/unique budget)
+🔥 Text Attack: 10 nodes grouped into 2 clusters (min/avg/max = 5/5.0/5).
+Text Attack Completion: targets=10, template_attempts=0, template_successes=0, template_failures=0, cache_hits=2, feature_writes=10, feature_changes=10, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 10/10, LLM Calls: 0, Cache Hits: 2
+
+⏭️ [Step 146/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 147/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 148/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 149/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 150/366] Text attack: 11 eligible nodes (skipped 158 by visit/unique budget)
+🔥 Text Attack: 11 nodes grouped into 3 clusters (min/avg/max = 3/3.7/4).
+Text Attack Completion: targets=11, template_attempts=1, template_successes=1, template_failures=0, cache_hits=2, feature_writes=11, feature_changes=11, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 11/11, LLM Calls: 1, Cache Hits: 2
+
+⏭️ [Step 151/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 152/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 153/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 154/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 155/366] Text attack: 6 eligible nodes (skipped 163 by visit/unique budget)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=6, template_attempts=1, template_successes=1, template_failures=0, cache_hits=1, feature_writes=6, feature_changes=6, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 1, Cache Hits: 1
+
+⏭️ [Step 156/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 157/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 158/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 159/366] Text attack: 2 eligible nodes (skipped 167 by visit/unique budget)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 160/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 161/366] Text attack: 7 eligible nodes (skipped 162 by visit/unique budget)
+🔥 Text Attack: 7 nodes grouped into 2 clusters (min/avg/max = 2/3.5/5).
+Text Attack Completion: targets=7, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=7, feature_changes=7, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 7/7, LLM Calls: 2, Cache Hits: 0
+
+⏭️ [Step 162/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 163/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 164/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 165/366] Text attack: 28 eligible nodes (skipped 141 by visit/unique budget)
+🔥 Text Attack: 28 nodes grouped into 9 clusters (min/avg/max = 2/3.1/5).
+Text Attack Completion: targets=28, template_attempts=9, template_successes=9, template_failures=0, cache_hits=0, feature_writes=28, feature_changes=28, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 28/28, LLM Calls: 9, Cache Hits: 0
+
+⏭️ [Step 166/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 167/366] Text attack: 16 eligible nodes (skipped 153 by visit/unique budget)
+🔥 Text Attack: 16 nodes grouped into 4 clusters (min/avg/max = 4/4.0/4).
+Text Attack Completion: targets=16, template_attempts=2, template_successes=2, template_failures=0, cache_hits=2, feature_writes=16, feature_changes=16, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 16/16, LLM Calls: 2, Cache Hits: 2
+
+⏭️ [Step 168/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 169/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 170/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 171/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 172/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 173/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 174/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 175/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+🎯 [Step 176/366] Text attack: 6 eligible nodes (skipped 163 by visit/unique budget)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=6, template_attempts=2, template_successes=2, template_failures=0, cache_hits=0, feature_writes=6, feature_changes=6, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 2, Cache Hits: 0
+
+⏭️ [Step 177/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 178/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 179/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 180/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 181/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 182/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 183/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 184/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 185/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 186/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 187/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 188/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 189/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 190/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 191/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 192/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 193/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 194/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 195/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 196/366] Text attack: 2 eligible nodes (skipped 167 by visit/unique budget)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 197/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 198/366] Text attack: 6 eligible nodes (skipped 163 by visit/unique budget)
+🔥 Text Attack: 6 nodes grouped into 2 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=6, template_attempts=1, template_successes=1, template_failures=0, cache_hits=1, feature_writes=6, feature_changes=6, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 6/6, LLM Calls: 1, Cache Hits: 1
+
+🎯 [Step 199/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 200/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 201/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 202/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 203/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 204/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 205/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 206/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 207/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 208/366] Text attack: 5 eligible nodes (skipped 164 by visit/unique budget)
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+Text Attack Completion: targets=5, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=5, feature_changes=5, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 209/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 210/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 211/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 212/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 213/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 214/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 215/366] Text attack: 5 eligible nodes (skipped 164 by visit/unique budget)
+🔥 Text Attack: 5 nodes grouped into 1 clusters (min/avg/max = 5/5.0/5).
+Text Attack Completion: targets=5, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=5, feature_changes=5, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 5/5, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 216/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 217/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 218/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 219/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 220/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 221/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 222/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 223/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 224/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 225/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 226/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 227/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 228/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 229/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 230/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 231/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 232/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 233/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 234/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 235/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 236/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 237/366] Text attack: 2 eligible nodes (skipped 167 by visit/unique budget)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 238/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 239/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 240/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 241/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 242/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 243/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 244/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 245/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 246/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 247/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 248/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 249/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 250/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 251/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 252/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 253/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 254/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 255/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 256/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 257/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 258/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 259/366] Text attack: 4 eligible nodes (skipped 165 by visit/unique budget)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+Text Attack Completion: targets=4, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=4, feature_changes=4, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 260/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 261/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 262/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 263/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 264/366] Text attack: 4 eligible nodes (skipped 165 by visit/unique budget)
+🔥 Text Attack: 4 nodes grouped into 1 clusters (min/avg/max = 4/4.0/4).
+Text Attack Completion: targets=4, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=4, feature_changes=4, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 4/4, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 265/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 266/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 267/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 268/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 269/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 270/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 271/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 272/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 273/366] Text attack: 3 eligible nodes (skipped 166 by visit/unique budget)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=3, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=3, feature_changes=3, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+⏭️ [Step 274/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 275/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 276/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 277/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 278/366] Text attack: 3 eligible nodes (skipped 166 by visit/unique budget)
+🔥 Text Attack: 3 nodes grouped into 1 clusters (min/avg/max = 3/3.0/3).
+Text Attack Completion: targets=3, template_attempts=0, template_successes=0, template_failures=0, cache_hits=1, feature_writes=3, feature_changes=3, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 3/3, LLM Calls: 0, Cache Hits: 1
+
+🎯 [Step 279/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 280/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 281/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 282/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 283/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 284/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 285/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 286/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 287/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 288/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 289/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 290/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 291/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 292/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 293/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 294/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 295/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 296/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 297/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 298/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 299/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 300/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 301/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 302/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 303/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 304/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 305/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 306/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 307/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 308/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 309/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 310/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 311/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 312/366] Text attack: 1 eligible nodes (skipped 168 by visit/unique budget)
+🔥 Text Attack: 1 nodes grouped into 1 clusters (min/avg/max = 1/1.0/1).
+Text Attack Completion: targets=1, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=1, feature_changes=1, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 1/1, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 313/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 314/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 315/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 316/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 317/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 318/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 319/366] Text attack: 2 eligible nodes (skipped 167 by visit/unique budget)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 320/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 321/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 322/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 323/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 324/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 325/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 326/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 327/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 328/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 329/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 330/366] All 169 nodes already attacked, skipping
+
+🎯 [Step 331/366] Text attack: 2 eligible nodes (skipped 167 by visit/unique budget)
+🔥 Text Attack: 2 nodes grouped into 1 clusters (min/avg/max = 2/2.0/2).
+Text Attack Completion: targets=2, template_attempts=1, template_successes=1, template_failures=0, cache_hits=0, feature_writes=2, feature_changes=2, node_failures=0, cluster_failures=0, completed=1
+✅ Cluster Attack Done. Success: 2/2, LLM Calls: 1, Cache Hits: 0
+
+⏭️ [Step 332/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 333/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 334/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 335/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 336/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 337/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 338/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 339/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 340/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 341/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 342/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 343/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 344/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 345/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 346/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 347/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 348/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 349/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 350/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 351/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 352/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 353/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 354/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 355/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 356/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 357/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 358/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 359/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 360/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 361/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 362/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 363/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 364/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 365/366] All 169 nodes already attacked, skipping
+
+⏭️ [Step 366/366] All 169 nodes already attacked, skipping
+
+✅ Attack completed: Structure perturbations=366, text attacks executed in-loop
+Attribute attack coverage: unique_nodes=100, total_visits=1471, unique_budget=100, max_visits=15, graph_nodes=2110
+
+============================================================
+📊 Evaluation Results
+============================================================
+
+=== Clean graph ===
+Clean graph results: loss= 1.2627 accuracy= 0.7156
+
+=== Edge-only attack ===
+Edge-only attack results: loss= 1.4206 accuracy= 0.6440
+
+=== Feature-only attack ===
+Feature-only attack results: loss= 1.2467 accuracy= 0.7135
+
+=== Combined attack (edge + feature) ===
+Combined attack results: loss= 1.4598 accuracy= 0.6377
+
+============================================================
+📈 Attack Performance Summary
+============================================================
+  Clean accuracy:         0.7156
+  Edge attack accuracy:   0.6440 (drop: 0.0716)
+  Feature attack accuracy: 0.7135 (drop: 0.0021)
+  Combined accuracy:      0.6377 (drop: 0.0779)
+  Misclassification:      0.3623
+============================================================
+

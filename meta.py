@@ -182,6 +182,16 @@ parser.add_argument(
     help="Number of attribute candidate nodes selected per perturbation step (default: text_topk_ratio * num_nodes).",
 )
 parser.add_argument(
+    "--text_attack_total_nodes",
+    type=int,
+    default=None,
+    help=(
+        "Maximum number of distinct nodes targeted by the attribute attack over "
+        "the complete run (default: unlimited). This is a global unique-node "
+        "budget, unlike --text_attack_nodes, which is a per-step candidate cap."
+    ),
+)
+parser.add_argument(
     "--text_attack_max_visits",
     type=int,
     default=1,
@@ -273,6 +283,8 @@ if args.allow_partial_vocabulary and args.allow_fallback_vocabulary:
         "--allow_partial_vocabulary and --allow_fallback_vocabulary cannot be "
         "used together"
     )
+if args.text_attack_total_nodes is not None and args.text_attack_total_nodes < 0:
+    parser.error("--text_attack_total_nodes must be non-negative")
 
 # Setup logger
 if not os.path.exists("logs"):
@@ -549,7 +561,9 @@ def main():
             "  Text config: "
             f"topk_ratio={args.text_topk_ratio}, alpha={args.text_ppr_alpha}, "
             f"iters={args.text_ppr_iters}, budget={args.text_budget_per_node}, "
-            f"per_step={args.text_attack_nodes}, max_visits={args.text_attack_max_visits}, "
+            f"per_step={args.text_attack_nodes}, "
+            f"total_nodes={args.text_attack_total_nodes}, "
+            f"max_visits={args.text_attack_max_visits}, "
             f"candidate={args.local_candidate_strategy}, hops={args.local_candidate_hops}, "
             f"cluster={args.text_min_cluster_size}-{args.text_max_cluster_size}, "
             f"sim>={args.text_similarity_min}, cdl_topk={args.text_cdl_topk}, "
