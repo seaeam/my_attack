@@ -525,15 +525,27 @@ class TextAttackGenerator:
     def _generate_text_with_api_retry(self, messages: List[Dict[str, str]]):
         attempts = max(1, int(self.num_retries) + 1)
         last_error = None
+        if not hasattr(self, "api_stats"):
+            self.api_stats = dict(attempts=0, successes=0, failures=0, retries=0)
 
         for attempt in range(attempts):
             try:
-                return self.client.chat.completions.create(
+                self.api_stats["attempts"] += 1
+                self.api_stats["retries"] += int(attempt > 0)
+                generation_options = {}
+                if hasattr(self, "generation_seed"):
+                    generation_options["seed"] = self.generation_seed
+                    generation_options["temperature"] = self.generation_temperature
+                response = self.client.chat.completions.create(
                     model=self.model_name,
                     messages=messages,
                     max_tokens=self.max_tokens,
+                    **generation_options,
                 )
+                self.api_stats["successes"] += 1
+                return response
             except Exception as e:
+                self.api_stats["failures"] += 1
                 last_error = e
                 if attempt >= attempts - 1 or not self._is_retryable_api_error(e):
                     raise

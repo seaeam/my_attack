@@ -84,9 +84,9 @@ parser.add_argument(
 parser.add_argument(
     "--global_seed_strategy",
     type=str,
-    default="uniform",
+    default="degree",
     choices=["uniform", "degree", "label"],
-    help="Seed distribution used by global PPR for structure attack.",
+    help="Global AE-PR source for structure attack (default: degree; uniform is a legacy diagnostic).",
 )
 parser.add_argument(
     "--global_label_weight",
@@ -508,6 +508,9 @@ def test(adj, features, idx_eval, description="Test set"):
     """Test GCN and ensure tensors are on CPU for deeprobust."""
     import scipy.sparse as sp
 
+    if hasattr(model, "before_victim_evaluation"):
+        model.before_victim_evaluation(description)
+
     # 将 features 和 adj 转到 CPU
     if torch.is_tensor(features) and features.is_cuda:
         features = features.cpu()
@@ -526,6 +529,8 @@ def test(adj, features, idx_eval, description="Test set"):
     gcn = gcn.to(device)
     gcn.fit(features, adj, labels, idx_train)
     output = gcn.output.cpu()
+    if hasattr(model, "record_victim_evaluation"):
+        model.record_victim_evaluation(description, output, labels, idx_eval)
     loss_test = F.nll_loss(output[idx_eval], labels[idx_eval])
     acc_test = accuracy(output[idx_eval], labels[idx_eval])
     print(

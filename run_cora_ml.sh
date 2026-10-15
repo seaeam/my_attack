@@ -18,7 +18,7 @@ ARGS=(
   --global_important_ratio 0.25      # 回到Edge-only=0.7407那版的结构候选覆盖
   --global_ppr_alpha 0.08            # 回到已验证更强的全局PPR强度
   --global_ppr_iters 180             # 回到已验证的PPR排序稳定度
-  --global_seed_strategy uniform     # degree在日志中边攻击偏弱，改回无偏全图种子
+  --global_seed_strategy degree      # 全局 AE-PR 统一主配置：按当前图度数分配源权重
 
   --freeze_structure_features        # ★ 关键：结构搜索用原始特征，防止文本攻击污染梯度
 

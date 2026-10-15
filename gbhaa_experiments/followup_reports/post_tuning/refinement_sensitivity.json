@@ -1,0 +1,240 @@
+{
+  "scope": "Same saved alpha050 Post feature and visit states; no candidate rollout, labels, training, or generation. Sensitivity is not predicted attacked ACC.",
+  "dataset": "citeseer",
+  "seed": 15,
+  "rounds": 60,
+  "configs": {
+    "baseline": {
+      "id": "baseline",
+      "family": "baseline",
+      "description": "Original endpoint diffusion and text-generation settings.",
+      "alpha": 0.28,
+      "iterations": 60,
+      "weight_floor": 0.0,
+      "visit_gamma": 0.0,
+      "readout": "last",
+      "generation_max_tokens": 50,
+      "text_min_cluster_size": 2,
+      "text_max_cluster_size": 4,
+      "text_max_added_words": 70,
+      "text_cdl_topk": 36,
+      "text_budget_per_node": 80,
+      "text_similarity_min": 0.35
+    },
+    "alpha050": {
+      "id": "alpha050",
+      "family": "baseline",
+      "description": "Original endpoint diffusion and text-generation settings.",
+      "alpha": 0.5,
+      "iterations": 60,
+      "weight_floor": 0.0,
+      "visit_gamma": 0.0,
+      "readout": "last",
+      "generation_max_tokens": 50,
+      "text_min_cluster_size": 2,
+      "text_max_cluster_size": 4,
+      "text_max_added_words": 70,
+      "text_cdl_topk": 36,
+      "text_budget_per_node": 80,
+      "text_similarity_min": 0.35
+    },
+    "alpha040": {
+      "id": "alpha040",
+      "family": "baseline",
+      "description": "Original endpoint diffusion and text-generation settings.",
+      "alpha": 0.4,
+      "iterations": 60,
+      "weight_floor": 0.0,
+      "visit_gamma": 0.0,
+      "readout": "last",
+      "generation_max_tokens": 50,
+      "text_min_cluster_size": 2,
+      "text_max_cluster_size": 4,
+      "text_max_added_words": 70,
+      "text_cdl_topk": 36,
+      "text_budget_per_node": 80,
+      "text_similarity_min": 0.35
+    },
+    "alpha060": {
+      "id": "alpha060",
+      "family": "baseline",
+      "description": "Original endpoint diffusion and text-generation settings.",
+      "alpha": 0.6,
+      "iterations": 60,
+      "weight_floor": 0.0,
+      "visit_gamma": 0.0,
+      "readout": "last",
+      "generation_max_tokens": 50,
+      "text_min_cluster_size": 2,
+      "text_max_cluster_size": 4,
+      "text_max_added_words": 70,
+      "text_cdl_topk": 36,
+      "text_budget_per_node": 80,
+      "text_similarity_min": 0.35
+    },
+    "a50_f01": {
+      "id": "a50_f01",
+      "family": "baseline",
+      "description": "Original endpoint diffusion and text-generation settings.",
+      "alpha": 0.5,
+      "iterations": 60,
+      "weight_floor": 0.01,
+      "visit_gamma": 0.0,
+      "readout": "last",
+      "generation_max_tokens": 50,
+      "text_min_cluster_size": 2,
+      "text_max_cluster_size": 4,
+      "text_max_added_words": 70,
+      "text_cdl_topk": 36,
+      "text_budget_per_node": 80,
+      "text_similarity_min": 0.35
+    },
+    "a50_f03": {
+      "id": "a50_f03",
+      "family": "baseline",
+      "description": "Original endpoint diffusion and text-generation settings.",
+      "alpha": 0.5,
+      "iterations": 60,
+      "weight_floor": 0.03,
+      "visit_gamma": 0.0,
+      "readout": "last",
+      "generation_max_tokens": 50,
+      "text_min_cluster_size": 2,
+      "text_max_cluster_size": 4,
+      "text_max_added_words": 70,
+      "text_cdl_topk": 36,
+      "text_budget_per_node": 80,
+      "text_similarity_min": 0.35
+    },
+    "a50_f05": {
+      "id": "a50_f05",
+      "family": "baseline",
+      "description": "Original endpoint diffusion and text-generation settings.",
+      "alpha": 0.5,
+      "iterations": 60,
+      "weight_floor": 0.05,
+      "visit_gamma": 0.0,
+      "readout": "last",
+      "generation_max_tokens": 50,
+      "text_min_cluster_size": 2,
+      "text_max_cluster_size": 4,
+      "text_max_added_words": 70,
+      "text_cdl_topk": 36,
+      "text_budget_per_node": 80,
+      "text_similarity_min": 0.35
+    },
+    "a50_diffused": {
+      "id": "a50_diffused",
+      "family": "baseline",
+      "description": "Original endpoint diffusion and text-generation settings.",
+      "alpha": 0.5,
+      "iterations": 60,
+      "weight_floor": 0.0,
+      "visit_gamma": 0.0,
+      "readout": "diffused",
+      "generation_max_tokens": 50,
+      "text_min_cluster_size": 2,
+      "text_max_cluster_size": 4,
+      "text_max_added_words": 70,
+      "text_cdl_topk": 36,
+      "text_budget_per_node": 80,
+      "text_similarity_min": 0.35
+    },
+    "a50_f03_diffused": {
+      "id": "a50_f03_diffused",
+      "family": "baseline",
+      "description": "Original endpoint diffusion and text-generation settings.",
+      "alpha": 0.5,
+      "iterations": 60,
+      "weight_floor": 0.03,
+      "visit_gamma": 0.0,
+      "readout": "diffused",
+      "generation_max_tokens": 50,
+      "text_min_cluster_size": 2,
+      "text_max_cluster_size": 4,
+      "text_max_added_words": 70,
+      "text_cdl_topk": 36,
+      "text_budget_per_node": 80,
+      "text_similarity_min": 0.35
+    },
+    "a50_coverage025": {
+      "id": "a50_coverage025",
+      "family": "baseline",
+      "description": "Original endpoint diffusion and text-generation settings.",
+      "alpha": 0.5,
+      "iterations": 60,
+      "weight_floor": 0.0,
+      "visit_gamma": 0.25,
+      "readout": "last",
+      "generation_max_tokens": 50,
+      "text_min_cluster_size": 2,
+      "text_max_cluster_size": 4,
+      "text_max_added_words": 70,
+      "text_cdl_topk": 36,
+      "text_budget_per_node": 80,
+      "text_similarity_min": 0.35
+    }
+  },
+  "diagnostics": {
+    "baseline": {
+      "different_top4_sets": 6,
+      "different_top4_order": 24,
+      "zero_score_difference": 16,
+      "different_from_alpha050_post": 11
+    },
+    "alpha050": {
+      "different_top4_sets": 3,
+      "different_top4_order": 16,
+      "zero_score_difference": 16,
+      "different_from_alpha050_post": 0
+    },
+    "alpha040": {
+      "different_top4_sets": 3,
+      "different_top4_order": 16,
+      "zero_score_difference": 16,
+      "different_from_alpha050_post": 6
+    },
+    "alpha060": {
+      "different_top4_sets": 3,
+      "different_top4_order": 18,
+      "zero_score_difference": 16,
+      "different_from_alpha050_post": 1
+    },
+    "a50_f01": {
+      "different_top4_sets": 3,
+      "different_top4_order": 19,
+      "zero_score_difference": 0,
+      "different_from_alpha050_post": 1
+    },
+    "a50_f03": {
+      "different_top4_sets": 1,
+      "different_top4_order": 22,
+      "zero_score_difference": 0,
+      "different_from_alpha050_post": 3
+    },
+    "a50_f05": {
+      "different_top4_sets": 2,
+      "different_top4_order": 22,
+      "zero_score_difference": 0,
+      "different_from_alpha050_post": 4
+    },
+    "a50_diffused": {
+      "different_top4_sets": 30,
+      "different_top4_order": 36,
+      "zero_score_difference": 16,
+      "different_from_alpha050_post": 47
+    },
+    "a50_f03_diffused": {
+      "different_top4_sets": 41,
+      "different_top4_order": 49,
+      "zero_score_difference": 0,
+      "different_from_alpha050_post": 44
+    },
+    "a50_coverage025": {
+      "different_top4_sets": 2,
+      "different_top4_order": 17,
+      "zero_score_difference": 16,
+      "different_from_alpha050_post": 2
+    }
+  }
+}

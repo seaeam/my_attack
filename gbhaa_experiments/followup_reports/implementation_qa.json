@@ -1,0 +1,46 @@
+{
+  "scope": "Synthetic/unit tests and dry runs only; no full attack, training, or LLM request performed",
+  "edge_order": "selected endpoints -> edge flip -> AE-PR on modified adjacency -> embeddings on modified adjacency -> attribute update",
+  "checks_completed": {
+    "protocol_tests": 13,
+    "runner_tests": 6,
+    "audit_tests": 20,
+    "existing_attribute_budget_tests": 4,
+    "existing_text_generator_tests": 4,
+    "entrypoint_argument_help": true,
+    "all_four_suite_dry_runs": true,
+    "synthetic_plot_smoke": true,
+    "summary_tests": 25,
+    "syntax_and_whitespace": true
+  },
+  "summary_validation": "25 summary tests plus final combined suite: duplicate seeds, action replay, hashes, configuration/provenance, exact prediction metrics, malformed records and planned Holm family checked.",
+  "experiment_results_created": false,
+  "legacy_audit": {
+    "complete_seed_blocks": 47,
+    "expected_cells": 210,
+    "factorial_settings_mismatches": 0,
+    "issue_counts": {
+      "cell_mapping_conflict": 12,
+      "drop_disagreement": 5,
+      "duplicate_cell": 8,
+      "historical_provenance_unknown": 177,
+      "misclassification_disagreement": 5,
+      "path_mapping_unresolved": 4,
+      "uniform_global_invariance": 19
+    },
+    "missing_cells": 37,
+    "records": 177,
+    "unresolved_mapping": 19,
+    "unusable_cells": 16,
+    "usable_complete_seed_blocks": 44,
+    "usable_records": 157
+  },
+  "final_tests": {
+    "run": 72,
+    "failures": 0,
+    "errors": 0,
+    "passed": true,
+    "log": "/tmp/gbca-followup-final-tests.log"
+  },
+  "review": "Independent review findings resolved; artifact validation verified by positive and malformed synthetic fixtures."
+}

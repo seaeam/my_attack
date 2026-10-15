@@ -1,0 +1,2603 @@
+{
+  "dataset": "citeseer",
+  "seed": 19,
+  "budget": 0.1,
+  "variant": "parallel",
+  "protocol": "gbca-action-state-v1",
+  "settings": {
+    "model": "Meta-Both",
+    "split_data": "normal",
+    "epochs": 200,
+    "step": 1,
+    "hidden": 16,
+    "dropout": 0.5,
+    "level": 2,
+    "miter": 10,
+    "lr": 0.01,
+    "global_important_ratio": 0.1,
+    "global_ppr_alpha": 0.15,
+    "global_ppr_iters": 30,
+    "global_seed_strategy": "degree",
+    "text_attack_max_visits": 10,
+    "text_retries": 3,
+    "text_budget_per_node": 80,
+    "text_topk_ratio": 0.12,
+    "text_ppr_alpha": 0.28,
+    "text_ppr_iters": 60,
+    "text_min_cluster_size": 2,
+    "text_max_cluster_size": 4,
+    "text_similarity_min": 0.35,
+    "text_cdl_topk": 36,
+    "text_cluster_attr_topk": 36,
+    "text_max_added_words": 70,
+    "coarsen_method": "gb",
+    "text_attack_nodes": 4
+  },
+  "provenance": {
+    "protocol": "gbca-action-state-v1",
+    "sources": {
+      "dataset_support.py": "a9cce46860bc63fd725d0f6fdd8bdbf662656c2bb6cc6073e7c8292857834471",
+      "gb_division.py": "fccd5fc18f188ca141019226cfdc59fd273ff6eb57075f1ab27e3f2bcc35f64e",
+      "gb_division_simple.py": "384d7c84acb4a9d3c12311d28ebc2670db26da2b43c66c0af4a18dd722dd5f68",
+      "gbhaa_experiments/__init__.py": "4af85bf1aebeb425a05d6b1798fc2be28cbd28d59d03f09ee7273d30757f55ea",
+      "gbhaa_experiments/action_state_cache.py": "d3ad75498669fb13659619ca6a4f2a2fdedacb1163d868b7f13e4d235a0d961a",
+      "gbhaa_experiments/action_state_protocol.py": "a64a864bd6f8f0accfd8d8004e4d145a9a85f6b6707384c53b78c6158dc04912",
+      "gbhaa_experiments/action_state_validation.py": "e03b2d7d4862dbb3e124b52871759bbc8fb116a9ce617c7f8a284f1441f0884a",
+      "gbhaa_experiments/aggregate_results.py": "c5b252aa01931e300f80bbc84f532735709cb5d35dc3b71b5cb139846962340b",
+      "gbhaa_experiments/coarse_gradient_consistency.py": "39b5a9b167724ac33682263289c0b1da781a0616f0d055eee37ebc1c67e34dce",
+      "gbhaa_experiments/entrypoints/__init__.py": "c19571e1f4b7959c0750fd2c42a65151df06e2ebb5aed7fbd9293dafbe122d9d",
+      "gbhaa_experiments/entrypoints/meta_action_state.py": "a362c5600dae61045b9f82977c01fdd69899d94d59ae054450251ed8e38482a2",
+      "gbhaa_experiments/entrypoints/meta_ae_ppr_ablation.py": "629a3f7dd3311ec9657cc126b52fde6953f277f5a3b609b61153bc9feacaaa80",
+      "gbhaa_experiments/entrypoints/meta_artifact.py": "4b35ae121e5d4e67011ec617d3bd12f368638cbf4f9e3850a0a84d1c6bc0ecd4",
+      "gbhaa_experiments/entrypoints/meta_coarsen_ablation.py": "c45b3eb257bec7507a642a277fc59d851ae0c9052a13f118ecac8e79250386f7",
+      "gbhaa_experiments/entrypoints/meta_deterministic_text.py": "cdd8c2e4bbb8e250a551f070438c2fc356a12688e76cd3c5dc422b722c5450ab",
+      "gbhaa_experiments/entrypoints/meta_feature_only.py": "083a44ac94a3872cae64785c5e0b411391b000f3b25bc554cfc05464b2518cdc",
+      "gbhaa_experiments/entrypoints/meta_followup.py": "5922b01ca356e260350d2e1de69043074fa8755454d2ccc0125d8569a3c21945",
+      "gbhaa_experiments/followup_audit.py": "2a767011379e0765ff18f2319a476e1fb1ca160b02b1627fd75f0d6addf2d5de",
+      "gbhaa_experiments/followup_config.py": "08ef9e7b2b70accac0d2a83a85037ceed0c397199441c919146df74634bf8fa5",
+      "gbhaa_experiments/followup_protocol.py": "2ad7da93358ba4d52c0d83fc3a0d501552f54e14276a8e78d90b715a64369dfc",
+      "gbhaa_experiments/gradient_metrics.py": "33fb045bce8865cfdebed6fd0b8a35e1d29e594533e6ad49655e8d9865fd0083",
+      "gbhaa_experiments/plot_followup.py": "cbec98773079e9af781d77f015c25412fd1f07e7601de75be78fc2e8a626ecfe",
+      "gbhaa_experiments/run_action_state.py": "985bbd2ecdefc025a61d26257e71b4defaec77fc25cd76e60e3e7d822028e50f",
+      "gbhaa_experiments/run_followup.py": "c1440527926c0c838f93728ec5eb9be06cf21502d583991163d00f221d3ee195",
+      "gbhaa_experiments/run_matrix.py": "616794986a289c565a447afe8305aab3dfc1b7ad21332d9fd85f3ca2d9c447c9",
+      "gbhaa_experiments/run_stealthiness.py": "41a19dedc8ad9005825badec1a594eb1a13499842a2429b00c7b041d32cfe074",
+      "gbhaa_experiments/runner.py": "decb2bc207280847d1ac5b8253f6ab5333eb7ff8c296705bdf26df199cf1a91a",
+      "gbhaa_experiments/specs.py": "1fd7f0671b7b6d3ba1f1827b97483d7ef20b4167299c0d8fc8768a813f3e3fcd",
+      "gbhaa_experiments/stealthiness.py": "6bcf407d49a26ab583bed3208ab63b65943b2beef2a0c62d0ea86b0b4bd4da02",
+      "gbhaa_experiments/summarize_action_state.py": "ff4977f76bee73997612fd7cfa371258e1dda2125ec71b49fd7595e53acb7f23",
+      "gbhaa_experiments/summarize_followup.py": "9a0151892dde86d9ca2cbec9151c412148ce7f86ccf5fbd52b43d4e3da5b01ff",
+      "heir.py": "a0ddaf47b904e64fa9530378ab7c3499d50b223f50c93f4b0421a290bb7477c2",
+      "meta.py": "0098ab6b59881819ce120670ea296e7dc39e6fc93aa9dc5815d9dd4dff58cdde",
+      "meta_edge_only.py": "5ff5855a4fbaddb5f15d20be8491fc070a3ddb8630b98d23aeee878e5a85a926",
+      "meta_gin.py": "24646a9baf2178d3169f205b5b75f15db791178da7858609fac2f1164c02b246",
+      "meta_gsage.py": "fbf67a5187f6585fb02894d0f56d0160f02b2bc896db24ec4a5e28823e15fb54",
+      "meta_independent.py": "f9086f26a06ac9369deea20a73e36f352808e91d2dd24eedafd2f3a24f8e5494",
+      "ours_gcn.py": "57bd419bf223b4d888fa2923e851438f747c2c2311d1cb098489dbe03e534710",
+      "prepare_small_datasets.py": "248256cc55dcdb70e6a9d031d7a5ea8e2213b131393d1538a3a186356e0c00ca",
+      "split_test.py": "be8fc247eab06051680f95dc3cdc60b8ec6d0f377ef04dfde351799e1375618b",
+      "target_models.py": "c14743d6e8db3edbecada3d98681c548b991e426fc4a7fac1b5058bd9063bae5",
+      "text_attack_generator.py": "122ee65b0f31cfeac64dfd90ed3654d44725bc2f523ee48e94445b03772c5039",
+      "tools/__init__.py": "1fd6c4b6db21e75233b6aeb0c48ff8d8491035ec6f701201dcc3ea4557777833",
+      "tools/add_id.py": "3c37b560210bebc16580bceba705bc7eb3817dac26cf6cb2a95f03828ba91dff",
+      "tools/add_noise.py": "0c72f510842cdd461e9b705fcc8eec882585235fddfeac86ccf1caeeb1dfa419",
+      "tools/add_purity.py": "3b900b7f03f442e58964d61eab8c7347c1524e20e846e3391ef1c42f8e9eb58f",
+      "tools/ball_quality_loss.py": "456ab285bc9acc139d9ec96ea0f928f45149422e1c58e5340b426dbf406f57c5",
+      "tools/corse_split.py": "63444b280ef9c47650e02bb733d99fb477aeda8e46d7013a2c49e42a9ed0a4db",
+      "tools/del_outlier.py": "3f14753b2496b14b98a48f7674290bdcae1e5cb75599fb4c3cf6247eb56a9ff5",
+      "tools/dimensionality_reduction.py": "b88f4e58bd94bc99748ac5084d1181300c2e5c75923c7666d4cf86a83e89a964",
+      "tools/find_major.py": "90b1f8d0b92523dce3cd497f6421385abc1f85e8eb30d376a5d0a31725b8d6a2",
+      "tools/find_major_num.py": "cb0eb215f23c2daa352b336afbeb2a1b4b94bd41a16cbbc0d49c7fb504f9b108",
+      "tools/find_max_degree.py": "ebd633975c20411ef776fef639cda023414af20fa70799d2cdb4f92490efd6a7",
+      "tools/find_max_pagerank.py": "39c32cd054ed6528c5e91216f0720ace5d0c04d6db963c9e88daccbbaac9c8a1",
+      "tools/get_dataset.py": "4812ac064f600f56ab4d835d085a7fdd920a7ad641552f109bcf05cd713d6193",
+      "tools/new_graph.py": "3346b8198ee6e653041cbc20f95d9df02a36c9603305d3d4304575d16fdd1eef",
+      "tools/ours_split_ball_purity.py": "d42976c73e118a9559fd6bd7c9720b4b617f9428ce5f9faca5b4e77f1f4aecaa",
+      "tools/purification.py": "ded4a1d67608d7ec82c913dd657fec9471e8661178450a432869d59fce7247b7",
+      "tools/split_2_co.py": "056e1e92734f0a85d1d4597e06f54d763735580549e310c764e61c20e9db384c",
+      "tools/split_ball_purity.py": "692b56601f32fe5bb2ab45b4e959c231571fd818b6900473a9d492d552c2dcfb",
+      "tools/split_indices.py": "5b89a27f6dc5aad6f8115df8316175c1a508863cb3761361c36d2c6bcff6b76e"
+    },
+    "input_files": {
+      "Data/.DS_Store": "96ff84ab0c54827ed1c01ff0e86aefef8278c872ff673734e32389305bdcd6ed",
+      "Data/CS/processed/data.pt": "e2fd93e40abd6f61879b4b6a968027aee282696552808cef57d48443a75cfa6a",
+      "Data/CS/processed/pre_filter.pt": "0b235e5f068a00e5bf391cec33fad69292177c841d5a8fd2ab76f764489fb6e7",
+      "Data/CS/processed/pre_transform.pt": "0b235e5f068a00e5bf391cec33fad69292177c841d5a8fd2ab76f764489fb6e7",
+      "Data/CS/raw/ms_academic_cs.npz": "933c745734e78908c7eb77172a673fee0503f30e26e5a99b36814d88534c42e3",
+      "Data/Computers/processed/data.pt": "05fe0132d275e97c9133aa8ac658393eff13d6608f0687bb289d067ceb7bfe1c",
+      "Data/Computers/processed/pre_filter.pt": "d61040ea2f61a70e2ff5c16e08d11f887eaaabc091afa86598dea9531deb6bb5",
+      "Data/Computers/processed/pre_transform.pt": "d61040ea2f61a70e2ff5c16e08d11f887eaaabc091afa86598dea9531deb6bb5",
+      "Data/Computers/raw/amazon_electronics_computers.npz": "736ba1d9fd85eac2da83a5ad25c463f04b0031a6ca01563f90a7099d9e8ffb2c",
+      "Data/Photo/processed/data.pt": "3dc53ddfdde6c1226bf230a4948a770d03652dc7361a24a87905e607bcb66e8a",
+      "Data/Photo/processed/pre_filter.pt": "d61040ea2f61a70e2ff5c16e08d11f887eaaabc091afa86598dea9531deb6bb5",
+      "Data/Photo/processed/pre_transform.pt": "d61040ea2f61a70e2ff5c16e08d11f887eaaabc091afa86598dea9531deb6bb5",
+      "Data/Photo/raw/amazon_electronics_photo.npz": "bdb1feb8e6ff42ee44024b04479145029c563fd42fc31bff80af20887ba0439a",
+      "Data/Physics/processed/data.pt": "dc2b54ba962955224275c248c5e6578baece5257a526829cf4f1d6dd2728891e",
+      "Data/Physics/processed/pre_filter.pt": "d61040ea2f61a70e2ff5c16e08d11f887eaaabc091afa86598dea9531deb6bb5",
+      "Data/Physics/processed/pre_transform.pt": "d61040ea2f61a70e2ff5c16e08d11f887eaaabc091afa86598dea9531deb6bb5",
+      "Data/Physics/raw/ms_academic_phy.npz": "e4d68468eba5fb8f6b280ffd406bd53e6e4295ba1dd2967d6fe99b978e4b3375",
+      "Data/acm/acm.edge": "d4a9d755cb194fa33a3e065178991b6b1169e0211687afce2989210383101c33",
+      "Data/acm/acm.feature": "9b79821de99b0967e42ed44462e946576a0966285879b90b1d832632bd0a4370",
+      "Data/acm/acm.label": "db4872c037fb5e6b2c4e49316e455d5b7347d4798ad230eb9862445badc35f84",
+      "Data/acm.zip": "f3950005c650a390e869fac37d21d5bfadcf349bc4b5d275eb5090d15564f7ed",
+      "Data/blogcatalog/blogcatalog.edge": "cccbf085dca7e4de2c643b7794f792e96d04ce3f2b2f27d17fdbf5630f864cd8",
+      "Data/blogcatalog/blogcatalog.feature": "212055a7b769dd1e48d43581acaff84226ba34cbb09ef698336bb704fcc24f35",
+      "Data/blogcatalog/blogcatalog.label": "892d13d2b0b78329251f2a8660a4b440b41f8e4a61318cf9d73825e799fe5c1a",
+      "Data/blogcatalog.zip": "3e46d6d18573aff7bc6e3996f32f8d3c19f380c6745304ecb700913a5f8dde20",
+      "Data/citeseer/processed/data.pt": "24243aba45fc673f8f6cb76f2f4d0fa29d20abf854a330430f1a59d8b1faa93a",
+      "Data/citeseer/processed/pre_filter.pt": "0b235e5f068a00e5bf391cec33fad69292177c841d5a8fd2ab76f764489fb6e7",
+      "Data/citeseer/processed/pre_transform.pt": "0b235e5f068a00e5bf391cec33fad69292177c841d5a8fd2ab76f764489fb6e7",
+      "Data/citeseer/raw/ind.citeseer.allx": "2ac30345d95c9ec933a817ee0bdd6a5f077f8c184a20e696910192d534414668",
+      "Data/citeseer/raw/ind.citeseer.ally": "f704b2d986dde6c2669934de1f3ae5696a6cf9455c0f6b2646a2d135ea0a1c95",
+      "Data/citeseer/raw/ind.citeseer.graph": "d79a4ef9d3e7169aee8946145f6b7306e35bc79bffad26346cfb94e10e9912a7",
+      "Data/citeseer/raw/ind.citeseer.test.index": "2af990671580b6b2df5d158d1038f8292e30c9cd821b5453f399659b25b723d4",
+      "Data/citeseer/raw/ind.citeseer.tx": "539a8906a2da97628d212f2fdd668c109a8b3f0d36574b59e5d3fd5b5303da21",
+      "Data/citeseer/raw/ind.citeseer.ty": "55e5bd1ba1e733a04598753ad1a8d57957f4b8f89e74519f41f4f4938767e4ce",
+      "Data/citeseer/raw/ind.citeseer.x": "d20de19150741e555de0ed037195630fc194114ebc7fd72ced62810148aa22f6",
+      "Data/citeseer/raw/ind.citeseer.y": "8ba87e515d8e3ee3cf52f6d2c5b86aa73f11ecad825a808455209ec26cd54924",
+      "Data/citeseer.npz": "36e9a5bbe84eaa0c3c6b226f8b27450bb79246a5df22c375b3bacddb856efa8e",
+      "Data/cora/processed/data.pt": "a703cd242fee898ce244eb7fad2a0e084a4750f76dffcbc48c65491318567939",
+      "Data/cora/processed/pre_filter.pt": "d8e85a693a769ec1ab202c65c24be372d509f1d39b15df13aff87ce8cb3b87a9",
+      "Data/cora/processed/pre_transform.pt": "d8e85a693a769ec1ab202c65c24be372d509f1d39b15df13aff87ce8cb3b87a9",
+      "Data/cora/raw/ind.cora.allx": "9419ba2f26f5c35243db64aba110e0f35a04851609e0dc5433450676ca6b8543",
+      "Data/cora/raw/ind.cora.ally": "2b998f5cc7fedc86e7f97ca2498f47a1ffc1462c29e2d578b23bf3f62b6e7d71",
+      "Data/cora/raw/ind.cora.graph": "58f13302f39dde8852dad6fe6d15b89b077b6d7f837626bce671ef80344b383d",
+      "Data/cora/raw/ind.cora.test.index": "297ce89af2b51a6a194181c7dbe1796c6a1cf9cd9349a88383b1b1e227867875",
+      "Data/cora/raw/ind.cora.tx": "b9afbaa4a400df991f6f02ef677e1e44da55ffc04801fd02f9e673987829226a",
+      "Data/cora/raw/ind.cora.ty": "41f5ac76596a1699cc33f53084a2419e92961c42bb75f36fc38e616d348532ad",
+      "Data/cora/raw/ind.cora.x": "23cfa55d91c6f624233f5eb7b6e3f141f1bd2b2ae39608a63cf5d084bb27baab",
+      "Data/cora/raw/ind.cora.y": "94465c14eb53e04ca262198dcbb2521ee8af60fb3f3d546cd6ca24a511b0e7d1",
+      "Data/cora.npz": "398a5c8f949a4f2a3c8fb248f777d2756c654de714762d6a18c04eaa19a96271",
+      "Data/cora_ml.npz": "ffbe4e64857dc6bf38f1877e4312559a064df84b59d0f32f938717de5d5af0fd",
+      "Data/cora_raw_texts.pkl": "30c18d99e038b553ef764a9c775d3fd80f31cdb924c7ed0f855bd36d7127d9bb",
+      "Data/polblogs.npz": "cd0983c2b1caa3bbe2703a4e316f97bb1dccd33f98800d3d8e4bbe51cc86941b",
+      "Data/pygdata/cs/CS/processed/data.pt": "e2fd93e40abd6f61879b4b6a968027aee282696552808cef57d48443a75cfa6a",
+      "Data/pygdata/cs/CS/processed/pre_filter.pt": "0b235e5f068a00e5bf391cec33fad69292177c841d5a8fd2ab76f764489fb6e7",
+      "Data/pygdata/cs/CS/processed/pre_transform.pt": "0b235e5f068a00e5bf391cec33fad69292177c841d5a8fd2ab76f764489fb6e7",
+      "Data/pygdata/cs/CS/raw/ms_academic_cs.npz": "933c745734e78908c7eb77172a673fee0503f30e26e5a99b36814d88534c42e3",
+      "bow_cache/arxiv.pkl": "7769eebb1669d3537c0116b435d2240308431fe2bf8ee1f1b3d3477438b7b675",
+      "bow_cache/citeseer.pkl": "0c2d2f95374ead5cacbd10556d249a22a47ec4ae3709994bed7f2252dba530de",
+      "bow_cache/cora.pkl": "401fdb086a4b7f73dfdb61554a1ce7ec5bfe7159b794e241f6f44f76f20e4067",
+      "bow_cache/cora_ml.pkl": "6a55d05b23785ec85f04c125f6cc9c0a3c12d54479486a283e960635080f20b3",
+      "bow_cache/pubmed.pkl": "bc6624958db7a65d337ac1c02ec09340375091db2095a442bb0ce86ef9035ffd",
+      "bow_cache/reddit.pkl": "3c60782e01398722cdf472ec9cf8616b4f84439f7f1230a50edd69f0a2010848"
+    },
+    "python_executable": "/Users/shemingcong/anaconda3/envs/smc/bin/python",
+    "python_environment": {
+      "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:11:29) [Clang 20.1.8 ]",
+      "executable": "/Users/shemingcong/anaconda3/envs/smc/bin/python",
+      "packages": {
+        "numpy": "2.3.4",
+        "scipy": "1.16.3",
+        "networkx": "3.5",
+        "torch": "2.9.0",
+        "torch-geometric": "2.7.0",
+        "deeprobust": "0.2.11",
+        "scikit-learn": "1.7.2",
+        "openai": "2.7.1",
+        "transformers": "4.57.1"
+      },
+      "cuda": null,
+      "devices": []
+    },
+    "api_base_url": "http://localhost:11434/v1",
+    "generation_model": "llama3.2:1b-instruct-fp16",
+    "machine": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "cuda_visible_devices": null,
+    "thread_count": 1,
+    "generation_temperature": 0.0
+  },
+  "fingerprint": "3f19a169152b69f8eb942c6f91e3236193b8074ab2194501f140536add6c3e93",
+  "status": "complete",
+  "command": [
+    "python",
+    "-u",
+    "-m",
+    "gbhaa_experiments.entrypoints.meta_action_state",
+    "--action-state-phase",
+    "parallel",
+    "--action-state-artifacts",
+    "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_action_state/citeseer/ptb_0.1/seed_19/parallel/artifacts",
+    "--action-state-trajectory",
+    "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_action_state/citeseer/ptb_0.1/seed_19/structure/artifacts/trajectory.json",
+    "--action-state-cache",
+    "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_action_state/_generation_cache/53a77f0bc1caeb59cd1b3acb0825d42b0f8fbfe302711e964e0002f540b8d6c6",
+    "--model",
+    "Meta-Both",
+    "--split_data",
+    "normal",
+    "--epochs",
+    "200",
+    "--step",
+    "1",
+    "--hidden",
+    "16",
+    "--dropout",
+    "0.5",
+    "--level",
+    "2",
+    "--miter",
+    "10",
+    "--lr",
+    "0.01",
+    "--global_important_ratio",
+    "0.1",
+    "--global_ppr_alpha",
+    "0.15",
+    "--global_ppr_iters",
+    "30",
+    "--global_seed_strategy",
+    "degree",
+    "--text_attack_max_visits",
+    "10",
+    "--text_retries",
+    "3",
+    "--text_budget_per_node",
+    "80",
+    "--text_topk_ratio",
+    "0.12",
+    "--text_ppr_alpha",
+    "0.28",
+    "--text_ppr_iters",
+    "60",
+    "--text_min_cluster_size",
+    "2",
+    "--text_max_cluster_size",
+    "4",
+    "--text_similarity_min",
+    "0.35",
+    "--text_cdl_topk",
+    "36",
+    "--text_cluster_attr_topk",
+    "36",
+    "--text_max_added_words",
+    "70",
+    "--coarsen_method",
+    "gb",
+    "--text_attack_nodes",
+    "4",
+    "--dataset",
+    "citeseer",
+    "--seed",
+    "19",
+    "--ptb_rate",
+    "0.1",
+    "--freeze_structure_features",
+    "--use_text_attack",
+    "--llm_type",
+    "gpt",
+    "--allow_partial_vocabulary",
+    "--api_base_url",
+    "http://localhost:11434/v1"
+  ],
+  "returncode": 0,
+  "wall_time_seconds": 321.3623657920398,
+  "peak_rss_mib": 1813.671875,
+  "attack": {
+    "actions": [
+      [
+        488,
+        1021,
+        1
+      ],
+      [
+        1311,
+        2069,
+        0
+      ],
+      [
+        785,
+        140,
+        1
+      ],
+      [
+        1807,
+        449,
+        1
+      ],
+      [
+        1548,
+        284,
+        1
+      ],
+      [
+        1610,
+        1609,
+        0
+      ],
+      [
+        212,
+        980,
+        1
+      ],
+      [
+        482,
+        900,
+        1
+      ],
+      [
+        135,
+        753,
+        1
+      ],
+      [
+        15,
+        61,
+        1
+      ],
+      [
+        1385,
+        795,
+        0
+      ],
+      [
+        482,
+        1051,
+        1
+      ],
+      [
+        781,
+        1096,
+        1
+      ],
+      [
+        875,
+        224,
+        1
+      ],
+      [
+        779,
+        543,
+        1
+      ],
+      [
+        934,
+        1219,
+        1
+      ],
+      [
+        355,
+        2088,
+        0
+      ],
+      [
+        1592,
+        1533,
+        1
+      ],
+      [
+        1415,
+        558,
+        1
+      ],
+      [
+        655,
+        403,
+        0
+      ],
+      [
+        439,
+        859,
+        1
+      ],
+      [
+        1934,
+        1120,
+        1
+      ],
+      [
+        805,
+        640,
+        0
+      ],
+      [
+        1807,
+        796,
+        1
+      ],
+      [
+        1937,
+        1863,
+        0
+      ],
+      [
+        1452,
+        528,
+        0
+      ],
+      [
+        944,
+        961,
+        1
+      ],
+      [
+        1314,
+        1208,
+        1
+      ],
+      [
+        1018,
+        718,
+        0
+      ],
+      [
+        15,
+        886,
+        1
+      ],
+      [
+        1402,
+        319,
+        1
+      ],
+      [
+        1772,
+        1506,
+        1
+      ],
+      [
+        1296,
+        254,
+        1
+      ],
+      [
+        511,
+        1959,
+        1
+      ],
+      [
+        1750,
+        1641,
+        0
+      ],
+      [
+        1765,
+        472,
+        0
+      ],
+      [
+        543,
+        656,
+        0
+      ],
+      [
+        570,
+        1195,
+        1
+      ],
+      [
+        1740,
+        1481,
+        1
+      ],
+      [
+        453,
+        1728,
+        1
+      ],
+      [
+        1595,
+        945,
+        1
+      ],
+      [
+        1132,
+        1948,
+        1
+      ],
+      [
+        448,
+        1485,
+        0
+      ],
+      [
+        1427,
+        46,
+        1
+      ],
+      [
+        1224,
+        1496,
+        1
+      ],
+      [
+        1163,
+        639,
+        1
+      ],
+      [
+        1740,
+        1681,
+        1
+      ],
+      [
+        2089,
+        1700,
+        1
+      ],
+      [
+        1229,
+        819,
+        1
+      ],
+      [
+        1295,
+        218,
+        0
+      ],
+      [
+        1740,
+        1433,
+        0
+      ],
+      [
+        353,
+        819,
+        1
+      ],
+      [
+        857,
+        1193,
+        1
+      ],
+      [
+        1315,
+        933,
+        1
+      ],
+      [
+        523,
+        607,
+        1
+      ],
+      [
+        666,
+        2092,
+        0
+      ],
+      [
+        579,
+        604,
+        1
+      ],
+      [
+        1916,
+        1915,
+        1
+      ],
+      [
+        785,
+        1434,
+        1
+      ],
+      [
+        673,
+        1752,
+        1
+      ],
+      [
+        1879,
+        775,
+        1
+      ],
+      [
+        1939,
+        1185,
+        1
+      ],
+      [
+        1919,
+        1970,
+        1
+      ],
+      [
+        575,
+        1144,
+        0
+      ],
+      [
+        2017,
+        1298,
+        1
+      ],
+      [
+        1595,
+        249,
+        0
+      ],
+      [
+        1913,
+        1475,
+        1
+      ],
+      [
+        1946,
+        123,
+        1
+      ],
+      [
+        235,
+        1455,
+        1
+      ],
+      [
+        1588,
+        471,
+        0
+      ],
+      [
+        464,
+        1105,
+        0
+      ],
+      [
+        70,
+        2045,
+        1
+      ],
+      [
+        1934,
+        906,
+        1
+      ],
+      [
+        1649,
+        1271,
+        1
+      ],
+      [
+        94,
+        63,
+        1
+      ],
+      [
+        1935,
+        1902,
+        1
+      ],
+      [
+        594,
+        2082,
+        1
+      ],
+      [
+        1763,
+        572,
+        0
+      ],
+      [
+        217,
+        1115,
+        1
+      ],
+      [
+        470,
+        1254,
+        1
+      ],
+      [
+        1421,
+        1589,
+        1
+      ],
+      [
+        2044,
+        1918,
+        1
+      ],
+      [
+        2019,
+        239,
+        1
+      ],
+      [
+        1743,
+        1520,
+        1
+      ],
+      [
+        1640,
+        1825,
+        1
+      ],
+      [
+        2048,
+        682,
+        1
+      ],
+      [
+        476,
+        1023,
+        0
+      ],
+      [
+        1743,
+        1349,
+        1
+      ],
+      [
+        1743,
+        1641,
+        1
+      ],
+      [
+        1547,
+        139,
+        1
+      ],
+      [
+        1534,
+        1669,
+        1
+      ],
+      [
+        2015,
+        1319,
+        0
+      ],
+      [
+        1386,
+        214,
+        0
+      ],
+      [
+        882,
+        427,
+        0
+      ],
+      [
+        452,
+        1440,
+        0
+      ],
+      [
+        679,
+        1607,
+        1
+      ],
+      [
+        1867,
+        1933,
+        0
+      ],
+      [
+        779,
+        702,
+        1
+      ],
+      [
+        1236,
+        1144,
+        1
+      ],
+      [
+        73,
+        348,
+        1
+      ],
+      [
+        870,
+        1990,
+        1
+      ],
+      [
+        568,
+        1424,
+        0
+      ],
+      [
+        1764,
+        218,
+        1
+      ],
+      [
+        1701,
+        872,
+        0
+      ],
+      [
+        523,
+        1942,
+        1
+      ],
+      [
+        1595,
+        1319,
+        1
+      ],
+      [
+        881,
+        1650,
+        0
+      ],
+      [
+        1670,
+        1553,
+        0
+      ],
+      [
+        582,
+        1973,
+        0
+      ],
+      [
+        1975,
+        1548,
+        1
+      ],
+      [
+        755,
+        1253,
+        0
+      ],
+      [
+        134,
+        1134,
+        1
+      ],
+      [
+        1901,
+        1902,
+        0
+      ],
+      [
+        424,
+        777,
+        1
+      ],
+      [
+        1637,
+        406,
+        0
+      ],
+      [
+        2106,
+        976,
+        0
+      ],
+      [
+        1002,
+        133,
+        1
+      ],
+      [
+        152,
+        930,
+        1
+      ],
+      [
+        1677,
+        1620,
+        1
+      ],
+      [
+        2070,
+        934,
+        1
+      ],
+      [
+        1467,
+        1791,
+        1
+      ],
+      [
+        1987,
+        849,
+        1
+      ],
+      [
+        2015,
+        515,
+        1
+      ],
+      [
+        673,
+        384,
+        1
+      ],
+      [
+        1772,
+        1892,
+        1
+      ],
+      [
+        938,
+        592,
+        0
+      ],
+      [
+        274,
+        1777,
+        1
+      ],
+      [
+        1879,
+        1792,
+        1
+      ],
+      [
+        995,
+        1194,
+        1
+      ],
+      [
+        424,
+        1928,
+        1
+      ],
+      [
+        1841,
+        1986,
+        0
+      ],
+      [
+        249,
+        1433,
+        1
+      ],
+      [
+        809,
+        627,
+        1
+      ],
+      [
+        793,
+        1606,
+        1
+      ],
+      [
+        681,
+        1045,
+        1
+      ],
+      [
+        995,
+        1629,
+        1
+      ],
+      [
+        235,
+        801,
+        1
+      ],
+      [
+        1453,
+        1194,
+        0
+      ],
+      [
+        303,
+        1611,
+        1
+      ],
+      [
+        424,
+        406,
+        1
+      ],
+      [
+        862,
+        685,
+        0
+      ],
+      [
+        1967,
+        2089,
+        1
+      ],
+      [
+        812,
+        421,
+        1
+      ],
+      [
+        936,
+        819,
+        1
+      ],
+      [
+        1530,
+        1650,
+        0
+      ],
+      [
+        1644,
+        989,
+        1
+      ],
+      [
+        1092,
+        1472,
+        1
+      ],
+      [
+        934,
+        1252,
+        1
+      ],
+      [
+        665,
+        164,
+        1
+      ],
+      [
+        1221,
+        536,
+        1
+      ],
+      [
+        1316,
+        1873,
+        1
+      ],
+      [
+        1598,
+        816,
+        0
+      ],
+      [
+        1222,
+        1142,
+        1
+      ],
+      [
+        2013,
+        621,
+        1
+      ],
+      [
+        640,
+        403,
+        0
+      ],
+      [
+        140,
+        2012,
+        1
+      ],
+      [
+        374,
+        298,
+        1
+      ],
+      [
+        1137,
+        1869,
+        1
+      ],
+      [
+        1144,
+        554,
+        1
+      ],
+      [
+        2070,
+        1217,
+        1
+      ],
+      [
+        1618,
+        648,
+        1
+      ],
+      [
+        1470,
+        775,
+        1
+      ],
+      [
+        1315,
+        1599,
+        1
+      ],
+      [
+        1764,
+        1405,
+        1
+      ],
+      [
+        522,
+        619,
+        1
+      ],
+      [
+        1478,
+        1215,
+        1
+      ],
+      [
+        1928,
+        672,
+        1
+      ],
+      [
+        2051,
+        1133,
+        1
+      ],
+      [
+        2051,
+        1643,
+        1
+      ],
+      [
+        453,
+        550,
+        1
+      ],
+      [
+        17,
+        1289,
+        0
+      ],
+      [
+        265,
+        141,
+        1
+      ],
+      [
+        2090,
+        17,
+        0
+      ],
+      [
+        1002,
+        1109,
+        1
+      ],
+      [
+        800,
+        801,
+        0
+      ],
+      [
+        1686,
+        58,
+        1
+      ],
+      [
+        801,
+        1598,
+        1
+      ],
+      [
+        922,
+        1481,
+        1
+      ],
+      [
+        681,
+        1197,
+        1
+      ],
+      [
+        135,
+        1898,
+        1
+      ],
+      [
+        1253,
+        384,
+        0
+      ],
+      [
+        627,
+        474,
+        1
+      ],
+      [
+        739,
+        1861,
+        1
+      ],
+      [
+        1575,
+        301,
+        1
+      ],
+      [
+        1315,
+        330,
+        1
+      ],
+      [
+        1723,
+        2077,
+        1
+      ],
+      [
+        1171,
+        902,
+        0
+      ],
+      [
+        1268,
+        1094,
+        1
+      ],
+      [
+        883,
+        1937,
+        1
+      ],
+      [
+        1080,
+        854,
+        1
+      ],
+      [
+        654,
+        409,
+        0
+      ],
+      [
+        1740,
+        1994,
+        1
+      ],
+      [
+        1222,
+        795,
+        1
+      ],
+      [
+        354,
+        678,
+        0
+      ],
+      [
+        11,
+        1289,
+        1
+      ],
+      [
+        1671,
+        1030,
+        0
+      ],
+      [
+        428,
+        522,
+        1
+      ],
+      [
+        1390,
+        1413,
+        0
+      ],
+      [
+        655,
+        1238,
+        0
+      ],
+      [
+        379,
+        647,
+        1
+      ],
+      [
+        2016,
+        594,
+        1
+      ],
+      [
+        1094,
+        1481,
+        1
+      ],
+      [
+        470,
+        1267,
+        1
+      ],
+      [
+        1007,
+        1144,
+        1
+      ],
+      [
+        588,
+        1306,
+        1
+      ],
+      [
+        853,
+        184,
+        0
+      ],
+      [
+        1903,
+        1421,
+        0
+      ],
+      [
+        134,
+        1097,
+        1
+      ],
+      [
+        1984,
+        1516,
+        0
+      ],
+      [
+        428,
+        1512,
+        1
+      ],
+      [
+        2053,
+        455,
+        0
+      ],
+      [
+        1579,
+        29,
+        0
+      ],
+      [
+        263,
+        333,
+        0
+      ],
+      [
+        1575,
+        2026,
+        1
+      ],
+      [
+        658,
+        1676,
+        1
+      ],
+      [
+        1928,
+        780,
+        1
+      ],
+      [
+        73,
+        566,
+        1
+      ],
+      [
+        312,
+        1984,
+        1
+      ],
+      [
+        559,
+        1144,
+        0
+      ],
+      [
+        2015,
+        1795,
+        1
+      ],
+      [
+        572,
+        832,
+        0
+      ],
+      [
+        1850,
+        1898,
+        1
+      ],
+      [
+        26,
+        1030,
+        1
+      ],
+      [
+        684,
+        911,
+        1
+      ],
+      [
+        1916,
+        678,
+        1
+      ],
+      [
+        1229,
+        529,
+        0
+      ],
+      [
+        1916,
+        684,
+        1
+      ],
+      [
+        1542,
+        769,
+        1
+      ],
+      [
+        1052,
+        403,
+        0
+      ],
+      [
+        668,
+        1663,
+        0
+      ],
+      [
+        625,
+        1926,
+        0
+      ],
+      [
+        1271,
+        550,
+        0
+      ],
+      [
+        518,
+        270,
+        1
+      ],
+      [
+        94,
+        1031,
+        1
+      ],
+      [
+        490,
+        701,
+        0
+      ],
+      [
+        1570,
+        199,
+        1
+      ],
+      [
+        303,
+        1453,
+        1
+      ],
+      [
+        1466,
+        1467,
+        0
+      ],
+      [
+        1677,
+        1501,
+        1
+      ],
+      [
+        525,
+        1973,
+        1
+      ],
+      [
+        1946,
+        1945,
+        0
+      ],
+      [
+        1714,
+        1266,
+        0
+      ],
+      [
+        533,
+        1169,
+        1
+      ],
+      [
+        426,
+        1608,
+        0
+      ],
+      [
+        1044,
+        441,
+        1
+      ],
+      [
+        1740,
+        1443,
+        1
+      ],
+      [
+        1842,
+        747,
+        1
+      ],
+      [
+        1092,
+        616,
+        1
+      ],
+      [
+        1400,
+        572,
+        0
+      ],
+      [
+        1449,
+        1933,
+        1
+      ],
+      [
+        579,
+        1194,
+        1
+      ],
+      [
+        292,
+        771,
+        1
+      ],
+      [
+        1575,
+        184,
+        1
+      ],
+      [
+        2051,
+        1073,
+        1
+      ],
+      [
+        940,
+        2046,
+        1
+      ],
+      [
+        273,
+        997,
+        1
+      ],
+      [
+        1415,
+        1432,
+        1
+      ],
+      [
+        140,
+        1759,
+        0
+      ],
+      [
+        1723,
+        1276,
+        1
+      ],
+      [
+        1196,
+        1194,
+        0
+      ],
+      [
+        895,
+        606,
+        1
+      ],
+      [
+        1630,
+        38,
+        0
+      ],
+      [
+        1835,
+        1397,
+        1
+      ],
+      [
+        1648,
+        719,
+        0
+      ],
+      [
+        1126,
+        1675,
+        1
+      ],
+      [
+        1712,
+        572,
+        1
+      ],
+      [
+        356,
+        892,
+        1
+      ],
+      [
+        687,
+        1094,
+        1
+      ],
+      [
+        1378,
+        579,
+        0
+      ],
+      [
+        1759,
+        332,
+        1
+      ],
+      [
+        1218,
+        1520,
+        1
+      ],
+      [
+        1640,
+        2092,
+        1
+      ],
+      [
+        766,
+        835,
+        1
+      ],
+      [
+        1765,
+        1373,
+        1
+      ],
+      [
+        817,
+        1069,
+        0
+      ],
+      [
+        527,
+        1466,
+        0
+      ],
+      [
+        1304,
+        220,
+        0
+      ],
+      [
+        985,
+        1207,
+        0
+      ],
+      [
+        568,
+        172,
+        1
+      ],
+      [
+        1424,
+        529,
+        0
+      ],
+      [
+        1935,
+        518,
+        1
+      ],
+      [
+        870,
+        120,
+        1
+      ],
+      [
+        1376,
+        1826,
+        1
+      ],
+      [
+        1325,
+        950,
+        1
+      ],
+      [
+        866,
+        492,
+        1
+      ],
+      [
+        607,
+        490,
+        1
+      ],
+      [
+        1916,
+        1864,
+        1
+      ],
+      [
+        261,
+        817,
+        0
+      ],
+      [
+        1109,
+        1110,
+        0
+      ],
+      [
+        1313,
+        74,
+        1
+      ],
+      [
+        1049,
+        1578,
+        0
+      ],
+      [
+        1018,
+        1019,
+        0
+      ],
+      [
+        1268,
+        1148,
+        1
+      ],
+      [
+        1144,
+        1231,
+        1
+      ],
+      [
+        500,
+        1943,
+        1
+      ],
+      [
+        253,
+        1956,
+        0
+      ],
+      [
+        1900,
+        592,
+        1
+      ],
+      [
+        1967,
+        1702,
+        1
+      ],
+      [
+        1295,
+        667,
+        1
+      ],
+      [
+        1263,
+        2019,
+        1
+      ],
+      [
+        1435,
+        280,
+        1
+      ],
+      [
+        568,
+        529,
+        1
+      ],
+      [
+        599,
+        950,
+        1
+      ],
+      [
+        1784,
+        1119,
+        1
+      ],
+      [
+        1450,
+        1622,
+        1
+      ],
+      [
+        135,
+        1869,
+        1
+      ],
+      [
+        1223,
+        1398,
+        1
+      ],
+      [
+        483,
+        1438,
+        1
+      ],
+      [
+        1193,
+        242,
+        0
+      ],
+      [
+        801,
+        763,
+        1
+      ],
+      [
+        2051,
+        927,
+        1
+      ],
+      [
+        893,
+        1448,
+        1
+      ],
+      [
+        673,
+        645,
+        1
+      ],
+      [
+        1858,
+        266,
+        1
+      ],
+      [
+        1665,
+        818,
+        0
+      ],
+      [
+        2094,
+        1144,
+        1
+      ],
+      [
+        1975,
+        569,
+        1
+      ],
+      [
+        844,
+        1898,
+        1
+      ],
+      [
+        2060,
+        1148,
+        1
+      ],
+      [
+        1765,
+        796,
+        1
+      ],
+      [
+        102,
+        1194,
+        1
+      ],
+      [
+        1156,
+        1244,
+        1
+      ],
+      [
+        940,
+        1264,
+        1
+      ],
+      [
+        90,
+        371,
+        0
+      ],
+      [
+        428,
+        33,
+        1
+      ],
+      [
+        268,
+        1160,
+        0
+      ],
+      [
+        1194,
+        1740,
+        0
+      ],
+      [
+        1421,
+        708,
+        1
+      ],
+      [
+        1349,
+        1440,
+        1
+      ],
+      [
+        692,
+        1669,
+        1
+      ],
+      [
+        967,
+        1683,
+        0
+      ],
+      [
+        249,
+        1926,
+        1
+      ],
+      [
+        322,
+        1113,
+        1
+      ],
+      [
+        439,
+        1485,
+        1
+      ],
+      [
+        1765,
+        808,
+        1
+      ],
+      [
+        2082,
+        1453,
+        1
+      ],
+      [
+        1126,
+        1290,
+        1
+      ],
+      [
+        1551,
+        186,
+        1
+      ],
+      [
+        1364,
+        416,
+        1
+      ],
+      [
+        832,
+        833,
+        0
+      ],
+      [
+        482,
+        319,
+        1
+      ],
+      [
+        102,
+        1009,
+        1
+      ],
+      [
+        897,
+        1933,
+        1
+      ],
+      [
+        723,
+        1189,
+        0
+      ],
+      [
+        780,
+        1681,
+        1
+      ],
+      [
+        169,
+        1665,
+        1
+      ],
+      [
+        70,
+        520,
+        1
+      ],
+      [
+        673,
+        181,
+        1
+      ],
+      [
+        73,
+        1022,
+        1
+      ],
+      [
+        1236,
+        333,
+        0
+      ],
+      [
+        1558,
+        20,
+        1
+      ],
+      [
+        948,
+        241,
+        0
+      ],
+      [
+        720,
+        452,
+        1
+      ],
+      [
+        545,
+        1193,
+        0
+      ],
+      [
+        511,
+        446,
+        1
+      ],
+      [
+        241,
+        640,
+        0
+      ],
+      [
+        59,
+        619,
+        1
+      ],
+      [
+        268,
+        945,
+        0
+      ],
+      [
+        1478,
+        1103,
+        1
+      ],
+      [
+        1869,
+        1165,
+        0
+      ],
+      [
+        831,
+        1453,
+        1
+      ],
+      [
+        2057,
+        996,
+        1
+      ],
+      [
+        883,
+        165,
+        1
+      ],
+      [
+        809,
+        1387,
+        1
+      ],
+      [
+        1014,
+        788,
+        0
+      ],
+      [
+        26,
+        1528,
+        1
+      ]
+    ],
+    "actions_hash": "aba58eb88866a5032b06dd27902ffe57af87863591f20e697d3977e2799e223b",
+    "api_counts": {
+      "attempts": 183,
+      "failures": 0,
+      "retries": 0,
+      "successes": 183
+    },
+    "attribute_counts": {
+      "cache_hits": 0,
+      "cluster_failures": 0,
+      "completed": 366,
+      "feature_changes": 1464,
+      "feature_writes": 1464,
+      "node_failures": 0,
+      "targets": 1464,
+      "template_attempts": 366,
+      "template_failures": 0,
+      "template_successes": 366
+    },
+    "attribute_node_visits": 1464,
+    "budget": 0.1,
+    "budget_complete": true,
+    "changed_feature_entries": 89888,
+    "changed_feature_nodes": 957,
+    "completed_edges": 366,
+    "dataset": "citeseer",
+    "evaluation_labels_hash": "8a6717752fafb4dd180125b75b36f24ced6091d742e54c215bf491dc25ffa6ea",
+    "feature_l1": 77918.70042896271,
+    "feature_l2": 262.8725448252732,
+    "feature_linf": 1.0,
+    "generation_model": "llama3.2:1b-instruct-fp16",
+    "generation_request_keys": [
+      "0070d9defe9e32a36fa6d568f735eb9d2ebca6edc9a65f41e5673bae4970f07d",
+      "00ad8632a3048ecb60e9589f8c94fb5fdff54a3ff913e07b54c05411e5f7a630",
+      "00c2ce6dc70aedfec49d9cb768dea6e66edd4a1402425540a9866159f72ef5b1",
+      "00e80f0e64e6fcbfdd988fafe30c2c58ad5b98df24a2cf15f276aad53347f49e",
+      "00f29c8f52c593b7060c65c5a8f753c48473792f530ca358db682e533c51357c",
+      "013c38a303d53289dc4a0cd8b72054bd8feec075daf1290a19651005a79b0e60",
+      "01eeea788e60c514cdb3a0b7eaa7d43cd89356c07c93c141c97e5a28c88df044",
+      "0234b65f3bd413fc3ff66a9163ea18f7c98876634312e3b9c56330694209d945",
+      "02c210a4e7aa64474b0c52d9794830bd9afeac82489546784bdb55aae3b5c071",
+      "02eecaef0a9b8543842b5509cdfcb753210cc77a58afc5110d00013cbe641a4c",
+      "04854448b799fe9239351098267d74145cb865f60f62cfade72fd51f05b20bb1",
+      "051ef6d47060db256a3ce1270ef7bf5fffbab76ec3d045d09c86fdf7ed5df474",
+      "06aad1254ec86efd76aeddd20f12984f6f7664bbb9f5a96b4b6404bb7eaef513",
+      "07d6cf6e9f0da8e72ce042622114c9b9a600659131b667e91094a2f1ff8fc0ce",
+      "0801df41a01004deae93e6dbf21f10ba9df478e38d234db74a7eefb3845e15fc",
+      "08757dc533a9e38fd689943c19198c9f8b0bf1de74a7084894cfc080f2ddb7d8",
+      "08d4c996ea3de0ccd80351613511901e2f139fd46fba2709dd6c581a98ca9677",
+      "08f6c63847950d16806c5df94e647e0a54d6d6f37f53236c6b25e5676ed6e26c",
+      "0b6f73ebd772cf883306bad340ebf140cf0bf7760d0137ced2f7215218c6b8e7",
+      "0bf6f5e4638b808a338eb104698f4102d1f9c1997f50d9b6bb20f8c215df7fb0",
+      "0c5b0e7bc0058bcd4ee9226928a9d3b817ae5a9eb82bbde514baebbcbc1a2366",
+      "0c7323398a562f68a372fbcf37d2fa4e5aa6932c0a170339a834b2c6871453b4",
+      "0e194c537678e34e957335de48c5b0fb329bb4ec8b7032faf26a4a4d7fc45520",
+      "0e27e3b95a66e49fb5b5f11ef366c386e0941d3b3c11b088ed3340aaa43fd512",
+      "0e5954e073ae46d800fdc7e6c885b9b1891b77f9727961ef87e6d42b8ebdb047",
+      "0eb52b527a33f93e6bff6abbfdeaeb465b46ca01e45321ce15fd1b6330d4c8cc",
+      "0ede43db400f7985806ad94e45eace5c1309d3e57a6c816df8a2823e58b2bc08",
+      "0f481e260708935a2b4a7bb1d78f19807223718b6a21231e908c67cc8be398ef",
+      "0f8e10a718e67e274c02f344a26bde938d03894d3b64fd8e1411ede339a322f4",
+      "105e94fbcd235a4007a2860cb8c46d9bdd972d7893bb6f564b1bd97461563507",
+      "10c82c6f73f3ce2e2507f5e83f4887b8c7bcc09584b985fd16e1044c644caed2",
+      "11434c575aa33243ed2702eb3c3d7dd16e55666c2c3d777cde3bc7e73bd46010",
+      "12524ca99c132f62a755fbe35f283e5266fa4cdfffb9234dfd0a0ce9e892c0ec",
+      "134193990f9fa18ad9072e836bad223b0e2975db0bb16cd32fef5cf5b8d0fa6a",
+      "13447f8322569f671eaaa0f0c075c9eecbf45bb622c88eff8773185cad16fa9e",
+      "134e65f682014f28d0495b9a996db08e937dc3a1609a1f47431cca1b3e436121",
+      "13568f0c5ddfae0f3819fe0a24221f1688fe71db89b98f28dc434c154c03844d",
+      "13b6a7379f38583d8cd7e4795170b6d2104451108d3ce5500ade7f04ef417066",
+      "13d3a6ef6163829bb74b0f2b303781856d4572b3b7b43cf4704f228a40a1257e",
+      "1489a06f9661d357b7da8295072b6be78f3c2abce09b907b64d6758ea4d5d00c",
+      "14bba822a9ed22c0689935b0014181d88c3bd4f0e334bf03318b00a83520d61a",
+      "14dd6ad42d8a4e24d3ebf60019bf770876303c7ddb29058fedaefaaceb399470",
+      "178394771fe26693450184c688fddc206185d5c67a7260e2f3e3b410ea069013",
+      "17eaf873176dc37018e42885dfe0a2e58a109c97b59e28305cb8d0e46590191c",
+      "1834729e2b6658138766a42740be2c25cf910640e2d38377d2072aac658d6863",
+      "1a08e7a387556f571950fa6ef9c034b48250129681ede387a1492aca4164d8ea",
+      "1ade800bd9c57e8a1f41749e4f62b3d9d8e80a6c0851c766bcf46d6714a39d2f",
+      "1aecf6e332aff82e2b6b060e04cdf85038e13bf57e34bc846b94c2b0617e3e16",
+      "1b05d875195d1a94fd127d956b14f7a2547ccd7e6e01207afe4674fe22277a84",
+      "1b22dcffff24a22344db54900e506c2d605f55c39ba5b8aafb5ab6cd3e76c88e",
+      "1ea408657d9a6133653e09b7b9eb7bb12c7c7370057e116c09ad86bb9d2ac690",
+      "1f38a88912552cf743de56a365f8553e45bd94ff3ce8bf605c00b0ab8414bf68",
+      "207e1627fb4ce29d02d13f57b144553b3132a056be32cf9dec03e700b799a0d5",
+      "21a1c2f70895b42e5d730397f1c53c1317ea5130b75795cd6f72fe966d0c830d",
+      "21a4498fa30a4ff1eae7da1e288434faedcef1d68dbc46bbb0d7e4cb962e9cbd",
+      "21c117907626673535af38ee97d9f2fde3c964e3349792747003699c2fb2912d",
+      "2279770e9434babf4c7905edb05a864335391588f8211bfc8413f77de4aff17b",
+      "236568e9bbe227bf8af07609ec5da1d5b3d21bedfd56e4110bba8db86a7eb68d",
+      "254e9ecb6b21efe4c660e05690c719351a16a32fd253bfd65dad03a793df6a6c",
+      "2612a1eb04f240fc9fae670e0590718580960497ed4f85375fe0dd2c2814a125",
+      "276a58bc8c17ac3a0189137b1d41d315a6d3a86adb7496319cc1d677c2e9e2fc",
+      "28506613f317cf215cbb45304e3bfcecec5b1b9edcbdfdff1b27dbf71a5f34f6",
+      "288e7425eb6c1a7f0ca7b2decfaa711a65b4b437314bed032e0f541c7b249805",
+      "293ea830618f73d931252716c096f76653ecce000894fc2b658bd0968b7f32aa",
+      "298a65d3ea305187259a9ba4e8fbb390733b3674703a7230599b5d89d5a68589",
+      "2c32008b3d05f741d6744027b80dbbb8a546de3cec0c4fa7356d089ce8863ec1",
+      "2c638358656760206c319dcbb18b435f5688859414c3a1c9d2c876ad7531cfe8",
+      "2d47b854bf5a33bcfe021180c25d775f93f4bf38f837665ab7e86d97f78667e8",
+      "2d86b8b622bcff532a5034b601d81372941d19ca294edeaba58ab0e096d39c37",
+      "2ed72d1f3c69baccaa1d4c2520187619ce2055c85814243944b2c00441838a44",
+      "3090fa2242d522289aaebc9e7c1fd722ac35750bba2955b304757cab772248a6",
+      "30a2867c8916f20b6c2c8fec24ad20fb532269d80573c6176192a36cde0e2a09",
+      "30a6f7d386172f04ce18994d70367e1c5eda220eff062793ed79dd27c52e231a",
+      "30f59f45ed006f30992a2aca107d0e9dcb8ae53dd70cbf9dbb0a6b1c1fb78dd2",
+      "3109deaa031d089fc25b8e0a1ce6f00ad0426f6ad129383a38141df28ebfa7c8",
+      "31365a7fdb2e617ae704f80d9ce221069e968436459cf657185b9f7dce04ce83",
+      "31c2f61e5ad8c1aa1ad92aec2b5138a914e8b2c401b7e786d6461803311a6385",
+      "3306d96c87ab106ea418ed6a64256768eeae71fcfc07f27a1fad276c9c7c5009",
+      "3405e30f7d3e1f7e8783433b3b0aa1b21172baeb38a08ddeea712111b6da3547",
+      "35063453b58c7e071fd5d0051f5822afa65a0d7d44ba652d1462206a1d068560",
+      "35369f7428a13bb02b338af7d7e930499b65aa123bad37ad2010ecc0ce508ab2",
+      "3592c18872c8f57c48a9dca8502bc4962328dc262eb72b6b7ab841bc6e2de07b",
+      "3631619d556e5d8a337cf666f63bb4a26160dc1c59d1da3ccc201bd8348d67f9",
+      "364cbd4a085ee5cf4e8e37e90f4d649245a50d8b534c299de0ebfcce1fa02f11",
+      "370e23dceac4456f7e9b91129b2fdffb9c04929cb29241ba91b3028e03411a4a",
+      "374d701cc2369ad148c28d083a55fcde9fe39a7298b0619b5efa93e0664d3c82",
+      "376e4a035b6153e367ce85118e5f333da3d4abdf9c7a15b5fa3cb45522f7bc73",
+      "37ea12f919b42386baf06d8def62c9cdd01088e972784bba01027c006e041a96",
+      "38148bd8b0909553c488007ae3e9401d121411c78a3f04c762d8bfafabae6e42",
+      "3853f03f41e27f63a6862cb459bc7ab331ba6590acb14252c532916b55b2d15c",
+      "38742ced133dd934e699468e80832d1ebe3024f5545bdfb84708956f8c1f287f",
+      "396d9aedc45ff83450012c3842c3792d3764614907532eb87e6404b4a29206aa",
+      "3997c37712699f76b742bc5f45e8953609add9de97ec3e18b303518bb568ab55",
+      "39bd97d383b14f70c8c739398b6d3f332743de529d883eb4ac3be6749520cf14",
+      "3a17e681f2cb162aec050dc6b56c140813cbb9a4db686194a1dc48358459eca2",
+      "3a94179abf47719daf522a1e841d1874665b43fcd42ea872eaf16591c4f1b56d",
+      "3ad4e8353d5c64f05028e4679edfb5f8055bfad2c385475cfbe1f5c146c82c7f",
+      "3c81eaaf5b25963068c1571b76dbd2e709226722cfadc979e805c8309c1b5064",
+      "3c927a18eaf80b2037b8c1e0f84ae02ad89cdd4608c0e71baa8f74bfdd36a964",
+      "3d0264759d318f3ec7a6f964a560312a6d163a2ed750dac5814e1bdc1c9dde89",
+      "3f1ea98c1b3c826a7173d8d4d23b2a0f30194ff76a7a615dccc32918fa669ab2",
+      "3f8464dbd0599db41b63cfc42869e8374e24b0cbf37698553f1b28159fd6a2f7",
+      "40a95c53e6e632fd42927525068d37a6be8ae9ec784b15f976c76e7f6cfe6c2b",
+      "427bc311977f073d42a79311ade2f3f7b52cbca483f0ce1fa308b38c16ea01ad",
+      "438286acce392c6eb1c30134c7afb42d0c6db8ce9a23528b7e1242dff9bdb21c",
+      "44b0fff56085bee764dd9d694f2720eb5d6636bf357950c5b45c461fd00f15fb",
+      "4523aa9f1ab7ae5b38957f860750d330d15448d13de522d6ba334bcda8838b77",
+      "461cc35799105edd677978cd26dca44b2cd682b823290d5dad5e57587eb3badf",
+      "46bcaa84d768c3593a277d0491b0e93a82d539b3033b5b14265ca9d534008f0d",
+      "472a0e144c1c4bdf77ee1c79bcd97adda158f8f4021ed91e534319212fe3b3fc",
+      "47a0493531c54dcf37aa2b877292ce41ced8bad6a6c76b8e71d63e0dc4b36505",
+      "47d9c8a29c0621ec4817a267af75c01a63f67ca68988e76f226a990e2c874d99",
+      "483dfa34dfa406b12c5804ea5768ab667af73a432ec43c78ac182d24eb4fdd98",
+      "48e8ab583ea4533252caef17775a8efa9f0ef8f6d66fe16a36e98f810c5212ec",
+      "493c19d3308f726c721943f64db6564f7b4d166c9df00bc609a11f0e0b4914b0",
+      "4a9b0612f6ffa6229a6fb4f9f84a0e91e1b710801761534050bf7a9934494140",
+      "4b1c7e1a2281c1e8f1ff835999f8b4fd790ec83d330a48a89e779f78ab828f5b",
+      "4b5493bef030a649e5db89c2e110e3bb5751d6b8e3bf890d954f7141fb4aae7b",
+      "4d24ec9525e9997ed6d3f70c41b8a9cb5880f9e76dfa6ef9e0ae168055da8192",
+      "4f4c544c61fb3c4f8628d434753dc68cd6e1a11def32daab12f4105d1250e9ec",
+      "50afd4fce6c4d2aad9b2236f0bc67cdce82bf95f8a34f3949c38d99a7ccbc04c",
+      "511198e7e8beed7f6cf991bbc3ec5e69db9334bdc17a25d5fe7d8a48305de1a7",
+      "51bf9014435e6688d8645fc842570e73cfcd20312579198c05e5c3565fc50409",
+      "51ca3a8d7cc13334e78b4efa06b43602c44390049ea4b4ce79e95229eb8f2b46",
+      "51e3b1239a6a806c04427c6b97d6314b4f4672316582a2427e29997d6c81958b",
+      "546121a5907580f081fec955f535dec69416f9138c9f8962612bfce57a973973",
+      "548ed0b2ee6381a9fc3e1f534d8cb4d1fc4513d80759a2acadc4fc8233566aa4",
+      "55d5db2b41fc0eca16a88e832e84f27fc67fb57cb3726e35f82d23f5db625db3",
+      "56cbfa312712846afb6d4a157a1756389c38fbfde10aeb2111b37ab17b4bdf0c",
+      "579e0040cb078f14b61879cc97fb1f318cd571f2f3e961b733210d3b3fc39e44",
+      "57f9a9d05a321df4e2f0e5e265b685d3a53b2742b047be9260867a076cad6d00",
+      "581f0faf3f5ddd5ce6eef9ff17b127cfc9c0888a7bc2ce4a3dcf16469989f969",
+      "590495e21299a03398dc15b7e787de0d2adbd155fe21ef80ab727a49807e1215",
+      "59663c28ae055afa926dedc36b56466c5390d27fb62701c0ed0690ab2abc7b30",
+      "59dc498a8a279d4cb985221693668dd00726d271d85a51f6f426a3895eb177eb",
+      "5a89f68be3cdb1dc667047c8e4c9534224f533b0b95d3ef179880bf6f2e773c3",
+      "5a9525ec1771360d0c429f634ef5cb54cc6ace1585037b32400a5124e9d8cc35",
+      "5b489d579ff0df9bdd55c579bf1364aaef4c9ff492e909cf3c6049cf661301ac",
+      "5bfce75c57fdf9bc762ccbe36fb452e4dacab00bf5402736b6a41a2a3aec9e14",
+      "5d8cb42c625ff6d110b1c1c10568b017ead61ab3511fdd2bdeb1cd35342c095f",
+      "5d9462ba1109317d9136a9c440d6ab4ccc5d28042c05fdb9624e407c8a5dbd0f",
+      "5e8be3f5ca98fc8f863ea879a420b984dc5a4f5ea0a55363d85b1492304389cf",
+      "5eecc5fe95ed111918b1379e3509019b3bac49fd38bf363ef19455e152532320",
+      "5ef6fed9509b4a2e47f3fe977097b57862334969adbaa3aaa2184b5adae5cb82",
+      "5f332f0443e69355ae483fef11e1d6a4e2f11f769c63e0ec220e14d87b34ccab",
+      "60340e52834ed6467916dad37c47555348363cbfab6cbe0f237b8bcb70e498fb",
+      "607c37b85b8a2a8139cfe024a94f64c696d019469e774b81643b6465dccf8d49",
+      "610f61669bfe304de5fc8884dac686df29945b67293f7e9536b6da585cfc5e7f",
+      "6162e70b1536898449e1c999f3e9f316800ac7a74b26707170e626ae39106ed5",
+      "61adc2b7e0a8b7ba0e3177b7ddb8c619d14ac3aa71f27e1f54371ba5f7f9e1bb",
+      "620908c762b9142fe26edf7821d2918196ff8897d2e2a391c0678d135c080c88",
+      "62b01090e5cdbd1683371f4d7ea99f76b62685bd95d95e22be94e40965b62091",
+      "64eeaf9e4447588ad1c1aa06c3b42f25e8114749bd9bc91044956b2a976b80d3",
+      "65c17ecc02a3df915bbe7040736311836bc159f74f15f84c88a9c10659bcc2c0",
+      "663b4a71616f9209643b56aabe19d6922f436abb2ebdb50e48f414a5d5f98cbe",
+      "66a17f29254896d8eaf54e644a9bfa8bab26528fadfd46ebf1528832b76d4b24",
+      "678c9ea87874b454c63a0171f6ddf6a2bb29a731de7b503872f360899260eaf2",
+      "6a2d6522aaedbc99018002a509a17ed22c2d3e6284007eff89f4c0c8af2234b0",
+      "6b039d44517c65c497e0218ffcb169cb2e5724db67fad9a5694d13c9acd6851e",
+      "6bf0c7013c052a434fd43a89e0fe69b88eea8a5a0fef7f256cb6c3c17510b42e",
+      "6d4f3521c1c0b58f3037200b16b40fc384592d7c983ac749deaad581db3e4bcc",
+      "6dbca98567a783de1bd0bec45a70ab3090a8e7690dc0fcb3fcfed3b26dbec1a5",
+      "6dec29de1c518e645abf2449ec055194e7cabea47060e63f0acbec05f779e317",
+      "6f3eb2d78ea852e9a6b932096c82d70f47b66b16c92b8e8739c8a3a2e2df1991",
+      "7070a144e4dbbdd12e37a8e6d6ba4a2c498580fd591e63aa2b2272e0bff067f6",
+      "70b503051927408a65a4d7e6cc250db4fc1bc36591d0620e26781e27bc0548f3",
+      "72145c0ca7625773c89a90751728ff265c5daff6ddf32e992f958b17ffc053f0",
+      "726804f1e775a0ec823fd124b7a1e45e3e9961415711aa7ed2f57c359e0e5e66",
+      "727762fe5c9411483291edbbbb7f3140ce094c318893a8b355fd8f2ead45ba39",
+      "72922335a01b1f46ad21a7e0f04da0549d13d58f315b08b9b1ca01916ddc8093",
+      "72a347fe4c77f062d305226a241f7fe6454082207605c75ebde7e417448eb770",
+      "73824ba21874aecac10f148f24844488b4efed14f3bc91a921aafc460667ac6e",
+      "73a93768051bb2d8ce8d886a4af00916c967fcf02bd0a4d8ddeedf9bca309fac",
+      "745bf0a307ae47c58702eedbf086081fa08e5ab86cdce8b24b160326b4110d60",
+      "7538ffd60d8ac98233cef0e172ed34e6f11f0beec79887055e7b3b4d8d9f5128",
+      "75c2bf7a2b35cb45b9f98408887a0bf9d4ee239aa24d4a5db7dd3963303b372f",
+      "75f65e47cfa40d88f63502e9c50133085bcc1a27d277644f560ff162cea28ba2",
+      "762d48b36b8e38725c0eefdbc69552370b751c9fd937fb2f806ddf9ddf95e08b",
+      "765db7a94f2676a2551bd3324d64de0fac18b6605ee0abb6e5c0ecac5112e37a",
+      "7688232d743088aa776c14b30bfb87ae8737af289c2a28088823f3c60b27167b",
+      "779988d19afcf56b6edcfcc1bdeb20a731a5d9210047504bec57ddc65d592d40",
+      "789074740a7ad6628281b62b83494cb49c772c27ea65902103e4c4fdbfd82bf8",
+      "78fe6f7830cc7169b21650e0a30e4df9a5b0b4a712441004cd5967ee5225ffce",
+      "7997d73296e78c91b1792127927dbaaf7270fe82b5a4312974454f5aecc11de1",
+      "7a17ab51a0c7bf7cf20078620656be7c18d9e7e26693e046836d0ef26402af2a",
+      "7a9eb015442051749b078dbb9c7be23686fd5a02fd653962d4320ab5827f2c89",
+      "7b9770b452d9bd0a77e87ade60236edb5402b016fe2d89fd9a4189a0a26f04ae",
+      "7d2f2054f9930b6444d817e39774d51649877c0cf77d17060b7dc8568914e707",
+      "7d85c90516959a9b95d3a66900e0dac72f063898e7289ec4f6803e5d56209aab",
+      "7e05c40616ad41b9a56c30b4ac8a5506cae074ebcedbabceba3f4f9731b853ca",
+      "7e7cf2868a47fe4b1ee8d20f480764a48b43d201c162e37b693d9316a383008c",
+      "7efc2b5931cc939b54d16db83d1a7b3f627c9c00dfe95063fd2a4ee049fa5843",
+      "805478e0329babcbd192f7b5f87cdfc92d3f069f55dd87cc5fd0730258dce0db",
+      "806dca83b37cc53e64bc1957dcd3ad5c425ff1d7b8138ec8ec24dccb69ba227e",
+      "8149a3086e752c4104728096df46901a74c8ee7f4255e08ef56dd62acd39ab9d",
+      "845b5e56147455bee4966e3b83cb771df2b69a1d19210e73c86cfd0f15b220e6",
+      "85195b98124d119bea595920130da5548ee54caa9339e2203cb33aa917853421",
+      "85ad01e7cc153307c5d6d1be3d8b388dce165f4d33fc13e26579ba8305ed6877",
+      "85b42b65897e0ecae573721448aaf9403f191347f0d052e36f21c14be1a6d98a",
+      "863c6bec2c3a1fe10b8b99eafd39695da94ee880cb5d2a89f05189f4fc3efe87",
+      "86b2592f3c799e0a79eec9d8934d7359eee23a0186d55d36b22045febfbdde08",
+      "86d3e7f806ae09258661fba209884eb22cbf0d1cb76f56b7a5474cb3af7ba2ca",
+      "882a3eda4ef94598911f1c1b81a3222b5f61f48869a9844497bba096faac4288",
+      "887bf5859f147bce9c29f5a8202ba5ec5fdc09936cb3986bc0efa28f40a53e18",
+      "89a771dfa1e633e9f57bc4a002a240c34c0b38fca18f85402ceb66f048f577b6",
+      "8a7b53db9ae4bbc5324c6a3156755a1a9e38b948e1ee628877a59834628ecd4d",
+      "8acffbfd217649c08207a3c36e68d6811ca82d9091ec60fce027ed828fa512b7",
+      "8b1c15c0c3ecc2a29becde519c5b0b4e05a84f4f751c7eff862bc00f67815190",
+      "8caa9d15d13bc96958bd19c78a839b9b425d714b46564ca5d6c6170e62b2eed0",
+      "8d14fbe10439b7d6972379964c7400e188e481a2a14e44e15dc012cbace57869",
+      "8d1ff1ae210b157875be124a2baebe46c1390888f9d1a7fce9b51b0b8ca3f163",
+      "8e751a909b21eb7fe5282743ac5e83522ab3c4d73e7f89f409e29c28f3833c23",
+      "8ead924479e36300725220e190a87a911a8520963a38c41473487ae044b20b28",
+      "8ff2dbcb0e8a091537775b398e171191e7960dc653866eaf483e4ab4fcc682f2",
+      "90428b15704a358e16145a30bd8de7748d8b3d5de610045744eadb3f56f0ce98",
+      "907bf148eee05c3db1dedcdffea274f8961c53089201c84f73516e4b89520ef1",
+      "926a8f42c5b667be0b20bf0bcdd0c5630340bb364f0c28e0070511a268fb7921",
+      "93dc4e34c20b6946f3461ae072912cd881408cfb38f411fcb19a24d04edef5f1",
+      "944e6cc6d29b3a6c6480582785ae501d5fa0e13c6f805c446b3af0a10cfb2312",
+      "94741699bd5ed98ca36cd69367efa32052a4e1286957f1db6a7844ae5e5fc282",
+      "94ed63c908b8570d84b2d8c0d71643646ce560d14007898df3a1e62e77df7256",
+      "94fed5bf3e5e8d85f146dfd57f9b6e59ee5739e8ff66b1509dc591740c473dc8",
+      "950e1feb15573461af77f547417fe910b060a8146f1af4d685624c336b68f2dd",
+      "951bfc9b64b5a4f8a3cf355150afbd149e28e4151473de7e876cadf2257ebb65",
+      "95997be3bf770c3ae893978f732c78b3747bc4a62064eaf001efda671e4a3c0a",
+      "95ff94648691e5fb511f58bd431f816a558810fa3308436ed9d8133e2207fe9b",
+      "961d7097f1cc48991facc3677b40caa05f74103e9fd1c4d46733a109602342a4",
+      "9623f7daa7896a7aa31c0134dee018be0b2a4834bd5151ca1e5474db7963a3a3",
+      "96701daa3c31b6830b92b7fdbf21498d7594c5a2ea3c0007e5d90c11f856a0a7",
+      "967694492f3c9bc05f944daf19f1456f560b4dc76e19be8c6ece236e1b9c9eee",
+      "97a019f47f8eb35f72934ad1aa151fbb4d09d84e2fba8196952c8b4713e22e91",
+      "97df43a54fd1e49e084b53d3aa58d206a9e01d6d2692401f4f0b786f87246335",
+      "9a9695aad8d35fada305283f55a695cd3e2be6a40524b368482a951ac61af81a",
+      "9c033c5b1ecfdd4262ad8264a7d9ce1392264950d17024b04776e7dcc962ce82",
+      "9c54138be770e027f8fba40bca2925517132ae6772a70e4e2694c959f3bcf293",
+      "9cb95a11f967f92b9f7d5c9cb52b63d0d5b0f5fd4851f6d8176e0d04d024bb3a",
+      "9eb050406126730ecffab369d8783af8cd1b1ee6cd69075560a7b053b39f5817",
+      "a025c5328a845b345c607c691d99b025c4b00d68ef3eed8b00e45a4203c3287a",
+      "a0893c9d0032a88ca9fd2e88957f6580df7ad1075c20a68850f83e800e684112",
+      "a23b7e6f21831c2138436f0871f5a203ee590f389235afc367e6e11b785634b6",
+      "a35a29a48e8ec008770eceb514367ea2178c80c632b53360e922649b1c56db03",
+      "a37f281f901becf1e36200529426432ad234041cbdc3c3dfa6d8db4a6825a6da",
+      "a455e960bb04321c78541105b79a5571dbc2768ddb0a9ff4d04ba46b2d055e6e",
+      "a4cbc16dd211c85187b2421636023025f69ba995780b94629d5c143fe8452d82",
+      "a6d45323af56e9c145dfac685217234792c859732d9dd56c1ddf9cdb3859e49c",
+      "a6f89440f863538d3d8180d6bd05c80ea060e058f511800f752210966b9e4955",
+      "a726f371b9b35d76fd1a6ad2c12e29ede26d851592e30352cef005f54a2d5b21",
+      "a76bc37f4ec0f1c26416425befe91217a5de75a6f3f9254436a50b8806103f6c",
+      "a9ec6b7436828bcd4621e6a7c6ead9028250e22ef64845bf8b28cff0eb8bd190",
+      "aa99d4bdbdd0e97a8b509efde4bfa04c9560bb17fa5f021dac632cee8bb5957c",
+      "abc218bae3a70f680a4d79b8b5afa4e61bffdd7b8cdcf4070df8335bc927095f",
+      "abcdfdf6cb007e228e1fb58392806cc822a812f4cd3d21d08971fde373e1bc35",
+      "aca533d39b2055c5e62de01277823be09de1bf937c1c52b90160a88582b13247",
+      "acd28bb17a8f37d2f66c389ad22b3f98c7666b654f4b2de423e27576567b7c3d",
+      "ad1b6b0e8520d578ee1f3a9b5e45d6e955e347119d67ae6bf2c0c139b80c2b7a",
+      "ad51840e934e9b92f4a45b0b928644d47e164028bb2c095eadc4a37799faf20f",
+      "ad687f376917751459c398121370b79cea503037304dcefbc2b844bd788df5e3",
+      "ada44dedfa66f9ea537feb070d78d0117c04a70dbd595ac653de67207421e281",
+      "ae9265ffda45987668546845288ea694ec90b7d3bbf8d9698b56e6682948d338",
+      "aff7271a9cf1c33ba861ac5afac727fb494de89e4b2eb95ace0c088fa4ed9b6f",
+      "aff8b19fb5905b4aaecad17238d9936dc888ef37ebe76cd906a2e2a49fb06a2b",
+      "b1cfa9694d85ffd5ebf29a51c62e377fe44b82779d299d3af7bb3bc3001aa2aa",
+      "b22d2eae178f4d53e5a215c027e1adbc7ca2e8d7bc7b48d7c65bbd6457946981",
+      "b36179d189cb05021c087ace6b3b014cf7ddf068fd2c92aa100e0f60252ddb1b",
+      "b472d257465d22a2c2ffc9145e8093eb597ab4f90189773cb1fa5758471b3a98",
+      "b47db8151d8332388097bad30ab622d55ebc903b541d52b5a9258358ad81ad49",
+      "b5c1c86b4f36bac32318f7aac45081d24ec62ac800b33ccadd190c3440250824",
+      "b5e487d9857caac11fcede978102dd0afa5eb45d330ebc992a1051dfb09de305",
+      "b6a46a551af494368aef40c0d10ce62848ed652bca107ae30520a6cc97cc59d8",
+      "b6be4cc0fc9bebd4fc6fcf060a2d699fbeb79f3ecc2339733f3c3789caa6da9d",
+      "b7660ffc052023f9d826de8d5cc72ef2510990595356aa87eec8857164515e3d",
+      "b9373a7f0afd4e01a95d521f1b97febbc4707e2b0b75fb1a8b77bcafe1cd7758",
+      "b965b46c8d3aef4a6e9af44308b5ff1f7377a5f3d2a6bb31bc36e794205124d3",
+      "b9f6033eccd54a02568ae422c4c2d5ee6d3be08ec4561de753c1dd0fe18f7e1c",
+      "ba035172ff110351c6948c015c78ebb0ee4437bd4da8c412f58615b0d5fd3018",
+      "ba9cf3cda9f7f84808e685f7be8946c07620131a53b6c3e824cc3c34fd8936f3",
+      "bc03f5cbb21090e94c30808289beb5f9c86ad5c55e39fc6c74d0e32c95692d62",
+      "bc482da69549412af6873b7bdc5ae866f1d95f05459af15ef65260b934a45996",
+      "bd069ab525605dc835a1b2147e0ce90a3f9524a8fb3a60917d0e791cf6908f2f",
+      "bde656204726826b39aff96c4f52666f47b9861cfcfce5971d3b116dbeeb2ee9",
+      "bdf24d0bde1c58ef2cc3670ed7d081faf17f2e5e5f4c997066b92eec46154496",
+      "be16aaf32e71ea92aa130074ad5391c6e53c833533f7daa728576875b4ccb2da",
+      "bf08658a134b6939f76b680b0d0098e3f94b798093ff0171e44c995efbe8490b",
+      "bf2efaba8aaf91d88dcd3a1433a057067d4df5054416b29534fedd3c64e8d2bf",
+      "bf8d7e301e45c3c3847e9785a64746ca3651e2c68852a9045fd88c9ed4abae5e",
+      "bf9e68da7d1da56b7ad7b4217ffdc665dfe4858429023ecba45ec80d516ac00b",
+      "c097c1d409110d2dfbca4e1ef8b15f05c0b2ff4d83567e57e27e03da5f0bf0df",
+      "c111b0e1cfd14b4127c39cd9e77abf4038f04178d17f991b771910b374ad0d3a",
+      "c1cd07d6df1acc58d9fc63a9d1b5837f66a8b8cac15e215680751f39224daf5d",
+      "c1f08ce34e6b4afd04eff028b0fcd68b5fcb63969547a8859c826c968c1e1ecf",
+      "c284bef4a4a0f11835f11787e3e8f8d66a105147e3a942fe084e4eaf9cbecbae",
+      "c2e81325dcd362cae76a03fd3616ea33000b6f7435ea174dc7052285908a02c7",
+      "c39e61a7455a123a7fd13a388a99f2a3bdc936aa7cdff9d8162e40bc057cd3f7",
+      "c3d86d48d7077340687ceab340c1419888b9128a3e68b39a3af432a8bcc2a5dc",
+      "c7014a71bcb58af7618f6fc13b963696059aa4d65b94ab48bbcef4d3fbe5c564",
+      "c78b3da6bef9980313234ce7ee7c52152438d5b073b614b700eb1987f6cc7792",
+      "c7cee1c6758d54c2f929676cf2fe208d628acab967d95b8bc419a699f7beae8f",
+      "c8de040375c0047f9b46416290ee407f3703cc541f9a54e078014042f33d9502",
+      "c8fdaebaf79d7b537977a7880ca17a565a36a57693de26b720138d53404d112c",
+      "c94056ff7107c8f202bb55dcd0d7d4ffe24dc023c75d9e13ed094d93772cc1f6",
+      "c9c9a8be25d3c6ac1caf22dfceaac5416a110a84665e42255673b7ed33c5bc73",
+      "ca4cb3d3f575d4d63d16ffa3ba32e97293667c141b8714490257ec4a190fcf4d",
+      "ca75f23b0f92843f4fd473b83a1bfbbd2508c20e23258bdcb27f1f2e81e2d17b",
+      "cad8ae36ca7596b34dd48e2cff7e269d9acadeaf4700202a28e062e4354ab455",
+      "ccddbc43e9b07d7f412ee8efe30ade7a8a7ab1f105399ecd64606fecac36cabe",
+      "ccea19bb6e3fda004f3adf6d59ba895633bfac653a4c3b28a9346262bf8401ef",
+      "cd7fb096c4449d8abf27665b4626e4db38c4bbc0155241ea16770afa10c2d975",
+      "cd87dd868a3cb186688d298dcb00085e273faadbfefe8e29764f9ce15391fe59",
+      "cd92a1d000460b56a949df615b437ec3187df04404c69916c6e29c42492a49cb",
+      "cfa66e581cc6448894e6eee48c8849c1496b598a1a93eb1d22c1afe108a3e280",
+      "cfb325bfdc68d974f059bbd95255ca345f2abd083d38d25b340edb9e1af99ba1",
+      "d0c040e8a09b78e315185186bc6d9b52686255f73a5d52206360c807c093ac2c",
+      "d21553c84dc0c5c3b823296287ca5b8deade66c4a5da9e1506276234fa6f99c6",
+      "d24b9bee2d20f283e22137d76c3d8035d5af9e62f128a5dce7e097c5c8939245",
+      "d268110482842176b7dd77d3f3a977ddf3c79a0f9f42d571a4d3f45d4dd3d5c0",
+      "d2a621f81a130a12a6681bd500796ca42e64f1aa612a6a91f51d8537bf3b1639",
+      "d2d373da37b076b56f93e1efbc09798e6117be66573abc39c1b56aa8fc47c6a7",
+      "d34304d29f7bbf7928ee099f87f0bc9b4fee3f8918383634df86f92e231e0421",
+      "d3d2663d4486cbbb7ec0e0489b8194a9d8c2ffc3b3f5f8040e014142a9875848",
+      "d4a5321c2cf57449b8e5759b6fe6c832e37a6fdf045a2d96a5b92a106057e05b",
+      "d6b5c8162210c6c693acd3b648c8dc2f14046ceb16619f035798ec7a0502fe74",
+      "d6be7f7943b874623d6b9a94bc9050052c8458d13c313fcf07c1058473588e20",
+      "d6d7603735ecdda8e41f94d7584fd9fa7baf8f57600c9d1c47b445d4e2068358",
+      "d76a115b50bf5a1853b5cd78cf166cd73dfe02eacf85362e084104b115f166e3",
+      "d91c2c7e044834dd069eed81de894b082175ca967b3009c811ad2b4f2d16605b",
+      "d9dcaa5c9b39a54c9ea2bb5a75d3589dd1e5b2e74d08eb533652dc1f0727cc0f",
+      "da483f235ad31bb0f859ed8be2e87ea25044d9bf2b9a7b00d03b39cbe5273234",
+      "ddd211eb44d84dc7035965f0e487095bca99d54179b4d8f9151c179d8adbca93",
+      "dee637d7ea7f1a906692dcc237a04dba761f7f88e3e2c02e390143d83bc3a5a6",
+      "dfb01690303e13aa967473e0777ff1b14b5e2091c0b95816f9061b695bda4f74",
+      "e06c46578083edb2a46bd1363837622c3b71a1c4a630c4f567b84345af095f8f",
+      "e1118f3b281d0a5ffb454fbfb9681ef55cac823e7c690c6121d08d2e15964973",
+      "e238bd2fa4afff242fee3cff9c31234434bb5eb8cddae0cc403b80cd57a6e929",
+      "e32421d6cce882e93b7aaa00a70d2269504313a5c17c7411ebec66b4107f04f6",
+      "e5815b7c956ee30d76116a513e91f469102427b56ca308fcc9ad7bac64de78e5",
+      "e680ef489d38658d38a02f3faf56b98781a80b97ab4e917fc86a6bfc5ab3eb20",
+      "e8f91716924c37ac66510f8b612aa0f7b10d209b9256b36a4cfa45e652567ed3",
+      "e9426474c32dc49f96830b6209c2197fa86751da76b3595ea35090ef663481d2",
+      "e9804fa4a1365b9c490a872d4dc0ffcf4cd9fe7a3df5b69031fc761ae5bc55a9",
+      "e99ec534fa40da12c8ffad191a9b5baf9dde1565b29a5fd129b87bf915326714",
+      "ea19ece40c8e1e8e064c738133503b10d173845dc2e0c242ee949a9e64eab0c4",
+      "eaf8d1b3004a7929bc94f0d54ebffb470ed7e67f0d3a2900bb6e415838aa28aa",
+      "eb8b8a4a50bd435669b18d6647156a94947c3f1cead3e812a44521d9999956e9",
+      "eb9e67065135b08a116c076b328c73d8b1b09b70d96eefb7b38a6ac526a5fee5",
+      "ecc13a9626a1fc436974588ff9e8d7b8a500c37ac9ed215152418a591c8e5fee",
+      "ed7cf2e6d9a17e0f37814694a5acd7f970df2751c08650cbdcfef7ce2a47e965",
+      "ef06beda4c1d8139ffcb469b0106d4226891daf95c332e9e6672dc9a6d58bfc3",
+      "ef8325c0fef346a553bab1d411fa91391d96e747a109551be40b39da215f916c",
+      "f0ab3b2b34473df4ad526aab7ad2bfe54e578ea200c5f3f31ba7956844df2cb0",
+      "f2a0589478e48145e4497f1e9e64a88052e14f57aeaebd7bddc615d21dd10cbb",
+      "f2adf9bebac5f4f6f3eee0616e4ca679c82ad4d2b01041b658bbb3535c5a59ca",
+      "f2f551c7233c55e7c8cdf1a60ffd1983c197a3aac8f7db7b397c6511a28e0b7b",
+      "f341641bda69247479909fcfb9cd5530a894d4b205fb5b6697c1f1b4988838df",
+      "f76de6419ff739c8bc0f8a7dba3e01cc5f3969f1baaa9cd3c8b96553881ebbe7",
+      "f7a6cd2f1d5d811ea6770e110886b6d8453eb37c3cce0d87cc3b4c571e631e4e",
+      "f8836b016931f0a91681f2f8cc34ef1d0b714b8501300030a62587c4710efaa1",
+      "f893b174c4621232ffc2ddc4e7353bf15fbfcf34b89b273569850fd560d08e54",
+      "faa80f545580dd98f4d66ec7ed6bfecb8668a7e2815fc4439056b1c5f6a1f8ab",
+      "faa963e7b09653436b8c44fe64228fae20c4f6b25e634fa4825da910ba69c2da",
+      "fc7c44692957a63bdd2c142c5c9732da05964cdf85c41c6c99c7920a7b501d8a",
+      "fca799240e6d9b35354ed471eaa0cb69d5d4741d7d0dced98314d9341cc8597b",
+      "fd325e6f25750bd7a8460b78a1bfde3834d6563fdef182c6ec1b9e3b11f1122e",
+      "fd95bbc1a931f1bce96aac3d24bb6c3cd8212c6564f354aac1185afd7b7d6e2f",
+      "fdbefcad635e39d8b806b93bb060ecb5732012984dfb2bcbf3b9bb68ff95c14b",
+      "fde8587b9aa07fab0bd1c4a08e8f7d29a97a2127021d95d8d1abafd9e122353b",
+      "ff14ea3783f3a90f2a4d018811c4a5a5435ec2e1c51ec0ae7192bbebf4132e9b"
+    ],
+    "generation_seed": 611610856,
+    "generation_temperature": 0.0,
+    "global_source": "degree",
+    "local_graph": "pre",
+    "modified_adj_hash": "d7eb1f6f39667c0eacdced438db873d4b9f1782b54e08002e8cfaa3fb9c36f4c",
+    "modified_features_hash": "5fda879107277e9d14aabe20f8575e5f1b89c284df38bde10e21c022f7bd190a",
+    "operator_settings": {
+      "attribute_weights": "clipped_cosine",
+      "diffusion_features": "current_arm_features",
+      "distinct_node_cap": null,
+      "generation_cache": "full_request_and_settings",
+      "generation_max_tokens": 50,
+      "global_accumulated_states": 30,
+      "global_restart": 0.15,
+      "global_source": "unweighted_degree_on_current_graph",
+      "grouping_graph": "post_in_all_arms",
+      "local_readout": "last_state",
+      "local_restart": 0.28,
+      "local_update": "alpha*q + (1-alpha)*(P.T@state)",
+      "local_updates": 60,
+      "max_visits_per_node": 10,
+      "nodes_per_round": 4,
+      "parallel_restart": "independent_uniform_pair_per_round_allow_endpoint_overlap",
+      "structure_actions": "saved_replay",
+      "structure_features": "frozen_original",
+      "template_cache": "reset_each_round",
+      "ties": "node_id_ascending",
+      "zero_weight_rows": "self_loop"
+    },
+    "original_adj_hash": "1e28aaeade28c18dee46c73cfb33b80ed180950b658dd486b1e640c4ed278635",
+    "original_features_hash": "e9c51bc590ff94118a9b5bcc4de17517f2460563234a92f0ead3c717509ed0d1",
+    "protocol": "gbca-action-state-v1",
+    "request_cache": {
+      "hits": 183,
+      "misses": 183
+    },
+    "seed": 19,
+    "selector": "ae_pr",
+    "settings": {
+      "coarsen_method": "gb",
+      "dropout": 0.5,
+      "epochs": 200,
+      "global_important_ratio": 0.1,
+      "global_ppr_alpha": 0.15,
+      "global_ppr_iters": 30,
+      "global_seed_strategy": "degree",
+      "hidden": 16,
+      "level": 2,
+      "lr": 0.01,
+      "miter": 10,
+      "model": "Meta-Both",
+      "split_data": "normal",
+      "step": 1,
+      "text_attack_max_visits": 10,
+      "text_attack_nodes": 4,
+      "text_budget_per_node": 80,
+      "text_cdl_topk": 36,
+      "text_cluster_attr_topk": 36,
+      "text_max_added_words": 70,
+      "text_max_cluster_size": 4,
+      "text_min_cluster_size": 2,
+      "text_ppr_alpha": 0.28,
+      "text_ppr_iters": 60,
+      "text_retries": 3,
+      "text_similarity_min": 0.35,
+      "text_topk_ratio": 0.12
+    },
+    "structural_seconds": 462.19782895897515,
+    "target_edges": 366,
+    "target_nodes_hash": "36e92da51d42cacf5c95d93561961cc5b427a15bca4391b6923e22e6be442873",
+    "training_nodes_hash": "eabd36cc0867f2302cf4637f128d3b46e291f32dc475dd679ed422acb21fdd11",
+    "trajectory_hash": "aba58eb88866a5032b06dd27902ffe57af87863591f20e697d3977e2799e223b",
+    "variant": "parallel",
+    "visited_attribute_nodes": 957,
+    "vocabulary_fallback": false,
+    "vocabulary_partial": true
+  },
+  "evaluation": {
+    "clean_predictions_hash": "87e67039b2e13d763669d2577beb38983ef6e6b735adb7b1316fa6eb37b5afd8",
+    "metrics": {
+      "accuracy_drop_pp": 10.215903106898361,
+      "attack_flips": 266,
+      "attacked_accuracy": 0.6097946287519748,
+      "clean_accuracy": 0.7119536598209584,
+      "clean_correct_count": 1352,
+      "combined_accuracy": 0.6097946287519748,
+      "conditional_asr": 0.19674556213017752,
+      "edge_accuracy": 0.6735123749341759,
+      "feature_accuracy": 0.6619273301737757,
+      "misclassification": 0.39020537124802523,
+      "target_count": 1899
+    },
+    "protocol": "gbca-action-state-v1",
+    "victim_seed": 453343620
+  }
+}

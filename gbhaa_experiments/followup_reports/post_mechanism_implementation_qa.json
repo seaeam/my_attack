@@ -1,0 +1,34 @@
+{
+  "scope": "Offline implementation checks only; no real attack/training/LLM execution",
+  "test_modules": [
+    "test_selector_mechanisms",
+    "test_selector_mechanism_integration",
+    "test_post_mechanism_launcher",
+    "test_post_refinement",
+    "test_post_tuning_protocol",
+    "test_post_tuning_summary",
+    "test_post_tuning_entrypoint",
+    "test_post_tuning_runner",
+    "test_action_state_protocol",
+    "test_action_state_replay",
+    "test_action_state_runner",
+    "test_action_state_summary"
+  ],
+  "old_results_validated": {
+    "post_tuning_results": 12,
+    "post_refinement_results": 30,
+    "post_refinement_confirm_results": 16
+  },
+  "launcher_preview": {
+    "default_trials": 24,
+    "single_seed_trials": 12,
+    "actions_per_trial": 60,
+    "creates_results": false
+  },
+  "review": "Approved; recomputed diffusion states determine audit ranking, with one-ULP tampering regression.",
+  "thesis_sha256": "4a41345f0515644f5f4737f35daa4a62729affebfbb667552eb9f6549e2a494e",
+  "new_experiment_output_exists": false,
+  "test_count": 114,
+  "test_status": "passed",
+  "bash_syntax": "passed"
+}

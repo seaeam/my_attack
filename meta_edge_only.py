@@ -85,8 +85,9 @@ parser.add_argument(
 parser.add_argument(
     "--global_seed_strategy",
     type=str,
-    default="uniform",
+    default="degree",
     choices=["uniform", "degree", "label"],
+    help="Global AE-PR source for structure attack (default: degree; uniform is a legacy diagnostic).",
 )
 parser.add_argument("--global_label_weight", type=float, default=0.0)
 parser.add_argument(

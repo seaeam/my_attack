@@ -1,0 +1,534 @@
+{
+  "actions": [
+    [
+      1383,
+      905,
+      1
+    ],
+    [
+      3,
+      484,
+      1
+    ],
+    [
+      67,
+      1745,
+      0
+    ],
+    [
+      1583,
+      1933,
+      1
+    ],
+    [
+      1217,
+      1987,
+      1
+    ],
+    [
+      684,
+      157,
+      0
+    ],
+    [
+      119,
+      1026,
+      0
+    ],
+    [
+      1878,
+      2009,
+      1
+    ],
+    [
+      2106,
+      976,
+      0
+    ],
+    [
+      1080,
+      1144,
+      1
+    ],
+    [
+      2053,
+      1032,
+      0
+    ],
+    [
+      623,
+      1557,
+      0
+    ],
+    [
+      2045,
+      1196,
+      1
+    ],
+    [
+      470,
+      580,
+      1
+    ],
+    [
+      306,
+      1447,
+      0
+    ],
+    [
+      986,
+      434,
+      1
+    ],
+    [
+      1485,
+      399,
+      1
+    ],
+    [
+      1649,
+      1902,
+      1
+    ],
+    [
+      2060,
+      1018,
+      1
+    ],
+    [
+      865,
+      214,
+      1
+    ],
+    [
+      854,
+      1923,
+      1
+    ],
+    [
+      1326,
+      1737,
+      1
+    ],
+    [
+      1837,
+      1448,
+      1
+    ],
+    [
+      1750,
+      933,
+      0
+    ],
+    [
+      218,
+      819,
+      0
+    ],
+    [
+      528,
+      518,
+      1
+    ],
+    [
+      946,
+      1599,
+      1
+    ],
+    [
+      46,
+      818,
+      1
+    ],
+    [
+      1528,
+      358,
+      1
+    ],
+    [
+      1541,
+      224,
+      1
+    ],
+    [
+      1374,
+      536,
+      1
+    ],
+    [
+      853,
+      184,
+      0
+    ],
+    [
+      1681,
+      1042,
+      1
+    ],
+    [
+      1183,
+      1078,
+      1
+    ],
+    [
+      986,
+      2016,
+      1
+    ],
+    [
+      874,
+      1357,
+      1
+    ],
+    [
+      1658,
+      395,
+      1
+    ],
+    [
+      1091,
+      747,
+      1
+    ],
+    [
+      656,
+      543,
+      0
+    ],
+    [
+      1792,
+      1434,
+      1
+    ],
+    [
+      1222,
+      150,
+      1
+    ],
+    [
+      545,
+      1193,
+      0
+    ],
+    [
+      859,
+      160,
+      1
+    ],
+    [
+      448,
+      1433,
+      0
+    ],
+    [
+      63,
+      1873,
+      0
+    ],
+    [
+      1386,
+      832,
+      1
+    ],
+    [
+      859,
+      1994,
+      1
+    ],
+    [
+      1989,
+      254,
+      1
+    ],
+    [
+      700,
+      753,
+      1
+    ],
+    [
+      221,
+      696,
+      1
+    ],
+    [
+      329,
+      522,
+      1
+    ],
+    [
+      881,
+      1892,
+      1
+    ],
+    [
+      1162,
+      816,
+      1
+    ],
+    [
+      1591,
+      833,
+      0
+    ],
+    [
+      1289,
+      1018,
+      0
+    ],
+    [
+      538,
+      1424,
+      0
+    ],
+    [
+      321,
+      776,
+      1
+    ],
+    [
+      1867,
+      1839,
+      1
+    ],
+    [
+      1028,
+      909,
+      1
+    ],
+    [
+      1033,
+      1025,
+      1
+    ]
+  ],
+  "actions_hash": "acc4a3ec1964bddd284d7a3730e5b9c4e6947afd338e31ce792bd9982a1ef9a1",
+  "api_counts": {
+    "attempts": 49,
+    "failures": 0,
+    "retries": 0,
+    "successes": 49
+  },
+  "attribute_counts": {
+    "cache_hits": 0,
+    "cluster_failures": 0,
+    "completed": 60,
+    "feature_changes": 240,
+    "feature_writes": 240,
+    "node_failures": 0,
+    "targets": 240,
+    "template_attempts": 60,
+    "template_failures": 0,
+    "template_successes": 60
+  },
+  "attribute_node_visits": 240,
+  "budget": 0.016357688113413305,
+  "budget_complete": true,
+  "changed_feature_entries": 16898,
+  "changed_feature_nodes": 197,
+  "completed_edges": 60,
+  "config": {
+    "alpha": 0.28,
+    "description": "Same 32-node gain pool; rank by gain/(1+prior visits).",
+    "family": "selector_mechanism",
+    "generation_max_tokens": 50,
+    "id": "frontier_editgain_decay",
+    "iterations": 60,
+    "readout": "last",
+    "selector_pool_size": 32,
+    "selector_rule": "frontier_editgain_decay",
+    "text_budget_per_node": 80,
+    "text_cdl_topk": 36,
+    "text_max_added_words": 70,
+    "text_max_cluster_size": 4,
+    "text_min_cluster_size": 2,
+    "text_similarity_min": 0.35,
+    "visit_gamma": 0.0,
+    "weight_floor": 0.0
+  },
+  "dataset": "citeseer",
+  "effective_budget": 0.016357688113413305,
+  "evaluation_labels_hash": "e410fb1b0f905bd49881b389f7dcc9985ef6f0621559f7537b965a74760dac19",
+  "feature_l1": 13682.523419380188,
+  "feature_l2": 106.39626304220356,
+  "feature_linf": 1.0,
+  "generation_max_tokens": 50,
+  "generation_model": "llama3.2:1b-instruct-fp16",
+  "generation_request_keys": [
+    "04e2fcfec2ee16899e8d37de5330b6d281bd3dfdba2b951365f068a398ee90de",
+    "0ebba915ad23be0316fded2f86a8f6a85f7be49e4c6a857f28748735ea28e772",
+    "14f79529caa5f1d1d489623ed8e6d319347f51b2c940dc1efc339b258f773ba1",
+    "15a8786c225a995457f8b9728b99d4c6ba680bace959713256dfd92bed716bef",
+    "16bb1c54d92bdd51572cb05c53c14a01df66b3bd72bbd377b42c4ea6c297e135",
+    "171899389fe239b54d93d85aa490ec9527461ca154fbac8f24cfdb25226c2b2c",
+    "1ab26baab843f5c29fa7cf4987e66dde78f76234bb2f0c1ce7ba1bb92d66265b",
+    "23402ed61369e41b2d576adf00db2881bfc9d822d1e6fe60a43c8ccd7e33f6ee",
+    "241c574938d27203c25e61b731190a34bdaaa98d84967858774fcf94c88c15fa",
+    "24f293c4f76ea2bdfbf1c1ba09d4cd81b01a114e02a9806a8f013bf36d62b207",
+    "25a2065cda1a8ca5084c6433c5183d22b86efa80b6b79f31ba948e8853f96e00",
+    "28d2bdb9b91e64c3af163d20b714648b55508f4a2fef149ee49e797e26d33559",
+    "2ce454ed0f11b98d00827e928b758b62393326e93a99b3441e3f3158573cb0e1",
+    "2d65b5ebc473fd003fb8c64adebc656491691d99ae77301e7da9f1fc4dc159a4",
+    "306dd1273a864b32e9e513149f2d989e424d30a57a57360b4156fc8018695396",
+    "32995f7385d92c4aafe5a888d017b16c1b21170018f0053c76583bf794d18274",
+    "36a563a0387ba0f9d8cf3282a77b621caf59ce88434491ea12f6b208ec567e74",
+    "3863f78e38a6c222d4f487c23fc679492b8302b385b9eef961ff52b88da1a9f6",
+    "433901437850b3786406f4016e9e7c0866802702d6170d51ee7f48b4640470d9",
+    "439cfd3d4131e01f69a002dcb79fee1d881efebabc7aa49e471b74095cdfe34a",
+    "442568f79b0cdab6a3b7c5a64ad07d3b231f76b53f64e78ceba5e4d1357ca177",
+    "4d68789c355dc78746aa6504543845985b04d15f840cf03a68b771c09454050a",
+    "600f50011c559e1c6aa108c8a93f6d882f38db3cb56845c93de4eb73a07cba90",
+    "62df279ef0a72631db4687797e579721cececa46ebf3562cf6c745173bad9fbe",
+    "65d2666049b74a0ee712149c603ae22a950ba9919a35e6f4d4fb12e1a9acfa43",
+    "687a03bd99df12eb528f9afd006843dfbcfe09da1ff2b7527acdba42879e9404",
+    "68c6efce5ba02e38df77242878034281a02eb5d4b544d13f3eece220ae869dc0",
+    "6ba051a4304abd434f428ec655123e844b8cc41b3e6608f2fedec9f97789a47a",
+    "6c523eac2efc27cebeef6627126e6d263660c97c4b43d7e7060335aba1d23ba3",
+    "6d6fcf497a0f596d3b34459d79fda85915963b2681050f0dea9fa2c1c5d521e1",
+    "83ec9dc5ea19a41071a6ddf7353c4c61d8f789a1ce265b169f326d3c27992f11",
+    "85fae2bd226f945f7ff73704474ba03bc4101774c80fadc0d17c3ee79305ac34",
+    "878bb72c321c7c750325cbf64401ecb67692466e99b69d1c2822c393376d98a1",
+    "8a256c31ee0128b0246916b90108f7602ec12bb6e3ea8cadaea84df4d2fb16d1",
+    "8b86d91bebd87f86f8a6c07e21126b2628630e8e769bfcb8a384917d82db2ece",
+    "8e6052b4f09ff04a2139a1977135e79d5a2bdc15e2ec8610a944a3c6ad829944",
+    "958b11d46fcaa7c18aebbb156c8cd34d6cb1005ecca2e5439f5bf8799d948a87",
+    "9ea24da7955c7567d37e5738c70608d0418221bc1016f886e2675eb35255e0bf",
+    "9f92bb5a98436069bb996ae06ea20168eadda7d4cb43189c8d8cbc51d2f340b2",
+    "a141d56b96d9f50f6128ee668da8b37ae04037f4b27770afff3eb3e10b36c0f6",
+    "a2d0382594ca12b1d5e07fa92c9c9635419b27b42a80b0bc81c68aaf3457221b",
+    "a69717c365c0b485fe0136384037ab8ecd41d41ea9a590e1fbc5d6d2759d45ce",
+    "a92f08dd4e42eeca6817a581750bc9b584bdaa083699bbe2cf7185c6f9299e07",
+    "adf58413fd7533d12fa3fd0b5b0848827cb4085348992c1648e6fe7685dd7ab5",
+    "b4f407ce342e1fc8955155afcbb85d392dcc2f68b3ac4f19d05d248adb8e2d0a",
+    "b5843e322577dded3bf9e1927a54632312cec3931bfa5862754171cfae6aee85",
+    "b7750b166973710e48b18f68a2a7636801e3a0e47ce7b71995d8f76acfb9f25a",
+    "c285a87ad6d29907942875a468ad30484f42166e963ad34e03594f042b487d01",
+    "c39a8d9e75b6ab4f9c7ba5776b51bd49b8e48ed68431ec337539b8646d29a2c7",
+    "c3de670a5c42d85add53d88621f66e703a6a02f34baac7658aba2ec41ebaf1f5",
+    "c990aa37e62df9071cf10599d49f05c236f4134dbe64a2436d52ece4e19fbbd5",
+    "cee906d05f385b1dc8a5eea106995b98dc955ed2eb6cd4e8421bbfa2b4a2201f",
+    "d3fcc6ca647df419923574ac04da683e873c1bd225e988fa60017263fed19408",
+    "d4b64e2b8a6be296184a6d727c83f9dabf5fb3e936a04e57197d810468435cc1",
+    "d62b4d57f8f098ca9f9f73e8651fc090a8a7b07514c6c55676dd7d0336715d5c",
+    "db3ed9b51b7938aa2fb50cd048a918e3de2341ed645edbcb38b91eaf149a84e0",
+    "e5f9d81df5b9703e35f5cf149be73b4cc48388d07fa8e30202818cdaec7db1d8",
+    "f7bd9e42fac213aaf7121985468dfc425e800637b40368fbddbbbf15718414e4",
+    "f9977ec4fd26faf0b6805ec359c4324d249f80e2b74f9a0e45a77a34c5dac2ee",
+    "ff55009441c86d0406867f6b0640edac76d6dd8baa0c489c10b9bc3fcd646b3a"
+  ],
+  "generation_seed": 1966329772,
+  "generation_temperature": 0.0,
+  "global_source": "degree",
+  "holdout_nodes_hash": "8ed629980d71b7fb1f0e14a5694a9c49140f249b74aefe15334ae99554452004",
+  "local_graph": "pre",
+  "modified_adj_hash": "b7fa0bbd68bad651dc877e49865da486d54410e8502b15f3c6b5eed22504dbaf",
+  "modified_features_hash": "eb556accb153bfcba491b54ec4383b10cb019c6f7db1ee162283579b35547646",
+  "operator_settings": {
+    "attribute_weights": "floor+(1-floor)*clipped_cosine",
+    "diffusion_features": "current_arm_features",
+    "distinct_node_cap": null,
+    "generation_cache": "full_request_and_settings",
+    "generation_max_tokens": 50,
+    "global_accumulated_states": 30,
+    "global_restart": 0.15,
+    "global_source": "unweighted_degree_on_current_graph",
+    "grouping_graph": "post_in_all_arms",
+    "local_readout": "last_state",
+    "local_restart": 0.28,
+    "local_update": "alpha*q + (1-alpha)*(P.T@state)",
+    "local_updates": 60,
+    "max_visits_per_node": 10,
+    "nodes_per_round": 4,
+    "parallel_restart": "independent_uniform_pair_per_round_allow_endpoint_overlap",
+    "ranking": "frontier_editgain_decay",
+    "scope": "short_prefix_validation_development",
+    "selector_coverage_policy": "gain/(1+prior visits)",
+    "selector_eligibility": "visits<10 before candidate ranking",
+    "selector_fallback": "original diffusion order after positive non-restarts",
+    "selector_fresh_quota": 0,
+    "selector_gradient_operator": "GCN on unweighted arm graph; self-loops and symmetric normalization",
+    "selector_pool_size": 32,
+    "selector_quota_scope": "original diffusion pool; no expansion; shortfall fills by existing ranking",
+    "selector_surrogate": "fixed clean model; fixed pseudo-labels; all non-training nodes",
+    "selector_version": "endpoint-frontier-coverage-v1",
+    "selector_zero_gain": "diffusion/ID order",
+    "structure_actions": "saved_replay",
+    "structure_features": "frozen_original",
+    "template_cache": "reset_each_round",
+    "ties": "node_id_ascending",
+    "visit_gamma": 0.0,
+    "weight_floor": 0.0,
+    "zero_weight_rows": "self_loop"
+  },
+  "original_adj_hash": "1e28aaeade28c18dee46c73cfb33b80ed180950b658dd486b1e640c4ed278635",
+  "original_features_hash": "e9c51bc590ff94118a9b5bcc4de17517f2460563234a92f0ead3c717509ed0d1",
+  "parent_actions_hash": "11d928ff54cea0cee9bda03080c0e3a31791b348fe783737c9905bf055ceec07",
+  "parent_fingerprint": "006fdd0086f00a8800ecde32e560dabf03251efd3a53a8902eb4d90644f12cd6",
+  "parent_protocol": "gbca-action-state-v1",
+  "prefix_length": 60,
+  "profile_id": "frontier_editgain_decay",
+  "protocol": "gbca-post-tuning-v1",
+  "request_cache": {
+    "hits": 11,
+    "misses": 49
+  },
+  "seed": 16,
+  "selector": "ae_pr",
+  "selector_surrogate": {
+    "clean_output_hash": "5307d59828e896cd90a0527674e0c424b51946a08e091f5537d0ff2e41182265",
+    "edit_proxy": "beneficial removals plus bounded unit additions in absent vocabulary columns",
+    "loss": "mean NLL of fixed clean argmax pseudo-labels over all non-training nodes",
+    "model_class": "deeprobust.graph.defense.gcn.GCN",
+    "nclass": 6,
+    "pseudo_labels_hash": "d8181c8e0aaff6c94046b79fb9db4a0426c151dba6541505a37c95bc2509122e",
+    "state_hashes": {
+      "gc1.bias": "7f7f1da817d30440c9a6ef63c999af24216f8a483095867b055fca77caabb4de",
+      "gc1.weight": "1956229d6cca7e57e67b1db4f041886a6b2dbc1a925022e1d3eb0b20850e7081",
+      "gc2.bias": "fbb2ba054ccff7cf4b33f7e7022481389f4520dae6a139600ec5d842055c5c2d",
+      "gc2.weight": "aab1db53f560961f23c4ab936a0dcd01d9637854322b187f674254ad10753027"
+    },
+    "target_nodes_hash": "ba9aaa04100f84c511e5b5f42e4cd177e0c5e5fc6aa90b9f75fff4fc9b3bd802",
+    "vocabulary_width": 500
+  },
+  "settings": {
+    "coarsen_method": "gb",
+    "dropout": 0.5,
+    "epochs": 200,
+    "global_important_ratio": 0.1,
+    "global_ppr_alpha": 0.15,
+    "global_ppr_iters": 30,
+    "global_seed_strategy": "degree",
+    "hidden": 16,
+    "level": 2,
+    "lr": 0.01,
+    "miter": 10,
+    "model": "Meta-Both",
+    "split_data": "normal",
+    "step": 1,
+    "text_attack_max_visits": 10,
+    "text_attack_nodes": 4,
+    "text_budget_per_node": 80,
+    "text_cdl_topk": 36,
+    "text_cluster_attr_topk": 36,
+    "text_max_added_words": 70,
+    "text_max_cluster_size": 4,
+    "text_min_cluster_size": 2,
+    "text_ppr_alpha": 0.28,
+    "text_ppr_iters": 60,
+    "text_retries": 3,
+    "text_similarity_min": 0.35,
+    "text_topk_ratio": 0.12
+  },
+  "source_budget": 0.1,
+  "structural_seconds": 74.76249266136438,
+  "structural_timing_scope": "sum_of_parent_round_times",
+  "target_edges": 60,
+  "target_nodes_hash": "9947e8c79ebee8dafbce82a82b830d4563170a8aa7ee2e5cf554506e015735c2",
+  "training_nodes_hash": "06a768b992b5bcfd19b988f5ccef3b5983de5b11c7b1f1a687cf0ec04cbcc9a9",
+  "trajectory_hash": "acc4a3ec1964bddd284d7a3730e5b9c4e6947afd338e31ce792bd9982a1ef9a1",
+  "trial_id": "frontier_editgain_decay__parallel",
+  "validation_nodes_hash": "1aed1bb876622fd3ba0e9ea8feae1b9130830448bb2462e8fff7d8592ce86ef5",
+  "variant": "parallel",
+  "visited_attribute_nodes": 197,
+  "vocabulary_fallback": false,
+  "vocabulary_partial": true
+}

@@ -3,12 +3,16 @@
 from __future__ import annotations
 
 import json
+import codecs
 import os
 import platform
 import re
 import shlex
 import shutil
 import subprocess
+import selectors
+import signal
+import sys
 import time
 from dataclasses import dataclass
 from functools import lru_cache
@@ -194,34 +198,120 @@ def runtime_environment() -> Dict[str, Any]:
     return details
 
 
+def _stream_command(command, *, cwd, env, log_path, redact_values, heartbeat_seconds):
+    """Tee raw pipe chunks, preserving tqdm carriage returns and UTF-8 boundaries."""
+    child_env = dict(os.environ if env is None else env)
+    child_env["PYTHONUNBUFFERED"] = "1"
+    secrets = sorted({value for value in redact_values if value}, key=len, reverse=True)
+    decoder = codecs.getincrementaldecoder("utf-8")(errors="replace")
+    pending = ""
+    chunks = []
+    log = None
+    if log_path is not None:
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+        log = log_path.open("w", encoding="utf-8")
+
+    def emit(text, final=False):
+        nonlocal pending
+        pending += text
+        for secret in secrets:
+            pending = pending.replace(secret, "<redacted>")
+        # Retain only a possible secret prefix; normal short progress messages
+        # must not wait for a whole line or for the child to finish.
+        hold = 0
+        if not final:
+            for secret in secrets:
+                for size in range(min(len(secret)-1, len(pending)), hold, -1):
+                    if pending.endswith(secret[:size]):
+                        hold = size
+                        break
+        visible = pending[:-hold] if hold else pending
+        pending = pending[-hold:] if hold else ""
+        if visible:
+            chunks.append(visible)
+            if log is not None:
+                log.write(visible)
+                log.flush()
+            sys.stdout.write(visible)
+            sys.stdout.flush()
+
+    process = None
+    started = last_output = last_heartbeat = time.monotonic()
+    try:
+        process = subprocess.Popen(command, cwd=str(cwd), env=child_env,
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=0,
+            start_new_session=True)
+        with selectors.DefaultSelector() as selector:
+            selector.register(process.stdout, selectors.EVENT_READ)
+            while True:
+                events = selector.select(heartbeat_seconds if heartbeat_seconds > 0 else None)
+                if events:
+                    chunk = os.read(process.stdout.fileno(), 8192)
+                    if not chunk:
+                        emit(decoder.decode(b"", final=True), final=True)
+                        break
+                    emit(decoder.decode(chunk))
+                    last_output = time.monotonic()
+                now = time.monotonic()
+                if heartbeat_seconds > 0 and now - max(last_output, last_heartbeat) >= heartbeat_seconds:
+                    print(f"\n[RUNNING] elapsed={now-started:.0f}s; no new output for {now-last_output:.0f}s", flush=True)
+                    last_heartbeat = now
+        return process.wait(), "".join(chunks)
+    except BaseException:
+        # Stop only this launch's process group, including /usr/bin/time's child.
+        if process is not None and process.poll() is None:
+            try:
+                os.killpg(process.pid, signal.SIGTERM)
+            except ProcessLookupError:
+                pass
+            try:
+                process.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                process.wait()
+        raise
+    finally:
+        if process is not None and process.stdout is not None:
+            process.stdout.close()
+        if log is not None:
+            log.close()
+
+
 def run_command(
     command: Sequence[str],
     *,
     cwd: Path,
     log_path: Optional[Path] = None,
     env: Optional[Dict[str, str]] = None,
+    stream_output: bool = False,
+    redact_values: Sequence[str] = (),
+    heartbeat_seconds: float = 30.0,
 ) -> CommandResult:
     """Run one experiment command and retain its complete combined output."""
     wrapped = _timed_command(command)
     started = time.perf_counter()
-    completed = subprocess.run(
-        wrapped,
-        cwd=str(cwd),
-        env=env,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-        errors="replace",
-        check=False,
-    )
+    if stream_output:
+        returncode, output = _stream_command(wrapped, cwd=cwd, env=env,
+            log_path=log_path, redact_values=redact_values, heartbeat_seconds=heartbeat_seconds)
+    else:
+        completed = subprocess.run(
+            wrapped, cwd=str(cwd), env=env, stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT, text=True, errors="replace", check=False,
+        )
+        returncode, output = completed.returncode, completed.stdout
+        for secret in redact_values:
+            if secret:
+                output = output.replace(secret, "<redacted>")
     elapsed = time.perf_counter() - started
-    output = completed.stdout
-    if log_path is not None:
+    if log_path is not None and not stream_output:
         log_path.parent.mkdir(parents=True, exist_ok=True)
         log_path.write_text(output, encoding="utf-8")
     return CommandResult(
         command=redact_command(command),
-        returncode=completed.returncode,
+        returncode=returncode,
         wall_time_seconds=elapsed,
         peak_rss_mib=_parse_peak_rss(output),
         output=output,

@@ -1,0 +1,355 @@
+{
+  "complete_blocks": [
+    {
+      "budget": 0.05,
+      "seed": 15,
+      "suite": "selectors"
+    },
+    {
+      "budget": 0.05,
+      "seed": 16,
+      "suite": "selectors"
+    }
+  ],
+  "contrasts": [
+    {
+      "budget": 0.05,
+      "ci95": [
+        -6.729675383003751,
+        3.306821249249146
+      ],
+      "contrast": "pr_minus_ae_pr",
+      "mean": -1.7114270668773024,
+      "n": 2,
+      "p_holm": 1.0,
+      "p_method": "exact paired sign-flip",
+      "p_signflip": 0.5,
+      "paired_dz": -3.064129385141686,
+      "sd": 0.5585361620746853,
+      "seeds": [
+        15,
+        16
+      ],
+      "suite": "selectors"
+    },
+    {
+      "budget": 0.05,
+      "ci95": [
+        -25.94464888639477,
+        25.57603382583657
+      ],
+      "contrast": "degree_minus_ae_pr",
+      "mean": -0.18430753027909863,
+      "n": 2,
+      "p_holm": 1.0,
+      "p_method": "exact paired sign-flip",
+      "p_signflip": 1.0,
+      "paired_dz": -0.06428243465332391,
+      "sd": 2.86715229865004,
+      "seeds": [
+        15,
+        16
+      ],
+      "suite": "selectors"
+    },
+    {
+      "budget": 0.05,
+      "ci95": [
+        -37.539207157780645,
+        31.378069717022345
+      ],
+      "contrast": "random_minus_ae_pr",
+      "mean": -3.080568720379151,
+      "n": 2,
+      "p_holm": 1.0,
+      "p_method": "exact paired sign-flip",
+      "p_signflip": 0.5,
+      "paired_dz": -0.8032183825128735,
+      "sd": 3.8352816462461594,
+      "seeds": [
+        15,
+        16
+      ],
+      "suite": "selectors"
+    }
+  ],
+  "expected_blocks": 5,
+  "expected_seeds": [
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "holm_family": {
+    "missing_contrasts": [],
+    "planned_contrasts": [
+      {
+        "budget": 0.05,
+        "contrast": "pr_minus_ae_pr",
+        "suite": "selectors"
+      },
+      {
+        "budget": 0.05,
+        "contrast": "degree_minus_ae_pr",
+        "suite": "selectors"
+      },
+      {
+        "budget": 0.05,
+        "contrast": "random_minus_ae_pr",
+        "suite": "selectors"
+      }
+    ],
+    "policy": "Unestimated planned contrasts are padded with p=1 for Holm only; they are not measured results.",
+    "size": 3
+  },
+  "missing": [
+    "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_17/pr/result.json",
+    "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_17/degree/result.json",
+    "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_17/random/result.json",
+    "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_18/pr/result.json",
+    "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_18/degree/result.json",
+    "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_18/random/result.json",
+    "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_19/pr/result.json",
+    "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_19/degree/result.json",
+    "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_19/random/result.json"
+  ],
+  "missing_jobs": [
+    {
+      "budget": 0.05,
+      "dataset": "citeseer",
+      "global_source": "degree",
+      "global_transition": "attribute",
+      "local_graph": "pre",
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_17/pr/result.json",
+      "search_method": "gb",
+      "seed": 17,
+      "selector": "pr",
+      "suite": "selectors",
+      "variant": "pr"
+    },
+    {
+      "budget": 0.05,
+      "dataset": "citeseer",
+      "global_source": "degree",
+      "global_transition": "attribute",
+      "local_graph": "pre",
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_17/degree/result.json",
+      "search_method": "gb",
+      "seed": 17,
+      "selector": "degree",
+      "suite": "selectors",
+      "variant": "degree"
+    },
+    {
+      "budget": 0.05,
+      "dataset": "citeseer",
+      "global_source": "degree",
+      "global_transition": "attribute",
+      "local_graph": "pre",
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_17/random/result.json",
+      "search_method": "gb",
+      "seed": 17,
+      "selector": "random",
+      "suite": "selectors",
+      "variant": "random"
+    },
+    {
+      "budget": 0.05,
+      "dataset": "citeseer",
+      "global_source": "degree",
+      "global_transition": "attribute",
+      "local_graph": "pre",
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_18/pr/result.json",
+      "search_method": "gb",
+      "seed": 18,
+      "selector": "pr",
+      "suite": "selectors",
+      "variant": "pr"
+    },
+    {
+      "budget": 0.05,
+      "dataset": "citeseer",
+      "global_source": "degree",
+      "global_transition": "attribute",
+      "local_graph": "pre",
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_18/degree/result.json",
+      "search_method": "gb",
+      "seed": 18,
+      "selector": "degree",
+      "suite": "selectors",
+      "variant": "degree"
+    },
+    {
+      "budget": 0.05,
+      "dataset": "citeseer",
+      "global_source": "degree",
+      "global_transition": "attribute",
+      "local_graph": "pre",
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_18/random/result.json",
+      "search_method": "gb",
+      "seed": 18,
+      "selector": "random",
+      "suite": "selectors",
+      "variant": "random"
+    },
+    {
+      "budget": 0.05,
+      "dataset": "citeseer",
+      "global_source": "degree",
+      "global_transition": "attribute",
+      "local_graph": "pre",
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_19/pr/result.json",
+      "search_method": "gb",
+      "seed": 19,
+      "selector": "pr",
+      "suite": "selectors",
+      "variant": "pr"
+    },
+    {
+      "budget": 0.05,
+      "dataset": "citeseer",
+      "global_source": "degree",
+      "global_transition": "attribute",
+      "local_graph": "pre",
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_19/degree/result.json",
+      "search_method": "gb",
+      "seed": 19,
+      "selector": "degree",
+      "suite": "selectors",
+      "variant": "degree"
+    },
+    {
+      "budget": 0.05,
+      "dataset": "citeseer",
+      "global_source": "degree",
+      "global_transition": "attribute",
+      "local_graph": "pre",
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_19/random/result.json",
+      "search_method": "gb",
+      "seed": 19,
+      "selector": "random",
+      "suite": "selectors",
+      "variant": "random"
+    }
+  ],
+  "protocol": "aepr-selectors-v2-pre-pr",
+  "protocols": {
+    "selectors": "aepr-selectors-v2-pre-pr"
+  },
+  "ready_for_full_seed_reporting": false,
+  "rejected_blocks": [
+    {
+      "budget": 0.05,
+      "dataset": "citeseer",
+      "error": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_17/ae_pr/result.json: Run incomplete/failed",
+      "error_type": "ValueError",
+      "global_source": "degree",
+      "global_transition": "attribute",
+      "local_graph": "pre",
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_17/ae_pr/result.json",
+      "search_method": "gb",
+      "seed": 17,
+      "selector": "ae_pr",
+      "suite": "selectors",
+      "variant": "ae_pr"
+    },
+    {
+      "budget": 0.05,
+      "dataset": "citeseer",
+      "error": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_18/ae_pr/result.json: Stored seed differs from directory/job",
+      "error_type": "ValueError",
+      "global_source": "degree",
+      "global_transition": "attribute",
+      "local_graph": "pre",
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_18/ae_pr/result.json",
+      "search_method": "gb",
+      "seed": 18,
+      "selector": "ae_pr",
+      "suite": "selectors",
+      "variant": "ae_pr"
+    },
+    {
+      "budget": 0.05,
+      "dataset": "citeseer",
+      "error": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_19/ae_pr/result.json: Stored seed differs from directory/job",
+      "error_type": "ValueError",
+      "global_source": "degree",
+      "global_transition": "attribute",
+      "local_graph": "pre",
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_pr_pre/selectors/citeseer/ptb_0.05/seed_19/ae_pr/result.json",
+      "search_method": "gb",
+      "seed": 19,
+      "selector": "ae_pr",
+      "suite": "selectors",
+      "variant": "ae_pr"
+    }
+  ],
+  "summary": [
+    {
+      "attacked_accuracy_percent_mean": 59.34702474986835,
+      "budget": 0.05,
+      "ci95": [
+        46.63412901568138,
+        72.05992048405533
+      ],
+      "n": 2,
+      "sd": 1.4149582772558655,
+      "seeds": [
+        15,
+        16
+      ],
+      "suite": "selectors",
+      "variant": "ae_pr"
+    },
+    {
+      "attacked_accuracy_percent_mean": 57.635597682991055,
+      "budget": 0.05,
+      "ci95": [
+        49.94095026493054,
+        65.33024510105157
+      ],
+      "n": 2,
+      "sd": 0.8564221151811796,
+      "seeds": [
+        15,
+        16
+      ],
+      "suite": "selectors",
+      "variant": "pr"
+    },
+    {
+      "attacked_accuracy_percent_mean": 59.162717219589254,
+      "budget": 0.05,
+      "ci95": [
+        46.11527159766053,
+        72.21016284151798
+      ],
+      "n": 2,
+      "sd": 1.4521940213941773,
+      "seeds": [
+        15,
+        16
+      ],
+      "suite": "selectors",
+      "variant": "degree"
+    },
+    {
+      "attacked_accuracy_percent_mean": 56.266456029489206,
+      "budget": 0.05,
+      "ci95": [
+        34.520713326274645,
+        78.01219873270377
+      ],
+      "n": 2,
+      "sd": 2.420323368990297,
+      "seeds": [
+        15,
+        16
+      ],
+      "suite": "selectors",
+      "variant": "random"
+    }
+  ],
+  "warnings": []
+}

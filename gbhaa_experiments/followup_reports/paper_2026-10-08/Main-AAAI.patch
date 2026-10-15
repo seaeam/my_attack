@@ -1,0 +1,171 @@
+--- revision_backups/2026-10-08-followup/Main-AAAI.tex
++++ Main-AAAI.tex
+@@ -108,7 +108,7 @@
+ \begin{itemize}
+     \item \textbf{A coordinated attack framework.} We formulate an original-node, untargeted poisoning protocol in which an executed structural action determines subsequent attribute localization under separate constraints. A matched serial-versus-parallel comparison tests the benefit of this dependency while holding structural perturbations and attribute budgets fixed (Fig.~\ref{fig:hybrid_coupling_ablation}).
+     \item \textbf{Hierarchical structural localization.} We develop Granular-Ball search that refines region pairs to node endpoints. Matched comparisons show lower search time and memory than K-Means with stronger attacks, and quantify the effectiveness--cost trade-off relative to direct node-level search (Fig.~\ref{fig:large_scale_efficiency}).
+-    \item \textbf{Endpoint-conditioned attribute modification.} We connect AE-PR node ranking on the edge-perturbed graph to group-level text generation, node-specific adaptation, and feature projection. Lexical and similarity constraints control each update for stealthiness, while diffusion ablations examine the role of attribute-aware localization (Fig.~\ref{fig:ae_ppr_2x2_ablation}).
++    \item \textbf{Endpoint-conditioned attribute modification.} We connect AE-PR node ranking on the edge-perturbed graph to group-level text generation, node-specific adaptation, and feature projection. Lexical and similarity constraints control each update for stealthiness. A separate pre-flip, multi-seed ablation examines attribute weighting under frozen structural features (Fig.~\ref{fig:ae_ppr_2x2_ablation}).
+ \end{itemize}
+ 
+ \section{Related Work}\label{sec:related}
+@@ -320,7 +320,7 @@
+ \end{align}
+ The update is performed for $t=0,\ldots,N_g-2$. Here $P_b^gz$ averages neighboring score values; it does not transport a column probability vector in the direction of the row transition. The output is a truncated diffusion accumulation, not a stationary PageRank distribution. The accumulation includes the initial vector. Neither routine tests a convergence tolerance.
+ 
+-An important consequence is that the uniform global source produces tied scores in exact arithmetic: because $P_b^g\mathbf 1=\mathbf 1$, every global iterate is a constant vector. This configuration therefore provides no nonuniform topology- or attribute-based ranking. Nonuniform guidance requires a nonuniform source, such as the implemented degree option. The entry-point defaults are $\alpha_g=0.15$ and $N_g=30$ with a uniform global source; experiment launchers may override the source and iteration settings.
++An important consequence is that the uniform global source produces tied scores in exact arithmetic: because $P_b^g\mathbf 1=\mathbf 1$, every global iterate is a constant vector. This configuration therefore provides no nonuniform topology- or attribute-based ranking. Nonuniform guidance requires a nonuniform source, such as the implemented degree option. The entry-point defaults are $\alpha_g=0.15$ and $N_g=30$ with a uniform global source; experiment launchers may override the source and iteration settings. The controlled follow-ups in Section~\ref{subsec:followup_weighting} explicitly use the degree source with these global parameters; their records show nonconstant global scores. This configuration disclosure applies to those follow-ups and does not retrospectively change earlier runs.
+ The global score $r^g$ in Equation~\ref{eq:global_ae_pr} selects the guidance set
+ \begin{align}
+ \mathcal{I}_g&=\operatorname{TopK}(r^g,K_g),\notag\\
+@@ -871,56 +871,63 @@
+ 
+ 
+ 
+-\subsubsection{Global and Local AE-PR Guidance} Fig.~\ref{fig:ae_ppr_2x2_ablation} varies feature-similarity weighting at the global and local stages. PR denotes the topology-only variant, obtained by replacing the off-diagonal affinity matrix $\widetilde W_b^\sigma$ with $A_b^\sigma$; AE-PR uses Equation~\ref{eq:ae_pr_weight}. Both variants retain the conditional self-transitions and their respective stage's recurrence and readout. The four combinations are (global PR, local PR), (global AE-PR, local PR), (global PR, local AE-PR), and (global AE-PR, local AE-PR), with the remaining settings held fixed. The comparison concerns attribute weighting within these routines, rather than two stationary PageRank solvers.
+-
+-Enabling AE-PR locally reduces attacked accuracy from $0.5456$ to $0.5276$ under global PR and from $0.5640$ to $0.5008$ under global AE-PR. Enabling it globally increases accuracy when local PR is used ($0.5456\rightarrow0.5640$), but decreases accuracy when local AE-PR is used ($0.5276\rightarrow0.5008$). Thus the observed effect of global weighting changes with the local setting, suggesting an interaction in this configuration. AE-PR at both stages gives the lowest reported accuracy ($0.5008$), compared with $0.5456$ for PR at both stages. Because the diagnostic uses one seed, it does not establish a general statistical benefit or robustness across restart and iteration settings. A uniform global source still yields tied global scores under either affinity choice in exact arithmetic; this diagnostic does not resolve that property of the global recurrence.
++% Follow-up numbers: my_attack/gbhaa_experiments/followup_reports/paper_2026-10-08/.
++\subsubsection{Global and Local AE-PR Guidance}
++\label{subsec:followup_weighting}
++We evaluate the $2\times2$ factorial design on Citeseer with seeds $15$--$19$ at both $5\%$ and $10\%$ structural budgets (40 completed runs). Let $G_0/G_1$ and $L_0/L_1$ denote topology-only/attribute-weighted transitions at the global and local stages, respectively. Each stage keeps its source, recurrence, iteration count, and readout fixed. Globally, the source is normalized unweighted degree, with $\alpha_g=0.15$ and 30 accumulated states including initialization. Locally, the two selected endpoints receive equal restart mass, with $\alpha_\ell=0.28$ and 60 updates, reading the final state. Thus $L_0$ is endpoint PPR, distinct from ordinary PR in the selector comparison below.
++
++These follow-ups use the graph \emph{before} the selected edge flip and freeze structural-search features at their original values. They test weighting under this controlled configuration, rather than the post-flip dependency specified by the main method. Within each global setting, the two local arms share a verified structural-action trajectory; changing global weighting may change that trajectory. All arms share the initial graph and features, attribute constraints, generation rules, and victim-training seed streams. Appendix~\ref{app:followup_details} documents the effective split, parameters, and actual attribute consumption.
++
++Fig.~\ref{fig:ae_ppr_2x2_ablation} reports mean attacked accuracy and sample standard deviation across five seeds. Both stages weighted ($G_1L_1$) attain the lowest means: $58.79\%$ at $5\%$ and $57.01\%$ at $10\%$, compared with $59.58\%$ and $57.89\%$ for $G_0L_0$. Clean accuracy is $72.85\%\pm1.41$ across the same seeds. The paired local-weighting gain is $1.31$ and $0.65$ percentage points under $G_1$, but $-0.02$ and $0.09$ under $G_0$ (Table~\ref{tab:factorial_paired}). The estimated interactions are positive, $1.33$ and $0.56$ points, but both confidence intervals include zero. Exact two-sided paired sign-flip tests with Holm correction across the ten planned contrasts yield $p\geq0.625$. Even the $5\%$ local effect under $G_1$, whose unadjusted $t$ interval barely excludes zero, has raw $p=0.0625$. These five-seed results suggest a conditional local-weighting benefit but do not establish a reliable interaction or a general advantage from global weighting.
+ 
+ \begin{figure}[!t]
+ \centering
+-\includegraphics[width=\columnwidth]{pictures/ae_ppr_2x2_ablation.pdf}
+-\caption{Single-run diagnostic (seed $15$) on Citeseer at a $10\%$ structural budget under the GBCA poisoning protocol. Bars report combined attacked accuracy (fraction; $\downarrow$), with clean accuracy $0.7156$. The matched $2\times2$ configuration toggles topology-only (PR) versus attribute-weighted (AE-PR) transitions at the global and local stages; each stage retains its recurrence and readout.}
++\includegraphics[width=\columnwidth]{pictures/ae_pr_factorial_multiseed_pre_20261008.pdf}
++\caption{Five-seed Citeseer weighting ablation with a retrained GCN victim. Cells show attacked accuracy (\%, mean $\pm$ sample SD; $\downarrow$). $G$ and $L$ index global and local weighting: 0 uses topology only and 1 uses cosine edge weights. Outlined cells mark the lowest means, not statistical significance. The graph is pre-flip and structural features are frozen.}
+ \label{fig:ae_ppr_2x2_ablation}
+ \end{figure}
+ 
+-\subsubsection{Comparison of Attribute-Node Selection Strategies} Table~\ref{tab:local_candidate_strategy_sensitivity} compares three ways to select attribute nodes after an edge modification: \texttt{local\_degree} ranks the endpoint-induced local pool by node degree; \texttt{global\_pagerank} applies the topology-only global recurrence with a uniform source; and \texttt{random} samples candidates without an importance score.
+-
+ \begin{table}[!t]
+ \centering
+-\caption{Attribute-node selection within GBCA's poisoning pipeline with a GCN victim. Entries report attacked accuracy (fraction; $\downarrow$) at the displayed 5\%, 10\%, and 15\% perturbation budgets. Bold marks the lowest recorded value per dataset-budget group, not statistical significance. The strategies change both candidate scope and ranking, so this is not a matched ablation of local restriction alone. The proposed endpoint-conditioned AE-PR selector is not included.}
+-\label{tab:local_candidate_strategy_sensitivity}
+-\scriptsize
+-\setlength{\tabcolsep}{3.2pt}
+-\renewcommand{\arraystretch}{1}
+-\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}llccc@{}}
++\caption{Paired factorial effects (percentage points): mean [unadjusted 95\% $t$ interval], $n=5$. With $Y_{ij}$ denoting attacked accuracy under $G_iL_j$, $G\mid L_j=Y_{0j}-Y_{1j}$ and $L\mid G_i=Y_{i0}-Y_{i1}$. Positive values favor weighting; interaction is $(L\mid G_1)-(L\mid G_0)$.}
++\label{tab:factorial_paired}
++\footnotesize
++\setlength{\tabcolsep}{2pt}
++\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lcc@{}}
+ \toprule
+-Dataset & Selector & \multicolumn{3}{c}{Perturbation budget} \\
+-\cmidrule(lr){3-5}
+- & & 5\% & 10\% & 15\% \\
++Effect & 5\% budget & 10\% budget \\
+ \midrule
+-\multirow{3}{*}{Cora}
+- & Local degree & \textbf{0.526} & \textbf{0.494} & \textbf{0.471} \\
+- & Global PR   & 0.548 & 0.532 & 0.510 \\
+- & Random      & 0.690 & 0.636 & 0.600 \\
+-\midrule
+-\multirow{3}{*}{Citeseer}
+- & Local degree & \textbf{0.550} & \textbf{0.518} & \textbf{0.490} \\
+- & Global PR   & 0.588 & 0.550 & 0.526 \\
+- & Random      & 0.712 & 0.676 & 0.642 \\
+-\midrule
+-\multirow{3}{*}{BlogCatalog}
+- & Local degree & \textbf{0.675} & \textbf{0.638} & \textbf{0.590} \\
+- & Global PR   & 0.697 & 0.669 & 0.623 \\
+- & Random      & 0.816 & 0.790 & 0.748 \\
+-\midrule
+-\multirow{3}{*}{Pubmed}
+- & Local degree & \textbf{0.449} & \textbf{0.392} & \textbf{0.371} \\
+- & Global PR   & 0.492 & 0.438 & 0.405 \\
+- & Random      & 0.574 & 0.548 & 0.525 \\
++$G\mid L_0$ & $-0.52\;[-3.15,\;2.12]$ & $0.23\;[-2.23,\;2.69]$ \\
++$G\mid L_1$ & $0.81\;[-0.92,\;2.54]$ & $0.79\;[-0.45,\;2.03]$ \\
++$L\mid G_0$ & $-0.02\;[-2.64,\;2.60]$ & $0.09\;[-2.54,\;2.73]$ \\
++$L\mid G_1$ & $1.31\;[0.01,\;2.60]$ & $0.65\;[-0.15,\;1.46]$ \\
++Interaction & $1.33\;[-2.32,\;4.97]$ & $0.56\;[-2.03,\;3.15]$ \\
+ \bottomrule
+ \end{tabular*}
+ \end{table}
+ 
+-In all 12 dataset-budget groups, attacked accuracy follows the order \texttt{local\_degree} $<$ \texttt{global\_pagerank} $<$ \texttt{random}. Accuracy decreases as the reported budget rises from 5\% to 15\% for every selector and dataset. These observations favor \texttt{local\_degree} among the three tested rules. The rules differ in both candidate scope and ranking, so the comparison does not isolate the effect of local restriction or directly evaluate the proposed AE-PR selector. Moreover, the uniform-source global branch yields tied scores in exact arithmetic; its results do not establish the performance of a nonuniform stationary PageRank ranking.
++\subsubsection{Comparison of Attribute-Node Selection Strategies}
++The matched selector follow-up compares endpoint-conditioned AE-PR, ordinary PR, Degree, and Random on the same pre-flip graph. Ordinary PR uses unweighted topology and uniform restart and dangling-node redistribution; its damping factor is $0.72$. Degree sorts by unweighted degree, and Random samples a seeded ranking. Every selector ranks the full legal candidate universe under the same admission rules, without an AE-PR prefilter. Within each seed, all four arms share the initial inputs, structural actions, attribute limits, generation rules, and victim protocol. Their later attribute states can diverge.
++
++Table~\ref{tab:local_candidate_strategy_sensitivity} reports \emph{preliminary} results from all currently complete, validated four-arm blocks: seeds $15$--$16$ at $5\%$ and $15$--$18$ at $10\%$. The planned five-seed matrices are incomplete (Appendix~\ref{app:followup_details}); the two columns use different seed sets. AE-PR does not have the lowest mean in either subset: Random is lowest at $5\%$, and ordinary PR at $10\%$. At $10\%$, the paired PR-minus-AE-PR difference is $-0.59$ points (95\% $t$ interval $[-3.26,2.07]$); the available data do not establish AE-PR superiority. This comparison changes restart distribution and readout as well as attribute weighting, so only the factorial design isolates weighting within each stage. Neither follow-up tests the benefit of replacing the pre-flip graph with the post-flip graph.
++
++\begin{table}[!t]
++\centering
++\caption{Preliminary matched selector results on Citeseer: attacked accuracy (\%, mean $\pm$ sample SD; $\downarrow$). Only complete four-arm seed blocks are included. The planned five-seed evaluation is not complete; bold identifies the lowest available mean.}
++\label{tab:local_candidate_strategy_sensitivity}
++\small
++\setlength{\tabcolsep}{3pt}
++\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lcc@{}}
++\toprule
++Selector & 5\% ($n=2$) & 10\% ($n=4$) \\
++\midrule
++AE-PR & $59.35\pm1.41$ & $56.79\pm1.35$ \\
++Ordinary PR & $57.64\pm0.86$ & $\mathbf{56.20\pm1.57}$ \\
++Degree & $59.16\pm1.45$ & $57.16\pm1.78$ \\
++Random & $\mathbf{56.27\pm2.42}$ & $56.37\pm2.67$ \\
++\bottomrule
++\end{tabular*}
++\end{table}
+ 
+ 
+ \begin{figure*}[t]
+@@ -1004,6 +1011,8 @@
+ 
+ This paper presented GBCA for original-node, untargeted poisoning attacks under separate structural and attribute constraints. Its coordination mechanism executes a selected edge modification and then runs AE-PR on the modified graph, using the two endpoints as restart seeds to locate important nodes for attribute attack. In the matched Citeseer comparison with a GCN victim, serial coordination lowered attacked accuracy by 4.20 and 4.60 percentage points relative to parallel combination at the 5\% and 10\% structural budgets. Across nine search settings on Cora, Citeseer, and Pubmed, Granular-Ball search yielded larger accuracy drops than matched K-Means while reducing search runtime by 9.3\%--29.5\% and peak memory by 8.9\%--28.0\%. Direct node-level search achieved larger accuracy drops in eight of these nine settings, at higher time and memory costs. These results support endpoint-conditioned coordination and quantify the effectiveness--cost trade-off of hierarchical structural search within the evaluated graph and budget range.
+ 
++The separate five-seed Citeseer follow-up, using a degree global source, pre-flip diffusion, and frozen structural features, gives the lowest mean accuracy when both stages use attribute weights. However, paired tests do not establish a reliable gain or interaction, and the incomplete matched selector comparison does not establish AE-PR superiority over ordinary PR, Degree, or Random. These diagnostics delimit the current evidence for attribute weighting; they do not establish the necessity of post-flip diffusion.
++
+ The findings are limited to transductive node classification on the evaluated graphs and victim architectures. Greedy hierarchical refinement does not guarantee globally optimal structural actions, and surrogate guidance depends on the quality of fixed pseudo labels. The LLM module depends on generation quality and a meaningful correspondence between the generated vocabulary and model features. Lexical and feature-similarity constraints provide update-level controls intended to promote stealthiness; they do not establish text-level semantic equivalence, preservation of graph distributions, or resistance to detection. The reported search costs exclude LLM generation and feature projection, so the measured savings do not quantify end-to-end attack cost.
+ 
+ \appendices
+@@ -1034,6 +1043,41 @@
+ 
+ Cached template batches are reused by group identifier and representative-word signature; no classification-loss ranking is performed. During node-specific adaptation, missing words are identified by a case-insensitive substring check and appended in a short phrase. Each node uniformly samples one template, as specified in Section~\ref{subsec:attribute_perturbation}.
+ 
++\section{Controlled Follow-up Protocol and Accounting}
++\label{app:followup_details}
++The follow-ups use the processed Citeseer graph with 2,110 nodes, 183/366 edge flips at the 5\%/10\% budgets, and a retrained GCN victim (16 hidden units, dropout 0.5). The effective split is DeepRobust \texttt{nettack}: the Citeseer loader fixes this setting even though the launcher records \texttt{split\_data=normal}. The evaluation set contains 1,899 validation-plus-test nodes. Seeds 15--19 define paired attack and victim replicates; structural, selector, generation, and victim random streams are separated. Original inputs, clean predictions, saved attacked predictions, and structural-action replay are checked before a block enters a summary. Seed is the statistical unit; nodes are not treated as independent replicates.
++
++Global guidance selects a ratio of 0.10. The factorial protocol resolves exact global-score ties by ascending node ID; its 10,980 recorded rounds have 1,840--2,011 distinct scores among 2,110 nodes, with positive score ranges throughout. Thus these degree-source runs avoid the all-tied uniform-source configuration, although this diagnostic does not prove ranking quality. Local score ties also use node ID. The selector suite retains the earlier global NumPy sorting rule and is analyzed separately. Ordinary PR is computed by \texttt{networkx.pagerank} with damping 0.72, tolerance $10^{-12}$, and at most 1,000 iterations; convergence is required.
++
++Both suites admit up to a 0.12 fraction of nodes per attribute round, with no additional distinct-node cap and at most ten visits per node. Other shared settings are an adaptation-word limit of 80, a maximum of 70 newly activated vocabulary dimensions per update, a current-vector cosine threshold of 0.35, and group sizes of 2--4. Generation uses \texttt{llama3.2:1b-instruct-fp16}, temperature zero, and a seed derived from the run seed. These runs use the recorded fallback vocabulary (\texttt{feature\_i} placeholders), so they are feature-space diagnostics and do not establish natural-text semantic preservation. The structural model always uses original features; the local selector uses its arm's evolving attributes. This design leaves the global-to-structure effect active but does not measure feedback from modified attributes into later structural search.
++
++Every included run records 2,110 changed nodes and 21,100 node visits, exhausting ten visits to every node. Consequently, the selector differences concern the sequence and trajectory of updates, not a smaller final set of modified nodes. Table~\ref{tab:followup_consumption} reports recorded net feature-entry changes, which differ across arms despite shared limits. Factorial entry counts are identical across the two budgets within each seed and arm. The retained artifacts contain graphs, predictions, and change counts but no final feature matrix or feature-norm measurements; final perturbation amplitude cannot be independently recovered. The local cosine threshold is not a guarantee about the final distance from clean features.
++
++The factorial matrix contains all five complete four-arm seed blocks at both budgets. For selectors, the 5\% runs for seeds 17--19 are incomplete or have inconsistent identity records, and the 10\% Random run at seed 19 failed. Only complete blocks enter Table~\ref{tab:local_candidate_strategy_sensitivity}; available arms of an incomplete block are excluded. Missing runs are not imputed, and preliminary selector subsets are not pooled with the factorial cohort. Paired $t$ intervals and sign-flip tests are exploratory at these small sample sizes; with five seeds the minimum attainable exact two-sided sign-flip $p$ is 0.0625.
++
++\begin{table}[!t]
++\centering
++\caption{Recorded net changed feature entries ($\times10^3$, mean $\pm$ sample SD). Factorial uses five seeds per budget; selector subsets use two/four seeds at 5\%/10\%. All included runs change 2,110 nodes with 21,100 visits. Counts do not measure feature-value magnitude.}
++\label{tab:followup_consumption}
++\small
++\setlength{\tabcolsep}{2pt}
++\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lcc@{}}
++\toprule
++Configuration & 5\% budget & 10\% budget \\
++\midrule
++Factorial $G_0L_0$ & $255.46\pm1.51$ & $255.46\pm1.51$ \\
++Factorial $G_0L_1$ & $256.93\pm1.63$ & $256.93\pm1.63$ \\
++Factorial $G_1L_0$ & $255.97\pm0.49$ & $255.97\pm0.49$ \\
++Factorial $G_1L_1$ & $257.84\pm0.89$ & $257.84\pm0.89$ \\
++\midrule
++Selector AE-PR & $257.34\pm3.32$ & $256.80\pm2.03$ \\
++Selector PR & $257.61\pm0.31$ & $257.99\pm0.48$ \\
++Selector Degree & $254.93\pm0.86$ & $255.15\pm0.83$ \\
++Selector Random & $251.25\pm1.31$ & $250.97\pm0.85$ \\
++\bottomrule
++\end{tabular*}
++\end{table}
++
+ \bibliographystyle{IEEEtran}
+ \bibliography{tkde}
+ % \begin{IEEEbiographynophoto}{Jane Doe}

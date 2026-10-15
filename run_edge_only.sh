@@ -15,7 +15,7 @@ ARGS=(
   --global_important_ratio 0.15      
   --global_ppr_alpha 1
   --global_ppr_iters 40              
-  --global_seed_strategy uniform      
+  --global_seed_strategy degree
 )
 
 python meta_edge_only.py "${ARGS[@]}"

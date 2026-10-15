@@ -48,7 +48,7 @@ CORA_ARGS=(
   --global_important_ratio 0.25
   --global_ppr_alpha 0.08
   --global_ppr_iters 180
-  --global_seed_strategy uniform
+  --global_seed_strategy degree
   --text_attack_max_visits 16
   --text_retries 3
   --text_budget_per_node 80

@@ -18,7 +18,7 @@ ARGS=(
   --global_important_ratio 0.25      # 全局重要节点覆盖比例
   --global_ppr_alpha 0.08            # 全局PPR扩散强度
   --global_ppr_iters 140             # 全局PPR迭代次数
-  --global_seed_strategy uniform     # 使用无偏全图种子
+  --global_seed_strategy degree      # 全局 AE-PR 统一主配置：按当前图度数分配源权重
 
   --freeze_structure_features        # 结构搜索使用原始特征，防止文本攻击污染梯度
 

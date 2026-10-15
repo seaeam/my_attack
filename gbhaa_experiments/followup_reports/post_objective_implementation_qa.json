@@ -1,0 +1,116 @@
+{
+  "scope": "Implementation QA only; no real experiments, generation or dataset training executed",
+  "tests": {
+    "tests_run": 170,
+    "errors": 0,
+    "failures": 0,
+    "seconds": 22.766446113586426,
+    "patterns": [
+      "test_post_*.py",
+      "test_projected_editing*.py",
+      "test_action_state*.py",
+      "test_selector_*.py"
+    ],
+    "success": true
+  },
+  "compatibility": {
+    "old_profiles_unchanged": 40,
+    "catalog_size": 43,
+    "old_operator_runtime_unchanged": true,
+    "historical_jobs_validated": 133,
+    "protected_hashes": {
+      "heir.py": "a0ddaf47b904e64fa9530378ab7c3499d50b223f50c93f4b0421a290bb7477c2",
+      "meta.py": "0098ab6b59881819ce120670ea296e7dc39e6fc93aa9dc5815d9dd4dff58cdde",
+      "gbhaa_experiments/entrypoints/meta_action_state.py": "a362c5600dae61045b9f82977c01fdd69899d94d59ae054450251ed8e38482a2",
+      "/Users/shemingcong/Downloads/Thesis/GBHAA/Main-AAAI.tex": "4a41345f0515644f5f4737f35daa4a62729affebfbb667552eb9f6549e2a494e"
+    },
+    "historical_audits": [
+      {
+        "trial_id": "edit_control__endpoint_post",
+        "seconds": 17.716789960861206,
+        "valid": true
+      },
+      {
+        "trial_id": "edit_both__endpoint_post",
+        "seconds": 15.879862070083618,
+        "valid": true
+      },
+      {
+        "trial_id": "transfer_relu__endpoint_post",
+        "seconds": 16.64240598678589,
+        "valid": true
+      },
+      {
+        "trial_id": "transfer_both__endpoint_post",
+        "seconds": 15.904386043548584,
+        "valid": true
+      },
+      {
+        "trial_id": "transfer_relu__parallel",
+        "seconds": 19.092646837234497,
+        "valid": true
+      },
+      {
+        "trial_id": "transfer_relu__endpoint_pre",
+        "seconds": 16.168205976486206,
+        "valid": true
+      }
+    ]
+  },
+  "default_parent_trajectories": [
+    {
+      "seed": 15,
+      "status": "complete",
+      "available_actions": 366,
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_action_state/citeseer/ptb_0.1/seed_15/structure/result.json"
+    },
+    {
+      "seed": 16,
+      "status": "complete",
+      "available_actions": 366,
+      "path": "/Users/shemingcong/Downloads/my_attack/gbhaa_experiments/followup_results_action_state/citeseer/ptb_0.1/seed_16/structure/result.json"
+    }
+  ],
+  "read_only_candidate_diagnostic": {
+    "source_trial": "transfer_relu__endpoint_post; seed15; 60 actions",
+    "writes": 240,
+    "mean_already_misclassified_pseudo_target_fraction": 0.12407017567505439,
+    "positive_nll_increment_share_on_already_misclassified_targets": 0.6274166576879,
+    "margin_choice_disagreements": 92,
+    "margin_choice_slots": [
+      85,
+      10,
+      145
+    ],
+    "original_chosen_slots": [
+      3,
+      1,
+      236
+    ],
+    "note": "Same-state candidate replay diagnostics only. Capped margin=-relu(logp[pseudo]-max_other_logp), uniform nontraining targets. No refitting/LLM/true validation labels."
+  },
+  "review": {
+    "spec_plan": "approved after explicit independent graph reconstruction and complete trace fields were added",
+    "code": "approved; no substantive findings"
+  },
+  "launcher_default": {
+    "dataset": "citeseer",
+    "seeds": [
+      15,
+      16
+    ],
+    "max_actions": 60,
+    "profiles": [
+      "transfer_relu",
+      "objective_margin",
+      "objective_local",
+      "objective_both"
+    ],
+    "arms": [
+      "endpoint_post",
+      "endpoint_pre",
+      "parallel"
+    ],
+    "trials": 24
+  }
+}

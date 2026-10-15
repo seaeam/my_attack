@@ -122,7 +122,7 @@ class Heirattack(BaseAttack):
         )
         self.global_ppr_alpha = float(getattr(args, "global_ppr_alpha", 0.15))
         self.global_ppr_iters = int(getattr(args, "global_ppr_iters", 30))
-        self.global_seed_strategy = getattr(args, "global_seed_strategy", "uniform")
+        self.global_seed_strategy = getattr(args, "global_seed_strategy", "degree")
         self.freeze_structure_features = bool(
             getattr(args, "freeze_structure_features", False)
         )
@@ -927,11 +927,28 @@ class Heirattack(BaseAttack):
             f"✅ Cluster Attack Done. Success: {feature_writes}/{targets}, "
             f"LLM Calls: {template_attempts}, Cache Hits: {cache_hits}"
         )
-        if not completed:
+        self.finish_text_attack_round({
+            "targets": targets, "template_attempts": template_attempts,
+            "template_successes": template_successes, "template_failures": template_failures,
+            "cache_hits": cache_hits, "feature_writes": feature_writes,
+            "feature_changes": feature_changes, "node_failures": node_failures,
+            "cluster_failures": cluster_failures, "completed": completed,
+        })
+        return modified_features
+
+    def finish_text_attack_round(self, stats):
+        """Preserve legacy completion; isolated protocols can validate real counters."""
+        if not stats["completed"]:
             raise RuntimeError(
                 "Text attack did not produce at least one actual feature change."
             )
-        return modified_features
+
+    def rank_global_candidates(self, scores, k):
+        """Legacy ordering; versioned experiment subclasses may override it."""
+        return np.argsort(-scores)[:k]
+
+    def record_structural_action(self, adj, row_idx, col_idx):
+        """Observation hook after endpoint selection, before attributes and flip."""
 
     # 层次化图对抗攻击的多步元攻击主函数
     # 实现基于粗化图的多步元攻击，通过递归聚类和梯度指导来选择最优扰动
@@ -1011,7 +1028,7 @@ class Heirattack(BaseAttack):
                 self.nnodes,
                 max(self.M, int(round(self.global_important_ratio * self.nnodes))),
             )
-            global_important_nodes = np.argsort(-self.global_ppr_scores)[:global_k]
+            global_important_nodes = self.rank_global_candidates(self.global_ppr_scores, global_k)
 
             # GB Division (粒球划分) - 使用重要节点引导
             pool = [range(self.nnodes)]
@@ -1219,6 +1236,7 @@ class Heirattack(BaseAttack):
 
                     # 1) 刚刚选出的两个具体节点
                     row_idx, col_idx = pool[targetI][0], pool[targetJ][0]
+                    self.record_structural_action(full_adj_cpu, row_idx, col_idx)
 
                     # ===== 文本/特征攻击（仅在 attack_features 开启时执行）=====
                     if self.attack_features:
@@ -1571,7 +1589,7 @@ class Heirattack(BaseAttack):
         N: int = 30,
         eps: float = 1e-12,
         use_cos_sim: bool = True,
-        seed_strategy: str = "uniform",  # "uniform", "degree", "label"
+        seed_strategy: str = "degree",  # "degree", "uniform", "label"
     ):
         """
         计算全局属性增强 PageRank，识别重要节点
@@ -1583,9 +1601,9 @@ class Heirattack(BaseAttack):
         - alpha: 重启概率 (0.15 更全局，0.85 更局部)
         - N: 迭代次数
         - use_cos_sim: 是否使用特征相似度加权边
-        - seed_strategy: 初始分布策略
-            - "uniform": 均匀分布（无偏全局）
-            - "degree": 按度数加权（偏向枢纽）
+        - seed_strategy: 初始化及重启源分布策略
+            - "degree": 默认主配置，按当前图的未加权度数归一化
+            - "uniform": 显式历史诊断；当前行随机 P @ x 更新会产生同分
             - "label": 按标签节点加权（偏向已知重要节点）
 
         返回:
@@ -1625,7 +1643,7 @@ class Heirattack(BaseAttack):
         P = Dinv @ W
 
         # 初始分布 v（根据策略）
-        v = np.ones((n,), dtype=np.float32) / n  # 默认均匀
+        v = np.ones((n,), dtype=np.float32) / n  # 显式均匀源或总度数为零时的回退
 
         if seed_strategy == "degree":
             # 按度数加权（度数高的节点初始概率大）

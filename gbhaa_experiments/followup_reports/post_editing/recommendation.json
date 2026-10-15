@@ -1,0 +1,47 @@
+{
+  "criterion": "mean validation accuracy ascending; mean validation NLL descending; stable profile_id ascending",
+  "protocol": "gbca-post-tuning-v1",
+  "recommendations": [
+    {
+      "config": {
+        "alpha": 0.28,
+        "description": "Three real candidates; frequency words; seeded random choice.",
+        "editor_candidates": 3,
+        "editor_gain": false,
+        "editor_gradient": false,
+        "family": "projected_editing",
+        "generation_max_tokens": 50,
+        "id": "edit_control",
+        "iterations": 60,
+        "readout": "last",
+        "text_budget_per_node": 80,
+        "text_cdl_topk": 36,
+        "text_max_added_words": 70,
+        "text_max_cluster_size": 4,
+        "text_min_cluster_size": 2,
+        "text_similarity_min": 0.35,
+        "visit_gamma": 0.0,
+        "weight_floor": 0.0
+      },
+      "dataset": "citeseer",
+      "development_only": true,
+      "expected_n": 1,
+      "max_actions": 60,
+      "n": 1,
+      "profile_id": "edit_control",
+      "rank": 1,
+      "seeds": [
+        15
+      ],
+      "selection_split": "validation",
+      "source_budget": 0.1,
+      "status": "complete",
+      "validation_accuracy_percent_mean": 66.82464454976304,
+      "validation_accuracy_percent_sd": null,
+      "validation_nll_mean": 1.3679466935795201,
+      "validation_nll_sd": null
+    }
+  ],
+  "selection_split": "validation",
+  "status": "complete"
+}

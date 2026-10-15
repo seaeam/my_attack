@@ -1,0 +1,50 @@
+{
+  "scope": "matched clean-proxy/residual-feature pilot",
+  "experiments_run": false,
+  "network_generation_calls": 0,
+  "testing": "tiny synthetic GCN fits and saved real-artifact inference only",
+  "tests": {
+    "tests": 160,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "success": true
+  },
+  "compatibility": {
+    "old_profiles_unchanged": 37,
+    "old_operators_unchanged": 37,
+    "catalog_profiles": 40,
+    "historical_job_identities": 118,
+    "artifact_audits": [
+      "gbhaa_experiments/post_editing_results/citeseer/source_ptb_0.1/steps_60/seed_15/edit_control__endpoint_post/result.json",
+      "gbhaa_experiments/post_editing_results/citeseer/source_ptb_0.1/steps_60/seed_15/edit_gain__endpoint_pre/result.json",
+      "gbhaa_experiments/post_editing_results/citeseer/source_ptb_0.1/steps_60/seed_15/edit_words__parallel/result.json",
+      "gbhaa_experiments/post_editing_results/citeseer/source_ptb_0.1/steps_60/seed_15/edit_both__endpoint_post/result.json",
+      "gbhaa_experiments/post_coverage_results/citeseer/source_ptb_0.1/steps_60/seed_15/baseline__endpoint_post/result.json",
+      "gbhaa_experiments/post_coverage_results/citeseer/source_ptb_0.1/steps_60/seed_15/frontier_editgain_decay__endpoint_pre/result.json"
+    ],
+    "protected_sha256": {
+      "heir.py": "a0ddaf47b904e64fa9530378ab7c3499d50b223f50c93f4b0421a290bb7477c2",
+      "meta.py": "0098ab6b59881819ce120670ea296e7dc39e6fc93aa9dc5815d9dd4dff58cdde",
+      "gbhaa_experiments/entrypoints/meta_action_state.py": "a362c5600dae61045b9f82977c01fdd69899d94d59ae054450251ed8e38482a2",
+      "/Users/shemingcong/Downloads/Thesis/GBHAA/Main-AAAI.tex": "4a41345f0515644f5f4737f35daa4a62729affebfbb667552eb9f6549e2a494e"
+    }
+  },
+  "files_sha256": {
+    "gbhaa_experiments/editor_transfer.py": "db9db66f0130ce3ccc7d52fadfc0053f235c128567ba45742004ee8bd23bea1c",
+    "gbhaa_experiments/projected_editing.py": "394fdaa2e00ebddae5236f201111495ff168a96075c4df3c243dc5a6ea5299ca",
+    "gbhaa_experiments/projected_editing_runtime.py": "ec71b95c7caaed80dbbf1c4796d8ab3fee0d496b373c09415d0a592dcd6b6641",
+    "gbhaa_experiments/projected_editing_validation.py": "177ac600237d198039628ad5a505f01864497c37443e5bd82d412c727f9e9627",
+    "gbhaa_experiments/entrypoints/meta_post_tuning.py": "cf22ad764270650b7d8c7de59cc1d9f04b5ec031f41a4f357cac50897b10877c",
+    "gbhaa_experiments/post_tuning_protocol.py": "dc16b324ab29a783fe6a97a873bfa901ec2ae9b9ca55a8827825fa5b224321ff",
+    "gbhaa_experiments/run_post_tuning.py": "7b2f88af9b9e0e585e0a5368c4f435bad32704d71a180a051294237a9f06e931",
+    "gbhaa_experiments/summarize_post_tuning.py": "885af905b54407a8672bc8464d78dd383316f7250da5a1f3678bd361913fad1f",
+    "gbhaa_experiments/post_editing_summary.py": "33c184d03f451e5b4cdd0a3c6bb972001ff7259556c8b7a51e20f888cea07199",
+    "gbhaa_experiments/launchers/run_post_transfer.sh": "e8e81621b553842c9bf075340cf6830b63881a3324d19dac5c7bd4d53cd7c3ff",
+    "gbhaa_experiments/POST_TRANSFER_ZH.md": "77a3fb95acec433b120c7afdc79e795ad1e8bc171c1d4ccfecdc62ab02e3594f",
+    "tests/test_post_transfer.py": "dcdd7dc663112b209ad5baae9a324020fec2d33b7d42eb66277ebb58ebf1de35",
+    "tests/test_post_editing_end_to_end.py": "9ea708f5c14b1c926912302c70455f75c539c6ae05075732e2d405ba284fd29b",
+    "tests/test_post_tuning_protocol.py": "67a53a6739890523835ce69cb1bd6737d61a62ea3ffefa836d1dadbea46f40b9"
+  },
+  "review": "Approved after architecture mismatch guard and CPU-only RNG seeding; reviewer independently reran both regression tests (2 passed), no remaining actionable findings."
+}
